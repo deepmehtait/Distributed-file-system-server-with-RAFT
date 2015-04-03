@@ -1,0 +1,35 @@
+These items should be added by default for the next class:
+
+0) THREADS - use new executor threading from 1.6
+
+1) enable/disable heartbeat
+2) plugin leader election - better isolation
+3) multiple proto files (mgmt and functional)
+   a) should mgmt be proto and messages json (or yaml)?
+4) graph/network discovery
+5) job scheduling (optional)
+6) c++, ruby, and python clients
+7) DAG syntax - what does yarn use (pkg) and can we re-create it?
+8) python server (C++, ruby, ...)
+
+What we want to focus on as a learning objective:
+
+1) leader election - isolation and communication flow
+2) consensus-based algos
+   a) agreement to commit, update, delete, read
+3) scheduling and priority queues (ranking, poison pill, balancing)
+4) distributed file system concepts - can we implement hdfs? should we?
+5) rebalancing data
+6) swarm or ant colony  algo
+7) byzanitine fault tolerance (optimized solutions using hashes and ppk)
+8) thread scaling algorithm for load spikes
+
+Future expansion (student option):
+
+1) json messaging with compression
+2) streaming
+   a) monitors
+   b) parallel job assembly
+   c) ML algo?
+3) binary tree or butterfly messaging
+4) QoS algo

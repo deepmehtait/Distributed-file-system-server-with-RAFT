@@ -1,0 +1,227 @@
+
+option optimize_for = SPEED;
+option java_package = "poke.comm";
+
+// general status. The NO[word] values are 'failure for cause' and 
+// FAILURE is w/o cause.
+enum PokeStatus {
+   UKNOWN = 1;
+   SUCCESS = 2;
+   NOFOUND = 100;
+   NOINCOMPLETE = 101;
+   NOAUTH = 102;
+   NOCONNECTION = 103;
+   NOREACHABLE = 104;
+   NORESOURCE = 105;
+   FAILURE = 199;
+}
+
+// data - a hierarchical container to send/receive name-value pairs
+message NameValueSet {
+    // a node should not have a value though this is not enforced
+    required NodeType node_type = 1;
+
+    optional string name = 2;
+    optional string value = 3;
+
+    // nested NVPs
+    repeated NameValueSet node = 4;
+    
+    enum NodeType {
+    	NODE = 1;
+    	VALUE = 2;
+    }
+}
+
+// data - a logical separation of data/processing capabilities (same as a tentant)
+message NameSpace {
+   // internally created or supplied by caller when performing an action on a NS
+   required int64 ns_id = 2 [default = -1]; 
+
+   optional string name = 3;
+   optional string desc = 4;
+   optional int64 created = 5;
+   optional int64 last_modified = 6;
+   optional string owner = 7;
+
+   // additional properties of the space
+   optional NameValueSet properties = 8;
+}
+
+// data - a job description
+message JobDesc {
+   required string name_space = 1;
+   required int64 owner_id = 2;
+   required string job_id = 3;
+   required JobCode status = 4;
+   optional NameValueSet options = 5;
+
+   enum JobCode {
+       JOBUNKNOWN = 1;
+       JOBRECEIVED = 2;
+       JOBQUEUED = 3;
+       JOBRUNNING = 4;
+       JOBKILLED = 100;
+       JOBFAILED = 101;
+   }
+}
+
+// request/response - check to see if a node is accepting requests
+message Ping {
+   required int32 number = 1;
+   required string tag = 2;
+}
+
+// request - perform an operation to the namespace
+message NameSpaceOperation {
+   required SpaceAction action = 1;
+   optional int64 ns_id = 2 [default = -1]; 
+   optional NameSpace data = 3;
+
+   // additional options for operation
+   optional NameValueSet options = 4;
+
+   enum SpaceAction {
+      ADDSPACE = 1;
+      UPDATESPACE = 2;
+      REMOVESPACE = 3;
+      LISTSPACES = 4;
+   }
+}
+
+// response - reply from a space operation
+message NameSpaceStatus {
+   required PokeStatus status = 1;
+
+   // data pertaining to the space operation
+   repeated NameSpace data = 2;
+}
+
+// external and internal requests - a job operation
+//
+// since job control is both external (show, add, stop, remove, list) and 
+// internal (propose, bid), we need to ensure that only authorized nodes 
+// can make protected requests
+message JobOperation {
+   required JobAction action = 1;
+  
+   // ID for actions on known jobs
+   optional string job_id = 2;
+
+   // new job to add
+   optional JobDesc data = 3;
+     
+   optional JobProposal job_propose = 5;
+   optional JobBid job_bid = 6;
+   
+   enum JobAction {
+      SHOWJOB = 2;
+      ADDJOB = 3;
+      STOPJOB = 4;
+      REMOVEJOB = 5;
+      LISTJOBS = 6;
+      PROPOSEJOB = 10;
+      BIDJOB = 11;
+   }
+}
+
+// request - a node submits a job to be ran on the cluster
+message JobProposal {
+   required string name_space = 1;
+   required int64 owner_id = 2;
+   required string job_id = 3;
+
+   // weight is a scalar value representing the expected load for 
+   // performing this job (e.g., 1 = light, 10 = intensive)
+   required int32 weight  = 4;
+
+   // properties of the job
+   optional NameValueSet options = 5;
+   
+   // authorization
+   required string authorizationCode = 6;
+}
+
+// request - a node's bid for running a job (a response in the form of a request)
+message JobBid {
+   required string name_space = 1;
+   required int64 owner_id = 2;
+   required string job_id = 3;
+
+   // a weighted bid -> this helps to remove ties in systems with a
+   // even number of voters 
+   required int32 bid = 4;
+   
+   // authentication
+   required string securityCode = 6;
+}
+
+
+// response - the status of a job
+message JobStatus {
+    required string job_id = 1;
+    required PokeStatus status = 2;
+    required JobDesc.JobCode job_state = 3;
+
+    // data associated with a job request
+    repeated JobDesc data = 4;
+}
+
+message RoutingPath {
+    required int32 node_id = 1;
+    required int64 time = 2;
+}
+
+message Header {  
+    required Routing routing_id = 1;
+    required int32 originator = 2;
+    optional string tag = 3;
+    optional int64 time = 4;
+    
+    // while we can use extensions, it is not a clean inheritance 
+    // implementation and since requests and responses differ only 
+    // by these two fields, a new message is not created.
+
+    optional PokeStatus reply_code = 5;
+    optional string reply_msg = 6;
+    
+    // the path a message takes - to handle cycles in the network
+    repeated RoutingPath path = 7;
+
+    // if the message is for a specific node, this will be set
+    optional int32 toNode = 8;
+
+    // catch all for options
+    repeated NameValueSet options = 9;
+
+    enum Routing {
+        PING = 2;
+        NAMESPACES = 3;
+        JOBS = 4;
+        REPORTS = 10;
+        MANAGE = 100;
+        }
+}
+
+// these are commands from external (and possible internal) clients
+// TODO: this needs to be moved to its own .proto
+message Payload {
+    // requests & replies
+    optional Ping ping = 1;
+
+    // requests only
+    optional NameSpaceOperation space_op = 2;
+    optional JobOperation job_op = 3;
+  
+    // replies only
+    optional JobStatus job_status = 13;
+    optional NameSpaceStatus space_status = 12;
+   
+    // TBD
+    // reports
+}
+
+message Request {
+    required Header header = 1;
+    required Payload body = 2;
+}

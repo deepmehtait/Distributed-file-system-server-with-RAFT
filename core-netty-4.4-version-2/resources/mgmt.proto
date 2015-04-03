@@ -1,0 +1,161 @@
+
+option optimize_for = SPEED;
+option java_package = "poke.core";
+
+message Heartbeat {
+    required int64 time_ref = 2;
+}
+
+message Network {
+    required int32 from_node_id = 1;
+    required int32 to_node_id = 2;
+    required NetworkAction action = 3;
+
+    enum NetworkAction {
+       NODEJOIN = 1;
+       NODELEAVE = 2;
+       NODEDEAD = 3;
+       CREATEMAP = 55;
+       ANNOUNCE = 56;
+       SHUTDOWN = 999;
+   }
+}
+
+message LeaderElection {
+   required int32 elect_id = 2; // election ID (not candidate)
+   required int32 candidate_id = 3;
+   optional string desc = 4;
+   required ElectAction action = 5;
+   
+   // this is seconds since
+   optional int64 expires = 6 [default = -1];
+   
+   // the number of times this message should be propagated. 
+   // For Flooding, this is the diameter of the graph to ensure 
+   // a message can reach all nodes. If the diameter is unknown,
+   // limiting the hops will create non-deterministic results.
+   optional int32 hops = 7 [default = -1];
+	   
+   enum ElectAction {
+      DECLAREELECTION = 1;
+      NOMINATE = 2;
+      ABSTAIN = 3;
+      DECLAREWINNER = 4;
+      DECLAREVOID = 5;
+      WHOISTHELEADER = 6;
+      THELEADERIS = 7;
+   }
+}
+
+// voting is a general feature used by the framework and external resources.
+message VotingBallot {
+   required string ballot_id = 1;
+   required string desc = 2;
+   required BallotType ballot_format = 3;
+   
+   // supports time constrained voting
+   optional int64 expires_sec = 6;
+   
+   // supports voting where a winning margin (percentage, 52, 60 %) is needed to declare a winner
+   optional int32 margin_to_win = 7;
+   
+   // interesting/novel idea is to support localized elections for near-cooperation 
+   // events. This factor limits the hops that a vote occurs within a network 
+   // relative to the initiating node. Default (-1) is the whole network.
+   optional int32 max_hops = 8 [default = -1];
+   
+   enum BallotType {
+      SIMPLEMAJORITY = 1;
+      TIMECONSTRAINEDMAJORITY = 2;
+      RANKED = 3;
+      INSTANTRUNOFF = 4;
+   }
+}
+
+// voting - casting a vote
+message VotingCast {
+   required string voter = 1;
+   required string ballot_id = 2;
+   
+   // voting may not require a candidate other than a 'yup' and silence 
+   // for 'nope'. So, these fields are optional. Secondly, voting algo
+   // that requires ranking or cumulative approach will have to submit
+   // multiple messages
+   
+   // the voting item (candidate)
+   optional int32 candidate = 10;
+ 
+   // positional preference or weight
+   optional int32 rank = 11;
+}
+
+// voting status update (declare winner, cancel, ...)
+message VotingStatus {
+   required string ballot_id = 1;
+   required VoteStatus status = 2;
+   optional int32 winner = 3;
+   
+   enum VoteStatus {
+      BALLOTABANDONED = 1;
+      BALLOTWINNER = 2;
+   }
+}
+
+// implementation of a Vector Clock
+message VectorClock {
+    required int32 node_id = 1;
+    required int32 version = 2;
+    required int64 time = 3;
+}
+
+// lightweight header for internal messages
+message MgmtHeader {  
+    required int32 originator = 2;
+    required int32 securityCode = 3;
+    required int64 time = 4;
+    
+    // to handle version differences and cycles in the network
+    repeated VectorClock path = 7;
+
+    // if the message is for a specific node, this will be set
+    optional int32 toNode = 8;
+}
+
+message RaftMessage{
+	
+	optional int32 term = 3;
+	optional int32 logIndex = 4;
+	optional int32 prevTerm = 5;
+	optional int32 prevlogIndex = 6;
+	optional int32 leader = 8;
+	optional RaftAction raftAction = 7;
+	   enum RaftAction {
+      APPEND = 1;
+      REQUESTVOTE = 2;
+      LEADER = 3;
+      VOTE = 4;
+      WHOISTHELEADER = 5;
+      THELEADERIS = 6;
+   }
+}
+
+
+// internal communication payload
+message Management {
+   required MgmtHeader header = 1;
+
+   // a node joined or left the network
+   optional Network graph = 2;
+
+   // status updates between adjacent nodes
+   optional Heartbeat beat = 3;
+
+   // declare an election for a new leader 
+   optional LeaderElection election = 4;
+	//For Raft Election(both leader and appendnotice)
+	optional RaftMessage raftmessage = 5;
+   // voting management
+   optional VotingBallot vote_declare = 7;
+   optional VotingCast vote_cast = 8;
+   optional VotingStatus vote_status = 9;
+}	
