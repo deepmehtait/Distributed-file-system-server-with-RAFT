@@ -1,0 +1,59 @@
+<?xml version="1.0"?>
+<project xmlns:ivy="antlib:org.apache.ivy.ant" name="concurrency demo" basedir="." default="build">
+
+	<target name="resolve" depends="init">
+		<ivy:retrieve pattern="${lib.dir}/[module]-[type]-[artifact]-[revision].[ext]" />
+	</target>
+
+	<target name="init">
+		<property name="lib.dir" location="${basedir}/lib" />
+		<property name="src.dir" location="${basedir}/src" />
+		<property name="generated.dir" location="${basedir}/generated" />
+		<property name="test.dir" location="${basedir}/test" />
+		<property name="build.dir" location="${basedir}/classes" />
+		<property name="config.dir" location="${basedir}/resources" />
+
+		<path id="project.classpath">
+			<pathelement location="${build.dir}" />
+			<fileset dir="${lib.dir}">
+				<include name="**/*.jar" />
+			</fileset>
+		</path>
+	</target>
+
+	<target name="clean" depends="init">
+		<delete dir="${build.dir}" />
+	</target>
+
+	<target name="build" depends="init">
+		<mkdir dir="${build.dir}" />
+
+		<javac destdir="${build.dir}" debug="true" deprecation="false" optimize="false" failonerror="true">
+			<src path="${src.dir}" />
+			<classpath refid="project.classpath" />
+		</javac>
+	</target>
+
+	<target name="build.test" depends="build">
+		<javac destdir="${build.dir}" debug="true" deprecation="false" optimize="false" failonerror="true">
+			<src path="${test.dir}" />
+			<classpath refid="project.classpath" />
+		</javac>
+	</target>
+
+	<!-- ================================================================= -->
+
+	<target name="gen-names" depends="build">
+		<java fork="yes" maxmemory="512m" classname="gash.data.GeneratePeople">
+			<classpath refid="project.classpath" />
+		</java>
+	</target>
+
+	<target name="pop-movable" depends="build">
+		<java fork="yes" maxmemory="512m" classname="gash.data.PopulateMovableSegments">
+			<classpath refid="project.classpath" />
+		</java>
+	</target>
+
+
+</project>
