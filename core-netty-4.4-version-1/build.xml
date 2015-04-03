@@ -1,0 +1,91 @@
+<?xml version="1.0"?>
+<project xmlns:ivy="antlib:org.apache.ivy.ant" name="netty demo" basedir="." default="build">
+
+	<target name="resolve" depends="init">
+		<ivy:retrieve pattern="${lib.dir}/[module]-[type]-[artifact]-[revision].[ext]" />
+	</target>
+
+	<target name="init">
+		<property name="lib.dir" location="${basedir}/lib" />
+		<property name="src.dir" location="${basedir}/src" />
+		<property name="generated.dir" location="${basedir}/generated" />
+		<property name="test.dir" location="${basedir}/test" />
+		<property name="build.dir" location="${basedir}/classes" />
+		<property name="config.dir" location="${basedir}/resources" />
+
+		<path id="project.classpath">
+			<pathelement location="${build.dir}" />
+			<fileset dir="${lib.dir}">
+				<include name="**/*.jar" />
+			</fileset>
+		</path>
+	</target>
+
+	<target name="clean" depends="init">
+		<delete dir="${build.dir}" />
+		<echo>Note: protobuf generated .java are not removed. Changes to data.proto require build_pb.sh</echo>
+	</target>
+
+	<target name="build" depends="clean">
+		<mkdir dir="${build.dir}" />
+
+		<javac destdir="${build.dir}" debug="true" deprecation="false" optimize="false" failonerror="true">
+			<src path="${generated.dir}" />
+			<classpath refid="project.classpath" />
+		</javac>
+
+		<javac destdir="${build.dir}" debug="true" deprecation="false" optimize="false" failonerror="true">
+			<src path="${src.dir}" />
+			<classpath refid="project.classpath" />
+		</javac>
+	</target>
+
+	<target name="build.test" depends="build">
+		<javac destdir="${build.dir}" debug="true" deprecation="false" optimize="false" failonerror="true">
+			<src path="${test.dir}" />
+			<classpath refid="project.classpath" />
+		</javac>
+	</target>
+
+	<!-- ================================================================= -->
+
+	<target name="ping" depends="init">
+		<java fork="yes" classname="poke.demo.Jab">
+			<classpath refid="project.classpath" />
+			<arg value="localhost" />
+			<arg value="5670" />
+		</java>
+	</target>
+
+	<target name="startelection" depends="init">
+		<java fork="yes" classname="poke.demo.StartElection">
+			<classpath refid="project.classpath" />
+			<arg value="localhost" />
+			<arg value="5670" />
+		</java>
+	</target>
+
+	<target name="monitor0" depends="init">
+		<java fork="yes" classname="poke.monitor.HeartMonitor">
+			<classpath refid="project.classpath" />
+			<arg value="localhost" />
+			<arg value="5670" />
+		</java>
+	</target>
+
+	<target name="monitor1" depends="init">
+		<java fork="yes" classname="poke.monitor.HeartMonitor">
+			<classpath refid="project.classpath" />
+			<arg value="localhost" />
+			<arg value="5671" />
+		</java>
+	</target>
+
+	<target name="server" depends="build">
+		<java fork="yes" maxmemory="1024m" classname="poke.server.Server">
+			<arg value="${basedir}/runtime/server.conf" />
+			<classpath refid="project.classpath" />
+		</java>
+	</target>
+
+</project>

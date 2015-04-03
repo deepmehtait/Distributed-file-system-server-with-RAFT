@@ -1,0 +1,52 @@
+{
+    "port": 5570,
+    "nodeId": 0,
+    "adjacent": {
+        "adjacentNodes": {
+            "1": {
+                "port": 5571,
+                "host": "localhost",
+                "nodeId": 1,
+                "mgmtPort": 5671,
+                "nodeName": "one"
+            },
+            "2": {
+                "port": 5572,
+                "host": "localhost",
+                "nodeId": 2,
+                "mgmtPort": 5672,
+                "nodeName": "two"
+            }
+        }
+    },
+    "mgmtPort": 5670,
+    "nodeName": "zero",
+    "forwardingImplementation": "poke.resources.ForwardResource",
+    "electionImplementation": "poke.server.election.FloodMaxElection",
+    "numberOfElectionVotes": 1,
+    "storage": {
+        "tenant": "poke.server.storage.noop.TenantNoOpStorage",
+        "voting": "poke.server.storage.noop.VotingNoOpStorage",
+        "election": "poke.server.storage.noop.ElectionNoOpStorage"
+    },
+    "routing": [
+        {
+            "name": "ping",
+            "id": 2,
+            "clazz": "poke.resources.PingResource",
+            "enabled": false
+        },
+        {
+            "name": "namespaces",
+            "id": 11,
+            "clazz": "poke.resources.NameSpaceResource",
+            "enabled": false
+        },
+        {
+            "name": "jobs",
+            "id": 13,
+            "clazz": "poke.resources.JobResource",
+            "enabled": false
+        }
+    ]
+}
