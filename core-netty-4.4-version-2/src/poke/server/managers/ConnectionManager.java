@@ -70,19 +70,22 @@ public class ConnectionManager {
 	}
 
 	public synchronized static void removeConnection(Channel channel, boolean isMgmt) {
-
+		logger.info("In Remove Function");
 		if (isMgmt) {
+			logger.info("In IF Block");
 			if (!mgmtConnections.containsValue(channel)) {
 				return;
 			}
-
+			logger.info("Management Connections Size : " + ConnectionManager.getNumMgmtConnections());
 			for (Integer nid : mgmtConnections.keySet()) {
 				if (channel == mgmtConnections.get(nid)) {
 					mgmtConnections.remove(nid);
 					break;
 				}
 			}
+			logger.info("Management Connections Size After Removal: " + ConnectionManager.getNumMgmtConnections());
 		} else {
+			logger.info("In ELSE Block");
 			if (!connections.containsValue(channel)) {
 				return;
 			}

@@ -1,5 +1,7 @@
 package poke.server.managers;
 
+import io.netty.channel.Channel;
+
 import java.beans.Beans;
 import java.util.concurrent.atomic.AtomicReference;
 
@@ -125,13 +127,14 @@ public class RaftManager implements ElectionListener {
 		if (rm.getRaftAction().getNumber() == RaftAction.WHOISTHELEADER_VALUE) {
 			respondToWhoIsTheLeader(mgmt);
 			return;
-		} else if (rm.getRaftAction().getNumber() == RaftAction.THELEADERIS_VALUE) {
-			logger.info("Node " + conf.getNodeId()
-					+ " got an answer on who the leader is. Its Node "
-					+ rm.getLeader());
-			this.leaderNode = rm.getLeader();
-			return;
-		}
+		} 
+//		else if (rm.getRaftAction().getNumber() == RaftAction.THELEADERIS_VALUE) {
+//			logger.info("Node " + conf.getNodeId()
+//					+ " got an answer on who the leader is. Its Node "
+//					+ rm.getLeader());
+//			this.leaderNode = rm.getLeader();
+//			return;
+//		}
 
 		// else fall through to an election
 
@@ -156,7 +159,7 @@ public class RaftManager implements ElectionListener {
 			return false;
 		}
 		
-		else if (leaderNode == null) { 
+		else { 
 			// if this is not an election state, we need to assess the H&S of // the network's leader
 		 // synchronized (syncPt) { 
 //			  long now = System.currentTimeMillis();
@@ -165,7 +168,6 @@ public class RaftManager implements ElectionListener {
 		  //	}
 		  	return true;
 		  }
-		return false;
 		 
 	}
 
@@ -193,7 +195,8 @@ public class RaftManager implements ElectionListener {
 		MgmtHeader.Builder mhb = MgmtHeader.newBuilder();
 		mhb.setOriginator(conf.getNodeId());
 		mhb.setTime(System.currentTimeMillis());
-
+		mhb.setSecurityCode(-999); // TODO add security
+		
 		RaftMessage.Builder rmb = RaftMessage.newBuilder();
 		rmb.setLeader(this.leaderNode);
 		rmb.setRaftAction(RaftAction.THELEADERIS);
@@ -203,8 +206,10 @@ public class RaftManager implements ElectionListener {
 		mb.setRaftmessage(rmb);
 		try {
 
-			ConnectionManager.getConnection(mgmt.getHeader().getOriginator(),
-					true).writeAndFlush(mb.build());
+			Channel ch =  ConnectionManager.getConnection(mgmt.getHeader().getOriginator(),true);
+			if(ch!=null)
+				ch.writeAndFlush(mb.build());
+			
 		} catch (Exception ex) {
 			ex.printStackTrace();
 		}
@@ -212,6 +217,7 @@ public class RaftManager implements ElectionListener {
 
 	private void askWhoIsTheLeader() {
 		logger.info("Node " + conf.getNodeId() + " is searching for the leader");
+		/*
 		MgmtHeader.Builder mhb = MgmtHeader.newBuilder();
 		mhb.setOriginator(conf.getNodeId());
 		mhb.setTime(System.currentTimeMillis());
@@ -223,9 +229,19 @@ public class RaftManager implements ElectionListener {
 		Management.Builder mb = Management.newBuilder();
 		mb.setHeader(mhb.build());
 		mb.setRaftmessage(rmb);
-
+		Channel ch = ConnectionManager.getConnection(conf.getNodeId(),true);
+		if(ch!=null){
 		// now send it to the requester
-		ConnectionManager.broadcastAndFlush(mb.build());
+			ConnectionManager.broadcastAndFlush(mb.build());
+		}*/
+		if (whoIsTheLeader() == null) {
+			logger.info("----> I cannot find the leader is! I don't know!");
+			return;
+		}
+		else{
+			logger.info("The Leader is "+ this.leaderNode);
+		}
+			
 
 	}
 

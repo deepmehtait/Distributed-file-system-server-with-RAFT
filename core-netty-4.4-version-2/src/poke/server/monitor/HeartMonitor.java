@@ -121,7 +121,7 @@ public class HeartMonitor {
 			listeners.add(ml);
 		}
 
-		// TODO should wait a fixed time and use a listener to reset values;s
+		// TODO should wait a fixed time and use a listener to reset values;
 		channel = null;
 		handler = null;
 	}

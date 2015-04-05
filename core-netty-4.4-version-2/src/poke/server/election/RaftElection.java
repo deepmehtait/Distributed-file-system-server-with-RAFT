@@ -10,10 +10,9 @@ import poke.core.Mgmt.LeaderElection.ElectAction;
 import poke.core.Mgmt.Management;
 import poke.core.Mgmt.MgmtHeader;
 import poke.core.Mgmt.RaftMessage;
-import poke.core.Mgmt.VectorClock;
 import poke.core.Mgmt.RaftMessage.RaftAction;
 import poke.server.managers.ConnectionManager;
-import poke.server.managers.ElectionManager;
+import poke.server.managers.HeartbeatManager;
 import poke.server.managers.RaftManager;
 
 
@@ -89,16 +88,18 @@ public class RaftElection implements Election{
 
 			if (rm.getRaftAction().getNumber() == RaftAction.REQUESTVOTE_VALUE) {
 				// an election is declared!
+//
+//				if (currentState == RState.Candidate) {
+//					// candidate ignores other vote requests
+//				} else
+				if (currentState == RState.Follower || currentState == RState.Candidate) {
 
-				if (currentState == RState.Candidate) {
-					// candidate ignores other vote requests
-				} else
-				if (currentState == RState.Follower) {
-
+					this.lastKnownBeat = System.currentTimeMillis();
 					/**
 					 * check if already voted for this term or else vote for the
 					 * candidate
 					 **/
+					
 					if (this.votedFor == null || rm.getTerm() > this.votedFor.getTerm()) {
 						if(this.votedFor != null){
 							System.out.println("Voting for "
@@ -139,14 +140,17 @@ public class RaftElection implements Election{
 			else if(rm.getRaftAction().getNumber() == RaftAction.APPEND_VALUE){
 				if (currentState == RState.Candidate) {
 					if (rm.getTerm() >= term) {
+						this.lastKnownBeat = System.currentTimeMillis();
 						this.term = rm.getTerm();
 						this.leaderId = mgmt.getHeader().getOriginator();
 						this.currentState = RState.Follower;
+						logger.info("Received Append RPC from leader " +  mgmt.getHeader().getOriginator());
 						
 					}
 				} else if (currentState == RState.Follower) {
 					this.term = rm.getTerm();
 					this.lastKnownBeat = System.currentTimeMillis();
+					logger.info("Received Append from leader " +  mgmt.getHeader().getOriginator());
 					// TODO append work
 				} else if (currentState == RState.Leader) {
 					// should not happen
@@ -157,8 +161,9 @@ public class RaftElection implements Election{
 		}
 
 		private void receiveVote(RaftMessage rm) {
-			logger.info("Size " + RaftManager.getConf().getAdjacent().getAdjacentNodes().size() + " count " + count);
-				if (++count > (RaftManager.getConf().getAdjacent().getAdjacentNodes().size()+1)/2) {
+			logger.info("Size " + HeartbeatManager.getInstance().outgoingHB.size());
+				if (++count > (HeartbeatManager.getInstance().outgoingHB.size() +1)/2) {
+					logger.info("Final Count Received " + count );
 					count = 0;
 					currentState = RState.Leader;
 					leaderId = this.nodeId;
@@ -336,7 +341,7 @@ public class RaftElection implements Election{
 
 		public Management sendAppendNotice()
 		{
-			logger.info("Leader Node " + this.nodeId + " sending appendRPC's" );
+			//logger.info("Leader Node " + this.nodeId + " sending appendRPC's" );
 			RaftMessage.Builder rm = RaftMessage.newBuilder();
 			MgmtHeader.Builder mhb = MgmtHeader.newBuilder();
 			mhb.setTime(System.currentTimeMillis());
@@ -362,6 +367,12 @@ public class RaftElection implements Election{
 			@Override
 			public void run() {
 				while (true) {
+					try {
+						Thread.sleep(1000);
+					} catch (InterruptedException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
 					if (currentState == RState.Leader) 
 						ConnectionManager.broadcastAndFlush(sendAppendNotice());			
 					else {
@@ -386,8 +397,18 @@ public class RaftElection implements Election{
 			currentState = RState.Candidate;
 			count = 1;
 			term++;
-			ConnectionManager.broadcastAndFlush(sendRequestVoteNotice());
-			
+			if(HeartbeatManager.getInstance().outgoingHB.size() == 0){
+				count = 0;
+				currentState = RState.Leader;
+				leaderId = this.nodeId;
+				System.out.println(" Leader elected "
+						+ this.nodeId);
+				ConnectionManager.broadcastAndFlush(sendLeaderMesssage());
+			}
+				
+			else{
+				ConnectionManager.broadcastAndFlush(sendRequestVoteNotice());
+			}
 			
 		}
 

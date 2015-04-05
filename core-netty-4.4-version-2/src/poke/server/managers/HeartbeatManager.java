@@ -66,8 +66,8 @@ public class HeartbeatManager extends Thread {
 
 	// the in/out queues for sending heartbeat messages
 	// TODO this queue should be shared across managers
-	ConcurrentHashMap<Channel, HeartbeatData> outgoingHB = new ConcurrentHashMap<Channel, HeartbeatData>();
-	ConcurrentHashMap<Integer, HeartbeatData> incomingHB = new ConcurrentHashMap<Integer, HeartbeatData>();
+	 public ConcurrentHashMap<Channel, HeartbeatData> outgoingHB = new ConcurrentHashMap<Channel, HeartbeatData>();
+	 public ConcurrentHashMap<Integer, HeartbeatData> incomingHB = new ConcurrentHashMap<Integer, HeartbeatData>();
 
 	public static HeartbeatManager initManager(ServerConf conf) {
 		System.out.println("\nTODO HB QUEUES SHOULD BE SHARED!\n");

@@ -270,7 +270,6 @@ public class ElectionManager implements ElectionListener {
 		// now send it to the requester
 		logger.info("Election started by node " + conf.getNodeId());
 		try {
-
 			ConnectionManager.getConnection(mgmt.getHeader().getOriginator(), true).write(mb.build());
 		} catch (Exception ex) {
 			ex.printStackTrace();
