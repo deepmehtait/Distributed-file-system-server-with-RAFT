@@ -1200,8 +1200,8 @@ public final class Mgmt {
      * <code>optional int32 hops = 7 [default = -1];</code>
      *
      * <pre>
-     * the number of times this message should be propagated. 
-     * For Flooding, this is the diameter of the graph to ensure 
+     * the number of times this message should be propagated.
+     * For Flooding, this is the diameter of the graph to ensure
      * a message can reach all nodes. If the diameter is unknown,
      * limiting the hops will create non-deterministic results.
      * </pre>
@@ -1211,8 +1211,8 @@ public final class Mgmt {
      * <code>optional int32 hops = 7 [default = -1];</code>
      *
      * <pre>
-     * the number of times this message should be propagated. 
-     * For Flooding, this is the diameter of the graph to ensure 
+     * the number of times this message should be propagated.
+     * For Flooding, this is the diameter of the graph to ensure
      * a message can reach all nodes. If the diameter is unknown,
      * limiting the hops will create non-deterministic results.
      * </pre>
@@ -1603,8 +1603,8 @@ public final class Mgmt {
      * <code>optional int32 hops = 7 [default = -1];</code>
      *
      * <pre>
-     * the number of times this message should be propagated. 
-     * For Flooding, this is the diameter of the graph to ensure 
+     * the number of times this message should be propagated.
+     * For Flooding, this is the diameter of the graph to ensure
      * a message can reach all nodes. If the diameter is unknown,
      * limiting the hops will create non-deterministic results.
      * </pre>
@@ -1616,8 +1616,8 @@ public final class Mgmt {
      * <code>optional int32 hops = 7 [default = -1];</code>
      *
      * <pre>
-     * the number of times this message should be propagated. 
-     * For Flooding, this is the diameter of the graph to ensure 
+     * the number of times this message should be propagated.
+     * For Flooding, this is the diameter of the graph to ensure
      * a message can reach all nodes. If the diameter is unknown,
      * limiting the hops will create non-deterministic results.
      * </pre>
@@ -2211,8 +2211,8 @@ public final class Mgmt {
        * <code>optional int32 hops = 7 [default = -1];</code>
        *
        * <pre>
-       * the number of times this message should be propagated. 
-       * For Flooding, this is the diameter of the graph to ensure 
+       * the number of times this message should be propagated.
+       * For Flooding, this is the diameter of the graph to ensure
        * a message can reach all nodes. If the diameter is unknown,
        * limiting the hops will create non-deterministic results.
        * </pre>
@@ -2224,8 +2224,8 @@ public final class Mgmt {
        * <code>optional int32 hops = 7 [default = -1];</code>
        *
        * <pre>
-       * the number of times this message should be propagated. 
-       * For Flooding, this is the diameter of the graph to ensure 
+       * the number of times this message should be propagated.
+       * For Flooding, this is the diameter of the graph to ensure
        * a message can reach all nodes. If the diameter is unknown,
        * limiting the hops will create non-deterministic results.
        * </pre>
@@ -2237,8 +2237,8 @@ public final class Mgmt {
        * <code>optional int32 hops = 7 [default = -1];</code>
        *
        * <pre>
-       * the number of times this message should be propagated. 
-       * For Flooding, this is the diameter of the graph to ensure 
+       * the number of times this message should be propagated.
+       * For Flooding, this is the diameter of the graph to ensure
        * a message can reach all nodes. If the diameter is unknown,
        * limiting the hops will create non-deterministic results.
        * </pre>
@@ -2253,8 +2253,8 @@ public final class Mgmt {
        * <code>optional int32 hops = 7 [default = -1];</code>
        *
        * <pre>
-       * the number of times this message should be propagated. 
-       * For Flooding, this is the diameter of the graph to ensure 
+       * the number of times this message should be propagated.
+       * For Flooding, this is the diameter of the graph to ensure
        * a message can reach all nodes. If the diameter is unknown,
        * limiting the hops will create non-deterministic results.
        * </pre>
@@ -2361,8 +2361,8 @@ public final class Mgmt {
      * <code>optional int32 max_hops = 8 [default = -1];</code>
      *
      * <pre>
-     * interesting/novel idea is to support localized elections for near-cooperation 
-     * events. This factor limits the hops that a vote occurs within a network 
+     * interesting/novel idea is to support localized elections for near-cooperation
+     * events. This factor limits the hops that a vote occurs within a network
      * relative to the initiating node. Default (-1) is the whole network.
      * </pre>
      */
@@ -2371,8 +2371,8 @@ public final class Mgmt {
      * <code>optional int32 max_hops = 8 [default = -1];</code>
      *
      * <pre>
-     * interesting/novel idea is to support localized elections for near-cooperation 
-     * events. This factor limits the hops that a vote occurs within a network 
+     * interesting/novel idea is to support localized elections for near-cooperation
+     * events. This factor limits the hops that a vote occurs within a network
      * relative to the initiating node. Default (-1) is the whole network.
      * </pre>
      */
@@ -2766,8 +2766,8 @@ public final class Mgmt {
      * <code>optional int32 max_hops = 8 [default = -1];</code>
      *
      * <pre>
-     * interesting/novel idea is to support localized elections for near-cooperation 
-     * events. This factor limits the hops that a vote occurs within a network 
+     * interesting/novel idea is to support localized elections for near-cooperation
+     * events. This factor limits the hops that a vote occurs within a network
      * relative to the initiating node. Default (-1) is the whole network.
      * </pre>
      */
@@ -2778,8 +2778,8 @@ public final class Mgmt {
      * <code>optional int32 max_hops = 8 [default = -1];</code>
      *
      * <pre>
-     * interesting/novel idea is to support localized elections for near-cooperation 
-     * events. This factor limits the hops that a vote occurs within a network 
+     * interesting/novel idea is to support localized elections for near-cooperation
+     * events. This factor limits the hops that a vote occurs within a network
      * relative to the initiating node. Default (-1) is the whole network.
      * </pre>
      */
@@ -3419,8 +3419,8 @@ public final class Mgmt {
        * <code>optional int32 max_hops = 8 [default = -1];</code>
        *
        * <pre>
-       * interesting/novel idea is to support localized elections for near-cooperation 
-       * events. This factor limits the hops that a vote occurs within a network 
+       * interesting/novel idea is to support localized elections for near-cooperation
+       * events. This factor limits the hops that a vote occurs within a network
        * relative to the initiating node. Default (-1) is the whole network.
        * </pre>
        */
@@ -3431,8 +3431,8 @@ public final class Mgmt {
        * <code>optional int32 max_hops = 8 [default = -1];</code>
        *
        * <pre>
-       * interesting/novel idea is to support localized elections for near-cooperation 
-       * events. This factor limits the hops that a vote occurs within a network 
+       * interesting/novel idea is to support localized elections for near-cooperation
+       * events. This factor limits the hops that a vote occurs within a network
        * relative to the initiating node. Default (-1) is the whole network.
        * </pre>
        */
@@ -3443,8 +3443,8 @@ public final class Mgmt {
        * <code>optional int32 max_hops = 8 [default = -1];</code>
        *
        * <pre>
-       * interesting/novel idea is to support localized elections for near-cooperation 
-       * events. This factor limits the hops that a vote occurs within a network 
+       * interesting/novel idea is to support localized elections for near-cooperation
+       * events. This factor limits the hops that a vote occurs within a network
        * relative to the initiating node. Default (-1) is the whole network.
        * </pre>
        */
@@ -3458,8 +3458,8 @@ public final class Mgmt {
        * <code>optional int32 max_hops = 8 [default = -1];</code>
        *
        * <pre>
-       * interesting/novel idea is to support localized elections for near-cooperation 
-       * events. This factor limits the hops that a vote occurs within a network 
+       * interesting/novel idea is to support localized elections for near-cooperation
+       * events. This factor limits the hops that a vote occurs within a network
        * relative to the initiating node. Default (-1) is the whole network.
        * </pre>
        */
@@ -6947,6 +6947,16 @@ public final class Mgmt {
      * <code>optional .RaftMessage.RaftAction raftAction = 7;</code>
      */
     poke.core.Mgmt.RaftMessage.RaftAction getRaftAction();
+
+    // optional .RaftMessage.RaftAppendAction raftAppendAction = 9;
+    /**
+     * <code>optional .RaftMessage.RaftAppendAction raftAppendAction = 9;</code>
+     */
+    boolean hasRaftAppendAction();
+    /**
+     * <code>optional .RaftMessage.RaftAppendAction raftAppendAction = 9;</code>
+     */
+    poke.core.Mgmt.RaftMessage.RaftAppendAction getRaftAppendAction();
   }
   /**
    * Protobuf type {@code RaftMessage}
@@ -7033,6 +7043,17 @@ public final class Mgmt {
             case 64: {
               bitField0_ |= 0x00000010;
               leader_ = input.readInt32();
+              break;
+            }
+            case 72: {
+              int rawValue = input.readEnum();
+              poke.core.Mgmt.RaftMessage.RaftAppendAction value = poke.core.Mgmt.RaftMessage.RaftAppendAction.valueOf(rawValue);
+              if (value == null) {
+                unknownFields.mergeVarintField(9, rawValue);
+              } else {
+                bitField0_ |= 0x00000040;
+                raftAppendAction_ = value;
+              }
               break;
             }
           }
@@ -7192,6 +7213,97 @@ public final class Mgmt {
       // @@protoc_insertion_point(enum_scope:RaftMessage.RaftAction)
     }
 
+    /**
+     * Protobuf enum {@code RaftMessage.RaftAppendAction}
+     */
+    public enum RaftAppendAction
+        implements com.google.protobuf.ProtocolMessageEnum {
+      /**
+       * <code>APPENDHEARTBEAT = 1;</code>
+       */
+      APPENDHEARTBEAT(0, 1),
+      /**
+       * <code>APPENDLOG = 2;</code>
+       */
+      APPENDLOG(1, 2),
+      /**
+       * <code>APPENDVALUE = 3;</code>
+       */
+      APPENDVALUE(2, 3),
+      ;
+
+      /**
+       * <code>APPENDHEARTBEAT = 1;</code>
+       */
+      public static final int APPENDHEARTBEAT_VALUE = 1;
+      /**
+       * <code>APPENDLOG = 2;</code>
+       */
+      public static final int APPENDLOG_VALUE = 2;
+      /**
+       * <code>APPENDVALUE = 3;</code>
+       */
+      public static final int APPENDVALUE_VALUE = 3;
+
+
+      public final int getNumber() { return value; }
+
+      public static RaftAppendAction valueOf(int value) {
+        switch (value) {
+          case 1: return APPENDHEARTBEAT;
+          case 2: return APPENDLOG;
+          case 3: return APPENDVALUE;
+          default: return null;
+        }
+      }
+
+      public static com.google.protobuf.Internal.EnumLiteMap<RaftAppendAction>
+          internalGetValueMap() {
+        return internalValueMap;
+      }
+      private static com.google.protobuf.Internal.EnumLiteMap<RaftAppendAction>
+          internalValueMap =
+            new com.google.protobuf.Internal.EnumLiteMap<RaftAppendAction>() {
+              public RaftAppendAction findValueByNumber(int number) {
+                return RaftAppendAction.valueOf(number);
+              }
+            };
+
+      public final com.google.protobuf.Descriptors.EnumValueDescriptor
+          getValueDescriptor() {
+        return getDescriptor().getValues().get(index);
+      }
+      public final com.google.protobuf.Descriptors.EnumDescriptor
+          getDescriptorForType() {
+        return getDescriptor();
+      }
+      public static final com.google.protobuf.Descriptors.EnumDescriptor
+          getDescriptor() {
+        return poke.core.Mgmt.RaftMessage.getDescriptor().getEnumTypes().get(1);
+      }
+
+      private static final RaftAppendAction[] VALUES = values();
+
+      public static RaftAppendAction valueOf(
+          com.google.protobuf.Descriptors.EnumValueDescriptor desc) {
+        if (desc.getType() != getDescriptor()) {
+          throw new java.lang.IllegalArgumentException(
+            "EnumValueDescriptor is not for this type.");
+        }
+        return VALUES[desc.getIndex()];
+      }
+
+      private final int index;
+      private final int value;
+
+      private RaftAppendAction(int index, int value) {
+        this.index = index;
+        this.value = value;
+      }
+
+      // @@protoc_insertion_point(enum_scope:RaftMessage.RaftAppendAction)
+    }
+
     private int bitField0_;
     // optional int32 term = 3;
     public static final int TERM_FIELD_NUMBER = 3;
@@ -7289,6 +7401,22 @@ public final class Mgmt {
       return raftAction_;
     }
 
+    // optional .RaftMessage.RaftAppendAction raftAppendAction = 9;
+    public static final int RAFTAPPENDACTION_FIELD_NUMBER = 9;
+    private poke.core.Mgmt.RaftMessage.RaftAppendAction raftAppendAction_;
+    /**
+     * <code>optional .RaftMessage.RaftAppendAction raftAppendAction = 9;</code>
+     */
+    public boolean hasRaftAppendAction() {
+      return ((bitField0_ & 0x00000040) == 0x00000040);
+    }
+    /**
+     * <code>optional .RaftMessage.RaftAppendAction raftAppendAction = 9;</code>
+     */
+    public poke.core.Mgmt.RaftMessage.RaftAppendAction getRaftAppendAction() {
+      return raftAppendAction_;
+    }
+
     private void initFields() {
       term_ = 0;
       logIndex_ = 0;
@@ -7296,6 +7424,7 @@ public final class Mgmt {
       prevlogIndex_ = 0;
       leader_ = 0;
       raftAction_ = poke.core.Mgmt.RaftMessage.RaftAction.APPEND;
+      raftAppendAction_ = poke.core.Mgmt.RaftMessage.RaftAppendAction.APPENDHEARTBEAT;
     }
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
@@ -7326,6 +7455,9 @@ public final class Mgmt {
       }
       if (((bitField0_ & 0x00000010) == 0x00000010)) {
         output.writeInt32(8, leader_);
+      }
+      if (((bitField0_ & 0x00000040) == 0x00000040)) {
+        output.writeEnum(9, raftAppendAction_.getNumber());
       }
       getUnknownFields().writeTo(output);
     }
@@ -7359,6 +7491,10 @@ public final class Mgmt {
       if (((bitField0_ & 0x00000010) == 0x00000010)) {
         size += com.google.protobuf.CodedOutputStream
           .computeInt32Size(8, leader_);
+      }
+      if (((bitField0_ & 0x00000040) == 0x00000040)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeEnumSize(9, raftAppendAction_.getNumber());
       }
       size += getUnknownFields().getSerializedSize();
       memoizedSerializedSize = size;
@@ -7488,6 +7624,8 @@ public final class Mgmt {
         bitField0_ = (bitField0_ & ~0x00000010);
         raftAction_ = poke.core.Mgmt.RaftMessage.RaftAction.APPEND;
         bitField0_ = (bitField0_ & ~0x00000020);
+        raftAppendAction_ = poke.core.Mgmt.RaftMessage.RaftAppendAction.APPENDHEARTBEAT;
+        bitField0_ = (bitField0_ & ~0x00000040);
         return this;
       }
 
@@ -7540,6 +7678,10 @@ public final class Mgmt {
           to_bitField0_ |= 0x00000020;
         }
         result.raftAction_ = raftAction_;
+        if (((from_bitField0_ & 0x00000040) == 0x00000040)) {
+          to_bitField0_ |= 0x00000040;
+        }
+        result.raftAppendAction_ = raftAppendAction_;
         result.bitField0_ = to_bitField0_;
         onBuilt();
         return result;
@@ -7573,6 +7715,9 @@ public final class Mgmt {
         }
         if (other.hasRaftAction()) {
           setRaftAction(other.getRaftAction());
+        }
+        if (other.hasRaftAppendAction()) {
+          setRaftAppendAction(other.getRaftAppendAction());
         }
         this.mergeUnknownFields(other.getUnknownFields());
         return this;
@@ -7802,6 +7947,42 @@ public final class Mgmt {
         return this;
       }
 
+      // optional .RaftMessage.RaftAppendAction raftAppendAction = 9;
+      private poke.core.Mgmt.RaftMessage.RaftAppendAction raftAppendAction_ = poke.core.Mgmt.RaftMessage.RaftAppendAction.APPENDHEARTBEAT;
+      /**
+       * <code>optional .RaftMessage.RaftAppendAction raftAppendAction = 9;</code>
+       */
+      public boolean hasRaftAppendAction() {
+        return ((bitField0_ & 0x00000040) == 0x00000040);
+      }
+      /**
+       * <code>optional .RaftMessage.RaftAppendAction raftAppendAction = 9;</code>
+       */
+      public poke.core.Mgmt.RaftMessage.RaftAppendAction getRaftAppendAction() {
+        return raftAppendAction_;
+      }
+      /**
+       * <code>optional .RaftMessage.RaftAppendAction raftAppendAction = 9;</code>
+       */
+      public Builder setRaftAppendAction(poke.core.Mgmt.RaftMessage.RaftAppendAction value) {
+        if (value == null) {
+          throw new NullPointerException();
+        }
+        bitField0_ |= 0x00000040;
+        raftAppendAction_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional .RaftMessage.RaftAppendAction raftAppendAction = 9;</code>
+       */
+      public Builder clearRaftAppendAction() {
+        bitField0_ = (bitField0_ & ~0x00000040);
+        raftAppendAction_ = poke.core.Mgmt.RaftMessage.RaftAppendAction.APPENDHEARTBEAT;
+        onChanged();
+        return this;
+      }
+
       // @@protoc_insertion_point(builder_scope:RaftMessage)
     }
 
@@ -7887,7 +8068,7 @@ public final class Mgmt {
      * <code>optional .LeaderElection election = 4;</code>
      *
      * <pre>
-     * declare an election for a new leader 
+     * declare an election for a new leader
      * </pre>
      */
     boolean hasElection();
@@ -7895,7 +8076,7 @@ public final class Mgmt {
      * <code>optional .LeaderElection election = 4;</code>
      *
      * <pre>
-     * declare an election for a new leader 
+     * declare an election for a new leader
      * </pre>
      */
     poke.core.Mgmt.LeaderElection getElection();
@@ -7903,7 +8084,7 @@ public final class Mgmt {
      * <code>optional .LeaderElection election = 4;</code>
      *
      * <pre>
-     * declare an election for a new leader 
+     * declare an election for a new leader
      * </pre>
      */
     poke.core.Mgmt.LeaderElectionOrBuilder getElectionOrBuilder();
@@ -8284,7 +8465,7 @@ public final class Mgmt {
      * <code>optional .LeaderElection election = 4;</code>
      *
      * <pre>
-     * declare an election for a new leader 
+     * declare an election for a new leader
      * </pre>
      */
     public boolean hasElection() {
@@ -8294,7 +8475,7 @@ public final class Mgmt {
      * <code>optional .LeaderElection election = 4;</code>
      *
      * <pre>
-     * declare an election for a new leader 
+     * declare an election for a new leader
      * </pre>
      */
     public poke.core.Mgmt.LeaderElection getElection() {
@@ -8304,7 +8485,7 @@ public final class Mgmt {
      * <code>optional .LeaderElection election = 4;</code>
      *
      * <pre>
-     * declare an election for a new leader 
+     * declare an election for a new leader
      * </pre>
      */
     public poke.core.Mgmt.LeaderElectionOrBuilder getElectionOrBuilder() {
@@ -9364,7 +9545,7 @@ public final class Mgmt {
        * <code>optional .LeaderElection election = 4;</code>
        *
        * <pre>
-       * declare an election for a new leader 
+       * declare an election for a new leader
        * </pre>
        */
       public boolean hasElection() {
@@ -9374,7 +9555,7 @@ public final class Mgmt {
        * <code>optional .LeaderElection election = 4;</code>
        *
        * <pre>
-       * declare an election for a new leader 
+       * declare an election for a new leader
        * </pre>
        */
       public poke.core.Mgmt.LeaderElection getElection() {
@@ -9388,7 +9569,7 @@ public final class Mgmt {
        * <code>optional .LeaderElection election = 4;</code>
        *
        * <pre>
-       * declare an election for a new leader 
+       * declare an election for a new leader
        * </pre>
        */
       public Builder setElection(poke.core.Mgmt.LeaderElection value) {
@@ -9408,7 +9589,7 @@ public final class Mgmt {
        * <code>optional .LeaderElection election = 4;</code>
        *
        * <pre>
-       * declare an election for a new leader 
+       * declare an election for a new leader
        * </pre>
        */
       public Builder setElection(
@@ -9426,7 +9607,7 @@ public final class Mgmt {
        * <code>optional .LeaderElection election = 4;</code>
        *
        * <pre>
-       * declare an election for a new leader 
+       * declare an election for a new leader
        * </pre>
        */
       public Builder mergeElection(poke.core.Mgmt.LeaderElection value) {
@@ -9449,7 +9630,7 @@ public final class Mgmt {
        * <code>optional .LeaderElection election = 4;</code>
        *
        * <pre>
-       * declare an election for a new leader 
+       * declare an election for a new leader
        * </pre>
        */
       public Builder clearElection() {
@@ -9466,7 +9647,7 @@ public final class Mgmt {
        * <code>optional .LeaderElection election = 4;</code>
        *
        * <pre>
-       * declare an election for a new leader 
+       * declare an election for a new leader
        * </pre>
        */
       public poke.core.Mgmt.LeaderElection.Builder getElectionBuilder() {
@@ -9478,7 +9659,7 @@ public final class Mgmt {
        * <code>optional .LeaderElection election = 4;</code>
        *
        * <pre>
-       * declare an election for a new leader 
+       * declare an election for a new leader
        * </pre>
        */
       public poke.core.Mgmt.LeaderElectionOrBuilder getElectionOrBuilder() {
@@ -9492,7 +9673,7 @@ public final class Mgmt {
        * <code>optional .LeaderElection election = 4;</code>
        *
        * <pre>
-       * declare an election for a new leader 
+       * declare an election for a new leader
        * </pre>
        */
       private com.google.protobuf.SingleFieldBuilder<
@@ -10149,20 +10330,23 @@ public final class Mgmt {
       "\003 \002(\003\"p\n\nMgmtHeader\022\022\n\noriginator\030\002 \002(\005\022" +
       "\024\n\014securityCode\030\003 \002(\005\022\014\n\004time\030\004 \002(\003\022\032\n\004p" +
       "ath\030\007 \003(\0132\014.VectorClock\022\016\n\006toNode\030\010 \001(\005\"",
-      "\370\001\n\013RaftMessage\022\014\n\004term\030\003 \001(\005\022\020\n\010logInde" +
+      "\372\002\n\013RaftMessage\022\014\n\004term\030\003 \001(\005\022\020\n\010logInde" +
       "x\030\004 \001(\005\022\020\n\010prevTerm\030\005 \001(\005\022\024\n\014prevlogInde" +
       "x\030\006 \001(\005\022\016\n\006leader\030\010 \001(\005\022+\n\nraftAction\030\007 " +
-      "\001(\0162\027.RaftMessage.RaftAction\"d\n\nRaftActi" +
-      "on\022\n\n\006APPEND\020\001\022\017\n\013REQUESTVOTE\020\002\022\n\n\006LEADE" +
-      "R\020\003\022\010\n\004VOTE\020\004\022\022\n\016WHOISTHELEADER\020\005\022\017\n\013THE" +
-      "LEADERIS\020\006\"\213\002\n\nManagement\022\033\n\006header\030\001 \002(" +
-      "\0132\013.MgmtHeader\022\027\n\005graph\030\002 \001(\0132\010.Network\022" +
-      "\030\n\004beat\030\003 \001(\0132\n.Heartbeat\022!\n\010election\030\004 " +
-      "\001(\0132\017.LeaderElection\022!\n\013raftmessage\030\005 \001(",
-      "\0132\014.RaftMessage\022#\n\014vote_declare\030\007 \001(\0132\r." +
-      "VotingBallot\022\036\n\tvote_cast\030\010 \001(\0132\013.Voting" +
-      "Cast\022\"\n\013vote_status\030\t \001(\0132\r.VotingStatus" +
-      "B\r\n\tpoke.coreH\001"
+      "\001(\0162\027.RaftMessage.RaftAction\0227\n\020raftAppe" +
+      "ndAction\030\t \001(\0162\035.RaftMessage.RaftAppendA" +
+      "ction\"d\n\nRaftAction\022\n\n\006APPEND\020\001\022\017\n\013REQUE" +
+      "STVOTE\020\002\022\n\n\006LEADER\020\003\022\010\n\004VOTE\020\004\022\022\n\016WHOIST" +
+      "HELEADER\020\005\022\017\n\013THELEADERIS\020\006\"G\n\020RaftAppen" +
+      "dAction\022\023\n\017APPENDHEARTBEAT\020\001\022\r\n\tAPPENDLO" +
+      "G\020\002\022\017\n\013APPENDVALUE\020\003\"\213\002\n\nManagement\022\033\n\006h",
+      "eader\030\001 \002(\0132\013.MgmtHeader\022\027\n\005graph\030\002 \001(\0132" +
+      "\010.Network\022\030\n\004beat\030\003 \001(\0132\n.Heartbeat\022!\n\010e" +
+      "lection\030\004 \001(\0132\017.LeaderElection\022!\n\013raftme" +
+      "ssage\030\005 \001(\0132\014.RaftMessage\022#\n\014vote_declar" +
+      "e\030\007 \001(\0132\r.VotingBallot\022\036\n\tvote_cast\030\010 \001(" +
+      "\0132\013.VotingCast\022\"\n\013vote_status\030\t \001(\0132\r.Vo" +
+      "tingStatusB\r\n\tpoke.coreH\001"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
       new com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner() {
@@ -10222,7 +10406,7 @@ public final class Mgmt {
           internal_static_RaftMessage_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_RaftMessage_descriptor,
-              new java.lang.String[] { "Term", "LogIndex", "PrevTerm", "PrevlogIndex", "Leader", "RaftAction", });
+              new java.lang.String[] { "Term", "LogIndex", "PrevTerm", "PrevlogIndex", "Leader", "RaftAction", "RaftAppendAction", });
           internal_static_Management_descriptor =
             getDescriptor().getMessageTypes().get(9);
           internal_static_Management_fieldAccessorTable = new

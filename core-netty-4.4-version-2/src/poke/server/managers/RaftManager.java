@@ -44,7 +44,7 @@ public class RaftManager implements ElectionListener {
 	public static RaftManager getInstance() {
 		return instance.get();
 	}
-	
+
 	public static void setInstance(AtomicReference<RaftManager> instance) {
 		RaftManager.instance = instance;
 	}
@@ -127,14 +127,15 @@ public class RaftManager implements ElectionListener {
 		if (rm.getRaftAction().getNumber() == RaftAction.WHOISTHELEADER_VALUE) {
 			respondToWhoIsTheLeader(mgmt);
 			return;
-		} 
-//		else if (rm.getRaftAction().getNumber() == RaftAction.THELEADERIS_VALUE) {
-//			logger.info("Node " + conf.getNodeId()
-//					+ " got an answer on who the leader is. Its Node "
-//					+ rm.getLeader());
-//			this.leaderNode = rm.getLeader();
-//			return;
-//		}
+		}
+		// else if (rm.getRaftAction().getNumber() ==
+		// RaftAction.THELEADERIS_VALUE) {
+		// logger.info("Node " + conf.getNodeId()
+		// + " got an answer on who the leader is. Its Node "
+		// + rm.getLeader());
+		// this.leaderNode = rm.getLeader();
+		// return;
+		// }
 
 		// else fall through to an election
 
@@ -149,7 +150,7 @@ public class RaftManager implements ElectionListener {
 	 * @param mgmt
 	 */
 	public boolean assessCurrentState() {
-		//logger.info("RaftManager.assessCurrentState() checking elected leader status");
+		// logger.info("RaftManager.assessCurrentState() checking elected leader status");
 
 		if (firstTime > 0 && ConnectionManager.getNumMgmtConnections() > 0) {
 			// give it two tries to get the leader
@@ -158,21 +159,21 @@ public class RaftManager implements ElectionListener {
 			askWhoIsTheLeader();
 			return false;
 		}
-		
-		else { 
-			// if this is not an election state, we need to assess the H&S of // the network's leader
-		 // synchronized (syncPt) { 
-//			  long now = System.currentTimeMillis();
-//			  if(now-lastKnownBeat>1000) 
-//				  startElection(); 
-		  //	}
-		  	return true;
-		  }
-		 
+
+		else {
+			// if this is not an election state, we need to assess the H&S of //
+			// the network's leader
+			// synchronized (syncPt) {
+			// long now = System.currentTimeMillis();
+			// if(now-lastKnownBeat>1000)
+			// startElection();
+			// }
+			return true;
+		}
+
 	}
 
 	/** election listener implementation */
-	@Override
 	public void concludeWith(boolean success, Integer leaderID) {
 		if (success) {
 			logger.info("----> the leader is " + leaderID);
@@ -196,7 +197,7 @@ public class RaftManager implements ElectionListener {
 		mhb.setOriginator(conf.getNodeId());
 		mhb.setTime(System.currentTimeMillis());
 		mhb.setSecurityCode(-999); // TODO add security
-		
+
 		RaftMessage.Builder rmb = RaftMessage.newBuilder();
 		rmb.setLeader(this.leaderNode);
 		rmb.setRaftAction(RaftAction.THELEADERIS);
@@ -206,10 +207,11 @@ public class RaftManager implements ElectionListener {
 		mb.setRaftmessage(rmb);
 		try {
 
-			Channel ch =  ConnectionManager.getConnection(mgmt.getHeader().getOriginator(),true);
-			if(ch!=null)
+			Channel ch = ConnectionManager.getConnection(mgmt.getHeader()
+					.getOriginator(), true);
+			if (ch != null)
 				ch.writeAndFlush(mb.build());
-			
+
 		} catch (Exception ex) {
 			ex.printStackTrace();
 		}
@@ -218,30 +220,26 @@ public class RaftManager implements ElectionListener {
 	private void askWhoIsTheLeader() {
 		logger.info("Node " + conf.getNodeId() + " is searching for the leader");
 		/*
-		MgmtHeader.Builder mhb = MgmtHeader.newBuilder();
-		mhb.setOriginator(conf.getNodeId());
-		mhb.setTime(System.currentTimeMillis());
-		mhb.setSecurityCode(-999); // TODO add security
-
-		RaftMessage.Builder rmb = RaftMessage.newBuilder();
-		rmb.setRaftAction(RaftAction.WHOISTHELEADER);
-
-		Management.Builder mb = Management.newBuilder();
-		mb.setHeader(mhb.build());
-		mb.setRaftmessage(rmb);
-		Channel ch = ConnectionManager.getConnection(conf.getNodeId(),true);
-		if(ch!=null){
-		// now send it to the requester
-			ConnectionManager.broadcastAndFlush(mb.build());
-		}*/
+		 * MgmtHeader.Builder mhb = MgmtHeader.newBuilder();
+		 * mhb.setOriginator(conf.getNodeId());
+		 * mhb.setTime(System.currentTimeMillis()); mhb.setSecurityCode(-999);
+		 * // TODO add security
+		 * 
+		 * RaftMessage.Builder rmb = RaftMessage.newBuilder();
+		 * rmb.setRaftAction(RaftAction.WHOISTHELEADER);
+		 * 
+		 * Management.Builder mb = Management.newBuilder();
+		 * mb.setHeader(mhb.build()); mb.setRaftmessage(rmb); Channel ch =
+		 * ConnectionManager.getConnection(conf.getNodeId(),true); if(ch!=null){
+		 * // now send it to the requester
+		 * ConnectionManager.broadcastAndFlush(mb.build()); }
+		 */
 		if (whoIsTheLeader() == null) {
 			logger.info("----> I cannot find the leader is! I don't know!");
 			return;
+		} else {
+			logger.info("The Leader is " + this.leaderNode);
 		}
-		else{
-			logger.info("The Leader is "+ this.leaderNode);
-		}
-			
 
 	}
 
