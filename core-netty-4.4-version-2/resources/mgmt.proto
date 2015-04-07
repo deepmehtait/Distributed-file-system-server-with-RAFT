@@ -133,7 +133,8 @@ message RaftMessage {
 		VOTE = 4;
 		WHOISTHELEADER = 5;
 		THELEADERIS = 6;
-	}
+		APPENDRESPONSE = 7;
+		 }
 
 	optional RaftAppendAction raftAppendAction = 9;
 	enum RaftAppendAction {
@@ -141,6 +142,7 @@ message RaftMessage {
 		APPENDLOG = 2;
 		APPENDVALUE = 3;
 	}
+	optional int32 success = 10;
 
 }
 

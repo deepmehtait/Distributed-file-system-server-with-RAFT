@@ -6957,6 +6957,16 @@ public final class Mgmt {
      * <code>optional .RaftMessage.RaftAppendAction raftAppendAction = 9;</code>
      */
     poke.core.Mgmt.RaftMessage.RaftAppendAction getRaftAppendAction();
+
+    // optional int32 success = 10;
+    /**
+     * <code>optional int32 success = 10;</code>
+     */
+    boolean hasSuccess();
+    /**
+     * <code>optional int32 success = 10;</code>
+     */
+    int getSuccess();
   }
   /**
    * Protobuf type {@code RaftMessage}
@@ -7056,6 +7066,11 @@ public final class Mgmt {
               }
               break;
             }
+            case 80: {
+              bitField0_ |= 0x00000080;
+              success_ = input.readInt32();
+              break;
+            }
           }
         }
       } catch (com.google.protobuf.InvalidProtocolBufferException e) {
@@ -7124,6 +7139,10 @@ public final class Mgmt {
        * <code>THELEADERIS = 6;</code>
        */
       THELEADERIS(5, 6),
+      /**
+       * <code>APPENDRESPONSE = 7;</code>
+       */
+      APPENDRESPONSE(6, 7),
       ;
 
       /**
@@ -7150,6 +7169,10 @@ public final class Mgmt {
        * <code>THELEADERIS = 6;</code>
        */
       public static final int THELEADERIS_VALUE = 6;
+      /**
+       * <code>APPENDRESPONSE = 7;</code>
+       */
+      public static final int APPENDRESPONSE_VALUE = 7;
 
 
       public final int getNumber() { return value; }
@@ -7162,6 +7185,7 @@ public final class Mgmt {
           case 4: return VOTE;
           case 5: return WHOISTHELEADER;
           case 6: return THELEADERIS;
+          case 7: return APPENDRESPONSE;
           default: return null;
         }
       }
@@ -7417,6 +7441,22 @@ public final class Mgmt {
       return raftAppendAction_;
     }
 
+    // optional int32 success = 10;
+    public static final int SUCCESS_FIELD_NUMBER = 10;
+    private int success_;
+    /**
+     * <code>optional int32 success = 10;</code>
+     */
+    public boolean hasSuccess() {
+      return ((bitField0_ & 0x00000080) == 0x00000080);
+    }
+    /**
+     * <code>optional int32 success = 10;</code>
+     */
+    public int getSuccess() {
+      return success_;
+    }
+
     private void initFields() {
       term_ = 0;
       logIndex_ = 0;
@@ -7425,6 +7465,7 @@ public final class Mgmt {
       leader_ = 0;
       raftAction_ = poke.core.Mgmt.RaftMessage.RaftAction.APPEND;
       raftAppendAction_ = poke.core.Mgmt.RaftMessage.RaftAppendAction.APPENDHEARTBEAT;
+      success_ = 0;
     }
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
@@ -7458,6 +7499,9 @@ public final class Mgmt {
       }
       if (((bitField0_ & 0x00000040) == 0x00000040)) {
         output.writeEnum(9, raftAppendAction_.getNumber());
+      }
+      if (((bitField0_ & 0x00000080) == 0x00000080)) {
+        output.writeInt32(10, success_);
       }
       getUnknownFields().writeTo(output);
     }
@@ -7495,6 +7539,10 @@ public final class Mgmt {
       if (((bitField0_ & 0x00000040) == 0x00000040)) {
         size += com.google.protobuf.CodedOutputStream
           .computeEnumSize(9, raftAppendAction_.getNumber());
+      }
+      if (((bitField0_ & 0x00000080) == 0x00000080)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt32Size(10, success_);
       }
       size += getUnknownFields().getSerializedSize();
       memoizedSerializedSize = size;
@@ -7626,6 +7674,8 @@ public final class Mgmt {
         bitField0_ = (bitField0_ & ~0x00000020);
         raftAppendAction_ = poke.core.Mgmt.RaftMessage.RaftAppendAction.APPENDHEARTBEAT;
         bitField0_ = (bitField0_ & ~0x00000040);
+        success_ = 0;
+        bitField0_ = (bitField0_ & ~0x00000080);
         return this;
       }
 
@@ -7682,6 +7732,10 @@ public final class Mgmt {
           to_bitField0_ |= 0x00000040;
         }
         result.raftAppendAction_ = raftAppendAction_;
+        if (((from_bitField0_ & 0x00000080) == 0x00000080)) {
+          to_bitField0_ |= 0x00000080;
+        }
+        result.success_ = success_;
         result.bitField0_ = to_bitField0_;
         onBuilt();
         return result;
@@ -7718,6 +7772,9 @@ public final class Mgmt {
         }
         if (other.hasRaftAppendAction()) {
           setRaftAppendAction(other.getRaftAppendAction());
+        }
+        if (other.hasSuccess()) {
+          setSuccess(other.getSuccess());
         }
         this.mergeUnknownFields(other.getUnknownFields());
         return this;
@@ -7979,6 +8036,39 @@ public final class Mgmt {
       public Builder clearRaftAppendAction() {
         bitField0_ = (bitField0_ & ~0x00000040);
         raftAppendAction_ = poke.core.Mgmt.RaftMessage.RaftAppendAction.APPENDHEARTBEAT;
+        onChanged();
+        return this;
+      }
+
+      // optional int32 success = 10;
+      private int success_ ;
+      /**
+       * <code>optional int32 success = 10;</code>
+       */
+      public boolean hasSuccess() {
+        return ((bitField0_ & 0x00000080) == 0x00000080);
+      }
+      /**
+       * <code>optional int32 success = 10;</code>
+       */
+      public int getSuccess() {
+        return success_;
+      }
+      /**
+       * <code>optional int32 success = 10;</code>
+       */
+      public Builder setSuccess(int value) {
+        bitField0_ |= 0x00000080;
+        success_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional int32 success = 10;</code>
+       */
+      public Builder clearSuccess() {
+        bitField0_ = (bitField0_ & ~0x00000080);
+        success_ = 0;
         onChanged();
         return this;
       }
@@ -10330,23 +10420,24 @@ public final class Mgmt {
       "\003 \002(\003\"p\n\nMgmtHeader\022\022\n\noriginator\030\002 \002(\005\022" +
       "\024\n\014securityCode\030\003 \002(\005\022\014\n\004time\030\004 \002(\003\022\032\n\004p" +
       "ath\030\007 \003(\0132\014.VectorClock\022\016\n\006toNode\030\010 \001(\005\"",
-      "\372\002\n\013RaftMessage\022\014\n\004term\030\003 \001(\005\022\020\n\010logInde" +
+      "\237\003\n\013RaftMessage\022\014\n\004term\030\003 \001(\005\022\020\n\010logInde" +
       "x\030\004 \001(\005\022\020\n\010prevTerm\030\005 \001(\005\022\024\n\014prevlogInde" +
       "x\030\006 \001(\005\022\016\n\006leader\030\010 \001(\005\022+\n\nraftAction\030\007 " +
       "\001(\0162\027.RaftMessage.RaftAction\0227\n\020raftAppe" +
       "ndAction\030\t \001(\0162\035.RaftMessage.RaftAppendA" +
-      "ction\"d\n\nRaftAction\022\n\n\006APPEND\020\001\022\017\n\013REQUE" +
-      "STVOTE\020\002\022\n\n\006LEADER\020\003\022\010\n\004VOTE\020\004\022\022\n\016WHOIST" +
-      "HELEADER\020\005\022\017\n\013THELEADERIS\020\006\"G\n\020RaftAppen" +
-      "dAction\022\023\n\017APPENDHEARTBEAT\020\001\022\r\n\tAPPENDLO" +
-      "G\020\002\022\017\n\013APPENDVALUE\020\003\"\213\002\n\nManagement\022\033\n\006h",
-      "eader\030\001 \002(\0132\013.MgmtHeader\022\027\n\005graph\030\002 \001(\0132" +
-      "\010.Network\022\030\n\004beat\030\003 \001(\0132\n.Heartbeat\022!\n\010e" +
-      "lection\030\004 \001(\0132\017.LeaderElection\022!\n\013raftme" +
-      "ssage\030\005 \001(\0132\014.RaftMessage\022#\n\014vote_declar" +
-      "e\030\007 \001(\0132\r.VotingBallot\022\036\n\tvote_cast\030\010 \001(" +
-      "\0132\013.VotingCast\022\"\n\013vote_status\030\t \001(\0132\r.Vo" +
-      "tingStatusB\r\n\tpoke.coreH\001"
+      "ction\022\017\n\007success\030\n \001(\005\"x\n\nRaftAction\022\n\n\006" +
+      "APPEND\020\001\022\017\n\013REQUESTVOTE\020\002\022\n\n\006LEADER\020\003\022\010\n" +
+      "\004VOTE\020\004\022\022\n\016WHOISTHELEADER\020\005\022\017\n\013THELEADER" +
+      "IS\020\006\022\022\n\016APPENDRESPONSE\020\007\"G\n\020RaftAppendAc" +
+      "tion\022\023\n\017APPENDHEARTBEAT\020\001\022\r\n\tAPPENDLOG\020\002",
+      "\022\017\n\013APPENDVALUE\020\003\"\213\002\n\nManagement\022\033\n\006head" +
+      "er\030\001 \002(\0132\013.MgmtHeader\022\027\n\005graph\030\002 \001(\0132\010.N" +
+      "etwork\022\030\n\004beat\030\003 \001(\0132\n.Heartbeat\022!\n\010elec" +
+      "tion\030\004 \001(\0132\017.LeaderElection\022!\n\013raftmessa" +
+      "ge\030\005 \001(\0132\014.RaftMessage\022#\n\014vote_declare\030\007" +
+      " \001(\0132\r.VotingBallot\022\036\n\tvote_cast\030\010 \001(\0132\013" +
+      ".VotingCast\022\"\n\013vote_status\030\t \001(\0132\r.Votin" +
+      "gStatusB\r\n\tpoke.coreH\001"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
       new com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner() {
@@ -10406,7 +10497,7 @@ public final class Mgmt {
           internal_static_RaftMessage_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_RaftMessage_descriptor,
-              new java.lang.String[] { "Term", "LogIndex", "PrevTerm", "PrevlogIndex", "Leader", "RaftAction", "RaftAppendAction", });
+              new java.lang.String[] { "Term", "LogIndex", "PrevTerm", "PrevlogIndex", "Leader", "RaftAction", "RaftAppendAction", "Success", });
           internal_static_Management_descriptor =
             getDescriptor().getMessageTypes().get(9);
           internal_static_Management_fieldAccessorTable = new

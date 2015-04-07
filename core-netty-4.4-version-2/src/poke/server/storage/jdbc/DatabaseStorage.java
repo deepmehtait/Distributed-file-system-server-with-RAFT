@@ -48,7 +48,7 @@ public class DatabaseStorage implements TenantStorage {
 		init(cfg);
 	}
 
-	@Override
+	
 	public void init(Properties cfg) {
 		if (cpool != null)
 			return;
@@ -76,7 +76,7 @@ public class DatabaseStorage implements TenantStorage {
 	 * 
 	 * @see gash.jdbc.repo.Repository#release()
 	 */
-	@Override
+	
 	public void release() {
 		if (cpool == null)
 			return;
@@ -85,7 +85,6 @@ public class DatabaseStorage implements TenantStorage {
 		cpool = null;
 	}
 
-	@Override
 	public NameSpace getNameSpaceInfo(long spaceId) {
 		NameSpace space = null;
 
@@ -115,7 +114,6 @@ public class DatabaseStorage implements TenantStorage {
 		return space;
 	}
 
-	@Override
 	public List<NameSpace> findNameSpaces(NameSpace criteria) {
 		List<NameSpace> list = null;
 
@@ -144,7 +142,6 @@ public class DatabaseStorage implements TenantStorage {
 		return list;
 	}
 
-	@Override
 	public NameSpace createNameSpace(NameSpace space) {
 		if (space == null)
 			return space;
@@ -177,31 +174,27 @@ public class DatabaseStorage implements TenantStorage {
 		return space;
 	}
 
-	@Override
 	public boolean removeNameSpace(long spaceId) {
 		// TODO Auto-generated method stub
 		return false;
 	}
 
-	@Override
 	public boolean addJob(String namespace, JobDesc job) {
 		// TODO Auto-generated method stub
 		return false;
 	}
 
-	@Override
 	public boolean removeJob(String namespace, String jobId) {
 		// TODO Auto-generated method stub
 		return false;
 	}
 
-	@Override
 	public boolean updateJob(String namespace, JobDesc job) {
 		// TODO Auto-generated method stub
 		return false;
 	}
 
-	@Override
+	
 	public List<JobDesc> findJobs(String namespace, JobDesc criteria) {
 		// TODO Auto-generated method stub
 		return null;

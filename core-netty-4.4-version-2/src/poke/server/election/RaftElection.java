@@ -1,5 +1,7 @@
 package poke.server.election;
 
+import io.netty.channel.Channel;
+
 import java.util.Random;
 
 import org.slf4j.Logger;
@@ -152,55 +154,159 @@ public class RaftElection implements Election {
 
 			} else if (currentState == RState.Follower) {
 				this.term = rm.getTerm();
-				//Move this line to last stmt as this resets the timer
+				// Move this line to last stmt as this resets the timer
 				this.lastKnownBeat = System.currentTimeMillis();
-					logger.info("---Test--- "
+				logger.info("---Test--- " + mgmt.getHeader().getOriginator()
+						+ "\n RaftAction=" + rm.getRaftAction().getNumber()
+						+ " RaftAppendAction="
+						+ rm.getRaftAppendAction().getNumber());
+				if (rm.getRaftAppendAction().getNumber() == RaftAppendAction.APPENDHEARTBEAT_VALUE) {
+					// Return Sucess to Leader if its normal Heartbeat
+					// message
+
+					logger.info("*Follower stateReceived AppendAction HB RPC from leader "
 							+ mgmt.getHeader().getOriginator()
-							+ "\n RaftAction=" + rm.getRaftAction().getNumber()
+							+ "\n RaftAction="
+							+ rm.getRaftAction().getNumber()
 							+ " RaftAppendAction="
 							+ rm.getRaftAppendAction().getNumber());
-					if (rm.getRaftAppendAction().getNumber() == RaftAppendAction.APPENDHEARTBEAT_VALUE) {
-						// Return Sucess to Leader if its normal Heartbeat
-						// message
+					sendAppendResponse(mgmt);
 
-						logger.info("*Follower stateReceived AppendAction HB RPC from leader "
-								+ mgmt.getHeader().getOriginator()
-								+ "\n RaftAction="
-								+ rm.getRaftAction().getNumber()
-								+ " RaftAppendAction="
-								+ rm.getRaftAppendAction().getNumber());
+				} else if (rm.getRaftAppendAction().getNumber() == RaftAppendAction.APPENDLOG_VALUE) {
+					// Return Sucess to Leader if Log is done
+					// message
 
-					} else if (rm.getRaftAppendAction().getNumber() == RaftAppendAction.APPENDLOG_VALUE) {
-						// Return Sucess to Leader if Log is done
-						// message
+					logger.info("**Follower stateReceived AppendAction HB Log  from leader "
+							+ mgmt.getHeader().getOriginator()
+							+ "\n RaftAction="
+							+ rm.getRaftAction().getNumber()
+							+ " RaftAppendAction="
+							+ rm.getRaftAppendAction().getNumber());
+					sendAppendResponseLog(mgmt);
 
-						logger.info("**Follower stateReceived AppendAction HB Log  from leader "
-								+ mgmt.getHeader().getOriginator()
-								+ "\n RaftAction="
-								+ rm.getRaftAction().getNumber()
-								+ " RaftAppendAction="
-								+ rm.getRaftAppendAction().getNumber());
+				} else if (rm.getRaftAppendAction().getNumber() == RaftAppendAction.APPENDVALUE_VALUE) {
+					// Return Sucess to Leader if Value is done
+					// message
 
-					}
-					else if (rm.getRaftAppendAction().getNumber() == RaftAppendAction.APPENDVALUE_VALUE) {
-						// Return Sucess to Leader if Value is done
-						// message
+					logger.info("***Follower stateReceived AppendAction HB VALUE  from leader "
+							+ mgmt.getHeader().getOriginator()
+							+ "\n RaftAction="
+							+ rm.getRaftAction().getNumber()
+							+ " RaftAppendAction="
+							+ rm.getRaftAppendAction().getNumber());
+					sendAppendResponseValue(mgmt);
 
-						logger.info("***Follower stateReceived AppendAction HB VALUE  from leader "
-								+ mgmt.getHeader().getOriginator()
-								+ "\n RaftAction="
-								+ rm.getRaftAction().getNumber()
-								+ " RaftAppendAction="
-								+ rm.getRaftAppendAction().getNumber());
-
-					}
-				 // TODO append work
+				}
+				// TODO append work
 			} else if (currentState == RState.Leader) {
 				// should not happen
+			}
+		} else if (rm.getRaftAction().getNumber() == RaftAction.APPENDRESPONSE_VALUE) {
+			if (currentState == RState.Leader) {
+				
+			}
+			if (rm.getTerm() > this.term) {
+				this.leaderId = mgmt.getHeader().getOriginator();
+				this.term = rm.getTerm();
+				this.lastKnownBeat = System.currentTimeMillis();
+				notify(true, mgmt.getHeader().getOriginator());
+				logger.info("Node " + mgmt.getHeader().getOriginator()
+						+ " is the leader ");
 			}
 		}
 		return rtn;
 	}
+	// Response of Normal HB to Leader
+	private Management sendAppendResponse(Management mgmt) {
+		// TODO Auto-generated method stub
+		
+		RaftMessage.Builder rm = RaftMessage.newBuilder();
+		MgmtHeader.Builder mhb = MgmtHeader.newBuilder();
+		mhb.setTime(System.currentTimeMillis());
+		mhb.setSecurityCode(-999); // TODO add security
+		mhb.setOriginator(this.nodeId);
+		mhb.setToNode(mgmt.getHeader().getOriginator());
+		// Raft Message to be added
+		rm.setTerm(term);
+		rm.setSuccess(1);
+		rm.setRaftAction(RaftAction.APPENDRESPONSE);
+		Management.Builder mb = Management.newBuilder();
+		mb.setHeader(mhb.build());
+		mb.setRaftmessage(rm.build());
+		try{
+			Channel ch = ConnectionManager.getConnection(mgmt.getHeader().getOriginator(), true);
+			if(ch!=null)
+				ch.writeAndFlush(mb.build());
+			
+		}
+		catch (Exception ex){
+			ex.printStackTrace();
+		}
+		return null;
+
+	}
+	// Response of Log Replication to Leader
+	// can be success of failure
+	private Management sendAppendResponseLog(Management mgmt)
+	{
+		RaftMessage.Builder rm = RaftMessage.newBuilder();
+		MgmtHeader.Builder mhb = MgmtHeader.newBuilder();
+		mhb.setTime(System.currentTimeMillis());
+		mhb.setSecurityCode(-999); // TODO add security
+		mhb.setOriginator(this.nodeId);
+		mhb.setToNode(mgmt.getHeader().getOriginator());
+		// Raft Message to be added
+		rm.setTerm(term);
+		rm.setSuccess(1);
+		rm.setRaftAction(RaftAction.APPENDRESPONSE);
+		Management.Builder mb = Management.newBuilder();
+		mb.setHeader(mhb.build());
+		mb.setRaftmessage(rm.build());
+
+		try{
+			Channel ch = ConnectionManager.getConnection(mgmt.getHeader().getOriginator(), true);
+			if(ch!=null)
+				ch.writeAndFlush(mb.build());
+			
+		}
+		catch (Exception ex){
+			ex.printStackTrace();
+		}
+		return null;
+
+	}
+	// Response of Vlaue to Leader
+	// can be success of failure
+	private Management sendAppendResponseValue(Management mgmt)
+	{
+		RaftMessage.Builder rm = RaftMessage.newBuilder();
+		MgmtHeader.Builder mhb = MgmtHeader.newBuilder();
+		mhb.setTime(System.currentTimeMillis());
+		mhb.setSecurityCode(-999); // TODO add security
+		mhb.setOriginator(this.nodeId);
+		mhb.setToNode(mgmt.getHeader().getOriginator());
+		// Raft Message to be added
+		rm.setTerm(term);
+		rm.setSuccess(1);
+		rm.setRaftAction(RaftAction.APPENDRESPONSE);
+		Management.Builder mb = Management.newBuilder();
+		mb.setHeader(mhb.build());
+		mb.setRaftmessage(rm.build());
+
+		try{
+			Channel ch = ConnectionManager.getConnection(mgmt.getHeader().getOriginator(), true);
+			if(ch!=null)
+				ch.writeAndFlush(mb.build());
+			
+		}
+		catch (Exception ex){
+			ex.printStackTrace();
+		}
+		return null;
+
+	}
+ 
+	
 
 	private void receiveVote(RaftMessage rm) {
 		logger.info("Size " + HeartbeatManager.getInstance().outgoingHB.size());
@@ -411,7 +517,7 @@ public class RaftElection implements Election {
 			mb.setHeader(mhb.build());
 			mb.setRaftmessage(rm.build());
 			return mb.build();
-		} else  {
+		} else {
 			logger.info("Leader Node " + this.nodeId
 					+ " sending appendAction HB RPC's");
 			RaftMessage.Builder rm = RaftMessage.newBuilder();
@@ -428,7 +534,7 @@ public class RaftElection implements Election {
 			mb.setHeader(mhb.build());
 			mb.setRaftmessage(rm.build());
 			return mb.build();
-		} 
+		}
 	}
 
 	public RaftMonitor getMonitor() {
@@ -472,15 +578,20 @@ public class RaftElection implements Election {
 		currentState = RState.Candidate;
 		count = 1;
 		term++;
+		logger.info("size of nodes "
+				+ HeartbeatManager.getInstance().outgoingHB.size());
 		if (HeartbeatManager.getInstance().outgoingHB.size() == 0) {
+			// logger.info("size of nodes.! IN IF="+HeartbeatManager.getInstance().outgoingHB.size());
 			count = 0;
 			currentState = RState.Leader;
 			leaderId = this.nodeId;
-			System.out.println(" Leader elected " + this.nodeId);
+			logger.info(" Leader elected " + this.nodeId);
 			ConnectionManager.broadcastAndFlush(sendLeaderMesssage());
 		}
 
 		else {
+			logger.info("size of nodes IN ELSE.!="
+					+ HeartbeatManager.getInstance().outgoingHB.size());
 			ConnectionManager.broadcastAndFlush(sendRequestVoteNotice());
 		}
 
