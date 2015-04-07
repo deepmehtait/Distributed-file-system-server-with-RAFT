@@ -13,7 +13,7 @@ project_base="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 
 # which protoc that you built
 #PROTOC_HOME=/usr/local/protobuf-2.4.1/
-PROTOC_HOME=/home/deep/Downloads/protobuf-2.5.0/
+PROTOC_HOME=/home/nishant/Documents/275/protobuf-2.5.0/
 
 if [ -d ${project_base}/generated ]; then
   rm -r ${project_base}/generated/*
