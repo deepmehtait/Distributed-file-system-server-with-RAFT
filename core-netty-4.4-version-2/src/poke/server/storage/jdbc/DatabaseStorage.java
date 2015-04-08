@@ -12,7 +12,7 @@
  * WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
  * License for the specific language governing permissions and limitations
  * under the License.
- */
+ 
 package poke.server.storage.jdbc;
 
 import java.sql.Connection;
@@ -71,11 +71,11 @@ public class DatabaseStorage implements TenantStorage {
 		}
 	}
 
-	/*
+	
 	 * (non-Javadoc)
 	 * 
 	 * @see gash.jdbc.repo.Repository#release()
-	 */
+	 
 	
 	public void release() {
 		if (cpool == null)
@@ -200,3 +200,4 @@ public class DatabaseStorage implements TenantStorage {
 		return null;
 	}
 }
+*/
