@@ -15,11 +15,10 @@
  */
 package poke.demo;
 
-import io.netty.channel.ChannelHandlerContext;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import io.netty.channel.*;
 import poke.core.Mgmt.Management;
 import poke.server.monitor.HeartMonitor;
 import poke.server.monitor.MonitorListener;
@@ -73,12 +72,11 @@ public class ExternalMonitor {
 			this.nodeID = nodeID;
 		}
 
-		@Override
+
 		public Integer getListenerID() {
 			return nodeID;
 		}
 
-		@Override
 		public void onMessage(Management msg, ChannelHandlerContext notused) {
 			if (logger.isDebugEnabled())
 				logger.debug("HeartMonitor got HB from node " + msg.getHeader().getOriginator());
@@ -94,15 +92,16 @@ public class ExternalMonitor {
 				logger.error("Received management response from unexpected host: " + msg.getHeader().getOriginator());
 		}
 
-		@Override
+
 		public void connectionClosed() {
 			logger.error("Management port connection failed");
 		}
 
-		@Override
+
 		public void connectionReady() {
 			logger.info("Management port is ready to receive messages");
 		}
+
 
 	}
 

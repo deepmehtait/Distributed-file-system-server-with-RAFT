@@ -24,6 +24,10 @@ import poke.comm.App.Header;
 import poke.comm.App.Payload;
 import poke.comm.App.Ping;
 import poke.comm.App.Request;
+import poke.comm.App.JobDesc;
+import poke.comm.App.JobOperation;
+import poke.comm.App.JobOperation.JobAction;
+
 
 /**
  * The command class is the concrete implementation of the functionality of our
@@ -50,7 +54,10 @@ public class ClientCommand {
 	}
 
 	private void init() {
-		comm = new CommConnection(host, port);
+ 		System.out.println("In ClientCommand Init (Host:"+host+"  Port:"+port+")");
+ 		comm = new CommConnection(host, port);
+		if(comm == null)
+			System.out.println("Comm is null");
 	}
 
 	/**
@@ -62,7 +69,7 @@ public class ClientCommand {
 	public void addListener(CommListener listener) {
 		comm.addListener(listener);
 	}
-
+	//Function to Ping from client to Server
 	/**
 	 * Our network's equivalent to ping
 	 * 
@@ -97,4 +104,40 @@ public class ClientCommand {
 			logger.warn("Unable to deliver message, queuing");
 		}
 	}
+	
+	
+	//Function to Send Request from client to Server
+	public void sendRequest(JobAction jAct, String jobId, JobDesc desc) {
+		
+		//Building Job Operation for request
+		JobOperation.Builder j = JobOperation.newBuilder();
+		j.setAction(jAct);
+		j.setJobId(jobId);
+		j.setData(desc);
+		
+		//Building Payload containing data for job
+		Request.Builder r = Request.newBuilder();
+		Payload.Builder p = Payload.newBuilder();
+		p.setJobOp(j.build());
+
+		//Building Header with routing info
+		Header.Builder h = Header.newBuilder();
+		h.setOriginator(1000);
+		h.setTag("jobs");
+		h.setTime(System.currentTimeMillis());
+		h.setRoutingId(Header.Routing.JOBS);
+		
+		//Setting Request parameters
+		r.setHeader(h.build());
+		r.setBody(p.build());
+		
+		Request req = r.build();
+		
+		try {
+			comm.sendMessage(req);
+		} catch (Exception e) {
+			logger.warn("Unable to deliver message, queuing");
+		}
+	}
+	
 }

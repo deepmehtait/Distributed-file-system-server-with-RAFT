@@ -18,6 +18,11 @@ package poke.demo;
 import poke.client.ClientCommand;
 import poke.client.ClientPrintListener;
 import poke.client.comm.CommListener;
+import poke.comm.App.JobDesc;
+import poke.comm.App.JobDesc.JobCode;
+import poke.comm.App.JobOperation.JobAction;
+import poke.comm.App.NameValueSet.NodeType;
+import poke.comm.App.NameValueSet;
 
 /**
  * DEMO: how to use the command class to implement a ping
@@ -35,24 +40,33 @@ public class Route {
 
 	public void run() {
 		ClientCommand cc = new ClientCommand("localhost", 5570);
-		CommListener listener = new ClientPrintListener("jab demo");
+		CommListener listener = new ClientPrintListener("Route demo");
 		cc.addListener(listener);
 
-		for (int i = 0; i < 3; i++) {
-			count++;
-			cc.poke(tag, count);
-		}
+		NameValueSet.Builder value = NameValueSet.newBuilder();
+		value.setName("Name");
+		value.setValue("Ankit");
+		value.setNodeType(NodeType.VALUE);
+		
+		JobDesc.Builder desc = JobDesc.newBuilder();
+		desc.setNameSpace("Raft");
+		desc.setJobId("0");
+		desc.setOwnerId(0);
+		desc.setStatus(JobCode.JOBUNKNOWN);
+		desc.setOptions(value.build());
+		
+		cc.sendRequest(JobAction.ADDJOB, "0", desc.build());
 	}
 
 	public static void main(String[] args) {
 		try {
-			Route jab = new Route("jab");
+			Route jab = new Route("route");
 			jab.run();
 
 			// we are running asynchronously
 			System.out.println("\nExiting in 5 seconds");
-			Thread.sleep(5000);
-			System.exit(0);
+			Thread.sleep(50000);
+			//System.exit(0);
 
 		} catch (Exception e) {
 			e.printStackTrace();

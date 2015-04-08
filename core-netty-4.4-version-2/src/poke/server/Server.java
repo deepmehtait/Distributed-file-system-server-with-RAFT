@@ -332,6 +332,7 @@ public class Server {
 	/**
 	 * @param args
 	 */
+	
 	public static void main(String[] args) {
 		if (args.length != 1) {
 			System.err.println("Usage: java " + Server.class.getClass().getName() + " conf-file");
@@ -357,7 +358,7 @@ public class Server {
 	 
 		try {
 			connection = DriverManager
-			.getConnection("jdbc:mysql://localhost:3306/DistributedSystem","root", "password-1");
+			.getConnection("jdbc:mysql://localhost:3306/DistributedSystem","root", "qwerty");
 	 
 		} catch (SQLException e) {
 			System.out.println("Connection Failed! Check output console");

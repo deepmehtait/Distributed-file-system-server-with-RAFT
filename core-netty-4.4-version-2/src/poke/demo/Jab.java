@@ -34,6 +34,7 @@ public class Jab {
 	}
 
 	public void run() {
+		System.out.println("IN Run");
 		ClientCommand cc = new ClientCommand("localhost", 5570);
 		CommListener listener = new ClientPrintListener("jab demo");
 		cc.addListener(listener);
@@ -51,7 +52,7 @@ public class Jab {
 
 			// we are running asynchronously
 			System.out.println("\nExiting in 5 seconds");
-			Thread.sleep(5000);
+			Thread.sleep(50000);
 			System.exit(0);
 
 		} catch (Exception e) {

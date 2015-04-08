@@ -35,6 +35,10 @@ public class CommHandler extends SimpleChannelInboundHandler<Request> {
 	protected ConcurrentMap<String, CommListener> listeners = new ConcurrentHashMap<String, CommListener>();
 	private volatile Channel channel;
 
+	public void setChannel(Channel channel) {
+		this.channel = channel;
+	}
+
 	public CommHandler() {
 	}
 

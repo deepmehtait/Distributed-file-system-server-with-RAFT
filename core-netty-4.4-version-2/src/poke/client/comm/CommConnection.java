@@ -20,9 +20,14 @@ import io.netty.channel.Channel;
 import io.netty.channel.ChannelFuture;
 import io.netty.channel.ChannelFutureListener;
 import io.netty.channel.ChannelOption;
+import io.netty.channel.ChannelPipeline;
 import io.netty.channel.EventLoopGroup;
 import io.netty.channel.nio.NioEventLoopGroup;
 import io.netty.channel.socket.nio.NioSocketChannel;
+import io.netty.handler.codec.LengthFieldBasedFrameDecoder;
+import io.netty.handler.codec.LengthFieldPrepender;
+import io.netty.handler.codec.protobuf.ProtobufDecoder;
+import io.netty.handler.codec.protobuf.ProtobufEncoder;
 
 import java.util.concurrent.LinkedBlockingDeque;
 
@@ -111,6 +116,8 @@ public class CommConnection {
 
 	private void init() {
 		// the queue to support client-side surging
+		System.out.println("IN init of Comm Connection ");
+		
 		outbound = new LinkedBlockingDeque<com.google.protobuf.GeneratedMessage>();
 
 		group = new NioEventLoopGroup();
@@ -121,20 +128,35 @@ public class CommConnection {
 			b.option(ChannelOption.CONNECT_TIMEOUT_MILLIS, 10000);
 			b.option(ChannelOption.TCP_NODELAY, true);
 			b.option(ChannelOption.SO_KEEPALIVE, true);
-
 			// Make the connection attempt.
 			channel = b.connect(host, port).syncUninterruptibly();
 
+			
+			//Client Code 03/07/2015 - Added Client Initializer that will create channel pipeline
+			channel.awaitUninterruptibly(5000l);
+			if(channel == null)
+				System.out.println("Channel is null, not able to connect to Host: "+host+"  Port: "+port);
+			else
+				System.out.println("Channel created, not null");
+
+			//CHannel Pipeline parameters
+			ChannelPipeline pipeline = channel.channel().pipeline();
+			pipeline.addLast("frameDecoder", new LengthFieldBasedFrameDecoder(67108864, 0, 4, 0, 4));
+			pipeline.addLast("protobufDecoder", new ProtobufDecoder(Request.getDefaultInstance()));
+			pipeline.addLast("frameEncoder", new LengthFieldPrepender(4));
+			pipeline.addLast("protobufEncoder", new ProtobufEncoder());
+			pipeline.addLast("handler", handler);
+
+			
 			// want to monitor the connection to the server s.t. if we loose the
 			// connection, we can try to re-establish it.
 			ClientClosedListener ccl = new ClientClosedListener(this);
+			handler.setChannel(channel.channel());
 			channel.channel().closeFuture().addListener(ccl);
 
 		} catch (Exception ex) {
 			logger.error("failed to initialize the client connection", ex);
-
 		}
-
 		// start outbound message processor
 		worker = new OutboundWorker(this);
 		worker.start();
@@ -190,11 +212,13 @@ public class CommConnection {
 				try {
 					// block until a message is enqueued
 					GeneratedMessage msg = conn.outbound.take();
+					//Directly write to Channel if it is available
 					if (ch.isWritable()) {
 						CommHandler handler = conn.connect().pipeline().get(CommHandler.class);
-
-						if (!handler.send(msg))
-							conn.outbound.putFirst(msg);
+						handler.setChannel(ch);
+						ch.writeAndFlush(msg);
+//						if (!handler.send(msg))
+//							conn.outbound.putFirst(msg);
 
 					} else
 						conn.outbound.putFirst(msg);
@@ -232,7 +256,7 @@ public class CommConnection {
 		@Override
 		public void operationComplete(ChannelFuture future) throws Exception {
 			// we lost the connection or have shutdown.
-
+			System.out.println("Connection is lost");
 			// @TODO if lost, try to re-establish the connection
 		}
 	}
