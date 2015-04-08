@@ -208,7 +208,7 @@ public class RaftElection implements Election {
 		} else if (rm.getRaftAction().getNumber() == RaftAction.APPENDRESPONSE_VALUE) {
 			if (currentState == RState.Leader) {
 
-<<<<<<< HEAD
+
 			}
 			if (rm.getTerm() > this.term) {
 				this.leaderId = mgmt.getHeader().getOriginator();
@@ -217,7 +217,7 @@ public class RaftElection implements Election {
 				notify(true, mgmt.getHeader().getOriginator());
 				logger.info("Node " + mgmt.getHeader().getOriginator()
 						+ " is the leader ");
-=======
+
 				if (rm.getRaftAppendAction().getNumber() == RaftAppendAction.APPENDLOG_VALUE) {
 					if (rm.getSuccess() == 1) {
 						majority_count++;
@@ -270,7 +270,7 @@ public class RaftElection implements Election {
 					// do nothing
 				}
 
->>>>>>> 1b37387d717f48a3031de2956ea15be43897de52
+
 			}
 
 		}
@@ -351,13 +351,11 @@ public class RaftElection implements Election {
 	// Response of Vlaue to Leader
 	// can be success of failure
 	private Management sendAppendResponseValue(Management mgmt) {
-<<<<<<< HEAD
+
 		// Store in DB
 		// success set message builder and set previous term
 		RaftMessage raftmessage = mgmt.getRaftmessage();
 		previousTerm=raftmessage.getTerm();
-=======
->>>>>>> 1b37387d717f48a3031de2956ea15be43897de52
 		RaftMessage.Builder rm = RaftMessage.newBuilder();
 		MgmtHeader.Builder mhb = MgmtHeader.newBuilder();
 		mhb.setTime(System.currentTimeMillis());
