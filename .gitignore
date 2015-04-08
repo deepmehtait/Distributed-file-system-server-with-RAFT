@@ -1,2 +1,2 @@
 *.conf~
-build_pb.sh
+/core-netty-4.4-version-2/build_pb.sh
