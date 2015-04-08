@@ -2,6 +2,7 @@ package poke.server.election;
 
 import io.netty.channel.Channel;
 
+import java.rmi.server.RMIClassLoader;
 import java.util.Random;
 
 import org.slf4j.Logger;
@@ -23,7 +24,8 @@ public class RaftElection implements Election {
 	protected static Logger logger = LoggerFactory.getLogger("Raft");
 	private Integer nodeId;
 	private ElectionListener listener;
-
+	private int previousTerm = 0;
+	private int previousIndex = 0;
 	private ElectionState current;
 	private int count = 0;
 
@@ -203,7 +205,7 @@ public class RaftElection implements Election {
 			}
 		} else if (rm.getRaftAction().getNumber() == RaftAction.APPENDRESPONSE_VALUE) {
 			if (currentState == RState.Leader) {
-				
+
 			}
 			if (rm.getTerm() > this.term) {
 				this.leaderId = mgmt.getHeader().getOriginator();
@@ -216,10 +218,11 @@ public class RaftElection implements Election {
 		}
 		return rtn;
 	}
+
 	// Response of Normal HB to Leader
 	private Management sendAppendResponse(Management mgmt) {
 		// TODO Auto-generated method stub
-		
+
 		RaftMessage.Builder rm = RaftMessage.newBuilder();
 		MgmtHeader.Builder mhb = MgmtHeader.newBuilder();
 		mhb.setTime(System.currentTimeMillis());
@@ -233,22 +236,22 @@ public class RaftElection implements Election {
 		Management.Builder mb = Management.newBuilder();
 		mb.setHeader(mhb.build());
 		mb.setRaftmessage(rm.build());
-		try{
-			Channel ch = ConnectionManager.getConnection(mgmt.getHeader().getOriginator(), true);
-			if(ch!=null)
+		try {
+			Channel ch = ConnectionManager.getConnection(mgmt.getHeader()
+					.getOriginator(), true);
+			if (ch != null)
 				ch.writeAndFlush(mb.build());
-			
-		}
-		catch (Exception ex){
+
+		} catch (Exception ex) {
 			ex.printStackTrace();
 		}
 		return null;
 
 	}
+
 	// Response of Log Replication to Leader
 	// can be success of failure
-	private Management sendAppendResponseLog(Management mgmt)
-	{
+	private Management sendAppendResponseLog(Management mgmt) {
 		RaftMessage.Builder rm = RaftMessage.newBuilder();
 		MgmtHeader.Builder mhb = MgmtHeader.newBuilder();
 		mhb.setTime(System.currentTimeMillis());
@@ -259,26 +262,31 @@ public class RaftElection implements Election {
 		rm.setTerm(term);
 		rm.setSuccess(1);
 		rm.setRaftAction(RaftAction.APPENDRESPONSE);
+		rm.setRaftAppendAction(RaftAppendAction.APPENDLOG);
 		Management.Builder mb = Management.newBuilder();
 		mb.setHeader(mhb.build());
 		mb.setRaftmessage(rm.build());
 
-		try{
-			Channel ch = ConnectionManager.getConnection(mgmt.getHeader().getOriginator(), true);
-			if(ch!=null)
+		try {
+			Channel ch = ConnectionManager.getConnection(mgmt.getHeader()
+					.getOriginator(), true);
+			if (ch != null)
 				ch.writeAndFlush(mb.build());
-			
-		}
-		catch (Exception ex){
+
+		} catch (Exception ex) {
 			ex.printStackTrace();
 		}
 		return null;
 
 	}
+
 	// Response of Vlaue to Leader
 	// can be success of failure
-	private Management sendAppendResponseValue(Management mgmt)
-	{
+	private Management sendAppendResponseValue(Management mgmt) {
+		// Store in DB
+		// success set message builder and set previous term
+		RaftMessage raftmessage = mgmt.getRaftmessage();
+		previousTerm=raftmessage.getTerm();
 		RaftMessage.Builder rm = RaftMessage.newBuilder();
 		MgmtHeader.Builder mhb = MgmtHeader.newBuilder();
 		mhb.setTime(System.currentTimeMillis());
@@ -293,20 +301,18 @@ public class RaftElection implements Election {
 		mb.setHeader(mhb.build());
 		mb.setRaftmessage(rm.build());
 
-		try{
-			Channel ch = ConnectionManager.getConnection(mgmt.getHeader().getOriginator(), true);
-			if(ch!=null)
+		try {
+			Channel ch = ConnectionManager.getConnection(mgmt.getHeader()
+					.getOriginator(), true);
+			if (ch != null)
 				ch.writeAndFlush(mb.build());
-			
-		}
-		catch (Exception ex){
+
+		} catch (Exception ex) {
 			ex.printStackTrace();
 		}
 		return null;
 
 	}
- 
-	
 
 	private void receiveVote(RaftMessage rm) {
 		logger.info("Size " + HeartbeatManager.getInstance().outgoingHB.size());
