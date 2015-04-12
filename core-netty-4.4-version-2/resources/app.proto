@@ -172,6 +172,16 @@ message RoutingPath {
     required int64 time = 2;
 }
 
+
+message ClientImage {
+		optional string msgId = 1;
+        optional string senderUserName = 2;
+        optional string receiverUserName = 3;
+        optional string msgText = 4;
+        optional string msgImageName = 5;
+        optional bytes  msgImageBits = 6;
+}
+
 message Header {  
     required Routing routing_id = 1;
     required int32 originator = 2;
@@ -212,11 +222,11 @@ message Payload {
     // requests only
     optional NameSpaceOperation space_op = 2;
     optional JobOperation job_op = 3;
-  
+    optional ClientImage client_image = 4;
+
     // replies only
     optional JobStatus job_status = 13;
     optional NameSpaceStatus space_status = 12;
-   
     // TBD
     // reports
 }

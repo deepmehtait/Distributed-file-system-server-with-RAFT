@@ -126,6 +126,7 @@ public class ClientCommand {
 		h.setTag("jobs");
 		h.setTime(System.currentTimeMillis());
 		h.setRoutingId(Header.Routing.JOBS);
+		h.setToNode(0);
 		
 		//Setting Request parameters
 		r.setHeader(h.build());

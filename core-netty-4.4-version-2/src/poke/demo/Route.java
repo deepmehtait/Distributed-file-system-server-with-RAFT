@@ -15,14 +15,22 @@
  */
 package poke.demo;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.InputStream;
+
 import poke.client.ClientCommand;
 import poke.client.ClientPrintListener;
 import poke.client.comm.CommListener;
+import poke.comm.App.ClientImage;
 import poke.comm.App.JobDesc;
 import poke.comm.App.JobDesc.JobCode;
 import poke.comm.App.JobOperation.JobAction;
-import poke.comm.App.NameValueSet.NodeType;
 import poke.comm.App.NameValueSet;
+import poke.comm.App.NameValueSet.NodeType;
+
+import com.google.protobuf.ByteString;
 
 /**
  * DEMO: how to use the command class to implement a ping
@@ -55,7 +63,34 @@ public class Route {
 		desc.setStatus(JobCode.JOBUNKNOWN);
 		desc.setOptions(value.build());
 		
-		cc.sendRequest(JobAction.ADDJOB, "0", desc.build());
+		
+		 try {
+
+		       InputStream imageInByte;
+		       File file = new File("/home/ankit/Downloads/scott.jpg");
+		       imageInByte = new FileInputStream(file); 
+		       System.out.println(imageInByte.toString());
+		       ClientImage.Builder clientImage = ClientImage.newBuilder();
+		       clientImage.setMsgId("1");
+		       clientImage.setSenderUserName("Client1");
+		       clientImage.setReceiverUserName("Client2");
+		       clientImage.setMsgText("Hello Client2");
+		       clientImage.setMsgImageName("Scott.jpg");
+		       clientImage.setMsgImageBits(ByteString.readFrom(imageInByte));
+		       // convert byte array back to BufferedImage
+		     /*  InputStream in = new ByteArrayInputStream(imageInByte);
+		       BufferedImage bImageFromConvert = ImageIO.read(in);
+
+		       ImageIO.write(bImageFromConvert, "jpg", new File(
+		               "/home/deep/Downloads/test2.jpg"));*/
+		       
+		       cc.sendRequest(JobAction.ADDJOB, "0", desc.build());
+		       
+		   } catch (IOException e) {
+		       System.out.println(e.getMessage());
+		   }
+		
+		
 	}
 
 	public static void main(String[] args) {

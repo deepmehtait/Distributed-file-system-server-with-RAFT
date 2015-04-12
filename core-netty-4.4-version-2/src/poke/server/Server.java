@@ -345,7 +345,7 @@ public class Server {
 			System.exit(2);
 		}
 		
-		try {
+/*		try {
 			Class.forName("com.mysql.jdbc.Driver");
 		} catch (ClassNotFoundException e) {
 			System.out.println("Cant find the MySQl Driver");
@@ -370,7 +370,7 @@ public class Server {
 			System.out.println("Successfully logged in. Thanks for using MySQL!");
 		} else {
 			System.out.println("Failed to make connection!");
-		}
+		}*/
 	  
 		
 		Server svr = new Server(cfg);
