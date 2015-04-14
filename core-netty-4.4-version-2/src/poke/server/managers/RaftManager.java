@@ -269,8 +269,12 @@ public class RaftManager implements ElectionListener {
 
 	}
 
-	public void startMonitor() {
-		logger.info("In Raft Monitor");
+	/**********Leader ELection 29th March 2015******************************
+	 * This function will call the run method of Raft Monitor class in the election instance. 
+	 * In our case RaftElection --> Raft Monitor
+	 */
+	public void startMonitor() {		
+		logger.info("Raft Monitor Started ");
 		if (election == null)
 			((RaftElection) electionInstance()).getMonitor().start();
 

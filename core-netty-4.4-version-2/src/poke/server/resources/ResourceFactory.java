@@ -87,8 +87,6 @@ public class ResourceFactory {
 		ResourceConf rc = cfg.findById(header.getRoutingId().getNumber());
 		if (rc == null)
 		{
-			System.out.println("RC is Null");
-			logger.info("RC NULL");
 			return null;
 		}
 		

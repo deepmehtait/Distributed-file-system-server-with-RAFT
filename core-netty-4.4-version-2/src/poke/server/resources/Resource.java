@@ -15,6 +15,7 @@
  */
 package poke.server.resources;
 
+import io.netty.channel.Channel;
 import poke.comm.App.Request;
 
 
@@ -34,6 +35,6 @@ public interface Resource {
 	 * @param request
 	 * @return an action
 	 */
-	Request process(Request request);
+	Request process(Request request, Channel ch);
 
 }

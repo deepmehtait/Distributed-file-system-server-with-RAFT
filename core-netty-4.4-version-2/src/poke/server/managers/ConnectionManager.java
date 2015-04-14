@@ -50,8 +50,10 @@ public class ConnectionManager {
 
 		if (isMgmt)
 			mgmtConnections.put(nodeId, channel);
-		else
+		else{
 			connections.put(nodeId, channel);
+			logger.info("Client Added in Connection Manager " + nodeId);
+		}
 	}
 
 	public static Channel getConnection(Integer nodeId, boolean isMgmt) {

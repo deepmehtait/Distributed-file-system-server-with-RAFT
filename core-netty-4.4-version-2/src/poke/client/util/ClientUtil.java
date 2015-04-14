@@ -32,6 +32,7 @@ public class ClientUtil {
 	}
 
 	public static void printPing(Ping f) {
+		System.out.println("Got the ping");
 		if (f == null) {
 			System.out.println("ping is null");
 			return;

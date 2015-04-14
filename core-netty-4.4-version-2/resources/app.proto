@@ -172,18 +172,9 @@ message RoutingPath {
     required int64 time = 2;
 }
 
-
-message ClientImage {
-		optional string msgId = 1;
-        optional string senderUserName = 2;
-        optional string receiverUserName = 3;
-        optional string msgText = 4;
-        optional string msgImageName = 5;
-        optional bytes  msgImageBits = 6;
-}
-
 message Header {  
     required Routing routing_id = 1;
+    //This is our Client Id
     required int32 originator = 2;
     optional string tag = 3;
     optional int64 time = 4;
@@ -210,11 +201,42 @@ message Header {
         JOBS = 4;
         REPORTS = 10;
         MANAGE = 100;
+        REGISTER = 5;
         }
+
+    //check if cluster message or client msg
+    required bool isClusterMsg = 10;
+}
+
+message ClientMessage{
+  optional string msgId = 1;
+  optional string senderUserName = 2;
+  optional string receiverUserName = 3;
+  optional int32  senderClientId = 8;
+  optional int32  receiverClientId = 9;
+  optional string msgText = 4;
+  optional string msgImageName = 5;
+  optional bytes msgImageBits = 6;
+  optional MessageType messageType = 7 [default = SUCCESS];
+
+
+  enum MessageType
+  {
+    REQUEST = 0;
+    SUCCESS = 1;
+
+    }
+
+}
+
+message ClusterMessage{
+  optional ClientMessage client_message = 1;
+  optional int32 cluster_id=2;
 }
 
 // these are commands from external (and possible internal) clients
 // TODO: this needs to be moved to its own .proto
+
 message Payload {
     // requests & replies
     optional Ping ping = 1;
@@ -222,16 +244,18 @@ message Payload {
     // requests only
     optional NameSpaceOperation space_op = 2;
     optional JobOperation job_op = 3;
-    optional ClientImage client_image = 4;
 
     // replies only
     optional JobStatus job_status = 13;
     optional NameSpaceStatus space_status = 12;
-    // TBD
-    // reports
+
+   	optional ClientMessage client_message = 5;
+    optional ClusterMessage cluster_message = 4;
+
 }
 
 message Request {
     required Header header = 1;
     required Payload body = 2;
 }
+

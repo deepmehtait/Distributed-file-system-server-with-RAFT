@@ -15,6 +15,11 @@
  */
 package poke.client;
 
+import java.io.BufferedOutputStream;
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.OutputStream;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -45,6 +50,7 @@ public class ClientPrintListener implements CommListener {
 
 	@Override
 	public void onMessage(Request msg) {
+		System.out.println("Received Message for Client");
 		if (logger.isDebugEnabled())
 			ClientUtil.printHeader(msg.getHeader());
 
@@ -53,11 +59,26 @@ public class ClientPrintListener implements CommListener {
 		else if (msg.getHeader().getRoutingId().getNumber() == Header.Routing.NAMESPACES_VALUE) {
 			// namespace responses
 		} else if (msg.getHeader().getRoutingId().getNumber() == Header.Routing.JOBS_VALUE) {
-			// job responses
+			try{
+			System.out.println("Recieved Image from Client1");
+			 File downloadFile2 = new File("/home/ankit/Downloads/CMPE280/Hello");
+	            OutputStream outputStream2 = new BufferedOutputStream(new FileOutputStream(downloadFile2));
+	            msg.getBody().getClientMessage().getMsgIdBytes().writeTo(outputStream2);;
+	            
+			}
+			catch(Exception e)
+			{
+				System.out.println("Exception aaala");
+			}
+			
+			
+			
 		} else if (msg.getHeader().getRoutingId().getNumber() == Header.Routing.MANAGE_VALUE) {
 			// management responses
-		} else {
-			// unexpected reply - how do you handle this?
+		} else if(msg.getHeader().getRoutingId().getNumber() == Header.Routing.REGISTER_VALUE){
+			// process the response
+			System.out.println(msg.getHeader().getReplyMsg());
+			System.out.println("Connection is established... Now you can send images to this node");
 		}
 	}
 }

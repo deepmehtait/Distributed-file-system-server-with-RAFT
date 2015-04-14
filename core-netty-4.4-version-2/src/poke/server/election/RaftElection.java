@@ -543,6 +543,10 @@ public class RaftElection implements Election {
 
 	public class RaftMonitor extends Thread {
 		@Override
+		/**********Leader ELection 29th March 2015******************************
+		 * This function will check if the leader exist then it will send AppendRPC. 
+		 * If not then it will wait for sometime and then start the election 
+		 */
 		public void run() {
 			while (true) {
 				try {
@@ -580,8 +584,8 @@ public class RaftElection implements Election {
 		term++;
 		logger.info("size of nodes "
 				+ HeartbeatManager.getInstance().outgoingHB.size());
+		//If it is a single node then declare itself the winner else send REquest VOte message
 		if (HeartbeatManager.getInstance().outgoingHB.size() == 0) {
-			// logger.info("size of nodes.! IN IF="+HeartbeatManager.getInstance().outgoingHB.size());
 			count = 0;
 			currentState = RState.Leader;
 			leaderId = this.nodeId;

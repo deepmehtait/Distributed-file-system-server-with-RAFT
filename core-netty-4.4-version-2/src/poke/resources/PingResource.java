@@ -15,6 +15,8 @@
  */
 package poke.resources;
 
+import io.netty.channel.Channel;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -36,10 +38,10 @@ public class PingResource implements Resource {
 	 * 
 	 * @see poke.server.resources.Resource#process(eye.Comm.Finger)
 	 */
-	public Request process(Request request) {
+	public Request process(Request request, Channel ch) {
 		// TODO add code to process the message/event received
 		logger.info("poke: " + request.getBody().getPing().getTag());
-
+		
 		Request.Builder rb = Request.newBuilder();
 
 		// metadata

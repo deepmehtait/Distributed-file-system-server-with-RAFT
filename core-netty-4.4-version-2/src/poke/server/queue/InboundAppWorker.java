@@ -86,11 +86,13 @@ public class InboundAppWorker extends Thread {
 						// message communication can be two-way or one-way.
 						// One-way communication will not produce a response
 						// (reply).
-						reply = rsc.process(req);
+						reply = rsc.process(req,conn);
 					}
 
 					if (reply != null)
 						sq.enqueueResponse(reply, null);
+					else
+						logger.info("Reply is null");
 				}
 
 			} catch (InterruptedException ie) {

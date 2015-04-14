@@ -15,6 +15,8 @@
  */
 package poke.resources;
 
+import io.netty.channel.Channel;
+
 import java.util.List;
 
 import org.slf4j.Logger;
@@ -57,7 +59,7 @@ public class ForwardResource implements Resource {
 	}
 
 	@Override
-	public Request process(Request request) {
+	public Request process(Request request, Channel ch) {
 		Integer nextNode = determineForwardNode(request);
 		if (nextNode != null) {
 			Request fwd = ResourceUtil.buildForwardMessage(request, cfg);

@@ -23,7 +23,7 @@ import java.io.InputStream;
 import poke.client.ClientCommand;
 import poke.client.ClientPrintListener;
 import poke.client.comm.CommListener;
-import poke.comm.App.ClientImage;
+import poke.comm.App.ClientMessage;
 import poke.comm.App.JobDesc;
 import poke.comm.App.JobDesc.JobCode;
 import poke.comm.App.JobOperation.JobAction;
@@ -31,6 +31,7 @@ import poke.comm.App.NameValueSet;
 import poke.comm.App.NameValueSet.NodeType;
 
 import com.google.protobuf.ByteString;
+
 
 /**
  * DEMO: how to use the command class to implement a ping
@@ -50,46 +51,11 @@ public class Route {
 		ClientCommand cc = new ClientCommand("localhost", 5570);
 		CommListener listener = new ClientPrintListener("Route demo");
 		cc.addListener(listener);
+		//Send Poke message to Connect to Server
+		cc.sendRegisterRequest();
 
-		NameValueSet.Builder value = NameValueSet.newBuilder();
-		value.setName("Name");
-		value.setValue("Ankit");
-		value.setNodeType(NodeType.VALUE);
-		
-		JobDesc.Builder desc = JobDesc.newBuilder();
-		desc.setNameSpace("Raft");
-		desc.setJobId("0");
-		desc.setOwnerId(0);
-		desc.setStatus(JobCode.JOBUNKNOWN);
-		desc.setOptions(value.build());
-		
-		
-		 try {
-
-		       InputStream imageInByte;
-		       File file = new File("/home/ankit/Downloads/scott.jpg");
-		       imageInByte = new FileInputStream(file); 
-		       System.out.println(imageInByte.toString());
-		       ClientImage.Builder clientImage = ClientImage.newBuilder();
-		       clientImage.setMsgId("1");
-		       clientImage.setSenderUserName("Client1");
-		       clientImage.setReceiverUserName("Client2");
-		       clientImage.setMsgText("Hello Client2");
-		       clientImage.setMsgImageName("Scott.jpg");
-		       clientImage.setMsgImageBits(ByteString.readFrom(imageInByte));
-		       // convert byte array back to BufferedImage
-		     /*  InputStream in = new ByteArrayInputStream(imageInByte);
-		       BufferedImage bImageFromConvert = ImageIO.read(in);
-
-		       ImageIO.write(bImageFromConvert, "jpg", new File(
-		               "/home/deep/Downloads/test2.jpg"));*/
-		       
-		       cc.sendRequest(JobAction.ADDJOB, "0", desc.build());
-		       
-		   } catch (IOException e) {
-		       System.out.println(e.getMessage());
-		   }
-		
+		//After Poke message send a file to server
+		cc.sendJobsRequest();
 		
 	}
 

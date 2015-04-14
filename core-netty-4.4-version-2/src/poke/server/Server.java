@@ -296,8 +296,13 @@ public class Server {
 		// manage heartbeatMgr connections
 		HeartbeatPusher conn = HeartbeatPusher.getInstance();
 		conn.start();
-		//Start the monitor
+		/***** Leader Election Start 29th March 2015*************************************************************************
+	    * This will start the monitor thread and check whether there is leader or not. If not then it will start the Election. 
+	    * This thread is used to send appendRPC to all the followers. IF they don't receive messages within a certain period then
+	    * they will start election
+	    */
 		raftMgr.startMonitor();
+		
 		logger.info("Server " + conf.getNodeId() + ", managers initialized");
 	}
 

@@ -15,18 +15,27 @@
  */
 package poke.client;
 
+import java.awt.TrayIcon.MessageType;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.InputStream;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import poke.client.comm.CommConnection;
 import poke.client.comm.CommListener;
+import poke.comm.App.ClientMessage;
 import poke.comm.App.Header;
-import poke.comm.App.Payload;
-import poke.comm.App.Ping;
-import poke.comm.App.Request;
+import poke.comm.App.Header.Routing;
 import poke.comm.App.JobDesc;
 import poke.comm.App.JobOperation;
 import poke.comm.App.JobOperation.JobAction;
+import poke.comm.App.Payload;
+import poke.comm.App.Ping;
+import poke.comm.App.Request;
+
+import com.google.protobuf.ByteString;
 
 
 /**
@@ -94,6 +103,7 @@ public class ClientCommand {
 		h.setTag("test finger");
 		h.setTime(System.currentTimeMillis());
 		h.setRoutingId(Header.Routing.PING);
+		h.setIsClusterMsg(false);
 		r.setHeader(h.build());
 
 		Request req = r.build();
@@ -103,10 +113,9 @@ public class ClientCommand {
 		} catch (Exception e) {
 			logger.warn("Unable to deliver message, queuing");
 		}
-	}
+	}	
 	
-	
-	//Function to Send Request from client to Server
+/*	//Function to Send Request from client to Server
 	public void sendRequest(JobAction jAct, String jobId, JobDesc desc) {
 		
 		//Building Job Operation for request
@@ -127,6 +136,7 @@ public class ClientCommand {
 		h.setTime(System.currentTimeMillis());
 		h.setRoutingId(Header.Routing.JOBS);
 		h.setToNode(0);
+		h.setIsClusterMsg(false);
 		
 		//Setting Request parameters
 		r.setHeader(h.build());
@@ -140,5 +150,76 @@ public class ClientCommand {
 			logger.warn("Unable to deliver message, queuing");
 		}
 	}
-	
+
+*/	public void sendRegisterRequest() {
+		Request.Builder r = Request.newBuilder();
+		
+		
+		//Build Header
+		Header.Builder h = Header.newBuilder();
+		h.setRoutingId(Routing.REGISTER);
+		h.setOriginator(1000);
+		h.setTag("Register this Client to the node");
+		h.setTime(System.currentTimeMillis());
+		//NOt setting Poke Status, Reply Message, ROuting Path, Name Value set
+		//TO Node is the node to which this client will get connected
+		h.setToNode(0);
+		
+		//Build Payload
+		Payload.Builder p = Payload.newBuilder();
+		//Not adding anything as it is just a register message
+
+		r.setBody(p);
+		r.setHeader(h);
+		Request req = r.build();
+		try {
+			comm.sendMessage(req);
+		} catch (Exception e) {
+			logger.warn("Unable to deliver message, queuing");
+		}
+	}
+
+	public void sendJobsRequest() {
+		try{
+		//
+				Request.Builder r = Request.newBuilder();
+		
+				//Build Header
+				Header.Builder h = Header.newBuilder();
+				h.setRoutingId(Routing.JOBS);
+				h.setOriginator(1000);
+				h.setTag("Sending image to the node");
+				h.setTime(System.currentTimeMillis());
+				//NOt setting Poke Status, Reply Message, ROuting Path, Name Value set
+				//TO Node is the node to which this client will get connected
+				h.setToNode(0);
+				
+				//Build Payload
+				Payload.Builder p = Payload.newBuilder();
+		        InputStream imageInByte;
+		        File file = new File("/home/ankit/Downloads/mobile.jpg");
+		        imageInByte = new FileInputStream(file); 
+		        ClientMessage.Builder clientImage = ClientMessage.newBuilder();
+		        clientImage.setMsgId("1");
+		        clientImage.setSenderUserName("Client1");
+		        clientImage.setReceiverUserName("Client2");
+		        clientImage.setSenderClientId(1000);
+		        clientImage.setReceiverClientId(2000);
+		        clientImage.setMsgText("Hello Client2");
+		        clientImage.setMsgImageName("Scott.jpg");
+		        clientImage.setMsgImageBits(ByteString.readFrom(imageInByte));
+		        clientImage.setMessageType(poke.comm.App.ClientMessage.MessageType.REQUEST);
+		        
+				r.setBody(p);
+				r.setHeader(h);
+				Request req = r.build();
+		
+				comm.sendMessage(req);
+			}
+			catch (Exception e) {
+				logger.warn("Unable to deliver message, queuing");
+			}
+
+		
+	}
 }

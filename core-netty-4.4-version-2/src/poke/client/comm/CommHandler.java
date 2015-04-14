@@ -53,7 +53,7 @@ public class CommHandler extends SimpleChannelInboundHandler<Request> {
 	public boolean send(GeneratedMessage msg) {
 		// TODO a queue is needed to prevent overloading of the socket
 		// connection. For the demonstration, we don't need it
-		ChannelFuture cf = channel.write(msg);
+		ChannelFuture cf = channel.writeAndFlush(msg);
 		if (cf.isDone() && !cf.isSuccess()) {
 			logger.error("failed to poke!");
 			return false;
@@ -91,6 +91,7 @@ public class CommHandler extends SimpleChannelInboundHandler<Request> {
 	 */
 	@Override
 	protected void channelRead0(ChannelHandlerContext ctx, Request msg) throws Exception {
+		System.out.println("IN REad0");
 		for (String id : listeners.keySet()) {
 			CommListener cl = listeners.get(id);
 

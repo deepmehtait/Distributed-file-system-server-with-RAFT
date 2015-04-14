@@ -123,8 +123,9 @@ public class CommConnection {
 		group = new NioEventLoopGroup();
 		try {
 			handler = new CommHandler();
+			CommInitializer comm = new CommInitializer(handler, false);
 			Bootstrap b = new Bootstrap();
-			b.group(group).channel(NioSocketChannel.class).handler(handler);
+			b.group(group).channel(NioSocketChannel.class).handler(comm);
 			b.option(ChannelOption.CONNECT_TIMEOUT_MILLIS, 10000);
 			b.option(ChannelOption.TCP_NODELAY, true);
 			b.option(ChannelOption.SO_KEEPALIVE, true);
@@ -138,16 +139,7 @@ public class CommConnection {
 				System.out.println("Channel is null, not able to connect to Host: "+host+"  Port: "+port);
 			else
 				System.out.println("Channel created, not null");
-
-			//CHannel Pipeline parameters
-			ChannelPipeline pipeline = channel.channel().pipeline();
-			pipeline.addLast("frameDecoder", new LengthFieldBasedFrameDecoder(67108864, 0, 4, 0, 4));
-			pipeline.addLast("protobufDecoder", new ProtobufDecoder(Request.getDefaultInstance()));
-			pipeline.addLast("frameEncoder", new LengthFieldPrepender(4));
-			pipeline.addLast("protobufEncoder", new ProtobufEncoder());
-			pipeline.addLast("handler", handler);
-
-			
+		
 			// want to monitor the connection to the server s.t. if we loose the
 			// connection, we can try to re-establish it.
 			ClientClosedListener ccl = new ClientClosedListener(this);

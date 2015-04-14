@@ -66,6 +66,11 @@ public class ServerHandler extends SimpleChannelInboundHandler<Request> {
 	public void channelInactive(ChannelHandlerContext ctx) throws Exception {
 
 	}
+	
+	@Override 
+	public void channelReadComplete(ChannelHandlerContext ctx) throws Exception { 
+		ctx.flush();    
+	} 
 
 	@Override
 	public void exceptionCaught(ChannelHandlerContext ctx, Throwable cause) throws Exception {
