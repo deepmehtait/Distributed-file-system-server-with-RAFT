@@ -16,6 +16,7 @@ import poke.server.conf.ServerConf;
 import poke.server.election.Election;
 import poke.server.election.ElectionListener;
 import poke.server.election.RaftElection;
+import poke.server.managers.ConnectionManager.connectionState;
 
 public class RaftManager implements ElectionListener {
 
@@ -208,7 +209,7 @@ public class RaftManager implements ElectionListener {
 		try {
 
 			Channel ch = ConnectionManager.getConnection(mgmt.getHeader()
-					.getOriginator(), true);
+					.getOriginator(), connectionState.SERVERMGMT);
 			if (ch != null)
 				ch.writeAndFlush(mb.build());
 

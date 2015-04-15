@@ -19,6 +19,8 @@ import io.netty.channel.Channel;
 
 import java.net.SocketAddress;
 
+import poke.server.managers.ConnectionManager.connectionState;
+
 /**
  * This class contains the connection information for establishing a connection
  * to the specified host/port and the status of the heartbeats.
@@ -78,7 +80,7 @@ public class HeartbeatData {
 	 * @return
 	 */
 	public Channel getChannel() {
-		return ConnectionManager.getConnection(nodeId, true);
+		return ConnectionManager.getConnection(nodeId, connectionState.SERVERMGMT);
 	}
 
 	/**
@@ -113,7 +115,7 @@ public class HeartbeatData {
 	 */
 	public void setConnection(Channel channel, SocketAddress sa, Integer nodeId) {
 		//System.out.println("---> setConnecton() to " + nodeId + ", i have " + this.nodeId);
-		ConnectionManager.addConnection(nodeId, channel, true);
+		ConnectionManager.addConnection(nodeId, channel, connectionState.SERVERMGMT);
 		this.sa = sa;
 	}
 
@@ -167,10 +169,10 @@ public class HeartbeatData {
 	public void clearHeartData() {
 		// TODO close the request/public channels
 		// TODO if we attempt o reconnect this should be removed
-		if (ConnectionManager.getConnection(nodeId, true) != null)
-			ConnectionManager.getConnection(nodeId, true).close();
+		if (ConnectionManager.getConnection(nodeId, connectionState.SERVERMGMT) != null)
+			ConnectionManager.getConnection(nodeId, connectionState.SERVERMGMT).close();
 
-		ConnectionManager.removeConnection(nodeId, true);
+		ConnectionManager.removeConnection(nodeId, connectionState.SERVERMGMT);
 		sa = null;
 	}
 
@@ -182,7 +184,7 @@ public class HeartbeatData {
 	 */
 	public boolean isGood() {
 		if (status == BeatStatus.Active || status == BeatStatus.Weak) {
-			Channel ch = ConnectionManager.getConnection(nodeId, true);
+			Channel ch = ConnectionManager.getConnection(nodeId, connectionState.SERVERMGMT);
 			boolean rtn = ch.isOpen() && ch.isWritable();
 			if (!rtn) {
 				// TODO how to use the weakThreshold and status

@@ -22,6 +22,8 @@ import org.slf4j.LoggerFactory;
 
 import poke.comm.App.PokeStatus;
 import poke.comm.App.Request;
+import poke.server.managers.ConnectionManager;
+import poke.server.managers.ConnectionManager.connectionState;
 import poke.server.resources.Resource;
 import poke.server.resources.ResourceFactory;
 import poke.server.resources.ResourceUtil;
@@ -63,7 +65,7 @@ public class InboundAppWorker extends Thread {
 				// process request and enqueue response
 				if (msg instanceof Request) {
 					Request req = ((Request) msg);
-
+					Request reply = null;
 					// HEY! if you find yourself here and are tempted to add
 					// code to process state or requests then you are in the
 					// WRONG place! This is a general routing class, all
@@ -74,27 +76,33 @@ public class InboundAppWorker extends Thread {
 					// request. This helps in thread isolation however, it
 					// creates creation burdens on the server. If
 					// we use a pool instead, we can gain some relief.
-
-					Resource rsc = ResourceFactory.getInstance().resourceInstance(req.getHeader());
-
-					Request reply = null;
-					if (rsc == null) {
-						logger.error("failed to obtain resource for " + req);
-						reply = ResourceUtil
-								.buildError(req.getHeader(), PokeStatus.NORESOURCE, "Request not processed");
-					} else {
-						// message communication can be two-way or one-way.
-						// One-way communication will not produce a response
-						// (reply).
-						reply = rsc.process(req,conn);
+					if(req.hasJoinMessage()){
+						ConnectionManager.addConnection(req.getJoinMessage().getFromNodeId(), 
+								sq.channel,
+								connectionState.SERVERAPP);
 					}
-
-					if (reply != null)
-						sq.enqueueResponse(reply, null);
-					else
-						logger.info("Reply is null");
+					else{
+						Resource rsc = ResourceFactory.getInstance().resourceInstance(req);
+					
+						if (rsc == null) {
+							logger.error("failed to obtain resource for " + req);
+							reply = ResourceUtil
+								.buildError(req.getHeader(), PokeStatus.NORESOURCE, "Request not processed");
+							sq.enqueueResponse(reply, null);
+						} else {
+						
+							// message communication can be two-way or one-way.
+							// One-way communication will not produce a response - OUr way
+							// (reply).
+							 rsc.process(req,conn);
+						}
+/*
+						if (reply != null)
+							sq.enqueueResponse(reply, null);
+						else
+							logger.info("Reply is null");*/
+					}
 				}
-
 			} catch (InterruptedException ie) {
 				break;
 			} catch (Exception e) {

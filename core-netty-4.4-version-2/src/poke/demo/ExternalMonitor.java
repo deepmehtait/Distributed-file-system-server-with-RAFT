@@ -51,7 +51,7 @@ public class ExternalMonitor {
 		logger.info("trying to connect monitor to " + host + ":" + mport);
 
 		int destNode = 0;
-		HeartMonitor hm = new HeartMonitor(2000, host, mport, destNode);
+		HeartMonitor hm = new HeartMonitor(2000, host, mport, destNode, false);
 		hm.addListener(new HeartPrintListener(null));
 		hm.waitForever();
 	}

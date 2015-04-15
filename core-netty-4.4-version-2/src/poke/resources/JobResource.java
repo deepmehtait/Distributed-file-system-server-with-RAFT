@@ -22,22 +22,67 @@ import java.io.InputStream;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import poke.comm.App.ClientMessage;
+import poke.comm.App.Header;
+import poke.comm.App.Header.Routing;
+import poke.comm.App.Payload;
 import poke.comm.App.Request;
 import poke.ftp.ftpConnection;
+import poke.server.managers.ConnectionManager;
+import poke.server.managers.RaftManager;
 import poke.server.resources.Resource;
 
 public class JobResource implements Resource {
 	protected static Logger logger = LoggerFactory.getLogger("server");
 	@Override
-	public Request process(Request request, Channel ch) {
+	public void process(Request request, Channel ch) {
+		
 		logger.info("Received Image from Client");
 		ftpConnection ftp = new ftpConnection();
 		//Upload File
 		ftp.connect();
 		InputStream image=request.getBody().getClientMessage().getMsgIdBytes().newInput();
 		ftp.uploadFile(image);
-
-		return null;
+		
+		//Send a APP message to leader that new image is uploaded to FTP server
+		ClientMessage.Builder cBuilder  = ClientMessage.newBuilder();
+		ClientMessage reqClientMsg=request.getBody().getClientMessage();
+		
+		
+		cBuilder.setMsgId(reqClientMsg.getMsgId());
+		cBuilder.setSenderUserName(reqClientMsg.getSenderUserName());
+		cBuilder.setReceiverUserName(reqClientMsg.getReceiverUserName());
+		cBuilder.setSenderClientId(reqClientMsg.getSenderClientId());
+		cBuilder.setReceiverClientId(reqClientMsg.getReceiverClientId());
+		cBuilder.setMsgText(reqClientMsg.getMsgText());
+		cBuilder.setMsgImageName(reqClientMsg.getMsgImageName());
+		//cBuilder.setMsgImageBits(reqClientMsg.getMsgImageBits());
+		cBuilder.setMessageType(reqClientMsg.getMessageType());
+		cBuilder.setIsClient(true);
+		cBuilder.setBroadcastInternal(true);
+		
+		
+		Header.Builder h = Header.newBuilder();
+		Header reqHeader = request.getHeader();
+		
+		h.setRoutingId(Routing.FORWARD);
+		h.setOriginator(reqHeader.getOriginator());
+		h.setTag(reqHeader.getTag());
+		h.setTime(System.currentTimeMillis());
+		h.setToNode(reqHeader.getToNode());
+		
+		//add client msg to body
+		Payload.Builder payload = Payload.newBuilder();
+		payload.setClientMessage(cBuilder);
+			
+		
+		//add body to request
+		Request.Builder req = Request.newBuilder();
+		req.setBody(payload);
+		req.setHeader(h);
+		Request r = req.build();
+		ConnectionManager.sendToNode(r, RaftManager.getInstance().whoIsTheLeader());
+	}
 		/*
 		//DownLOad File
 		try {
@@ -73,6 +118,5 @@ public class JobResource implements Resource {
 			e.printStackTrace();
 			return null;
 		}*/		
-	}
 
 }

@@ -12250,24 +12250,6 @@ public final class App {
      */
     poke.comm.App.NameValueSetOrBuilder getOptionsOrBuilder(
         int index);
-
-    // required bool isClusterMsg = 10;
-    /**
-     * <code>required bool isClusterMsg = 10;</code>
-     *
-     * <pre>
-     *check if cluster message or client msg
-     * </pre>
-     */
-    boolean hasIsClusterMsg();
-    /**
-     * <code>required bool isClusterMsg = 10;</code>
-     *
-     * <pre>
-     *check if cluster message or client msg
-     * </pre>
-     */
-    boolean getIsClusterMsg();
   }
   /**
    * Protobuf type {@code Header}
@@ -12383,11 +12365,6 @@ public final class App {
               options_.add(input.readMessage(poke.comm.App.NameValueSet.PARSER, extensionRegistry));
               break;
             }
-            case 80: {
-              bitField0_ |= 0x00000080;
-              isClusterMsg_ = input.readBool();
-              break;
-            }
           }
         }
       } catch (com.google.protobuf.InvalidProtocolBufferException e) {
@@ -12462,6 +12439,10 @@ public final class App {
        * <code>REGISTER = 5;</code>
        */
       REGISTER(5, 5),
+      /**
+       * <code>FORWARD = 6;</code>
+       */
+      FORWARD(6, 6),
       ;
 
       /**
@@ -12488,6 +12469,10 @@ public final class App {
        * <code>REGISTER = 5;</code>
        */
       public static final int REGISTER_VALUE = 5;
+      /**
+       * <code>FORWARD = 6;</code>
+       */
+      public static final int FORWARD_VALUE = 6;
 
 
       public final int getNumber() { return value; }
@@ -12500,6 +12485,7 @@ public final class App {
           case 10: return REPORTS;
           case 100: return MANAGE;
           case 5: return REGISTER;
+          case 6: return FORWARD;
           default: return null;
         }
       }
@@ -12846,30 +12832,6 @@ public final class App {
       return options_.get(index);
     }
 
-    // required bool isClusterMsg = 10;
-    public static final int ISCLUSTERMSG_FIELD_NUMBER = 10;
-    private boolean isClusterMsg_;
-    /**
-     * <code>required bool isClusterMsg = 10;</code>
-     *
-     * <pre>
-     *check if cluster message or client msg
-     * </pre>
-     */
-    public boolean hasIsClusterMsg() {
-      return ((bitField0_ & 0x00000080) == 0x00000080);
-    }
-    /**
-     * <code>required bool isClusterMsg = 10;</code>
-     *
-     * <pre>
-     *check if cluster message or client msg
-     * </pre>
-     */
-    public boolean getIsClusterMsg() {
-      return isClusterMsg_;
-    }
-
     private void initFields() {
       routingId_ = poke.comm.App.Header.Routing.PING;
       originator_ = 0;
@@ -12880,7 +12842,6 @@ public final class App {
       path_ = java.util.Collections.emptyList();
       toNode_ = 0;
       options_ = java.util.Collections.emptyList();
-      isClusterMsg_ = false;
     }
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
@@ -12892,10 +12853,6 @@ public final class App {
         return false;
       }
       if (!hasOriginator()) {
-        memoizedIsInitialized = 0;
-        return false;
-      }
-      if (!hasIsClusterMsg()) {
         memoizedIsInitialized = 0;
         return false;
       }
@@ -12945,9 +12902,6 @@ public final class App {
       for (int i = 0; i < options_.size(); i++) {
         output.writeMessage(9, options_.get(i));
       }
-      if (((bitField0_ & 0x00000080) == 0x00000080)) {
-        output.writeBool(10, isClusterMsg_);
-      }
       getUnknownFields().writeTo(output);
     }
 
@@ -12992,10 +12946,6 @@ public final class App {
       for (int i = 0; i < options_.size(); i++) {
         size += com.google.protobuf.CodedOutputStream
           .computeMessageSize(9, options_.get(i));
-      }
-      if (((bitField0_ & 0x00000080) == 0x00000080)) {
-        size += com.google.protobuf.CodedOutputStream
-          .computeBoolSize(10, isClusterMsg_);
       }
       size += getUnknownFields().getSerializedSize();
       memoizedSerializedSize = size;
@@ -13141,8 +13091,6 @@ public final class App {
         } else {
           optionsBuilder_.clear();
         }
-        isClusterMsg_ = false;
-        bitField0_ = (bitField0_ & ~0x00000200);
         return this;
       }
 
@@ -13217,10 +13165,6 @@ public final class App {
         } else {
           result.options_ = optionsBuilder_.build();
         }
-        if (((from_bitField0_ & 0x00000200) == 0x00000200)) {
-          to_bitField0_ |= 0x00000080;
-        }
-        result.isClusterMsg_ = isClusterMsg_;
         result.bitField0_ = to_bitField0_;
         onBuilt();
         return result;
@@ -13314,9 +13258,6 @@ public final class App {
             }
           }
         }
-        if (other.hasIsClusterMsg()) {
-          setIsClusterMsg(other.getIsClusterMsg());
-        }
         this.mergeUnknownFields(other.getUnknownFields());
         return this;
       }
@@ -13327,10 +13268,6 @@ public final class App {
           return false;
         }
         if (!hasOriginator()) {
-          
-          return false;
-        }
-        if (!hasIsClusterMsg()) {
           
           return false;
         }
@@ -14343,55 +14280,6 @@ public final class App {
         return optionsBuilder_;
       }
 
-      // required bool isClusterMsg = 10;
-      private boolean isClusterMsg_ ;
-      /**
-       * <code>required bool isClusterMsg = 10;</code>
-       *
-       * <pre>
-       *check if cluster message or client msg
-       * </pre>
-       */
-      public boolean hasIsClusterMsg() {
-        return ((bitField0_ & 0x00000200) == 0x00000200);
-      }
-      /**
-       * <code>required bool isClusterMsg = 10;</code>
-       *
-       * <pre>
-       *check if cluster message or client msg
-       * </pre>
-       */
-      public boolean getIsClusterMsg() {
-        return isClusterMsg_;
-      }
-      /**
-       * <code>required bool isClusterMsg = 10;</code>
-       *
-       * <pre>
-       *check if cluster message or client msg
-       * </pre>
-       */
-      public Builder setIsClusterMsg(boolean value) {
-        bitField0_ |= 0x00000200;
-        isClusterMsg_ = value;
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>required bool isClusterMsg = 10;</code>
-       *
-       * <pre>
-       *check if cluster message or client msg
-       * </pre>
-       */
-      public Builder clearIsClusterMsg() {
-        bitField0_ = (bitField0_ & ~0x00000200);
-        isClusterMsg_ = false;
-        onChanged();
-        return this;
-      }
-
       // @@protoc_insertion_point(builder_scope:Header)
     }
 
@@ -14520,6 +14408,26 @@ public final class App {
      * <code>optional .ClientMessage.MessageType messageType = 7 [default = SUCCESS];</code>
      */
     poke.comm.App.ClientMessage.MessageType getMessageType();
+
+    // optional bool isClient = 10 [default = false];
+    /**
+     * <code>optional bool isClient = 10 [default = false];</code>
+     */
+    boolean hasIsClient();
+    /**
+     * <code>optional bool isClient = 10 [default = false];</code>
+     */
+    boolean getIsClient();
+
+    // optional bool broadcastInternal = 11 [default = false];
+    /**
+     * <code>optional bool broadcastInternal = 11 [default = false];</code>
+     */
+    boolean hasBroadcastInternal();
+    /**
+     * <code>optional bool broadcastInternal = 11 [default = false];</code>
+     */
+    boolean getBroadcastInternal();
   }
   /**
    * Protobuf type {@code ClientMessage}
@@ -14621,6 +14529,16 @@ public final class App {
             case 72: {
               bitField0_ |= 0x00000010;
               receiverClientId_ = input.readInt32();
+              break;
+            }
+            case 80: {
+              bitField0_ |= 0x00000200;
+              isClient_ = input.readBool();
+              break;
+            }
+            case 88: {
+              bitField0_ |= 0x00000400;
+              broadcastInternal_ = input.readBool();
               break;
             }
           }
@@ -15024,6 +14942,38 @@ public final class App {
       return messageType_;
     }
 
+    // optional bool isClient = 10 [default = false];
+    public static final int ISCLIENT_FIELD_NUMBER = 10;
+    private boolean isClient_;
+    /**
+     * <code>optional bool isClient = 10 [default = false];</code>
+     */
+    public boolean hasIsClient() {
+      return ((bitField0_ & 0x00000200) == 0x00000200);
+    }
+    /**
+     * <code>optional bool isClient = 10 [default = false];</code>
+     */
+    public boolean getIsClient() {
+      return isClient_;
+    }
+
+    // optional bool broadcastInternal = 11 [default = false];
+    public static final int BROADCASTINTERNAL_FIELD_NUMBER = 11;
+    private boolean broadcastInternal_;
+    /**
+     * <code>optional bool broadcastInternal = 11 [default = false];</code>
+     */
+    public boolean hasBroadcastInternal() {
+      return ((bitField0_ & 0x00000400) == 0x00000400);
+    }
+    /**
+     * <code>optional bool broadcastInternal = 11 [default = false];</code>
+     */
+    public boolean getBroadcastInternal() {
+      return broadcastInternal_;
+    }
+
     private void initFields() {
       msgId_ = "";
       senderUserName_ = "";
@@ -15034,6 +14984,8 @@ public final class App {
       msgImageName_ = "";
       msgImageBits_ = com.google.protobuf.ByteString.EMPTY;
       messageType_ = poke.comm.App.ClientMessage.MessageType.SUCCESS;
+      isClient_ = false;
+      broadcastInternal_ = false;
     }
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
@@ -15073,6 +15025,12 @@ public final class App {
       }
       if (((bitField0_ & 0x00000010) == 0x00000010)) {
         output.writeInt32(9, receiverClientId_);
+      }
+      if (((bitField0_ & 0x00000200) == 0x00000200)) {
+        output.writeBool(10, isClient_);
+      }
+      if (((bitField0_ & 0x00000400) == 0x00000400)) {
+        output.writeBool(11, broadcastInternal_);
       }
       getUnknownFields().writeTo(output);
     }
@@ -15118,6 +15076,14 @@ public final class App {
       if (((bitField0_ & 0x00000010) == 0x00000010)) {
         size += com.google.protobuf.CodedOutputStream
           .computeInt32Size(9, receiverClientId_);
+      }
+      if (((bitField0_ & 0x00000200) == 0x00000200)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeBoolSize(10, isClient_);
+      }
+      if (((bitField0_ & 0x00000400) == 0x00000400)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeBoolSize(11, broadcastInternal_);
       }
       size += getUnknownFields().getSerializedSize();
       memoizedSerializedSize = size;
@@ -15253,6 +15219,10 @@ public final class App {
         bitField0_ = (bitField0_ & ~0x00000080);
         messageType_ = poke.comm.App.ClientMessage.MessageType.SUCCESS;
         bitField0_ = (bitField0_ & ~0x00000100);
+        isClient_ = false;
+        bitField0_ = (bitField0_ & ~0x00000200);
+        broadcastInternal_ = false;
+        bitField0_ = (bitField0_ & ~0x00000400);
         return this;
       }
 
@@ -15317,6 +15287,14 @@ public final class App {
           to_bitField0_ |= 0x00000100;
         }
         result.messageType_ = messageType_;
+        if (((from_bitField0_ & 0x00000200) == 0x00000200)) {
+          to_bitField0_ |= 0x00000200;
+        }
+        result.isClient_ = isClient_;
+        if (((from_bitField0_ & 0x00000400) == 0x00000400)) {
+          to_bitField0_ |= 0x00000400;
+        }
+        result.broadcastInternal_ = broadcastInternal_;
         result.bitField0_ = to_bitField0_;
         onBuilt();
         return result;
@@ -15369,6 +15347,12 @@ public final class App {
         }
         if (other.hasMessageType()) {
           setMessageType(other.getMessageType());
+        }
+        if (other.hasIsClient()) {
+          setIsClient(other.getIsClient());
+        }
+        if (other.hasBroadcastInternal()) {
+          setBroadcastInternal(other.getBroadcastInternal());
         }
         this.mergeUnknownFields(other.getUnknownFields());
         return this;
@@ -15901,6 +15885,72 @@ public final class App {
       public Builder clearMessageType() {
         bitField0_ = (bitField0_ & ~0x00000100);
         messageType_ = poke.comm.App.ClientMessage.MessageType.SUCCESS;
+        onChanged();
+        return this;
+      }
+
+      // optional bool isClient = 10 [default = false];
+      private boolean isClient_ ;
+      /**
+       * <code>optional bool isClient = 10 [default = false];</code>
+       */
+      public boolean hasIsClient() {
+        return ((bitField0_ & 0x00000200) == 0x00000200);
+      }
+      /**
+       * <code>optional bool isClient = 10 [default = false];</code>
+       */
+      public boolean getIsClient() {
+        return isClient_;
+      }
+      /**
+       * <code>optional bool isClient = 10 [default = false];</code>
+       */
+      public Builder setIsClient(boolean value) {
+        bitField0_ |= 0x00000200;
+        isClient_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional bool isClient = 10 [default = false];</code>
+       */
+      public Builder clearIsClient() {
+        bitField0_ = (bitField0_ & ~0x00000200);
+        isClient_ = false;
+        onChanged();
+        return this;
+      }
+
+      // optional bool broadcastInternal = 11 [default = false];
+      private boolean broadcastInternal_ ;
+      /**
+       * <code>optional bool broadcastInternal = 11 [default = false];</code>
+       */
+      public boolean hasBroadcastInternal() {
+        return ((bitField0_ & 0x00000400) == 0x00000400);
+      }
+      /**
+       * <code>optional bool broadcastInternal = 11 [default = false];</code>
+       */
+      public boolean getBroadcastInternal() {
+        return broadcastInternal_;
+      }
+      /**
+       * <code>optional bool broadcastInternal = 11 [default = false];</code>
+       */
+      public Builder setBroadcastInternal(boolean value) {
+        bitField0_ |= 0x00000400;
+        broadcastInternal_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional bool broadcastInternal = 11 [default = false];</code>
+       */
+      public Builder clearBroadcastInternal() {
+        bitField0_ = (bitField0_ & ~0x00000400);
+        broadcastInternal_ = false;
         onChanged();
         return this;
       }
@@ -18403,6 +18453,645 @@ public final class App {
     // @@protoc_insertion_point(class_scope:Payload)
   }
 
+  public interface JoinMessageOrBuilder
+      extends com.google.protobuf.MessageOrBuilder {
+
+    // optional int32 from_node_id = 1;
+    /**
+     * <code>optional int32 from_node_id = 1;</code>
+     */
+    boolean hasFromNodeId();
+    /**
+     * <code>optional int32 from_node_id = 1;</code>
+     */
+    int getFromNodeId();
+
+    // optional int32 to_node_id = 2;
+    /**
+     * <code>optional int32 to_node_id = 2;</code>
+     */
+    boolean hasToNodeId();
+    /**
+     * <code>optional int32 to_node_id = 2;</code>
+     */
+    int getToNodeId();
+
+    // optional int32 from_cluster_id = 3;
+    /**
+     * <code>optional int32 from_cluster_id = 3;</code>
+     */
+    boolean hasFromClusterId();
+    /**
+     * <code>optional int32 from_cluster_id = 3;</code>
+     */
+    int getFromClusterId();
+
+    // optional int32 to_cluster_id = 4;
+    /**
+     * <code>optional int32 to_cluster_id = 4;</code>
+     */
+    boolean hasToClusterId();
+    /**
+     * <code>optional int32 to_cluster_id = 4;</code>
+     */
+    int getToClusterId();
+  }
+  /**
+   * Protobuf type {@code JoinMessage}
+   */
+  public static final class JoinMessage extends
+      com.google.protobuf.GeneratedMessage
+      implements JoinMessageOrBuilder {
+    // Use JoinMessage.newBuilder() to construct.
+    private JoinMessage(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
+      super(builder);
+      this.unknownFields = builder.getUnknownFields();
+    }
+    private JoinMessage(boolean noInit) { this.unknownFields = com.google.protobuf.UnknownFieldSet.getDefaultInstance(); }
+
+    private static final JoinMessage defaultInstance;
+    public static JoinMessage getDefaultInstance() {
+      return defaultInstance;
+    }
+
+    public JoinMessage getDefaultInstanceForType() {
+      return defaultInstance;
+    }
+
+    private final com.google.protobuf.UnknownFieldSet unknownFields;
+    @java.lang.Override
+    public final com.google.protobuf.UnknownFieldSet
+        getUnknownFields() {
+      return this.unknownFields;
+    }
+    private JoinMessage(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      initFields();
+      int mutable_bitField0_ = 0;
+      com.google.protobuf.UnknownFieldSet.Builder unknownFields =
+          com.google.protobuf.UnknownFieldSet.newBuilder();
+      try {
+        boolean done = false;
+        while (!done) {
+          int tag = input.readTag();
+          switch (tag) {
+            case 0:
+              done = true;
+              break;
+            default: {
+              if (!parseUnknownField(input, unknownFields,
+                                     extensionRegistry, tag)) {
+                done = true;
+              }
+              break;
+            }
+            case 8: {
+              bitField0_ |= 0x00000001;
+              fromNodeId_ = input.readInt32();
+              break;
+            }
+            case 16: {
+              bitField0_ |= 0x00000002;
+              toNodeId_ = input.readInt32();
+              break;
+            }
+            case 24: {
+              bitField0_ |= 0x00000004;
+              fromClusterId_ = input.readInt32();
+              break;
+            }
+            case 32: {
+              bitField0_ |= 0x00000008;
+              toClusterId_ = input.readInt32();
+              break;
+            }
+          }
+        }
+      } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+        throw e.setUnfinishedMessage(this);
+      } catch (java.io.IOException e) {
+        throw new com.google.protobuf.InvalidProtocolBufferException(
+            e.getMessage()).setUnfinishedMessage(this);
+      } finally {
+        this.unknownFields = unknownFields.build();
+        makeExtensionsImmutable();
+      }
+    }
+    public static final com.google.protobuf.Descriptors.Descriptor
+        getDescriptor() {
+      return poke.comm.App.internal_static_JoinMessage_descriptor;
+    }
+
+    protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+        internalGetFieldAccessorTable() {
+      return poke.comm.App.internal_static_JoinMessage_fieldAccessorTable
+          .ensureFieldAccessorsInitialized(
+              poke.comm.App.JoinMessage.class, poke.comm.App.JoinMessage.Builder.class);
+    }
+
+    public static com.google.protobuf.Parser<JoinMessage> PARSER =
+        new com.google.protobuf.AbstractParser<JoinMessage>() {
+      public JoinMessage parsePartialFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        return new JoinMessage(input, extensionRegistry);
+      }
+    };
+
+    @java.lang.Override
+    public com.google.protobuf.Parser<JoinMessage> getParserForType() {
+      return PARSER;
+    }
+
+    private int bitField0_;
+    // optional int32 from_node_id = 1;
+    public static final int FROM_NODE_ID_FIELD_NUMBER = 1;
+    private int fromNodeId_;
+    /**
+     * <code>optional int32 from_node_id = 1;</code>
+     */
+    public boolean hasFromNodeId() {
+      return ((bitField0_ & 0x00000001) == 0x00000001);
+    }
+    /**
+     * <code>optional int32 from_node_id = 1;</code>
+     */
+    public int getFromNodeId() {
+      return fromNodeId_;
+    }
+
+    // optional int32 to_node_id = 2;
+    public static final int TO_NODE_ID_FIELD_NUMBER = 2;
+    private int toNodeId_;
+    /**
+     * <code>optional int32 to_node_id = 2;</code>
+     */
+    public boolean hasToNodeId() {
+      return ((bitField0_ & 0x00000002) == 0x00000002);
+    }
+    /**
+     * <code>optional int32 to_node_id = 2;</code>
+     */
+    public int getToNodeId() {
+      return toNodeId_;
+    }
+
+    // optional int32 from_cluster_id = 3;
+    public static final int FROM_CLUSTER_ID_FIELD_NUMBER = 3;
+    private int fromClusterId_;
+    /**
+     * <code>optional int32 from_cluster_id = 3;</code>
+     */
+    public boolean hasFromClusterId() {
+      return ((bitField0_ & 0x00000004) == 0x00000004);
+    }
+    /**
+     * <code>optional int32 from_cluster_id = 3;</code>
+     */
+    public int getFromClusterId() {
+      return fromClusterId_;
+    }
+
+    // optional int32 to_cluster_id = 4;
+    public static final int TO_CLUSTER_ID_FIELD_NUMBER = 4;
+    private int toClusterId_;
+    /**
+     * <code>optional int32 to_cluster_id = 4;</code>
+     */
+    public boolean hasToClusterId() {
+      return ((bitField0_ & 0x00000008) == 0x00000008);
+    }
+    /**
+     * <code>optional int32 to_cluster_id = 4;</code>
+     */
+    public int getToClusterId() {
+      return toClusterId_;
+    }
+
+    private void initFields() {
+      fromNodeId_ = 0;
+      toNodeId_ = 0;
+      fromClusterId_ = 0;
+      toClusterId_ = 0;
+    }
+    private byte memoizedIsInitialized = -1;
+    public final boolean isInitialized() {
+      byte isInitialized = memoizedIsInitialized;
+      if (isInitialized != -1) return isInitialized == 1;
+
+      memoizedIsInitialized = 1;
+      return true;
+    }
+
+    public void writeTo(com.google.protobuf.CodedOutputStream output)
+                        throws java.io.IOException {
+      getSerializedSize();
+      if (((bitField0_ & 0x00000001) == 0x00000001)) {
+        output.writeInt32(1, fromNodeId_);
+      }
+      if (((bitField0_ & 0x00000002) == 0x00000002)) {
+        output.writeInt32(2, toNodeId_);
+      }
+      if (((bitField0_ & 0x00000004) == 0x00000004)) {
+        output.writeInt32(3, fromClusterId_);
+      }
+      if (((bitField0_ & 0x00000008) == 0x00000008)) {
+        output.writeInt32(4, toClusterId_);
+      }
+      getUnknownFields().writeTo(output);
+    }
+
+    private int memoizedSerializedSize = -1;
+    public int getSerializedSize() {
+      int size = memoizedSerializedSize;
+      if (size != -1) return size;
+
+      size = 0;
+      if (((bitField0_ & 0x00000001) == 0x00000001)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt32Size(1, fromNodeId_);
+      }
+      if (((bitField0_ & 0x00000002) == 0x00000002)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt32Size(2, toNodeId_);
+      }
+      if (((bitField0_ & 0x00000004) == 0x00000004)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt32Size(3, fromClusterId_);
+      }
+      if (((bitField0_ & 0x00000008) == 0x00000008)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt32Size(4, toClusterId_);
+      }
+      size += getUnknownFields().getSerializedSize();
+      memoizedSerializedSize = size;
+      return size;
+    }
+
+    private static final long serialVersionUID = 0L;
+    @java.lang.Override
+    protected java.lang.Object writeReplace()
+        throws java.io.ObjectStreamException {
+      return super.writeReplace();
+    }
+
+    public static poke.comm.App.JoinMessage parseFrom(
+        com.google.protobuf.ByteString data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static poke.comm.App.JoinMessage parseFrom(
+        com.google.protobuf.ByteString data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static poke.comm.App.JoinMessage parseFrom(byte[] data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static poke.comm.App.JoinMessage parseFrom(
+        byte[] data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static poke.comm.App.JoinMessage parseFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input);
+    }
+    public static poke.comm.App.JoinMessage parseFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input, extensionRegistry);
+    }
+    public static poke.comm.App.JoinMessage parseDelimitedFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return PARSER.parseDelimitedFrom(input);
+    }
+    public static poke.comm.App.JoinMessage parseDelimitedFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return PARSER.parseDelimitedFrom(input, extensionRegistry);
+    }
+    public static poke.comm.App.JoinMessage parseFrom(
+        com.google.protobuf.CodedInputStream input)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input);
+    }
+    public static poke.comm.App.JoinMessage parseFrom(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input, extensionRegistry);
+    }
+
+    public static Builder newBuilder() { return Builder.create(); }
+    public Builder newBuilderForType() { return newBuilder(); }
+    public static Builder newBuilder(poke.comm.App.JoinMessage prototype) {
+      return newBuilder().mergeFrom(prototype);
+    }
+    public Builder toBuilder() { return newBuilder(this); }
+
+    @java.lang.Override
+    protected Builder newBuilderForType(
+        com.google.protobuf.GeneratedMessage.BuilderParent parent) {
+      Builder builder = new Builder(parent);
+      return builder;
+    }
+    /**
+     * Protobuf type {@code JoinMessage}
+     */
+    public static final class Builder extends
+        com.google.protobuf.GeneratedMessage.Builder<Builder>
+       implements poke.comm.App.JoinMessageOrBuilder {
+      public static final com.google.protobuf.Descriptors.Descriptor
+          getDescriptor() {
+        return poke.comm.App.internal_static_JoinMessage_descriptor;
+      }
+
+      protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+          internalGetFieldAccessorTable() {
+        return poke.comm.App.internal_static_JoinMessage_fieldAccessorTable
+            .ensureFieldAccessorsInitialized(
+                poke.comm.App.JoinMessage.class, poke.comm.App.JoinMessage.Builder.class);
+      }
+
+      // Construct using poke.comm.App.JoinMessage.newBuilder()
+      private Builder() {
+        maybeForceBuilderInitialization();
+      }
+
+      private Builder(
+          com.google.protobuf.GeneratedMessage.BuilderParent parent) {
+        super(parent);
+        maybeForceBuilderInitialization();
+      }
+      private void maybeForceBuilderInitialization() {
+        if (com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders) {
+        }
+      }
+      private static Builder create() {
+        return new Builder();
+      }
+
+      public Builder clear() {
+        super.clear();
+        fromNodeId_ = 0;
+        bitField0_ = (bitField0_ & ~0x00000001);
+        toNodeId_ = 0;
+        bitField0_ = (bitField0_ & ~0x00000002);
+        fromClusterId_ = 0;
+        bitField0_ = (bitField0_ & ~0x00000004);
+        toClusterId_ = 0;
+        bitField0_ = (bitField0_ & ~0x00000008);
+        return this;
+      }
+
+      public Builder clone() {
+        return create().mergeFrom(buildPartial());
+      }
+
+      public com.google.protobuf.Descriptors.Descriptor
+          getDescriptorForType() {
+        return poke.comm.App.internal_static_JoinMessage_descriptor;
+      }
+
+      public poke.comm.App.JoinMessage getDefaultInstanceForType() {
+        return poke.comm.App.JoinMessage.getDefaultInstance();
+      }
+
+      public poke.comm.App.JoinMessage build() {
+        poke.comm.App.JoinMessage result = buildPartial();
+        if (!result.isInitialized()) {
+          throw newUninitializedMessageException(result);
+        }
+        return result;
+      }
+
+      public poke.comm.App.JoinMessage buildPartial() {
+        poke.comm.App.JoinMessage result = new poke.comm.App.JoinMessage(this);
+        int from_bitField0_ = bitField0_;
+        int to_bitField0_ = 0;
+        if (((from_bitField0_ & 0x00000001) == 0x00000001)) {
+          to_bitField0_ |= 0x00000001;
+        }
+        result.fromNodeId_ = fromNodeId_;
+        if (((from_bitField0_ & 0x00000002) == 0x00000002)) {
+          to_bitField0_ |= 0x00000002;
+        }
+        result.toNodeId_ = toNodeId_;
+        if (((from_bitField0_ & 0x00000004) == 0x00000004)) {
+          to_bitField0_ |= 0x00000004;
+        }
+        result.fromClusterId_ = fromClusterId_;
+        if (((from_bitField0_ & 0x00000008) == 0x00000008)) {
+          to_bitField0_ |= 0x00000008;
+        }
+        result.toClusterId_ = toClusterId_;
+        result.bitField0_ = to_bitField0_;
+        onBuilt();
+        return result;
+      }
+
+      public Builder mergeFrom(com.google.protobuf.Message other) {
+        if (other instanceof poke.comm.App.JoinMessage) {
+          return mergeFrom((poke.comm.App.JoinMessage)other);
+        } else {
+          super.mergeFrom(other);
+          return this;
+        }
+      }
+
+      public Builder mergeFrom(poke.comm.App.JoinMessage other) {
+        if (other == poke.comm.App.JoinMessage.getDefaultInstance()) return this;
+        if (other.hasFromNodeId()) {
+          setFromNodeId(other.getFromNodeId());
+        }
+        if (other.hasToNodeId()) {
+          setToNodeId(other.getToNodeId());
+        }
+        if (other.hasFromClusterId()) {
+          setFromClusterId(other.getFromClusterId());
+        }
+        if (other.hasToClusterId()) {
+          setToClusterId(other.getToClusterId());
+        }
+        this.mergeUnknownFields(other.getUnknownFields());
+        return this;
+      }
+
+      public final boolean isInitialized() {
+        return true;
+      }
+
+      public Builder mergeFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws java.io.IOException {
+        poke.comm.App.JoinMessage parsedMessage = null;
+        try {
+          parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
+        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+          parsedMessage = (poke.comm.App.JoinMessage) e.getUnfinishedMessage();
+          throw e;
+        } finally {
+          if (parsedMessage != null) {
+            mergeFrom(parsedMessage);
+          }
+        }
+        return this;
+      }
+      private int bitField0_;
+
+      // optional int32 from_node_id = 1;
+      private int fromNodeId_ ;
+      /**
+       * <code>optional int32 from_node_id = 1;</code>
+       */
+      public boolean hasFromNodeId() {
+        return ((bitField0_ & 0x00000001) == 0x00000001);
+      }
+      /**
+       * <code>optional int32 from_node_id = 1;</code>
+       */
+      public int getFromNodeId() {
+        return fromNodeId_;
+      }
+      /**
+       * <code>optional int32 from_node_id = 1;</code>
+       */
+      public Builder setFromNodeId(int value) {
+        bitField0_ |= 0x00000001;
+        fromNodeId_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional int32 from_node_id = 1;</code>
+       */
+      public Builder clearFromNodeId() {
+        bitField0_ = (bitField0_ & ~0x00000001);
+        fromNodeId_ = 0;
+        onChanged();
+        return this;
+      }
+
+      // optional int32 to_node_id = 2;
+      private int toNodeId_ ;
+      /**
+       * <code>optional int32 to_node_id = 2;</code>
+       */
+      public boolean hasToNodeId() {
+        return ((bitField0_ & 0x00000002) == 0x00000002);
+      }
+      /**
+       * <code>optional int32 to_node_id = 2;</code>
+       */
+      public int getToNodeId() {
+        return toNodeId_;
+      }
+      /**
+       * <code>optional int32 to_node_id = 2;</code>
+       */
+      public Builder setToNodeId(int value) {
+        bitField0_ |= 0x00000002;
+        toNodeId_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional int32 to_node_id = 2;</code>
+       */
+      public Builder clearToNodeId() {
+        bitField0_ = (bitField0_ & ~0x00000002);
+        toNodeId_ = 0;
+        onChanged();
+        return this;
+      }
+
+      // optional int32 from_cluster_id = 3;
+      private int fromClusterId_ ;
+      /**
+       * <code>optional int32 from_cluster_id = 3;</code>
+       */
+      public boolean hasFromClusterId() {
+        return ((bitField0_ & 0x00000004) == 0x00000004);
+      }
+      /**
+       * <code>optional int32 from_cluster_id = 3;</code>
+       */
+      public int getFromClusterId() {
+        return fromClusterId_;
+      }
+      /**
+       * <code>optional int32 from_cluster_id = 3;</code>
+       */
+      public Builder setFromClusterId(int value) {
+        bitField0_ |= 0x00000004;
+        fromClusterId_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional int32 from_cluster_id = 3;</code>
+       */
+      public Builder clearFromClusterId() {
+        bitField0_ = (bitField0_ & ~0x00000004);
+        fromClusterId_ = 0;
+        onChanged();
+        return this;
+      }
+
+      // optional int32 to_cluster_id = 4;
+      private int toClusterId_ ;
+      /**
+       * <code>optional int32 to_cluster_id = 4;</code>
+       */
+      public boolean hasToClusterId() {
+        return ((bitField0_ & 0x00000008) == 0x00000008);
+      }
+      /**
+       * <code>optional int32 to_cluster_id = 4;</code>
+       */
+      public int getToClusterId() {
+        return toClusterId_;
+      }
+      /**
+       * <code>optional int32 to_cluster_id = 4;</code>
+       */
+      public Builder setToClusterId(int value) {
+        bitField0_ |= 0x00000008;
+        toClusterId_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional int32 to_cluster_id = 4;</code>
+       */
+      public Builder clearToClusterId() {
+        bitField0_ = (bitField0_ & ~0x00000008);
+        toClusterId_ = 0;
+        onChanged();
+        return this;
+      }
+
+      // @@protoc_insertion_point(builder_scope:JoinMessage)
+    }
+
+    static {
+      defaultInstance = new JoinMessage(true);
+      defaultInstance.initFields();
+    }
+
+    // @@protoc_insertion_point(class_scope:JoinMessage)
+  }
+
   public interface RequestOrBuilder
       extends com.google.protobuf.MessageOrBuilder {
 
@@ -18433,6 +19122,20 @@ public final class App {
      * <code>required .Payload body = 2;</code>
      */
     poke.comm.App.PayloadOrBuilder getBodyOrBuilder();
+
+    // optional .JoinMessage join_message = 3;
+    /**
+     * <code>optional .JoinMessage join_message = 3;</code>
+     */
+    boolean hasJoinMessage();
+    /**
+     * <code>optional .JoinMessage join_message = 3;</code>
+     */
+    poke.comm.App.JoinMessage getJoinMessage();
+    /**
+     * <code>optional .JoinMessage join_message = 3;</code>
+     */
+    poke.comm.App.JoinMessageOrBuilder getJoinMessageOrBuilder();
   }
   /**
    * Protobuf type {@code Request}
@@ -18509,6 +19212,19 @@ public final class App {
                 body_ = subBuilder.buildPartial();
               }
               bitField0_ |= 0x00000002;
+              break;
+            }
+            case 26: {
+              poke.comm.App.JoinMessage.Builder subBuilder = null;
+              if (((bitField0_ & 0x00000004) == 0x00000004)) {
+                subBuilder = joinMessage_.toBuilder();
+              }
+              joinMessage_ = input.readMessage(poke.comm.App.JoinMessage.PARSER, extensionRegistry);
+              if (subBuilder != null) {
+                subBuilder.mergeFrom(joinMessage_);
+                joinMessage_ = subBuilder.buildPartial();
+              }
+              bitField0_ |= 0x00000004;
               break;
             }
           }
@@ -18595,9 +19311,32 @@ public final class App {
       return body_;
     }
 
+    // optional .JoinMessage join_message = 3;
+    public static final int JOIN_MESSAGE_FIELD_NUMBER = 3;
+    private poke.comm.App.JoinMessage joinMessage_;
+    /**
+     * <code>optional .JoinMessage join_message = 3;</code>
+     */
+    public boolean hasJoinMessage() {
+      return ((bitField0_ & 0x00000004) == 0x00000004);
+    }
+    /**
+     * <code>optional .JoinMessage join_message = 3;</code>
+     */
+    public poke.comm.App.JoinMessage getJoinMessage() {
+      return joinMessage_;
+    }
+    /**
+     * <code>optional .JoinMessage join_message = 3;</code>
+     */
+    public poke.comm.App.JoinMessageOrBuilder getJoinMessageOrBuilder() {
+      return joinMessage_;
+    }
+
     private void initFields() {
       header_ = poke.comm.App.Header.getDefaultInstance();
       body_ = poke.comm.App.Payload.getDefaultInstance();
+      joinMessage_ = poke.comm.App.JoinMessage.getDefaultInstance();
     }
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
@@ -18633,6 +19372,9 @@ public final class App {
       if (((bitField0_ & 0x00000002) == 0x00000002)) {
         output.writeMessage(2, body_);
       }
+      if (((bitField0_ & 0x00000004) == 0x00000004)) {
+        output.writeMessage(3, joinMessage_);
+      }
       getUnknownFields().writeTo(output);
     }
 
@@ -18649,6 +19391,10 @@ public final class App {
       if (((bitField0_ & 0x00000002) == 0x00000002)) {
         size += com.google.protobuf.CodedOutputStream
           .computeMessageSize(2, body_);
+      }
+      if (((bitField0_ & 0x00000004) == 0x00000004)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeMessageSize(3, joinMessage_);
       }
       size += getUnknownFields().getSerializedSize();
       memoizedSerializedSize = size;
@@ -18760,6 +19506,7 @@ public final class App {
         if (com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders) {
           getHeaderFieldBuilder();
           getBodyFieldBuilder();
+          getJoinMessageFieldBuilder();
         }
       }
       private static Builder create() {
@@ -18780,6 +19527,12 @@ public final class App {
           bodyBuilder_.clear();
         }
         bitField0_ = (bitField0_ & ~0x00000002);
+        if (joinMessageBuilder_ == null) {
+          joinMessage_ = poke.comm.App.JoinMessage.getDefaultInstance();
+        } else {
+          joinMessageBuilder_.clear();
+        }
+        bitField0_ = (bitField0_ & ~0x00000004);
         return this;
       }
 
@@ -18824,6 +19577,14 @@ public final class App {
         } else {
           result.body_ = bodyBuilder_.build();
         }
+        if (((from_bitField0_ & 0x00000004) == 0x00000004)) {
+          to_bitField0_ |= 0x00000004;
+        }
+        if (joinMessageBuilder_ == null) {
+          result.joinMessage_ = joinMessage_;
+        } else {
+          result.joinMessage_ = joinMessageBuilder_.build();
+        }
         result.bitField0_ = to_bitField0_;
         onBuilt();
         return result;
@@ -18845,6 +19606,9 @@ public final class App {
         }
         if (other.hasBody()) {
           mergeBody(other.getBody());
+        }
+        if (other.hasJoinMessage()) {
+          mergeJoinMessage(other.getJoinMessage());
         }
         this.mergeUnknownFields(other.getUnknownFields());
         return this;
@@ -19123,6 +19887,123 @@ public final class App {
         return bodyBuilder_;
       }
 
+      // optional .JoinMessage join_message = 3;
+      private poke.comm.App.JoinMessage joinMessage_ = poke.comm.App.JoinMessage.getDefaultInstance();
+      private com.google.protobuf.SingleFieldBuilder<
+          poke.comm.App.JoinMessage, poke.comm.App.JoinMessage.Builder, poke.comm.App.JoinMessageOrBuilder> joinMessageBuilder_;
+      /**
+       * <code>optional .JoinMessage join_message = 3;</code>
+       */
+      public boolean hasJoinMessage() {
+        return ((bitField0_ & 0x00000004) == 0x00000004);
+      }
+      /**
+       * <code>optional .JoinMessage join_message = 3;</code>
+       */
+      public poke.comm.App.JoinMessage getJoinMessage() {
+        if (joinMessageBuilder_ == null) {
+          return joinMessage_;
+        } else {
+          return joinMessageBuilder_.getMessage();
+        }
+      }
+      /**
+       * <code>optional .JoinMessage join_message = 3;</code>
+       */
+      public Builder setJoinMessage(poke.comm.App.JoinMessage value) {
+        if (joinMessageBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          joinMessage_ = value;
+          onChanged();
+        } else {
+          joinMessageBuilder_.setMessage(value);
+        }
+        bitField0_ |= 0x00000004;
+        return this;
+      }
+      /**
+       * <code>optional .JoinMessage join_message = 3;</code>
+       */
+      public Builder setJoinMessage(
+          poke.comm.App.JoinMessage.Builder builderForValue) {
+        if (joinMessageBuilder_ == null) {
+          joinMessage_ = builderForValue.build();
+          onChanged();
+        } else {
+          joinMessageBuilder_.setMessage(builderForValue.build());
+        }
+        bitField0_ |= 0x00000004;
+        return this;
+      }
+      /**
+       * <code>optional .JoinMessage join_message = 3;</code>
+       */
+      public Builder mergeJoinMessage(poke.comm.App.JoinMessage value) {
+        if (joinMessageBuilder_ == null) {
+          if (((bitField0_ & 0x00000004) == 0x00000004) &&
+              joinMessage_ != poke.comm.App.JoinMessage.getDefaultInstance()) {
+            joinMessage_ =
+              poke.comm.App.JoinMessage.newBuilder(joinMessage_).mergeFrom(value).buildPartial();
+          } else {
+            joinMessage_ = value;
+          }
+          onChanged();
+        } else {
+          joinMessageBuilder_.mergeFrom(value);
+        }
+        bitField0_ |= 0x00000004;
+        return this;
+      }
+      /**
+       * <code>optional .JoinMessage join_message = 3;</code>
+       */
+      public Builder clearJoinMessage() {
+        if (joinMessageBuilder_ == null) {
+          joinMessage_ = poke.comm.App.JoinMessage.getDefaultInstance();
+          onChanged();
+        } else {
+          joinMessageBuilder_.clear();
+        }
+        bitField0_ = (bitField0_ & ~0x00000004);
+        return this;
+      }
+      /**
+       * <code>optional .JoinMessage join_message = 3;</code>
+       */
+      public poke.comm.App.JoinMessage.Builder getJoinMessageBuilder() {
+        bitField0_ |= 0x00000004;
+        onChanged();
+        return getJoinMessageFieldBuilder().getBuilder();
+      }
+      /**
+       * <code>optional .JoinMessage join_message = 3;</code>
+       */
+      public poke.comm.App.JoinMessageOrBuilder getJoinMessageOrBuilder() {
+        if (joinMessageBuilder_ != null) {
+          return joinMessageBuilder_.getMessageOrBuilder();
+        } else {
+          return joinMessage_;
+        }
+      }
+      /**
+       * <code>optional .JoinMessage join_message = 3;</code>
+       */
+      private com.google.protobuf.SingleFieldBuilder<
+          poke.comm.App.JoinMessage, poke.comm.App.JoinMessage.Builder, poke.comm.App.JoinMessageOrBuilder> 
+          getJoinMessageFieldBuilder() {
+        if (joinMessageBuilder_ == null) {
+          joinMessageBuilder_ = new com.google.protobuf.SingleFieldBuilder<
+              poke.comm.App.JoinMessage, poke.comm.App.JoinMessage.Builder, poke.comm.App.JoinMessageOrBuilder>(
+                  joinMessage_,
+                  getParentForChildren(),
+                  isClean());
+          joinMessage_ = null;
+        }
+        return joinMessageBuilder_;
+      }
+
       // @@protoc_insertion_point(builder_scope:Request)
     }
 
@@ -19210,6 +20091,11 @@ public final class App {
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
       internal_static_Payload_fieldAccessorTable;
   private static com.google.protobuf.Descriptors.Descriptor
+    internal_static_JoinMessage_descriptor;
+  private static
+    com.google.protobuf.GeneratedMessage.FieldAccessorTable
+      internal_static_JoinMessage_fieldAccessorTable;
+  private static com.google.protobuf.Descriptors.Descriptor
     internal_static_Request_descriptor;
   private static
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
@@ -19262,36 +20148,41 @@ public final class App {
       "\002 \002(\0162\013.PokeStatus\022#\n\tjob_state\030\003 \002(\0162\020." +
       "JobDesc.JobCode\022\026\n\004data\030\004 \003(\0132\010.JobDesc\"" +
       ",\n\013RoutingPath\022\017\n\007node_id\030\001 \002(\005\022\014\n\004time\030" +
-      "\002 \002(\003\"\310\002\n\006Header\022#\n\nrouting_id\030\001 \002(\0162\017.H",
+      "\002 \002(\003\"\277\002\n\006Header\022#\n\nrouting_id\030\001 \002(\0162\017.H",
       "eader.Routing\022\022\n\noriginator\030\002 \002(\005\022\013\n\003tag" +
       "\030\003 \001(\t\022\014\n\004time\030\004 \001(\003\022\037\n\nreply_code\030\005 \001(\016" +
       "2\013.PokeStatus\022\021\n\treply_msg\030\006 \001(\t\022\032\n\004path" +
       "\030\007 \003(\0132\014.RoutingPath\022\016\n\006toNode\030\010 \001(\005\022\036\n\007" +
-      "options\030\t \003(\0132\r.NameValueSet\022\024\n\014isCluste" +
-      "rMsg\030\n \002(\010\"T\n\007Routing\022\010\n\004PING\020\002\022\016\n\nNAMES" +
-      "PACES\020\003\022\010\n\004JOBS\020\004\022\013\n\007REPORTS\020\n\022\n\n\006MANAGE" +
-      "\020d\022\014\n\010REGISTER\020\005\"\242\002\n\rClientMessage\022\r\n\005ms" +
-      "gId\030\001 \001(\t\022\026\n\016senderUserName\030\002 \001(\t\022\030\n\020rec" +
-      "eiverUserName\030\003 \001(\t\022\026\n\016senderClientId\030\010 ",
-      "\001(\005\022\030\n\020receiverClientId\030\t \001(\005\022\017\n\007msgText" +
-      "\030\004 \001(\t\022\024\n\014msgImageName\030\005 \001(\t\022\024\n\014msgImage" +
-      "Bits\030\006 \001(\014\0228\n\013messageType\030\007 \001(\0162\032.Client" +
-      "Message.MessageType:\007SUCCESS\"\'\n\013MessageT" +
-      "ype\022\013\n\007REQUEST\020\000\022\013\n\007SUCCESS\020\001\"L\n\016Cluster" +
-      "Message\022&\n\016client_message\030\001 \001(\0132\016.Client" +
-      "Message\022\022\n\ncluster_id\030\002 \001(\005\"\376\001\n\007Payload\022" +
-      "\023\n\004ping\030\001 \001(\0132\005.Ping\022%\n\010space_op\030\002 \001(\0132\023" +
-      ".NameSpaceOperation\022\035\n\006job_op\030\003 \001(\0132\r.Jo" +
-      "bOperation\022\036\n\njob_status\030\r \001(\0132\n.JobStat",
-      "us\022&\n\014space_status\030\014 \001(\0132\020.NameSpaceStat" +
-      "us\022&\n\016client_message\030\005 \001(\0132\016.ClientMessa" +
-      "ge\022(\n\017cluster_message\030\004 \001(\0132\017.ClusterMes" +
-      "sage\":\n\007Request\022\027\n\006header\030\001 \002(\0132\007.Header" +
-      "\022\026\n\004body\030\002 \002(\0132\010.Payload*\221\001\n\nPokeStatus\022" +
-      "\n\n\006UKNOWN\020\001\022\013\n\007SUCCESS\020\002\022\013\n\007NOFOUND\020d\022\020\n" +
-      "\014NOINCOMPLETE\020e\022\n\n\006NOAUTH\020f\022\020\n\014NOCONNECT" +
-      "ION\020g\022\017\n\013NOREACHABLE\020h\022\016\n\nNORESOURCE\020i\022\014" +
-      "\n\007FAILURE\020\307\001B\r\n\tpoke.commH\001"
+      "options\030\t \003(\0132\r.NameValueSet\"a\n\007Routing\022" +
+      "\010\n\004PING\020\002\022\016\n\nNAMESPACES\020\003\022\010\n\004JOBS\020\004\022\013\n\007R" +
+      "EPORTS\020\n\022\n\n\006MANAGE\020d\022\014\n\010REGISTER\020\005\022\013\n\007FO" +
+      "RWARD\020\006\"\335\002\n\rClientMessage\022\r\n\005msgId\030\001 \001(\t" +
+      "\022\026\n\016senderUserName\030\002 \001(\t\022\030\n\020receiverUser" +
+      "Name\030\003 \001(\t\022\026\n\016senderClientId\030\010 \001(\005\022\030\n\020re",
+      "ceiverClientId\030\t \001(\005\022\017\n\007msgText\030\004 \001(\t\022\024\n" +
+      "\014msgImageName\030\005 \001(\t\022\024\n\014msgImageBits\030\006 \001(" +
+      "\014\0228\n\013messageType\030\007 \001(\0162\032.ClientMessage.M" +
+      "essageType:\007SUCCESS\022\027\n\010isClient\030\n \001(\010:\005f" +
+      "alse\022 \n\021broadcastInternal\030\013 \001(\010:\005false\"\'" +
+      "\n\013MessageType\022\013\n\007REQUEST\020\000\022\013\n\007SUCCESS\020\001\"" +
+      "L\n\016ClusterMessage\022&\n\016client_message\030\001 \001(" +
+      "\0132\016.ClientMessage\022\022\n\ncluster_id\030\002 \001(\005\"\376\001" +
+      "\n\007Payload\022\023\n\004ping\030\001 \001(\0132\005.Ping\022%\n\010space_" +
+      "op\030\002 \001(\0132\023.NameSpaceOperation\022\035\n\006job_op\030",
+      "\003 \001(\0132\r.JobOperation\022\036\n\njob_status\030\r \001(\013" +
+      "2\n.JobStatus\022&\n\014space_status\030\014 \001(\0132\020.Nam" +
+      "eSpaceStatus\022&\n\016client_message\030\005 \001(\0132\016.C" +
+      "lientMessage\022(\n\017cluster_message\030\004 \001(\0132\017." +
+      "ClusterMessage\"g\n\013JoinMessage\022\024\n\014from_no" +
+      "de_id\030\001 \001(\005\022\022\n\nto_node_id\030\002 \001(\005\022\027\n\017from_" +
+      "cluster_id\030\003 \001(\005\022\025\n\rto_cluster_id\030\004 \001(\005\"" +
+      "^\n\007Request\022\027\n\006header\030\001 \002(\0132\007.Header\022\026\n\004b" +
+      "ody\030\002 \002(\0132\010.Payload\022\"\n\014join_message\030\003 \001(" +
+      "\0132\014.JoinMessage*\221\001\n\nPokeStatus\022\n\n\006UKNOWN",
+      "\020\001\022\013\n\007SUCCESS\020\002\022\013\n\007NOFOUND\020d\022\020\n\014NOINCOMP" +
+      "LETE\020e\022\n\n\006NOAUTH\020f\022\020\n\014NOCONNECTION\020g\022\017\n\013" +
+      "NOREACHABLE\020h\022\016\n\nNORESOURCE\020i\022\014\n\007FAILURE" +
+      "\020\307\001B\r\n\tpoke.commH\001"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
       new com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner() {
@@ -19369,13 +20260,13 @@ public final class App {
           internal_static_Header_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_Header_descriptor,
-              new java.lang.String[] { "RoutingId", "Originator", "Tag", "Time", "ReplyCode", "ReplyMsg", "Path", "ToNode", "Options", "IsClusterMsg", });
+              new java.lang.String[] { "RoutingId", "Originator", "Tag", "Time", "ReplyCode", "ReplyMsg", "Path", "ToNode", "Options", });
           internal_static_ClientMessage_descriptor =
             getDescriptor().getMessageTypes().get(12);
           internal_static_ClientMessage_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_ClientMessage_descriptor,
-              new java.lang.String[] { "MsgId", "SenderUserName", "ReceiverUserName", "SenderClientId", "ReceiverClientId", "MsgText", "MsgImageName", "MsgImageBits", "MessageType", });
+              new java.lang.String[] { "MsgId", "SenderUserName", "ReceiverUserName", "SenderClientId", "ReceiverClientId", "MsgText", "MsgImageName", "MsgImageBits", "MessageType", "IsClient", "BroadcastInternal", });
           internal_static_ClusterMessage_descriptor =
             getDescriptor().getMessageTypes().get(13);
           internal_static_ClusterMessage_fieldAccessorTable = new
@@ -19388,12 +20279,18 @@ public final class App {
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_Payload_descriptor,
               new java.lang.String[] { "Ping", "SpaceOp", "JobOp", "JobStatus", "SpaceStatus", "ClientMessage", "ClusterMessage", });
-          internal_static_Request_descriptor =
+          internal_static_JoinMessage_descriptor =
             getDescriptor().getMessageTypes().get(15);
+          internal_static_JoinMessage_fieldAccessorTable = new
+            com.google.protobuf.GeneratedMessage.FieldAccessorTable(
+              internal_static_JoinMessage_descriptor,
+              new java.lang.String[] { "FromNodeId", "ToNodeId", "FromClusterId", "ToClusterId", });
+          internal_static_Request_descriptor =
+            getDescriptor().getMessageTypes().get(16);
           internal_static_Request_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_Request_descriptor,
-              new java.lang.String[] { "Header", "Body", });
+              new java.lang.String[] { "Header", "Body", "JoinMessage", });
           return null;
         }
       };

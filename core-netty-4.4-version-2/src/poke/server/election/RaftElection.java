@@ -15,6 +15,7 @@ import poke.core.Mgmt.RaftMessage;
 import poke.core.Mgmt.RaftMessage.RaftAction;
 import poke.core.Mgmt.RaftMessage.RaftAppendAction;
 import poke.server.managers.ConnectionManager;
+import poke.server.managers.ConnectionManager.connectionState;
 import poke.server.managers.HeartbeatManager;
 import poke.server.managers.RaftManager;
 
@@ -234,7 +235,7 @@ public class RaftElection implements Election {
 		mb.setHeader(mhb.build());
 		mb.setRaftmessage(rm.build());
 		try{
-			Channel ch = ConnectionManager.getConnection(mgmt.getHeader().getOriginator(), true);
+			Channel ch = ConnectionManager.getConnection(mgmt.getHeader().getOriginator(), connectionState.SERVERMGMT);
 			if(ch!=null)
 				ch.writeAndFlush(mb.build());
 			
@@ -264,7 +265,7 @@ public class RaftElection implements Election {
 		mb.setRaftmessage(rm.build());
 
 		try{
-			Channel ch = ConnectionManager.getConnection(mgmt.getHeader().getOriginator(), true);
+			Channel ch = ConnectionManager.getConnection(mgmt.getHeader().getOriginator(), connectionState.SERVERMGMT);
 			if(ch!=null)
 				ch.writeAndFlush(mb.build());
 			
@@ -294,7 +295,7 @@ public class RaftElection implements Election {
 		mb.setRaftmessage(rm.build());
 
 		try{
-			Channel ch = ConnectionManager.getConnection(mgmt.getHeader().getOriginator(), true);
+			Channel ch = ConnectionManager.getConnection(mgmt.getHeader().getOriginator(), connectionState.SERVERMGMT);
 			if(ch!=null)
 				ch.writeAndFlush(mb.build());
 			

@@ -15,10 +15,9 @@
  */
 package poke.client;
 
-import java.awt.TrayIcon.MessageType;
 import java.io.File;
-import java.io.FileInputStream;
-import java.io.InputStream;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -28,9 +27,6 @@ import poke.client.comm.CommListener;
 import poke.comm.App.ClientMessage;
 import poke.comm.App.Header;
 import poke.comm.App.Header.Routing;
-import poke.comm.App.JobDesc;
-import poke.comm.App.JobOperation;
-import poke.comm.App.JobOperation.JobAction;
 import poke.comm.App.Payload;
 import poke.comm.App.Ping;
 import poke.comm.App.Request;
@@ -103,7 +99,6 @@ public class ClientCommand {
 		h.setTag("test finger");
 		h.setTime(System.currentTimeMillis());
 		h.setRoutingId(Header.Routing.PING);
-		h.setIsClusterMsg(false);
 		r.setHeader(h.build());
 
 		Request req = r.build();
@@ -165,9 +160,15 @@ public class ClientCommand {
 		//TO Node is the node to which this client will get connected
 		h.setToNode(0);
 		
+		ClientMessage.Builder clBuilder  = ClientMessage.newBuilder();
+		clBuilder.setSenderUserName("client");
+		clBuilder.setSenderClientId(1000);
+
+		
 		//Build Payload
 		Payload.Builder p = Payload.newBuilder();
 		//Not adding anything as it is just a register message
+		p.setClientMessage(clBuilder);
 
 		r.setBody(p);
 		r.setHeader(h);
@@ -179,7 +180,7 @@ public class ClientCommand {
 		}
 	}
 
-	public void sendJobsRequest() {
+	public void sendJobsRequest(String fileLocation) {
 		try{
 		//
 				Request.Builder r = Request.newBuilder();
@@ -196,20 +197,21 @@ public class ClientCommand {
 				
 				//Build Payload
 				Payload.Builder p = Payload.newBuilder();
-		        InputStream imageInByte;
-		        File file = new File("/home/ankit/Downloads/mobile.jpg");
-		        imageInByte = new FileInputStream(file); 
+		        
+		        File file = new File(fileLocation);
+		        byte []imageInByte = Files.readAllBytes(Paths.get(fileLocation)); 
 		        ClientMessage.Builder clientImage = ClientMessage.newBuilder();
 		        clientImage.setMsgId("1");
 		        clientImage.setSenderUserName("Client1");
 		        clientImage.setReceiverUserName("Client2");
 		        clientImage.setSenderClientId(1000);
-		        clientImage.setReceiverClientId(2000);
+		        clientImage.setReceiverClientId(-1);
 		        clientImage.setMsgText("Hello Client2");
-		        clientImage.setMsgImageName("Scott.jpg");
-		        clientImage.setMsgImageBits(ByteString.readFrom(imageInByte));
+		        clientImage.setMsgImageName(file.getName());
+		        clientImage.setMsgImageBits(ByteString.copyFrom(imageInByte));
 		        clientImage.setMessageType(poke.comm.App.ClientMessage.MessageType.REQUEST);
-		        
+		        clientImage.setIsClient(true);
+		        clientImage.setBroadcastInternal(true);
 				r.setBody(p);
 				r.setHeader(h);
 				Request req = r.build();

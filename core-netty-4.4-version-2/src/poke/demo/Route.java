@@ -15,22 +15,9 @@
  */
 package poke.demo;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.IOException;
-import java.io.InputStream;
-
 import poke.client.ClientCommand;
 import poke.client.ClientPrintListener;
 import poke.client.comm.CommListener;
-import poke.comm.App.ClientMessage;
-import poke.comm.App.JobDesc;
-import poke.comm.App.JobDesc.JobCode;
-import poke.comm.App.JobOperation.JobAction;
-import poke.comm.App.NameValueSet;
-import poke.comm.App.NameValueSet.NodeType;
-
-import com.google.protobuf.ByteString;
 
 
 /**
@@ -55,7 +42,7 @@ public class Route {
 		cc.sendRegisterRequest();
 
 		//After Poke message send a file to server
-		cc.sendJobsRequest();
+		cc.sendJobsRequest("/home/ankit/Downloads/mobile.jpg");
 		
 	}
 

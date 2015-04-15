@@ -35,6 +35,6 @@ public interface Resource {
 	 * @param request
 	 * @return an action
 	 */
-	Request process(Request request, Channel ch);
+	void process(Request request, Channel ch);
 
 }

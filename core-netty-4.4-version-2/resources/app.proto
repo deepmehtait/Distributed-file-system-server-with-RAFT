@@ -202,10 +202,11 @@ message Header {
         REPORTS = 10;
         MANAGE = 100;
         REGISTER = 5;
+        FORWARD = 6;
         }
 
     //check if cluster message or client msg
-    required bool isClusterMsg = 10;
+
 }
 
 message ClientMessage{
@@ -218,7 +219,8 @@ message ClientMessage{
   optional string msgImageName = 5;
   optional bytes msgImageBits = 6;
   optional MessageType messageType = 7 [default = SUCCESS];
-
+  optional bool isClient = 10 [default = false];
+  optional bool broadcastInternal = 11 [default = false];
 
   enum MessageType
   {
@@ -254,8 +256,16 @@ message Payload {
 
 }
 
+message JoinMessage {
+    optional int32 from_node_id = 1;
+    optional int32 to_node_id = 2;
+    optional int32 from_cluster_id = 3;
+    optional int32 to_cluster_id = 4;
+}
+
 message Request {
     required Header header = 1;
     required Payload body = 2;
+    optional JoinMessage join_message = 3;
 }
 

@@ -64,9 +64,12 @@ public class HeartbeatPusher extends Thread {
 		// this class will monitor this channel/connection and together with the
 		// manager, we create the circuit breaker pattern to separate
 		// health-status from usage.
-		HeartMonitor hm = new HeartMonitor(iamNode, node.getHost(), node.getMgmtport(), node.getNodeId());
+		HeartMonitor hm = new HeartMonitor(iamNode, node.getHost(), node.getMgmtport(), node.getNodeId(),true);
 		monitors.add(hm);
 
+		
+		HeartMonitor hm1 = new HeartMonitor(iamNode, node.getHost(), node.getPort(), node.getNodeId(),false);
+		monitors.add(hm1);
 		// artifact of the client-side listener - processing is done in the
 		// inbound mgmt worker
 		HeartbeatStubListener notused = new HeartbeatStubListener(node);

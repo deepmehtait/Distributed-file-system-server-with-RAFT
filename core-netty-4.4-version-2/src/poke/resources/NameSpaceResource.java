@@ -27,9 +27,9 @@ public class NameSpaceResource implements Resource {
 	protected static Logger logger = LoggerFactory.getLogger("server");
 
 	@Override
-	public Request process(Request request, Channel ch) {
+	public void process(Request request, Channel ch) {
 		// TODO Auto-generated method stub
-		return null;
+		
 	}
 
 }

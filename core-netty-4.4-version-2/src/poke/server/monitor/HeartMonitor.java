@@ -30,10 +30,15 @@ import java.util.List;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import poke.comm.App.Header;
+import poke.comm.App.JoinMessage;
+import poke.comm.App.Payload;
+import poke.comm.App.Request;
 import poke.core.Mgmt.Management;
 import poke.core.Mgmt.MgmtHeader;
 import poke.core.Mgmt.Network;
 import poke.core.Mgmt.Network.NetworkAction;
+import poke.server.ServerInitializer;
 
 /**
  * The monitor is a client-side component that can exist as as its own client or
@@ -61,7 +66,7 @@ public class HeartMonitor {
 	private int toNodeId;
 	private String host;
 	private int port;
-
+	private boolean blnMgmt; 
 	// this list is only used if the connection cannot be established - it holds
 	// the listeners to be added.
 	private List<MonitorListener> listeners = new ArrayList<MonitorListener>();
@@ -76,13 +81,14 @@ public class HeartMonitor {
 	 * @param port
 	 *            This is the management port
 	 */
-	public HeartMonitor(int iamNode, String host, int port, int toNodeId) {
+	public HeartMonitor(int iamNode, String host, int port, int toNodeId, boolean blnMgmt) {
 		this.iamNode = iamNode;
 		this.toNodeId = toNodeId;
 		this.whoami = "mgmt-" + iamNode;
 		this.host = host;
 		this.port = port;
 		this.group = new NioEventLoopGroup();
+		this.blnMgmt = blnMgmt;
 
 		logger.info("Creating heartbeat monitor for " + host + "(" + port + ")");
 	}
@@ -131,16 +137,24 @@ public class HeartMonitor {
 	 * 
 	 * @return
 	 */
-	protected Channel connect() {
+	protected Channel connect(boolean blnMgmt) {
 		// Start the connection attempt.
 		if (channel == null) {
 			try {
-				handler = new MonitorHandler();
-				MonitorInitializer mi = new MonitorInitializer(handler, false);
-
 				Bootstrap b = new Bootstrap();
+				if(blnMgmt){
+					handler = new MonitorHandler();
+					MonitorInitializer mi = new MonitorInitializer(handler, false);
+					b.group(group).channel(NioSocketChannel.class).handler(mi);
+				}
+				else
+				{
+					ServerInitializer s = new ServerInitializer(false);
+					b.group(group).channel(NioSocketChannel.class).handler(s);
+				}
+				
 				// @TODO newFixedThreadPool(2);
-				b.group(group).channel(NioSocketChannel.class).handler(mi);
+				
 				b.option(ChannelOption.CONNECT_TIMEOUT_MILLIS, 10000);
 				b.option(ChannelOption.TCP_NODELAY, true);
 				b.option(ChannelOption.SO_KEEPALIVE, true);
@@ -200,35 +214,61 @@ public class HeartMonitor {
 
 		boolean rtn = false;
 		try {
-			Channel ch = connect();
+			Channel ch = connect(blnMgmt);
 			if (!ch.isWritable()) {
 				logger.error("Channel to node " + toNodeId + " not writable!");
 			}
 
 			logger.info("HeartMonitor sending join message to " + toNodeId);
-			Network.Builder n = Network.newBuilder();
+			if(blnMgmt)
+			{
+				Network.Builder n = Network.newBuilder();
+	
+				// 'N' allows us to track the connection restarts and to provide
+				// uniqueness
+				n.setFromNodeId(iamNode);
+				n.setToNodeId(toNodeId);
+				n.setAction(NetworkAction.NODEJOIN);
+	
+				MgmtHeader.Builder mhb = MgmtHeader.newBuilder();
+				mhb.setOriginator(iamNode);
+				mhb.setTime(System.currentTimeMillis());
+	
+				// TODO the security code is an authentication token to joint the
+				// cluster, all nodes in the cluster should share the same token or
+				// know how to authenticate a node.
+				mhb.setSecurityCode(-999);
+	
+				Management.Builder m = Management.newBuilder();
+				m.setHeader(mhb.build());
+				m.setGraph(n.build());
+	
+				ch.writeAndFlush(m.build());
+				rtn = true;
+			}
+			else
+			{
+				Header.Builder header = Header.newBuilder();
+				// header.setRoutingId(Routing.REGISTER);
+				header.setOriginator(iamNode);
+				// payload for request
+				Payload.Builder body = Payload.newBuilder();
+				// Request
+				Request.Builder request = Request.newBuilder();
+				request.setHeader(header);
+				request.setBody(body);
 
-			// 'N' allows us to track the connection restarts and to provide
-			// uniqueness
-			n.setFromNodeId(iamNode);
-			n.setToNodeId(toNodeId);
-			n.setAction(NetworkAction.NODEJOIN);
+				JoinMessage.Builder jm = JoinMessage.newBuilder();
+				
+				// 'N' allows us to track the connection restarts and to provide
+				// uniqueness
+				jm.setFromNodeId(iamNode);
+				jm.setToNodeId(toNodeId);
 
-			MgmtHeader.Builder mhb = MgmtHeader.newBuilder();
-			mhb.setOriginator(iamNode);
-			mhb.setTime(System.currentTimeMillis());
-
-			// TODO the security code is an authentication token to joint the
-			// cluster, all nodes in the cluster should share the same token or
-			// know how to authenticate a node.
-			mhb.setSecurityCode(-999);
-
-			Management.Builder m = Management.newBuilder();
-			m.setHeader(mhb.build());
-			m.setGraph(n.build());
-
-			ch.writeAndFlush(m.build());
-			rtn = true;
+				request.setJoinMessage(jm.build());
+				ch.writeAndFlush(request.build());
+				rtn = true;
+			}
 		} catch (Exception e) {
 			// normal to get this exception as a node may not be reachable
 			logger.debug("could not send connect to node " + toNodeId);

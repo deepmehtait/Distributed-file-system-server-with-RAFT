@@ -66,17 +66,15 @@ public class ResourceUtil {
 	 * @return
 	 */
 	public static Header buildHeaderFrom(Header reqHeader, PokeStatus status, String statusMsg) {
-		return buildHeader(reqHeader.getIsClusterMsg(),
-				reqHeader.getRoutingId(), status, statusMsg, reqHeader.getOriginator(), reqHeader.getTag());
+		return buildHeader(reqHeader.getRoutingId(), status, statusMsg, reqHeader.getOriginator(), reqHeader.getTag());
 	}
 
-	public static Header buildHeader(boolean clusterMsg, Routing path, PokeStatus status, String msg, int fromNode, String tag) {
+	public static Header buildHeader(Routing path, PokeStatus status, String msg, int fromNode, String tag) {
 		Header.Builder bldr = Header.newBuilder();
 		bldr.setOriginator(fromNode);
 		bldr.setRoutingId(path);
 		bldr.setTag(tag);
 		bldr.setReplyCode(status);
-		bldr.setIsClusterMsg(clusterMsg);
 		if (msg != null)
 			bldr.setReplyMsg(msg);
 

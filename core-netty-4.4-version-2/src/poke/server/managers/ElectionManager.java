@@ -34,6 +34,7 @@ import poke.server.election.ElectionListener;
 import poke.server.election.FloodMaxElection;
 import poke.server.election.RaftElection;
 import poke.server.election.RaftElection.RState;
+import poke.server.managers.ConnectionManager.connectionState;
 
 /**
  * The election manager is used to determine leadership within the network. The
@@ -270,7 +271,7 @@ public class ElectionManager implements ElectionListener {
 		// now send it to the requester
 		logger.info("Election started by node " + conf.getNodeId());
 		try {
-			ConnectionManager.getConnection(mgmt.getHeader().getOriginator(), true).write(mb.build());
+			ConnectionManager.getConnection(mgmt.getHeader().getOriginator(), connectionState.SERVERMGMT).write(mb.build());
 		} catch (Exception ex) {
 			ex.printStackTrace();
 		}

@@ -21,9 +21,14 @@ import java.util.concurrent.atomic.AtomicReference;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import poke.comm.App.ClientMessage;
 import poke.comm.App.Header;
+import poke.comm.App.Payload;
+import poke.comm.App.Request;
+import poke.comm.App.Header.Routing;
 import poke.server.conf.ServerConf;
 import poke.server.conf.ServerConf.ResourceConf;
+import poke.server.managers.ConnectionManager;
 
 /**
  * Resource factory provides how the server manages resource creation. We hide
@@ -74,15 +79,21 @@ public class ResourceFactory {
 	 * @param route
 	 * @return
 	 */
-	public Resource resourceInstance(Header header) {
+	public Resource resourceInstance(Request request) {
 		// is the message for this server?
+		Header header = request.getHeader();
 		if (header.hasToNode()) {
 			if (cfg.getNodeId() == header.getToNode())
-				; // fall through and process normally
+					; // fall through and process normally
 			else {
 				// forward request
 			}
 		}
+		/****
+		 * Irrespective of which nodes picks up the message from the APP Queue 
+		 * that node will upload the image to FTP server and 
+		 * send a message to leader
+		 */
 		System.out.println(header.getRoutingId().getNumber() + " The id is");
 		ResourceConf rc = cfg.findById(header.getRoutingId().getNumber());
 		if (rc == null)

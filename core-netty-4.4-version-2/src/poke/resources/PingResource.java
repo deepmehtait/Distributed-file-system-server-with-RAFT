@@ -24,6 +24,8 @@ import poke.comm.App.Payload;
 import poke.comm.App.Ping;
 import poke.comm.App.PokeStatus;
 import poke.comm.App.Request;
+import poke.server.managers.ConnectionManager;
+import poke.server.managers.ConnectionManager.connectionState;
 import poke.server.resources.Resource;
 import poke.server.resources.ResourceUtil;
 
@@ -38,10 +40,10 @@ public class PingResource implements Resource {
 	 * 
 	 * @see poke.server.resources.Resource#process(eye.Comm.Finger)
 	 */
-	public Request process(Request request, Channel ch) {
+	public void process(Request request, Channel ch) {
 		// TODO add code to process the message/event received
 		logger.info("poke: " + request.getBody().getPing().getTag());
-		
+		int clientId = request.getBody().getClientMessage().getSenderClientId();
 		Request.Builder rb = Request.newBuilder();
 
 		// metadata
@@ -56,7 +58,6 @@ public class PingResource implements Resource {
 		rb.setBody(pb.build());
 
 		Request reply = rb.build();
-
-		return reply;
+		ConnectionManager.sendToClient(reply, clientId);
 	}
 }
