@@ -25,13 +25,14 @@ public class ReportsResource implements Resource {
 		ftpConnection ftp = new ftpConnection();
 		//Download File
 		ftp.connect();
+		System.out.println("Receiver =sahjvdhvsaddsc" + request.getBody().getClientMessage().getReceiverClientId());
 
 		ClientMessage cm = request.getBody().getClientMessage();
-		int receiverClientId = cm.getReceiverClientId();
+		int receiverClientId = 2000;
 		int senderClientId = cm.getSenderClientId();
 		
 		Request r = createClientRequest(request, ftp);
-		
+		System.out.println("Receiver =ghchgc" + receiverClientId);
 		//IF receiver is -1 or is not present then all nodes will broad cast
 		//except for the node which had sent the request
 		if(receiverClientId ==-1 || receiverClientId == 0)
@@ -55,9 +56,10 @@ public class ReportsResource implements Resource {
 		//and send it to him
 		else
 		{
+			System.out.println("In Else of Repports Resource");
 			if(ConnectionManager.checkClient(connectionState.CLIENTAPP,receiverClientId))
 			{
-				
+				System.out.println("send to client");
 				ConnectionManager.sendToClient(r, receiverClientId);
 			}
 		}	

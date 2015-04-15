@@ -31,6 +31,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import poke.comm.App.Header;
+import poke.comm.App.Header.Routing;
 import poke.comm.App.JoinMessage;
 import poke.comm.App.Payload;
 import poke.comm.App.Request;
@@ -38,6 +39,7 @@ import poke.core.Mgmt.Management;
 import poke.core.Mgmt.MgmtHeader;
 import poke.core.Mgmt.Network;
 import poke.core.Mgmt.Network.NetworkAction;
+import poke.server.ServerHandler;
 import poke.server.ServerInitializer;
 
 /**
@@ -72,6 +74,7 @@ public class HeartMonitor {
 	private List<MonitorListener> listeners = new ArrayList<MonitorListener>();
 
 	private MonitorHandler handler;
+	private ServerHandler shandler;
 
 	/**
 	 * Create a heartbeat message processor.
@@ -216,10 +219,10 @@ public class HeartMonitor {
 		try {
 			Channel ch = connect(blnMgmt);
 			if (!ch.isWritable()) {
-				logger.error("Channel to node " + toNodeId + " not writable!");
+				//logger.error("Channel to node " + toNodeId + " not writable!");
 			}
 
-			logger.info("HeartMonitor sending join message to " + toNodeId);
+			logger.info("HeartMonitor sending join message to " + toNodeId) ;
 			if(blnMgmt)
 			{
 				Network.Builder n = Network.newBuilder();
@@ -242,14 +245,14 @@ public class HeartMonitor {
 				Management.Builder m = Management.newBuilder();
 				m.setHeader(mhb.build());
 				m.setGraph(n.build());
-	
 				ch.writeAndFlush(m.build());
 				rtn = true;
 			}
 			else
 			{
+				logger.info("HeartMonitor sending APP message to " + toNodeId) ;
 				Header.Builder header = Header.newBuilder();
-				// header.setRoutingId(Routing.REGISTER);
+				header.setRoutingId(Routing.REGISTER);
 				header.setOriginator(iamNode);
 				// payload for request
 				Payload.Builder body = Payload.newBuilder();
@@ -257,14 +260,13 @@ public class HeartMonitor {
 				Request.Builder request = Request.newBuilder();
 				request.setHeader(header);
 				request.setBody(body);
-
-				JoinMessage.Builder jm = JoinMessage.newBuilder();
 				
+				JoinMessage.Builder jm = JoinMessage.newBuilder();
 				// 'N' allows us to track the connection restarts and to provide
 				// uniqueness
 				jm.setFromNodeId(iamNode);
 				jm.setToNodeId(toNodeId);
-
+				
 				request.setJoinMessage(jm.build());
 				ch.writeAndFlush(request.build());
 				rtn = true;

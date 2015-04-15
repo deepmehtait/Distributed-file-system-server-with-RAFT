@@ -41,9 +41,9 @@ public class RaftElection implements Election {
 	private RaftMessage votedFor;
 
 	public RaftElection() {
-		this.timeElection = new Random().nextInt(10000);
-		if (this.timeElection < 5000)
-			this.timeElection += 3000;
+		this.timeElection = new Random().nextInt(20000);
+		if (this.timeElection < 16000)
+			this.timeElection += 7000;
 		logger.info("Time Electio  " + timeElection);
 		currentState = RState.Follower;
 	}
@@ -133,11 +133,11 @@ public class RaftElection implements Election {
 			}
 
 		} else if (rm.getRaftAction().getNumber() == RaftAction.LEADER_VALUE) {
-			if (rm.getTerm() > this.term) {
+			if (rm.getTerm() >= this.term) {
 				this.leaderId = mgmt.getHeader().getOriginator();
 				this.term = rm.getTerm();
 				this.lastKnownBeat = System.currentTimeMillis();
-				notify(true, mgmt.getHeader().getOriginator());
+				notify1(true, mgmt.getHeader().getOriginator());
 				logger.info("Node " + mgmt.getHeader().getOriginator()
 						+ " is the leader ");
 			}
@@ -162,18 +162,20 @@ public class RaftElection implements Election {
 						+ " RaftAppendAction="
 						+ rm.getRaftAppendAction().getNumber());
 				if (rm.getRaftAppendAction().getNumber() == RaftAppendAction.APPENDHEARTBEAT_VALUE) {
-					// Return Sucess to Leader if its normal Heartbeat
-					// message
-
+				
 					logger.info("*Follower stateReceived AppendAction HB RPC from leader "
 							+ mgmt.getHeader().getOriginator()
 							+ "\n RaftAction="
 							+ rm.getRaftAction().getNumber()
 							+ " RaftAppendAction="
 							+ rm.getRaftAppendAction().getNumber());
-					//sendAppendResponse(mgmt);
+							//sendAppendResponse(mgmt);
 
-				} else if (rm.getRaftAppendAction().getNumber() == RaftAppendAction.APPENDLOG_VALUE) {
+				} 
+				
+				
+				
+/*				else if (rm.getRaftAppendAction().getNumber() == RaftAppendAction.APPENDLOG_VALUE) {
 					// Return Sucess to Leader if Log is done
 					// message
 
@@ -197,9 +199,12 @@ public class RaftElection implements Election {
 							+ rm.getRaftAppendAction().getNumber());
 				//	sendAppendResponseValue(mgmt);
 
-				}
+				}*/
 				// TODO append work
-			} else if (currentState == RState.Leader) {
+			} 
+			
+			
+			else if (currentState == RState.Leader) {
 				// should not happen
 			}
 		} else if (rm.getRaftAction().getNumber() == RaftAction.APPENDRESPONSE_VALUE) {
@@ -210,11 +215,12 @@ public class RaftElection implements Election {
 				this.leaderId = mgmt.getHeader().getOriginator();
 				this.term = rm.getTerm();
 				this.lastKnownBeat = System.currentTimeMillis();
-				notify(true, mgmt.getHeader().getOriginator());
+				notify1(true, mgmt.getHeader().getOriginator());
 				logger.info("Node " + mgmt.getHeader().getOriginator()
 						+ " is the leader ");
 			}
 		}
+		
 		return rtn;
 	}
 	// Response of Normal HB to Leader
@@ -317,6 +323,7 @@ public class RaftElection implements Election {
 			currentState = RState.Leader;
 			leaderId = this.nodeId;
 			System.out.println(" Leader elected " + this.nodeId);
+			notify1(true, this.nodeId);
 			ConnectionManager.broadcastAndFlush(sendLeaderMesssage());
 		}
 	}
@@ -383,7 +390,7 @@ public class RaftElection implements Election {
 		return current != null;
 	}
 
-	private void notify(boolean success, Integer leader) {
+	private void notify1(boolean success, Integer leader) {
 		logger.info("In NOtify Method ");
 		if (listener != null) {
 			listener.concludeWith(success, leader);
@@ -482,7 +489,7 @@ public class RaftElection implements Election {
 	int i = 0;
 
 	public Management sendAppendNotice() {
-		i++;
+		/*i++;
 		logger.info("" + i);
 		if (i % 5 == 0) {
 			logger.info("Leader Node " + this.nodeId
@@ -519,7 +526,8 @@ public class RaftElection implements Election {
 			mb.setRaftmessage(rm.build());
 			return mb.build();
 		} else {
-			logger.info("Leader Node " + this.nodeId
+*/
+		logger.info("Leader Node " + this.nodeId
 					+ " sending appendAction HB RPC's");
 			RaftMessage.Builder rm = RaftMessage.newBuilder();
 			MgmtHeader.Builder mhb = MgmtHeader.newBuilder();
@@ -535,7 +543,7 @@ public class RaftElection implements Election {
 			mb.setHeader(mhb.build());
 			mb.setRaftmessage(rm.build());
 			return mb.build();
-		}
+		//}
 	}
 
 	public RaftMonitor getMonitor() {
@@ -551,7 +559,7 @@ public class RaftElection implements Election {
 		public void run() {
 			while (true) {
 				try {
-					Thread.sleep(1000);
+					Thread.sleep(11000);
 				} catch (InterruptedException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
@@ -587,6 +595,7 @@ public class RaftElection implements Election {
 				+ HeartbeatManager.getInstance().outgoingHB.size());
 		//If it is a single node then declare itself the winner else send REquest VOte message
 		if (HeartbeatManager.getInstance().outgoingHB.size() == 0) {
+			notify1(true, this.nodeId);
 			count = 0;
 			currentState = RState.Leader;
 			leaderId = this.nodeId;

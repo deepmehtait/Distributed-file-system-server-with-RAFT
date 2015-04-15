@@ -66,10 +66,10 @@ public class HeartbeatPusher extends Thread {
 		// health-status from usage.
 		HeartMonitor hm = new HeartMonitor(iamNode, node.getHost(), node.getMgmtport(), node.getNodeId(),true);
 		monitors.add(hm);
-
 		
 		HeartMonitor hm1 = new HeartMonitor(iamNode, node.getHost(), node.getPort(), node.getNodeId(),false);
 		monitors.add(hm1);
+		
 		// artifact of the client-side listener - processing is done in the
 		// inbound mgmt worker
 		HeartbeatStubListener notused = new HeartbeatStubListener(node);
@@ -86,20 +86,23 @@ public class HeartbeatPusher extends Thread {
 
 		while (forever) {
 			try {
-				Thread.sleep(sConnectRate);
-
+				Thread.sleep(2000);
+				
 				// try to establish connections to our nearest nodes
-				for (HeartMonitor hb : monitors) {
-					if (!hb.isConnected()) {
-						try {
-							if (logger.isDebugEnabled())
-								logger.debug("attempting to connect to node: " + hb.getNodeInfo());
-							hb.startHeartbeat();
-						} catch (Exception ie) {
-							// do nothing
+				
+					for (HeartMonitor hb : monitors) {
+						if (!hb.isConnected()) {
+							try {
+								if (logger.isDebugEnabled())
+									logger.debug("attempting to connect to node: " + hb.getNodeInfo());
+								hb.startHeartbeat();
+							} catch (Exception ie) {
+								// do nothing
+							}
 						}
 					}
-				}
+				
+			
 			} catch (InterruptedException e) {
 				logger.error("Unexpected HB connector failure", e);
 				break;

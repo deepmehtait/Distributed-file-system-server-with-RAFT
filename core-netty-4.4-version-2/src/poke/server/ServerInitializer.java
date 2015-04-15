@@ -12,8 +12,7 @@ import io.netty.handler.codec.protobuf.ProtobufEncoder;
 
 public class ServerInitializer extends ChannelInitializer<SocketChannel> {
 	boolean compress = false;
-
-	public ServerInitializer(boolean enableCompression) {
+	public ServerInitializer( boolean enableCompression) {
 		compress = enableCompression;
 	}
 

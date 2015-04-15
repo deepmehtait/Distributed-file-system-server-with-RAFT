@@ -79,6 +79,7 @@ public class ForwardResource implements Resource {
 	/***The message is received here if THIS  node is the leader and 	it will broadcast
 	 *  the message to all nodes through app channel and ask each node to send it to their client
 	 */
+		System.out.println("Forward ma receiver " + request.getBody().getClientMessage().getReceiverClientId());
 		ReportsResource rs = new ReportsResource();
 		rs.process(request, ch);
 		

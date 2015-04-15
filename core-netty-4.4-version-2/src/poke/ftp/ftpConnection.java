@@ -1,10 +1,13 @@
 package poke.ftp;
+import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 
+import org.apache.commons.net.ftp.FTP;
 import org.apache.commons.net.ftp.FTPClient;
 import org.apache.commons.net.ftp.FTPCommand;
 import org.apache.commons.net.ftp.FTPReply;
+import org.jibble.simpleftp.SimpleFTP;
 
 public class ftpConnection {
 	String server = "192.168.0.9";
@@ -12,6 +15,7 @@ public class ftpConnection {
 	String user = "ftp";
     String pass = "ftp";
     FTPClient ftpClient;
+    SimpleFTP ftp;
     public ftpConnection() {
         ftpClient = new FTPClient();
 	}
@@ -33,6 +37,8 @@ public class ftpConnection {
 	        } else {
 	            System.out.println("LOGGED IN SERVER");
 	        }
+	         ftp = new SimpleFTP();
+		    ftp.connect(server, port, user, pass);
 	    } 
 	    catch (IOException ex) {
 	        System.out.println("Oops! Something wrong happened");
@@ -51,12 +57,28 @@ public class ftpConnection {
     
     public void uploadFile(InputStream inputStream){
     	try{	
+    		
+    		 // Set binary mode.
+		    ftp.bin();
+		    
+		    // Change to a new working directory on the FTP server.
+		    ftp.cwd("images");
+		    System.out.println("changed dir");
+		    ftp.stor(inputStream, "test.jpg");
+		    ftp.disconnect();
+    	}
+    	catch(IOException e){
+    		e.printStackTrace();
+    	}
+    		 
+    		
+    		
 			/*ftpClient.setFileType(FTP.BINARY_FILE_TYPE, FTP.BINARY_FILE_TYPE);
-       	    ftpClient.setFileTransferMode(FTP.BINARY_FILE_TYPE);
-			*/
+       	    //ftpClient.setFileTransferMode(FTP.BINARY_FILE_TYPE);
+			
     		ftpClient.enterLocalPassiveMode();
 			//ftpClient.setBufferSize(1024);
-	        String firstRemoteFile = "images/hello";
+	        String firstRemoteFile = "images/mobile.jpg";
 	        System.out.println("Start uploading first file");
 	        boolean done = ftpClient.storeFile(firstRemoteFile, inputStream);
 	        System.out.println("Upload reply code " + ftpClient.getReplyString());
@@ -86,7 +108,7 @@ public class ftpConnection {
             } catch (IOException e) {
                 e.printStackTrace();
             }
-        }
+        }*/
     }
     
     public InputStream retrieveImage()
@@ -94,12 +116,13 @@ public class ftpConnection {
     	InputStream inputStream = null;
 		try{
 			  System.out.println("In Retriev Image");
-/*	    	  ftpClient.setFileType(FTP.BINARY_FILE_TYPE, FTP.BINARY_FILE_TYPE);
-	    	  ftpClient.setFileTransferMode(FTP.BINARY_FILE_TYPE);
+	    	  ftpClient.setFileType(FTP.BINARY_FILE_TYPE);
+/*	    	  ftpClient.setFileTransferMode(FTP.BINARY_FILE_TYPE);
 	    	  ftpClient.setBufferSize(1024);
 */			  ftpClient.enterLocalPassiveMode();
 			  System.out.println("Client set");
-			  String remoteFile2 = "/images/hello";
+			    ftpClient.cwd("images");
+			  String remoteFile2 = "test.jpg";
 			  inputStream = ftpClient.retrieveFileStream(remoteFile2);
 			  System.out.println("Input Stream " + inputStream);
 		      boolean success = ftpClient.completePendingCommand();

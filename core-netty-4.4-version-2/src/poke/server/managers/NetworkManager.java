@@ -73,7 +73,8 @@ public class NetworkManager {
 		if (req == null || channel == null)
 			return;
 
-		logger.info("Network: node '" + req.getFromNodeId() + "' sent a " + req.getAction());
+		logger.info("Network: node '" + req.getFromNodeId() + "' sent a " + req.getAction() );
+		logger.info("SYstem Time Start " + System.currentTimeMillis());
 
 		/**
 		 * Outgoing: when a node joins to another node, the connection is
@@ -88,6 +89,7 @@ public class NetworkManager {
 					// this node will send messages to the requesting client
 					InetSocketAddress isa = (InetSocketAddress) socka;
 					logger.info("NODEJOIN: " + isa.getHostName() + ", " + isa.getPort());
+					logger.info("SYstem Time END " + System.currentTimeMillis());
 					HeartbeatManager.getInstance().addOutgoingChannel(req.getFromNodeId(), isa.getHostName(),
 							isa.getPort(), channel, socka);
 				}

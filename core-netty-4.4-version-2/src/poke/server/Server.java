@@ -292,7 +292,6 @@ public class Server {
 			HeartbeatPusher.getInstance().connectToThisNode(conf.getNodeId(), node);
 		}
 		//heartbeatMgr.start();
-
 		// manage heartbeatMgr connections
 		HeartbeatPusher conn = HeartbeatPusher.getInstance();
 		conn.start();
@@ -348,35 +347,7 @@ public class Server {
 		if (!cfg.exists()) {
 			Server.logger.error("configuration file does not exist: " + cfg);
 			System.exit(2);
-		}
-		
-/*		try {
-			Class.forName("com.mysql.jdbc.Driver");
-		} catch (ClassNotFoundException e) {
-			System.out.println("Cant find the MySQl Driver");
-			e.printStackTrace();
-			return;
-		}
-	 
-		System.out.println("MySQL JDBC Driver Registered!");
-		Connection connection = null; //create connection
-	 
-		try {
-			connection = DriverManager
-			.getConnection("jdbc:mysql://localhost:3306/DistributedSystem","root", "qwerty");
-	 
-		} catch (SQLException e) {
-			System.out.println("Connection Failed! Check output console");
-			e.printStackTrace();
-			return;
-		}
-	 
-		if (connection != null) {
-			System.out.println("Successfully logged in. Thanks for using MySQL!");
-		} else {
-			System.out.println("Failed to make connection!");
-		}*/
-	  
+		}	  
 		
 		Server svr = new Server(cfg);
 		svr.run();

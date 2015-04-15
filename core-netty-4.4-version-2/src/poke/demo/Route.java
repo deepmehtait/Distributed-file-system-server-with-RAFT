@@ -15,6 +15,9 @@
  */
 package poke.demo;
 
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
+
 import poke.client.ClientCommand;
 import poke.client.ClientPrintListener;
 import poke.client.comm.CommListener;
@@ -35,25 +38,41 @@ public class Route {
 	}
 
 	public void run() {
-		ClientCommand cc = new ClientCommand("localhost", 5570);
+		ClientCommand cc = new ClientCommand("192.168.0.5", 5570);
 		CommListener listener = new ClientPrintListener("Route demo");
 		cc.addListener(listener);
 		//Send Poke message to Connect to Server
 		cc.sendRegisterRequest();
 
 		//After Poke message send a file to server
-		cc.sendJobsRequest("/home/ankit/Downloads/mobile.jpg");
+		cc.sendJobsRequest("/home/ankit/Downloads/test.jpg");
 		
 	}
 
 	public static void main(String[] args) {
 		try {
-			Route jab = new Route("route");
-			jab.run();
-
+				ClientCommand cc = new ClientCommand("192.168.0.5", 5570);
+				CommListener listener = new ClientPrintListener("Route demo");
+				cc.addListener(listener);
+				cc.sendRegisterRequest();
+				
+				int option = 0;
+				while (true) {
+					System.out.println("1. Poke");
+					System.out.println("2. Send Image");
+					BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+					option = Integer.parseInt(br.readLine());
+					switch (option) {
+					case 2:
+						//After Poke message send a file to server
+						cc.sendJobsRequest("/home/ankit/Downloads/test.jpg");
+						break;
+					}
+				}
+//				jab.run();
+			
 			// we are running asynchronously
-			System.out.println("\nExiting in 5 seconds");
-			Thread.sleep(50000);
+			
 			//System.exit(0);
 
 		} catch (Exception e) {

@@ -151,9 +151,9 @@ public class RaftManager implements ElectionListener {
 	 * @param mgmt
 	 */
 	public boolean assessCurrentState() {
-		// logger.info("RaftManager.assessCurrentState() checking elected leader status");
-
-		if (firstTime > 0 && ConnectionManager.getNumMgmtConnections() > 0) {
+		//logger.info("RaftManager.assessCurrentState() checking elected leader status");
+		
+		if (firstTime > 0) {
 			// give it two tries to get the leader
 			this.firstTime--;
 			logger.info("In assessCurrentState() if condition");

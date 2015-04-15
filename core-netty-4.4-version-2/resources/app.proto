@@ -209,27 +209,7 @@ message Header {
 
 }
 
-message ClientMessage{
-  optional string msgId = 1;
-  optional string senderUserName = 2;
-  optional string receiverUserName = 3;
-  optional int32  senderClientId = 8;
-  optional int32  receiverClientId = 9;
-  optional string msgText = 4;
-  optional string msgImageName = 5;
-  optional bytes msgImageBits = 6;
-  optional MessageType messageType = 7 [default = SUCCESS];
-  optional bool isClient = 10 [default = false];
-  optional bool broadcastInternal = 11 [default = false];
 
-  enum MessageType
-  {
-    REQUEST = 0;
-    SUCCESS = 1;
-
-    }
-
-}
 
 message ClusterMessage{
   optional ClientMessage client_message = 1;
@@ -253,6 +233,28 @@ message Payload {
 
    	optional ClientMessage client_message = 5;
     optional ClusterMessage cluster_message = 4;
+
+}
+
+message ClientMessage{
+  optional string msgId = 1;
+  optional string senderUserName = 2;
+  optional string receiverUserName = 3;
+  optional int32  senderClientId = 8;
+  optional int32  receiverClientId = 12;
+  optional string msgText = 4;
+  optional string msgImageName = 5;
+  optional bytes msgImageBits = 6;
+  optional MessageType messageType = 7 [default = SUCCESS];
+  optional bool isClient = 10 [default = false];
+  optional bool broadcastInternal = 11 [default = false];
+
+  enum MessageType
+  {
+    REQUEST = 0;
+    SUCCESS = 1;
+
+    }
 
 }
 

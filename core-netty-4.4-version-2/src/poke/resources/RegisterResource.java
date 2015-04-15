@@ -45,7 +45,6 @@ public class RegisterResource implements Resource {
 		//NOt setting Poke Status, Reply Message, ROuting Path, Name Value set
 		//TO Node is the node to which this client will get connected
 		h.setToNode(head.getOriginator());
-
 		ClientMessage.Builder clBuilder  = ClientMessage.newBuilder();
 		clBuilder.setMessageType(poke.comm.App.ClientMessage.MessageType.SUCCESS);
 		

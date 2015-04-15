@@ -14291,1681 +14291,6 @@ public final class App {
     // @@protoc_insertion_point(class_scope:Header)
   }
 
-  public interface ClientMessageOrBuilder
-      extends com.google.protobuf.MessageOrBuilder {
-
-    // optional string msgId = 1;
-    /**
-     * <code>optional string msgId = 1;</code>
-     */
-    boolean hasMsgId();
-    /**
-     * <code>optional string msgId = 1;</code>
-     */
-    java.lang.String getMsgId();
-    /**
-     * <code>optional string msgId = 1;</code>
-     */
-    com.google.protobuf.ByteString
-        getMsgIdBytes();
-
-    // optional string senderUserName = 2;
-    /**
-     * <code>optional string senderUserName = 2;</code>
-     */
-    boolean hasSenderUserName();
-    /**
-     * <code>optional string senderUserName = 2;</code>
-     */
-    java.lang.String getSenderUserName();
-    /**
-     * <code>optional string senderUserName = 2;</code>
-     */
-    com.google.protobuf.ByteString
-        getSenderUserNameBytes();
-
-    // optional string receiverUserName = 3;
-    /**
-     * <code>optional string receiverUserName = 3;</code>
-     */
-    boolean hasReceiverUserName();
-    /**
-     * <code>optional string receiverUserName = 3;</code>
-     */
-    java.lang.String getReceiverUserName();
-    /**
-     * <code>optional string receiverUserName = 3;</code>
-     */
-    com.google.protobuf.ByteString
-        getReceiverUserNameBytes();
-
-    // optional int32 senderClientId = 8;
-    /**
-     * <code>optional int32 senderClientId = 8;</code>
-     */
-    boolean hasSenderClientId();
-    /**
-     * <code>optional int32 senderClientId = 8;</code>
-     */
-    int getSenderClientId();
-
-    // optional int32 receiverClientId = 9;
-    /**
-     * <code>optional int32 receiverClientId = 9;</code>
-     */
-    boolean hasReceiverClientId();
-    /**
-     * <code>optional int32 receiverClientId = 9;</code>
-     */
-    int getReceiverClientId();
-
-    // optional string msgText = 4;
-    /**
-     * <code>optional string msgText = 4;</code>
-     */
-    boolean hasMsgText();
-    /**
-     * <code>optional string msgText = 4;</code>
-     */
-    java.lang.String getMsgText();
-    /**
-     * <code>optional string msgText = 4;</code>
-     */
-    com.google.protobuf.ByteString
-        getMsgTextBytes();
-
-    // optional string msgImageName = 5;
-    /**
-     * <code>optional string msgImageName = 5;</code>
-     */
-    boolean hasMsgImageName();
-    /**
-     * <code>optional string msgImageName = 5;</code>
-     */
-    java.lang.String getMsgImageName();
-    /**
-     * <code>optional string msgImageName = 5;</code>
-     */
-    com.google.protobuf.ByteString
-        getMsgImageNameBytes();
-
-    // optional bytes msgImageBits = 6;
-    /**
-     * <code>optional bytes msgImageBits = 6;</code>
-     */
-    boolean hasMsgImageBits();
-    /**
-     * <code>optional bytes msgImageBits = 6;</code>
-     */
-    com.google.protobuf.ByteString getMsgImageBits();
-
-    // optional .ClientMessage.MessageType messageType = 7 [default = SUCCESS];
-    /**
-     * <code>optional .ClientMessage.MessageType messageType = 7 [default = SUCCESS];</code>
-     */
-    boolean hasMessageType();
-    /**
-     * <code>optional .ClientMessage.MessageType messageType = 7 [default = SUCCESS];</code>
-     */
-    poke.comm.App.ClientMessage.MessageType getMessageType();
-
-    // optional bool isClient = 10 [default = false];
-    /**
-     * <code>optional bool isClient = 10 [default = false];</code>
-     */
-    boolean hasIsClient();
-    /**
-     * <code>optional bool isClient = 10 [default = false];</code>
-     */
-    boolean getIsClient();
-
-    // optional bool broadcastInternal = 11 [default = false];
-    /**
-     * <code>optional bool broadcastInternal = 11 [default = false];</code>
-     */
-    boolean hasBroadcastInternal();
-    /**
-     * <code>optional bool broadcastInternal = 11 [default = false];</code>
-     */
-    boolean getBroadcastInternal();
-  }
-  /**
-   * Protobuf type {@code ClientMessage}
-   */
-  public static final class ClientMessage extends
-      com.google.protobuf.GeneratedMessage
-      implements ClientMessageOrBuilder {
-    // Use ClientMessage.newBuilder() to construct.
-    private ClientMessage(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
-      super(builder);
-      this.unknownFields = builder.getUnknownFields();
-    }
-    private ClientMessage(boolean noInit) { this.unknownFields = com.google.protobuf.UnknownFieldSet.getDefaultInstance(); }
-
-    private static final ClientMessage defaultInstance;
-    public static ClientMessage getDefaultInstance() {
-      return defaultInstance;
-    }
-
-    public ClientMessage getDefaultInstanceForType() {
-      return defaultInstance;
-    }
-
-    private final com.google.protobuf.UnknownFieldSet unknownFields;
-    @java.lang.Override
-    public final com.google.protobuf.UnknownFieldSet
-        getUnknownFields() {
-      return this.unknownFields;
-    }
-    private ClientMessage(
-        com.google.protobuf.CodedInputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      initFields();
-      int mutable_bitField0_ = 0;
-      com.google.protobuf.UnknownFieldSet.Builder unknownFields =
-          com.google.protobuf.UnknownFieldSet.newBuilder();
-      try {
-        boolean done = false;
-        while (!done) {
-          int tag = input.readTag();
-          switch (tag) {
-            case 0:
-              done = true;
-              break;
-            default: {
-              if (!parseUnknownField(input, unknownFields,
-                                     extensionRegistry, tag)) {
-                done = true;
-              }
-              break;
-            }
-            case 10: {
-              bitField0_ |= 0x00000001;
-              msgId_ = input.readBytes();
-              break;
-            }
-            case 18: {
-              bitField0_ |= 0x00000002;
-              senderUserName_ = input.readBytes();
-              break;
-            }
-            case 26: {
-              bitField0_ |= 0x00000004;
-              receiverUserName_ = input.readBytes();
-              break;
-            }
-            case 34: {
-              bitField0_ |= 0x00000020;
-              msgText_ = input.readBytes();
-              break;
-            }
-            case 42: {
-              bitField0_ |= 0x00000040;
-              msgImageName_ = input.readBytes();
-              break;
-            }
-            case 50: {
-              bitField0_ |= 0x00000080;
-              msgImageBits_ = input.readBytes();
-              break;
-            }
-            case 56: {
-              int rawValue = input.readEnum();
-              poke.comm.App.ClientMessage.MessageType value = poke.comm.App.ClientMessage.MessageType.valueOf(rawValue);
-              if (value == null) {
-                unknownFields.mergeVarintField(7, rawValue);
-              } else {
-                bitField0_ |= 0x00000100;
-                messageType_ = value;
-              }
-              break;
-            }
-            case 64: {
-              bitField0_ |= 0x00000008;
-              senderClientId_ = input.readInt32();
-              break;
-            }
-            case 72: {
-              bitField0_ |= 0x00000010;
-              receiverClientId_ = input.readInt32();
-              break;
-            }
-            case 80: {
-              bitField0_ |= 0x00000200;
-              isClient_ = input.readBool();
-              break;
-            }
-            case 88: {
-              bitField0_ |= 0x00000400;
-              broadcastInternal_ = input.readBool();
-              break;
-            }
-          }
-        }
-      } catch (com.google.protobuf.InvalidProtocolBufferException e) {
-        throw e.setUnfinishedMessage(this);
-      } catch (java.io.IOException e) {
-        throw new com.google.protobuf.InvalidProtocolBufferException(
-            e.getMessage()).setUnfinishedMessage(this);
-      } finally {
-        this.unknownFields = unknownFields.build();
-        makeExtensionsImmutable();
-      }
-    }
-    public static final com.google.protobuf.Descriptors.Descriptor
-        getDescriptor() {
-      return poke.comm.App.internal_static_ClientMessage_descriptor;
-    }
-
-    protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
-        internalGetFieldAccessorTable() {
-      return poke.comm.App.internal_static_ClientMessage_fieldAccessorTable
-          .ensureFieldAccessorsInitialized(
-              poke.comm.App.ClientMessage.class, poke.comm.App.ClientMessage.Builder.class);
-    }
-
-    public static com.google.protobuf.Parser<ClientMessage> PARSER =
-        new com.google.protobuf.AbstractParser<ClientMessage>() {
-      public ClientMessage parsePartialFrom(
-          com.google.protobuf.CodedInputStream input,
-          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-          throws com.google.protobuf.InvalidProtocolBufferException {
-        return new ClientMessage(input, extensionRegistry);
-      }
-    };
-
-    @java.lang.Override
-    public com.google.protobuf.Parser<ClientMessage> getParserForType() {
-      return PARSER;
-    }
-
-    /**
-     * Protobuf enum {@code ClientMessage.MessageType}
-     */
-    public enum MessageType
-        implements com.google.protobuf.ProtocolMessageEnum {
-      /**
-       * <code>REQUEST = 0;</code>
-       */
-      REQUEST(0, 0),
-      /**
-       * <code>SUCCESS = 1;</code>
-       */
-      SUCCESS(1, 1),
-      ;
-
-      /**
-       * <code>REQUEST = 0;</code>
-       */
-      public static final int REQUEST_VALUE = 0;
-      /**
-       * <code>SUCCESS = 1;</code>
-       */
-      public static final int SUCCESS_VALUE = 1;
-
-
-      public final int getNumber() { return value; }
-
-      public static MessageType valueOf(int value) {
-        switch (value) {
-          case 0: return REQUEST;
-          case 1: return SUCCESS;
-          default: return null;
-        }
-      }
-
-      public static com.google.protobuf.Internal.EnumLiteMap<MessageType>
-          internalGetValueMap() {
-        return internalValueMap;
-      }
-      private static com.google.protobuf.Internal.EnumLiteMap<MessageType>
-          internalValueMap =
-            new com.google.protobuf.Internal.EnumLiteMap<MessageType>() {
-              public MessageType findValueByNumber(int number) {
-                return MessageType.valueOf(number);
-              }
-            };
-
-      public final com.google.protobuf.Descriptors.EnumValueDescriptor
-          getValueDescriptor() {
-        return getDescriptor().getValues().get(index);
-      }
-      public final com.google.protobuf.Descriptors.EnumDescriptor
-          getDescriptorForType() {
-        return getDescriptor();
-      }
-      public static final com.google.protobuf.Descriptors.EnumDescriptor
-          getDescriptor() {
-        return poke.comm.App.ClientMessage.getDescriptor().getEnumTypes().get(0);
-      }
-
-      private static final MessageType[] VALUES = values();
-
-      public static MessageType valueOf(
-          com.google.protobuf.Descriptors.EnumValueDescriptor desc) {
-        if (desc.getType() != getDescriptor()) {
-          throw new java.lang.IllegalArgumentException(
-            "EnumValueDescriptor is not for this type.");
-        }
-        return VALUES[desc.getIndex()];
-      }
-
-      private final int index;
-      private final int value;
-
-      private MessageType(int index, int value) {
-        this.index = index;
-        this.value = value;
-      }
-
-      // @@protoc_insertion_point(enum_scope:ClientMessage.MessageType)
-    }
-
-    private int bitField0_;
-    // optional string msgId = 1;
-    public static final int MSGID_FIELD_NUMBER = 1;
-    private java.lang.Object msgId_;
-    /**
-     * <code>optional string msgId = 1;</code>
-     */
-    public boolean hasMsgId() {
-      return ((bitField0_ & 0x00000001) == 0x00000001);
-    }
-    /**
-     * <code>optional string msgId = 1;</code>
-     */
-    public java.lang.String getMsgId() {
-      java.lang.Object ref = msgId_;
-      if (ref instanceof java.lang.String) {
-        return (java.lang.String) ref;
-      } else {
-        com.google.protobuf.ByteString bs = 
-            (com.google.protobuf.ByteString) ref;
-        java.lang.String s = bs.toStringUtf8();
-        if (bs.isValidUtf8()) {
-          msgId_ = s;
-        }
-        return s;
-      }
-    }
-    /**
-     * <code>optional string msgId = 1;</code>
-     */
-    public com.google.protobuf.ByteString
-        getMsgIdBytes() {
-      java.lang.Object ref = msgId_;
-      if (ref instanceof java.lang.String) {
-        com.google.protobuf.ByteString b = 
-            com.google.protobuf.ByteString.copyFromUtf8(
-                (java.lang.String) ref);
-        msgId_ = b;
-        return b;
-      } else {
-        return (com.google.protobuf.ByteString) ref;
-      }
-    }
-
-    // optional string senderUserName = 2;
-    public static final int SENDERUSERNAME_FIELD_NUMBER = 2;
-    private java.lang.Object senderUserName_;
-    /**
-     * <code>optional string senderUserName = 2;</code>
-     */
-    public boolean hasSenderUserName() {
-      return ((bitField0_ & 0x00000002) == 0x00000002);
-    }
-    /**
-     * <code>optional string senderUserName = 2;</code>
-     */
-    public java.lang.String getSenderUserName() {
-      java.lang.Object ref = senderUserName_;
-      if (ref instanceof java.lang.String) {
-        return (java.lang.String) ref;
-      } else {
-        com.google.protobuf.ByteString bs = 
-            (com.google.protobuf.ByteString) ref;
-        java.lang.String s = bs.toStringUtf8();
-        if (bs.isValidUtf8()) {
-          senderUserName_ = s;
-        }
-        return s;
-      }
-    }
-    /**
-     * <code>optional string senderUserName = 2;</code>
-     */
-    public com.google.protobuf.ByteString
-        getSenderUserNameBytes() {
-      java.lang.Object ref = senderUserName_;
-      if (ref instanceof java.lang.String) {
-        com.google.protobuf.ByteString b = 
-            com.google.protobuf.ByteString.copyFromUtf8(
-                (java.lang.String) ref);
-        senderUserName_ = b;
-        return b;
-      } else {
-        return (com.google.protobuf.ByteString) ref;
-      }
-    }
-
-    // optional string receiverUserName = 3;
-    public static final int RECEIVERUSERNAME_FIELD_NUMBER = 3;
-    private java.lang.Object receiverUserName_;
-    /**
-     * <code>optional string receiverUserName = 3;</code>
-     */
-    public boolean hasReceiverUserName() {
-      return ((bitField0_ & 0x00000004) == 0x00000004);
-    }
-    /**
-     * <code>optional string receiverUserName = 3;</code>
-     */
-    public java.lang.String getReceiverUserName() {
-      java.lang.Object ref = receiverUserName_;
-      if (ref instanceof java.lang.String) {
-        return (java.lang.String) ref;
-      } else {
-        com.google.protobuf.ByteString bs = 
-            (com.google.protobuf.ByteString) ref;
-        java.lang.String s = bs.toStringUtf8();
-        if (bs.isValidUtf8()) {
-          receiverUserName_ = s;
-        }
-        return s;
-      }
-    }
-    /**
-     * <code>optional string receiverUserName = 3;</code>
-     */
-    public com.google.protobuf.ByteString
-        getReceiverUserNameBytes() {
-      java.lang.Object ref = receiverUserName_;
-      if (ref instanceof java.lang.String) {
-        com.google.protobuf.ByteString b = 
-            com.google.protobuf.ByteString.copyFromUtf8(
-                (java.lang.String) ref);
-        receiverUserName_ = b;
-        return b;
-      } else {
-        return (com.google.protobuf.ByteString) ref;
-      }
-    }
-
-    // optional int32 senderClientId = 8;
-    public static final int SENDERCLIENTID_FIELD_NUMBER = 8;
-    private int senderClientId_;
-    /**
-     * <code>optional int32 senderClientId = 8;</code>
-     */
-    public boolean hasSenderClientId() {
-      return ((bitField0_ & 0x00000008) == 0x00000008);
-    }
-    /**
-     * <code>optional int32 senderClientId = 8;</code>
-     */
-    public int getSenderClientId() {
-      return senderClientId_;
-    }
-
-    // optional int32 receiverClientId = 9;
-    public static final int RECEIVERCLIENTID_FIELD_NUMBER = 9;
-    private int receiverClientId_;
-    /**
-     * <code>optional int32 receiverClientId = 9;</code>
-     */
-    public boolean hasReceiverClientId() {
-      return ((bitField0_ & 0x00000010) == 0x00000010);
-    }
-    /**
-     * <code>optional int32 receiverClientId = 9;</code>
-     */
-    public int getReceiverClientId() {
-      return receiverClientId_;
-    }
-
-    // optional string msgText = 4;
-    public static final int MSGTEXT_FIELD_NUMBER = 4;
-    private java.lang.Object msgText_;
-    /**
-     * <code>optional string msgText = 4;</code>
-     */
-    public boolean hasMsgText() {
-      return ((bitField0_ & 0x00000020) == 0x00000020);
-    }
-    /**
-     * <code>optional string msgText = 4;</code>
-     */
-    public java.lang.String getMsgText() {
-      java.lang.Object ref = msgText_;
-      if (ref instanceof java.lang.String) {
-        return (java.lang.String) ref;
-      } else {
-        com.google.protobuf.ByteString bs = 
-            (com.google.protobuf.ByteString) ref;
-        java.lang.String s = bs.toStringUtf8();
-        if (bs.isValidUtf8()) {
-          msgText_ = s;
-        }
-        return s;
-      }
-    }
-    /**
-     * <code>optional string msgText = 4;</code>
-     */
-    public com.google.protobuf.ByteString
-        getMsgTextBytes() {
-      java.lang.Object ref = msgText_;
-      if (ref instanceof java.lang.String) {
-        com.google.protobuf.ByteString b = 
-            com.google.protobuf.ByteString.copyFromUtf8(
-                (java.lang.String) ref);
-        msgText_ = b;
-        return b;
-      } else {
-        return (com.google.protobuf.ByteString) ref;
-      }
-    }
-
-    // optional string msgImageName = 5;
-    public static final int MSGIMAGENAME_FIELD_NUMBER = 5;
-    private java.lang.Object msgImageName_;
-    /**
-     * <code>optional string msgImageName = 5;</code>
-     */
-    public boolean hasMsgImageName() {
-      return ((bitField0_ & 0x00000040) == 0x00000040);
-    }
-    /**
-     * <code>optional string msgImageName = 5;</code>
-     */
-    public java.lang.String getMsgImageName() {
-      java.lang.Object ref = msgImageName_;
-      if (ref instanceof java.lang.String) {
-        return (java.lang.String) ref;
-      } else {
-        com.google.protobuf.ByteString bs = 
-            (com.google.protobuf.ByteString) ref;
-        java.lang.String s = bs.toStringUtf8();
-        if (bs.isValidUtf8()) {
-          msgImageName_ = s;
-        }
-        return s;
-      }
-    }
-    /**
-     * <code>optional string msgImageName = 5;</code>
-     */
-    public com.google.protobuf.ByteString
-        getMsgImageNameBytes() {
-      java.lang.Object ref = msgImageName_;
-      if (ref instanceof java.lang.String) {
-        com.google.protobuf.ByteString b = 
-            com.google.protobuf.ByteString.copyFromUtf8(
-                (java.lang.String) ref);
-        msgImageName_ = b;
-        return b;
-      } else {
-        return (com.google.protobuf.ByteString) ref;
-      }
-    }
-
-    // optional bytes msgImageBits = 6;
-    public static final int MSGIMAGEBITS_FIELD_NUMBER = 6;
-    private com.google.protobuf.ByteString msgImageBits_;
-    /**
-     * <code>optional bytes msgImageBits = 6;</code>
-     */
-    public boolean hasMsgImageBits() {
-      return ((bitField0_ & 0x00000080) == 0x00000080);
-    }
-    /**
-     * <code>optional bytes msgImageBits = 6;</code>
-     */
-    public com.google.protobuf.ByteString getMsgImageBits() {
-      return msgImageBits_;
-    }
-
-    // optional .ClientMessage.MessageType messageType = 7 [default = SUCCESS];
-    public static final int MESSAGETYPE_FIELD_NUMBER = 7;
-    private poke.comm.App.ClientMessage.MessageType messageType_;
-    /**
-     * <code>optional .ClientMessage.MessageType messageType = 7 [default = SUCCESS];</code>
-     */
-    public boolean hasMessageType() {
-      return ((bitField0_ & 0x00000100) == 0x00000100);
-    }
-    /**
-     * <code>optional .ClientMessage.MessageType messageType = 7 [default = SUCCESS];</code>
-     */
-    public poke.comm.App.ClientMessage.MessageType getMessageType() {
-      return messageType_;
-    }
-
-    // optional bool isClient = 10 [default = false];
-    public static final int ISCLIENT_FIELD_NUMBER = 10;
-    private boolean isClient_;
-    /**
-     * <code>optional bool isClient = 10 [default = false];</code>
-     */
-    public boolean hasIsClient() {
-      return ((bitField0_ & 0x00000200) == 0x00000200);
-    }
-    /**
-     * <code>optional bool isClient = 10 [default = false];</code>
-     */
-    public boolean getIsClient() {
-      return isClient_;
-    }
-
-    // optional bool broadcastInternal = 11 [default = false];
-    public static final int BROADCASTINTERNAL_FIELD_NUMBER = 11;
-    private boolean broadcastInternal_;
-    /**
-     * <code>optional bool broadcastInternal = 11 [default = false];</code>
-     */
-    public boolean hasBroadcastInternal() {
-      return ((bitField0_ & 0x00000400) == 0x00000400);
-    }
-    /**
-     * <code>optional bool broadcastInternal = 11 [default = false];</code>
-     */
-    public boolean getBroadcastInternal() {
-      return broadcastInternal_;
-    }
-
-    private void initFields() {
-      msgId_ = "";
-      senderUserName_ = "";
-      receiverUserName_ = "";
-      senderClientId_ = 0;
-      receiverClientId_ = 0;
-      msgText_ = "";
-      msgImageName_ = "";
-      msgImageBits_ = com.google.protobuf.ByteString.EMPTY;
-      messageType_ = poke.comm.App.ClientMessage.MessageType.SUCCESS;
-      isClient_ = false;
-      broadcastInternal_ = false;
-    }
-    private byte memoizedIsInitialized = -1;
-    public final boolean isInitialized() {
-      byte isInitialized = memoizedIsInitialized;
-      if (isInitialized != -1) return isInitialized == 1;
-
-      memoizedIsInitialized = 1;
-      return true;
-    }
-
-    public void writeTo(com.google.protobuf.CodedOutputStream output)
-                        throws java.io.IOException {
-      getSerializedSize();
-      if (((bitField0_ & 0x00000001) == 0x00000001)) {
-        output.writeBytes(1, getMsgIdBytes());
-      }
-      if (((bitField0_ & 0x00000002) == 0x00000002)) {
-        output.writeBytes(2, getSenderUserNameBytes());
-      }
-      if (((bitField0_ & 0x00000004) == 0x00000004)) {
-        output.writeBytes(3, getReceiverUserNameBytes());
-      }
-      if (((bitField0_ & 0x00000020) == 0x00000020)) {
-        output.writeBytes(4, getMsgTextBytes());
-      }
-      if (((bitField0_ & 0x00000040) == 0x00000040)) {
-        output.writeBytes(5, getMsgImageNameBytes());
-      }
-      if (((bitField0_ & 0x00000080) == 0x00000080)) {
-        output.writeBytes(6, msgImageBits_);
-      }
-      if (((bitField0_ & 0x00000100) == 0x00000100)) {
-        output.writeEnum(7, messageType_.getNumber());
-      }
-      if (((bitField0_ & 0x00000008) == 0x00000008)) {
-        output.writeInt32(8, senderClientId_);
-      }
-      if (((bitField0_ & 0x00000010) == 0x00000010)) {
-        output.writeInt32(9, receiverClientId_);
-      }
-      if (((bitField0_ & 0x00000200) == 0x00000200)) {
-        output.writeBool(10, isClient_);
-      }
-      if (((bitField0_ & 0x00000400) == 0x00000400)) {
-        output.writeBool(11, broadcastInternal_);
-      }
-      getUnknownFields().writeTo(output);
-    }
-
-    private int memoizedSerializedSize = -1;
-    public int getSerializedSize() {
-      int size = memoizedSerializedSize;
-      if (size != -1) return size;
-
-      size = 0;
-      if (((bitField0_ & 0x00000001) == 0x00000001)) {
-        size += com.google.protobuf.CodedOutputStream
-          .computeBytesSize(1, getMsgIdBytes());
-      }
-      if (((bitField0_ & 0x00000002) == 0x00000002)) {
-        size += com.google.protobuf.CodedOutputStream
-          .computeBytesSize(2, getSenderUserNameBytes());
-      }
-      if (((bitField0_ & 0x00000004) == 0x00000004)) {
-        size += com.google.protobuf.CodedOutputStream
-          .computeBytesSize(3, getReceiverUserNameBytes());
-      }
-      if (((bitField0_ & 0x00000020) == 0x00000020)) {
-        size += com.google.protobuf.CodedOutputStream
-          .computeBytesSize(4, getMsgTextBytes());
-      }
-      if (((bitField0_ & 0x00000040) == 0x00000040)) {
-        size += com.google.protobuf.CodedOutputStream
-          .computeBytesSize(5, getMsgImageNameBytes());
-      }
-      if (((bitField0_ & 0x00000080) == 0x00000080)) {
-        size += com.google.protobuf.CodedOutputStream
-          .computeBytesSize(6, msgImageBits_);
-      }
-      if (((bitField0_ & 0x00000100) == 0x00000100)) {
-        size += com.google.protobuf.CodedOutputStream
-          .computeEnumSize(7, messageType_.getNumber());
-      }
-      if (((bitField0_ & 0x00000008) == 0x00000008)) {
-        size += com.google.protobuf.CodedOutputStream
-          .computeInt32Size(8, senderClientId_);
-      }
-      if (((bitField0_ & 0x00000010) == 0x00000010)) {
-        size += com.google.protobuf.CodedOutputStream
-          .computeInt32Size(9, receiverClientId_);
-      }
-      if (((bitField0_ & 0x00000200) == 0x00000200)) {
-        size += com.google.protobuf.CodedOutputStream
-          .computeBoolSize(10, isClient_);
-      }
-      if (((bitField0_ & 0x00000400) == 0x00000400)) {
-        size += com.google.protobuf.CodedOutputStream
-          .computeBoolSize(11, broadcastInternal_);
-      }
-      size += getUnknownFields().getSerializedSize();
-      memoizedSerializedSize = size;
-      return size;
-    }
-
-    private static final long serialVersionUID = 0L;
-    @java.lang.Override
-    protected java.lang.Object writeReplace()
-        throws java.io.ObjectStreamException {
-      return super.writeReplace();
-    }
-
-    public static poke.comm.App.ClientMessage parseFrom(
-        com.google.protobuf.ByteString data)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      return PARSER.parseFrom(data);
-    }
-    public static poke.comm.App.ClientMessage parseFrom(
-        com.google.protobuf.ByteString data,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      return PARSER.parseFrom(data, extensionRegistry);
-    }
-    public static poke.comm.App.ClientMessage parseFrom(byte[] data)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      return PARSER.parseFrom(data);
-    }
-    public static poke.comm.App.ClientMessage parseFrom(
-        byte[] data,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      return PARSER.parseFrom(data, extensionRegistry);
-    }
-    public static poke.comm.App.ClientMessage parseFrom(java.io.InputStream input)
-        throws java.io.IOException {
-      return PARSER.parseFrom(input);
-    }
-    public static poke.comm.App.ClientMessage parseFrom(
-        java.io.InputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws java.io.IOException {
-      return PARSER.parseFrom(input, extensionRegistry);
-    }
-    public static poke.comm.App.ClientMessage parseDelimitedFrom(java.io.InputStream input)
-        throws java.io.IOException {
-      return PARSER.parseDelimitedFrom(input);
-    }
-    public static poke.comm.App.ClientMessage parseDelimitedFrom(
-        java.io.InputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws java.io.IOException {
-      return PARSER.parseDelimitedFrom(input, extensionRegistry);
-    }
-    public static poke.comm.App.ClientMessage parseFrom(
-        com.google.protobuf.CodedInputStream input)
-        throws java.io.IOException {
-      return PARSER.parseFrom(input);
-    }
-    public static poke.comm.App.ClientMessage parseFrom(
-        com.google.protobuf.CodedInputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws java.io.IOException {
-      return PARSER.parseFrom(input, extensionRegistry);
-    }
-
-    public static Builder newBuilder() { return Builder.create(); }
-    public Builder newBuilderForType() { return newBuilder(); }
-    public static Builder newBuilder(poke.comm.App.ClientMessage prototype) {
-      return newBuilder().mergeFrom(prototype);
-    }
-    public Builder toBuilder() { return newBuilder(this); }
-
-    @java.lang.Override
-    protected Builder newBuilderForType(
-        com.google.protobuf.GeneratedMessage.BuilderParent parent) {
-      Builder builder = new Builder(parent);
-      return builder;
-    }
-    /**
-     * Protobuf type {@code ClientMessage}
-     */
-    public static final class Builder extends
-        com.google.protobuf.GeneratedMessage.Builder<Builder>
-       implements poke.comm.App.ClientMessageOrBuilder {
-      public static final com.google.protobuf.Descriptors.Descriptor
-          getDescriptor() {
-        return poke.comm.App.internal_static_ClientMessage_descriptor;
-      }
-
-      protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
-          internalGetFieldAccessorTable() {
-        return poke.comm.App.internal_static_ClientMessage_fieldAccessorTable
-            .ensureFieldAccessorsInitialized(
-                poke.comm.App.ClientMessage.class, poke.comm.App.ClientMessage.Builder.class);
-      }
-
-      // Construct using poke.comm.App.ClientMessage.newBuilder()
-      private Builder() {
-        maybeForceBuilderInitialization();
-      }
-
-      private Builder(
-          com.google.protobuf.GeneratedMessage.BuilderParent parent) {
-        super(parent);
-        maybeForceBuilderInitialization();
-      }
-      private void maybeForceBuilderInitialization() {
-        if (com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders) {
-        }
-      }
-      private static Builder create() {
-        return new Builder();
-      }
-
-      public Builder clear() {
-        super.clear();
-        msgId_ = "";
-        bitField0_ = (bitField0_ & ~0x00000001);
-        senderUserName_ = "";
-        bitField0_ = (bitField0_ & ~0x00000002);
-        receiverUserName_ = "";
-        bitField0_ = (bitField0_ & ~0x00000004);
-        senderClientId_ = 0;
-        bitField0_ = (bitField0_ & ~0x00000008);
-        receiverClientId_ = 0;
-        bitField0_ = (bitField0_ & ~0x00000010);
-        msgText_ = "";
-        bitField0_ = (bitField0_ & ~0x00000020);
-        msgImageName_ = "";
-        bitField0_ = (bitField0_ & ~0x00000040);
-        msgImageBits_ = com.google.protobuf.ByteString.EMPTY;
-        bitField0_ = (bitField0_ & ~0x00000080);
-        messageType_ = poke.comm.App.ClientMessage.MessageType.SUCCESS;
-        bitField0_ = (bitField0_ & ~0x00000100);
-        isClient_ = false;
-        bitField0_ = (bitField0_ & ~0x00000200);
-        broadcastInternal_ = false;
-        bitField0_ = (bitField0_ & ~0x00000400);
-        return this;
-      }
-
-      public Builder clone() {
-        return create().mergeFrom(buildPartial());
-      }
-
-      public com.google.protobuf.Descriptors.Descriptor
-          getDescriptorForType() {
-        return poke.comm.App.internal_static_ClientMessage_descriptor;
-      }
-
-      public poke.comm.App.ClientMessage getDefaultInstanceForType() {
-        return poke.comm.App.ClientMessage.getDefaultInstance();
-      }
-
-      public poke.comm.App.ClientMessage build() {
-        poke.comm.App.ClientMessage result = buildPartial();
-        if (!result.isInitialized()) {
-          throw newUninitializedMessageException(result);
-        }
-        return result;
-      }
-
-      public poke.comm.App.ClientMessage buildPartial() {
-        poke.comm.App.ClientMessage result = new poke.comm.App.ClientMessage(this);
-        int from_bitField0_ = bitField0_;
-        int to_bitField0_ = 0;
-        if (((from_bitField0_ & 0x00000001) == 0x00000001)) {
-          to_bitField0_ |= 0x00000001;
-        }
-        result.msgId_ = msgId_;
-        if (((from_bitField0_ & 0x00000002) == 0x00000002)) {
-          to_bitField0_ |= 0x00000002;
-        }
-        result.senderUserName_ = senderUserName_;
-        if (((from_bitField0_ & 0x00000004) == 0x00000004)) {
-          to_bitField0_ |= 0x00000004;
-        }
-        result.receiverUserName_ = receiverUserName_;
-        if (((from_bitField0_ & 0x00000008) == 0x00000008)) {
-          to_bitField0_ |= 0x00000008;
-        }
-        result.senderClientId_ = senderClientId_;
-        if (((from_bitField0_ & 0x00000010) == 0x00000010)) {
-          to_bitField0_ |= 0x00000010;
-        }
-        result.receiverClientId_ = receiverClientId_;
-        if (((from_bitField0_ & 0x00000020) == 0x00000020)) {
-          to_bitField0_ |= 0x00000020;
-        }
-        result.msgText_ = msgText_;
-        if (((from_bitField0_ & 0x00000040) == 0x00000040)) {
-          to_bitField0_ |= 0x00000040;
-        }
-        result.msgImageName_ = msgImageName_;
-        if (((from_bitField0_ & 0x00000080) == 0x00000080)) {
-          to_bitField0_ |= 0x00000080;
-        }
-        result.msgImageBits_ = msgImageBits_;
-        if (((from_bitField0_ & 0x00000100) == 0x00000100)) {
-          to_bitField0_ |= 0x00000100;
-        }
-        result.messageType_ = messageType_;
-        if (((from_bitField0_ & 0x00000200) == 0x00000200)) {
-          to_bitField0_ |= 0x00000200;
-        }
-        result.isClient_ = isClient_;
-        if (((from_bitField0_ & 0x00000400) == 0x00000400)) {
-          to_bitField0_ |= 0x00000400;
-        }
-        result.broadcastInternal_ = broadcastInternal_;
-        result.bitField0_ = to_bitField0_;
-        onBuilt();
-        return result;
-      }
-
-      public Builder mergeFrom(com.google.protobuf.Message other) {
-        if (other instanceof poke.comm.App.ClientMessage) {
-          return mergeFrom((poke.comm.App.ClientMessage)other);
-        } else {
-          super.mergeFrom(other);
-          return this;
-        }
-      }
-
-      public Builder mergeFrom(poke.comm.App.ClientMessage other) {
-        if (other == poke.comm.App.ClientMessage.getDefaultInstance()) return this;
-        if (other.hasMsgId()) {
-          bitField0_ |= 0x00000001;
-          msgId_ = other.msgId_;
-          onChanged();
-        }
-        if (other.hasSenderUserName()) {
-          bitField0_ |= 0x00000002;
-          senderUserName_ = other.senderUserName_;
-          onChanged();
-        }
-        if (other.hasReceiverUserName()) {
-          bitField0_ |= 0x00000004;
-          receiverUserName_ = other.receiverUserName_;
-          onChanged();
-        }
-        if (other.hasSenderClientId()) {
-          setSenderClientId(other.getSenderClientId());
-        }
-        if (other.hasReceiverClientId()) {
-          setReceiverClientId(other.getReceiverClientId());
-        }
-        if (other.hasMsgText()) {
-          bitField0_ |= 0x00000020;
-          msgText_ = other.msgText_;
-          onChanged();
-        }
-        if (other.hasMsgImageName()) {
-          bitField0_ |= 0x00000040;
-          msgImageName_ = other.msgImageName_;
-          onChanged();
-        }
-        if (other.hasMsgImageBits()) {
-          setMsgImageBits(other.getMsgImageBits());
-        }
-        if (other.hasMessageType()) {
-          setMessageType(other.getMessageType());
-        }
-        if (other.hasIsClient()) {
-          setIsClient(other.getIsClient());
-        }
-        if (other.hasBroadcastInternal()) {
-          setBroadcastInternal(other.getBroadcastInternal());
-        }
-        this.mergeUnknownFields(other.getUnknownFields());
-        return this;
-      }
-
-      public final boolean isInitialized() {
-        return true;
-      }
-
-      public Builder mergeFrom(
-          com.google.protobuf.CodedInputStream input,
-          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-          throws java.io.IOException {
-        poke.comm.App.ClientMessage parsedMessage = null;
-        try {
-          parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
-        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
-          parsedMessage = (poke.comm.App.ClientMessage) e.getUnfinishedMessage();
-          throw e;
-        } finally {
-          if (parsedMessage != null) {
-            mergeFrom(parsedMessage);
-          }
-        }
-        return this;
-      }
-      private int bitField0_;
-
-      // optional string msgId = 1;
-      private java.lang.Object msgId_ = "";
-      /**
-       * <code>optional string msgId = 1;</code>
-       */
-      public boolean hasMsgId() {
-        return ((bitField0_ & 0x00000001) == 0x00000001);
-      }
-      /**
-       * <code>optional string msgId = 1;</code>
-       */
-      public java.lang.String getMsgId() {
-        java.lang.Object ref = msgId_;
-        if (!(ref instanceof java.lang.String)) {
-          java.lang.String s = ((com.google.protobuf.ByteString) ref)
-              .toStringUtf8();
-          msgId_ = s;
-          return s;
-        } else {
-          return (java.lang.String) ref;
-        }
-      }
-      /**
-       * <code>optional string msgId = 1;</code>
-       */
-      public com.google.protobuf.ByteString
-          getMsgIdBytes() {
-        java.lang.Object ref = msgId_;
-        if (ref instanceof String) {
-          com.google.protobuf.ByteString b = 
-              com.google.protobuf.ByteString.copyFromUtf8(
-                  (java.lang.String) ref);
-          msgId_ = b;
-          return b;
-        } else {
-          return (com.google.protobuf.ByteString) ref;
-        }
-      }
-      /**
-       * <code>optional string msgId = 1;</code>
-       */
-      public Builder setMsgId(
-          java.lang.String value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  bitField0_ |= 0x00000001;
-        msgId_ = value;
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>optional string msgId = 1;</code>
-       */
-      public Builder clearMsgId() {
-        bitField0_ = (bitField0_ & ~0x00000001);
-        msgId_ = getDefaultInstance().getMsgId();
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>optional string msgId = 1;</code>
-       */
-      public Builder setMsgIdBytes(
-          com.google.protobuf.ByteString value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  bitField0_ |= 0x00000001;
-        msgId_ = value;
-        onChanged();
-        return this;
-      }
-
-      // optional string senderUserName = 2;
-      private java.lang.Object senderUserName_ = "";
-      /**
-       * <code>optional string senderUserName = 2;</code>
-       */
-      public boolean hasSenderUserName() {
-        return ((bitField0_ & 0x00000002) == 0x00000002);
-      }
-      /**
-       * <code>optional string senderUserName = 2;</code>
-       */
-      public java.lang.String getSenderUserName() {
-        java.lang.Object ref = senderUserName_;
-        if (!(ref instanceof java.lang.String)) {
-          java.lang.String s = ((com.google.protobuf.ByteString) ref)
-              .toStringUtf8();
-          senderUserName_ = s;
-          return s;
-        } else {
-          return (java.lang.String) ref;
-        }
-      }
-      /**
-       * <code>optional string senderUserName = 2;</code>
-       */
-      public com.google.protobuf.ByteString
-          getSenderUserNameBytes() {
-        java.lang.Object ref = senderUserName_;
-        if (ref instanceof String) {
-          com.google.protobuf.ByteString b = 
-              com.google.protobuf.ByteString.copyFromUtf8(
-                  (java.lang.String) ref);
-          senderUserName_ = b;
-          return b;
-        } else {
-          return (com.google.protobuf.ByteString) ref;
-        }
-      }
-      /**
-       * <code>optional string senderUserName = 2;</code>
-       */
-      public Builder setSenderUserName(
-          java.lang.String value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  bitField0_ |= 0x00000002;
-        senderUserName_ = value;
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>optional string senderUserName = 2;</code>
-       */
-      public Builder clearSenderUserName() {
-        bitField0_ = (bitField0_ & ~0x00000002);
-        senderUserName_ = getDefaultInstance().getSenderUserName();
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>optional string senderUserName = 2;</code>
-       */
-      public Builder setSenderUserNameBytes(
-          com.google.protobuf.ByteString value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  bitField0_ |= 0x00000002;
-        senderUserName_ = value;
-        onChanged();
-        return this;
-      }
-
-      // optional string receiverUserName = 3;
-      private java.lang.Object receiverUserName_ = "";
-      /**
-       * <code>optional string receiverUserName = 3;</code>
-       */
-      public boolean hasReceiverUserName() {
-        return ((bitField0_ & 0x00000004) == 0x00000004);
-      }
-      /**
-       * <code>optional string receiverUserName = 3;</code>
-       */
-      public java.lang.String getReceiverUserName() {
-        java.lang.Object ref = receiverUserName_;
-        if (!(ref instanceof java.lang.String)) {
-          java.lang.String s = ((com.google.protobuf.ByteString) ref)
-              .toStringUtf8();
-          receiverUserName_ = s;
-          return s;
-        } else {
-          return (java.lang.String) ref;
-        }
-      }
-      /**
-       * <code>optional string receiverUserName = 3;</code>
-       */
-      public com.google.protobuf.ByteString
-          getReceiverUserNameBytes() {
-        java.lang.Object ref = receiverUserName_;
-        if (ref instanceof String) {
-          com.google.protobuf.ByteString b = 
-              com.google.protobuf.ByteString.copyFromUtf8(
-                  (java.lang.String) ref);
-          receiverUserName_ = b;
-          return b;
-        } else {
-          return (com.google.protobuf.ByteString) ref;
-        }
-      }
-      /**
-       * <code>optional string receiverUserName = 3;</code>
-       */
-      public Builder setReceiverUserName(
-          java.lang.String value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  bitField0_ |= 0x00000004;
-        receiverUserName_ = value;
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>optional string receiverUserName = 3;</code>
-       */
-      public Builder clearReceiverUserName() {
-        bitField0_ = (bitField0_ & ~0x00000004);
-        receiverUserName_ = getDefaultInstance().getReceiverUserName();
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>optional string receiverUserName = 3;</code>
-       */
-      public Builder setReceiverUserNameBytes(
-          com.google.protobuf.ByteString value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  bitField0_ |= 0x00000004;
-        receiverUserName_ = value;
-        onChanged();
-        return this;
-      }
-
-      // optional int32 senderClientId = 8;
-      private int senderClientId_ ;
-      /**
-       * <code>optional int32 senderClientId = 8;</code>
-       */
-      public boolean hasSenderClientId() {
-        return ((bitField0_ & 0x00000008) == 0x00000008);
-      }
-      /**
-       * <code>optional int32 senderClientId = 8;</code>
-       */
-      public int getSenderClientId() {
-        return senderClientId_;
-      }
-      /**
-       * <code>optional int32 senderClientId = 8;</code>
-       */
-      public Builder setSenderClientId(int value) {
-        bitField0_ |= 0x00000008;
-        senderClientId_ = value;
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>optional int32 senderClientId = 8;</code>
-       */
-      public Builder clearSenderClientId() {
-        bitField0_ = (bitField0_ & ~0x00000008);
-        senderClientId_ = 0;
-        onChanged();
-        return this;
-      }
-
-      // optional int32 receiverClientId = 9;
-      private int receiverClientId_ ;
-      /**
-       * <code>optional int32 receiverClientId = 9;</code>
-       */
-      public boolean hasReceiverClientId() {
-        return ((bitField0_ & 0x00000010) == 0x00000010);
-      }
-      /**
-       * <code>optional int32 receiverClientId = 9;</code>
-       */
-      public int getReceiverClientId() {
-        return receiverClientId_;
-      }
-      /**
-       * <code>optional int32 receiverClientId = 9;</code>
-       */
-      public Builder setReceiverClientId(int value) {
-        bitField0_ |= 0x00000010;
-        receiverClientId_ = value;
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>optional int32 receiverClientId = 9;</code>
-       */
-      public Builder clearReceiverClientId() {
-        bitField0_ = (bitField0_ & ~0x00000010);
-        receiverClientId_ = 0;
-        onChanged();
-        return this;
-      }
-
-      // optional string msgText = 4;
-      private java.lang.Object msgText_ = "";
-      /**
-       * <code>optional string msgText = 4;</code>
-       */
-      public boolean hasMsgText() {
-        return ((bitField0_ & 0x00000020) == 0x00000020);
-      }
-      /**
-       * <code>optional string msgText = 4;</code>
-       */
-      public java.lang.String getMsgText() {
-        java.lang.Object ref = msgText_;
-        if (!(ref instanceof java.lang.String)) {
-          java.lang.String s = ((com.google.protobuf.ByteString) ref)
-              .toStringUtf8();
-          msgText_ = s;
-          return s;
-        } else {
-          return (java.lang.String) ref;
-        }
-      }
-      /**
-       * <code>optional string msgText = 4;</code>
-       */
-      public com.google.protobuf.ByteString
-          getMsgTextBytes() {
-        java.lang.Object ref = msgText_;
-        if (ref instanceof String) {
-          com.google.protobuf.ByteString b = 
-              com.google.protobuf.ByteString.copyFromUtf8(
-                  (java.lang.String) ref);
-          msgText_ = b;
-          return b;
-        } else {
-          return (com.google.protobuf.ByteString) ref;
-        }
-      }
-      /**
-       * <code>optional string msgText = 4;</code>
-       */
-      public Builder setMsgText(
-          java.lang.String value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  bitField0_ |= 0x00000020;
-        msgText_ = value;
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>optional string msgText = 4;</code>
-       */
-      public Builder clearMsgText() {
-        bitField0_ = (bitField0_ & ~0x00000020);
-        msgText_ = getDefaultInstance().getMsgText();
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>optional string msgText = 4;</code>
-       */
-      public Builder setMsgTextBytes(
-          com.google.protobuf.ByteString value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  bitField0_ |= 0x00000020;
-        msgText_ = value;
-        onChanged();
-        return this;
-      }
-
-      // optional string msgImageName = 5;
-      private java.lang.Object msgImageName_ = "";
-      /**
-       * <code>optional string msgImageName = 5;</code>
-       */
-      public boolean hasMsgImageName() {
-        return ((bitField0_ & 0x00000040) == 0x00000040);
-      }
-      /**
-       * <code>optional string msgImageName = 5;</code>
-       */
-      public java.lang.String getMsgImageName() {
-        java.lang.Object ref = msgImageName_;
-        if (!(ref instanceof java.lang.String)) {
-          java.lang.String s = ((com.google.protobuf.ByteString) ref)
-              .toStringUtf8();
-          msgImageName_ = s;
-          return s;
-        } else {
-          return (java.lang.String) ref;
-        }
-      }
-      /**
-       * <code>optional string msgImageName = 5;</code>
-       */
-      public com.google.protobuf.ByteString
-          getMsgImageNameBytes() {
-        java.lang.Object ref = msgImageName_;
-        if (ref instanceof String) {
-          com.google.protobuf.ByteString b = 
-              com.google.protobuf.ByteString.copyFromUtf8(
-                  (java.lang.String) ref);
-          msgImageName_ = b;
-          return b;
-        } else {
-          return (com.google.protobuf.ByteString) ref;
-        }
-      }
-      /**
-       * <code>optional string msgImageName = 5;</code>
-       */
-      public Builder setMsgImageName(
-          java.lang.String value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  bitField0_ |= 0x00000040;
-        msgImageName_ = value;
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>optional string msgImageName = 5;</code>
-       */
-      public Builder clearMsgImageName() {
-        bitField0_ = (bitField0_ & ~0x00000040);
-        msgImageName_ = getDefaultInstance().getMsgImageName();
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>optional string msgImageName = 5;</code>
-       */
-      public Builder setMsgImageNameBytes(
-          com.google.protobuf.ByteString value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  bitField0_ |= 0x00000040;
-        msgImageName_ = value;
-        onChanged();
-        return this;
-      }
-
-      // optional bytes msgImageBits = 6;
-      private com.google.protobuf.ByteString msgImageBits_ = com.google.protobuf.ByteString.EMPTY;
-      /**
-       * <code>optional bytes msgImageBits = 6;</code>
-       */
-      public boolean hasMsgImageBits() {
-        return ((bitField0_ & 0x00000080) == 0x00000080);
-      }
-      /**
-       * <code>optional bytes msgImageBits = 6;</code>
-       */
-      public com.google.protobuf.ByteString getMsgImageBits() {
-        return msgImageBits_;
-      }
-      /**
-       * <code>optional bytes msgImageBits = 6;</code>
-       */
-      public Builder setMsgImageBits(com.google.protobuf.ByteString value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  bitField0_ |= 0x00000080;
-        msgImageBits_ = value;
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>optional bytes msgImageBits = 6;</code>
-       */
-      public Builder clearMsgImageBits() {
-        bitField0_ = (bitField0_ & ~0x00000080);
-        msgImageBits_ = getDefaultInstance().getMsgImageBits();
-        onChanged();
-        return this;
-      }
-
-      // optional .ClientMessage.MessageType messageType = 7 [default = SUCCESS];
-      private poke.comm.App.ClientMessage.MessageType messageType_ = poke.comm.App.ClientMessage.MessageType.SUCCESS;
-      /**
-       * <code>optional .ClientMessage.MessageType messageType = 7 [default = SUCCESS];</code>
-       */
-      public boolean hasMessageType() {
-        return ((bitField0_ & 0x00000100) == 0x00000100);
-      }
-      /**
-       * <code>optional .ClientMessage.MessageType messageType = 7 [default = SUCCESS];</code>
-       */
-      public poke.comm.App.ClientMessage.MessageType getMessageType() {
-        return messageType_;
-      }
-      /**
-       * <code>optional .ClientMessage.MessageType messageType = 7 [default = SUCCESS];</code>
-       */
-      public Builder setMessageType(poke.comm.App.ClientMessage.MessageType value) {
-        if (value == null) {
-          throw new NullPointerException();
-        }
-        bitField0_ |= 0x00000100;
-        messageType_ = value;
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>optional .ClientMessage.MessageType messageType = 7 [default = SUCCESS];</code>
-       */
-      public Builder clearMessageType() {
-        bitField0_ = (bitField0_ & ~0x00000100);
-        messageType_ = poke.comm.App.ClientMessage.MessageType.SUCCESS;
-        onChanged();
-        return this;
-      }
-
-      // optional bool isClient = 10 [default = false];
-      private boolean isClient_ ;
-      /**
-       * <code>optional bool isClient = 10 [default = false];</code>
-       */
-      public boolean hasIsClient() {
-        return ((bitField0_ & 0x00000200) == 0x00000200);
-      }
-      /**
-       * <code>optional bool isClient = 10 [default = false];</code>
-       */
-      public boolean getIsClient() {
-        return isClient_;
-      }
-      /**
-       * <code>optional bool isClient = 10 [default = false];</code>
-       */
-      public Builder setIsClient(boolean value) {
-        bitField0_ |= 0x00000200;
-        isClient_ = value;
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>optional bool isClient = 10 [default = false];</code>
-       */
-      public Builder clearIsClient() {
-        bitField0_ = (bitField0_ & ~0x00000200);
-        isClient_ = false;
-        onChanged();
-        return this;
-      }
-
-      // optional bool broadcastInternal = 11 [default = false];
-      private boolean broadcastInternal_ ;
-      /**
-       * <code>optional bool broadcastInternal = 11 [default = false];</code>
-       */
-      public boolean hasBroadcastInternal() {
-        return ((bitField0_ & 0x00000400) == 0x00000400);
-      }
-      /**
-       * <code>optional bool broadcastInternal = 11 [default = false];</code>
-       */
-      public boolean getBroadcastInternal() {
-        return broadcastInternal_;
-      }
-      /**
-       * <code>optional bool broadcastInternal = 11 [default = false];</code>
-       */
-      public Builder setBroadcastInternal(boolean value) {
-        bitField0_ |= 0x00000400;
-        broadcastInternal_ = value;
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>optional bool broadcastInternal = 11 [default = false];</code>
-       */
-      public Builder clearBroadcastInternal() {
-        bitField0_ = (bitField0_ & ~0x00000400);
-        broadcastInternal_ = false;
-        onChanged();
-        return this;
-      }
-
-      // @@protoc_insertion_point(builder_scope:ClientMessage)
-    }
-
-    static {
-      defaultInstance = new ClientMessage(true);
-      defaultInstance.initFields();
-    }
-
-    // @@protoc_insertion_point(class_scope:ClientMessage)
-  }
-
   public interface ClusterMessageOrBuilder
       extends com.google.protobuf.MessageOrBuilder {
 
@@ -18453,6 +16778,1681 @@ public final class App {
     // @@protoc_insertion_point(class_scope:Payload)
   }
 
+  public interface ClientMessageOrBuilder
+      extends com.google.protobuf.MessageOrBuilder {
+
+    // optional string msgId = 1;
+    /**
+     * <code>optional string msgId = 1;</code>
+     */
+    boolean hasMsgId();
+    /**
+     * <code>optional string msgId = 1;</code>
+     */
+    java.lang.String getMsgId();
+    /**
+     * <code>optional string msgId = 1;</code>
+     */
+    com.google.protobuf.ByteString
+        getMsgIdBytes();
+
+    // optional string senderUserName = 2;
+    /**
+     * <code>optional string senderUserName = 2;</code>
+     */
+    boolean hasSenderUserName();
+    /**
+     * <code>optional string senderUserName = 2;</code>
+     */
+    java.lang.String getSenderUserName();
+    /**
+     * <code>optional string senderUserName = 2;</code>
+     */
+    com.google.protobuf.ByteString
+        getSenderUserNameBytes();
+
+    // optional string receiverUserName = 3;
+    /**
+     * <code>optional string receiverUserName = 3;</code>
+     */
+    boolean hasReceiverUserName();
+    /**
+     * <code>optional string receiverUserName = 3;</code>
+     */
+    java.lang.String getReceiverUserName();
+    /**
+     * <code>optional string receiverUserName = 3;</code>
+     */
+    com.google.protobuf.ByteString
+        getReceiverUserNameBytes();
+
+    // optional int32 senderClientId = 8;
+    /**
+     * <code>optional int32 senderClientId = 8;</code>
+     */
+    boolean hasSenderClientId();
+    /**
+     * <code>optional int32 senderClientId = 8;</code>
+     */
+    int getSenderClientId();
+
+    // optional int32 receiverClientId = 12;
+    /**
+     * <code>optional int32 receiverClientId = 12;</code>
+     */
+    boolean hasReceiverClientId();
+    /**
+     * <code>optional int32 receiverClientId = 12;</code>
+     */
+    int getReceiverClientId();
+
+    // optional string msgText = 4;
+    /**
+     * <code>optional string msgText = 4;</code>
+     */
+    boolean hasMsgText();
+    /**
+     * <code>optional string msgText = 4;</code>
+     */
+    java.lang.String getMsgText();
+    /**
+     * <code>optional string msgText = 4;</code>
+     */
+    com.google.protobuf.ByteString
+        getMsgTextBytes();
+
+    // optional string msgImageName = 5;
+    /**
+     * <code>optional string msgImageName = 5;</code>
+     */
+    boolean hasMsgImageName();
+    /**
+     * <code>optional string msgImageName = 5;</code>
+     */
+    java.lang.String getMsgImageName();
+    /**
+     * <code>optional string msgImageName = 5;</code>
+     */
+    com.google.protobuf.ByteString
+        getMsgImageNameBytes();
+
+    // optional bytes msgImageBits = 6;
+    /**
+     * <code>optional bytes msgImageBits = 6;</code>
+     */
+    boolean hasMsgImageBits();
+    /**
+     * <code>optional bytes msgImageBits = 6;</code>
+     */
+    com.google.protobuf.ByteString getMsgImageBits();
+
+    // optional .ClientMessage.MessageType messageType = 7 [default = SUCCESS];
+    /**
+     * <code>optional .ClientMessage.MessageType messageType = 7 [default = SUCCESS];</code>
+     */
+    boolean hasMessageType();
+    /**
+     * <code>optional .ClientMessage.MessageType messageType = 7 [default = SUCCESS];</code>
+     */
+    poke.comm.App.ClientMessage.MessageType getMessageType();
+
+    // optional bool isClient = 10 [default = false];
+    /**
+     * <code>optional bool isClient = 10 [default = false];</code>
+     */
+    boolean hasIsClient();
+    /**
+     * <code>optional bool isClient = 10 [default = false];</code>
+     */
+    boolean getIsClient();
+
+    // optional bool broadcastInternal = 11 [default = false];
+    /**
+     * <code>optional bool broadcastInternal = 11 [default = false];</code>
+     */
+    boolean hasBroadcastInternal();
+    /**
+     * <code>optional bool broadcastInternal = 11 [default = false];</code>
+     */
+    boolean getBroadcastInternal();
+  }
+  /**
+   * Protobuf type {@code ClientMessage}
+   */
+  public static final class ClientMessage extends
+      com.google.protobuf.GeneratedMessage
+      implements ClientMessageOrBuilder {
+    // Use ClientMessage.newBuilder() to construct.
+    private ClientMessage(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
+      super(builder);
+      this.unknownFields = builder.getUnknownFields();
+    }
+    private ClientMessage(boolean noInit) { this.unknownFields = com.google.protobuf.UnknownFieldSet.getDefaultInstance(); }
+
+    private static final ClientMessage defaultInstance;
+    public static ClientMessage getDefaultInstance() {
+      return defaultInstance;
+    }
+
+    public ClientMessage getDefaultInstanceForType() {
+      return defaultInstance;
+    }
+
+    private final com.google.protobuf.UnknownFieldSet unknownFields;
+    @java.lang.Override
+    public final com.google.protobuf.UnknownFieldSet
+        getUnknownFields() {
+      return this.unknownFields;
+    }
+    private ClientMessage(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      initFields();
+      int mutable_bitField0_ = 0;
+      com.google.protobuf.UnknownFieldSet.Builder unknownFields =
+          com.google.protobuf.UnknownFieldSet.newBuilder();
+      try {
+        boolean done = false;
+        while (!done) {
+          int tag = input.readTag();
+          switch (tag) {
+            case 0:
+              done = true;
+              break;
+            default: {
+              if (!parseUnknownField(input, unknownFields,
+                                     extensionRegistry, tag)) {
+                done = true;
+              }
+              break;
+            }
+            case 10: {
+              bitField0_ |= 0x00000001;
+              msgId_ = input.readBytes();
+              break;
+            }
+            case 18: {
+              bitField0_ |= 0x00000002;
+              senderUserName_ = input.readBytes();
+              break;
+            }
+            case 26: {
+              bitField0_ |= 0x00000004;
+              receiverUserName_ = input.readBytes();
+              break;
+            }
+            case 34: {
+              bitField0_ |= 0x00000020;
+              msgText_ = input.readBytes();
+              break;
+            }
+            case 42: {
+              bitField0_ |= 0x00000040;
+              msgImageName_ = input.readBytes();
+              break;
+            }
+            case 50: {
+              bitField0_ |= 0x00000080;
+              msgImageBits_ = input.readBytes();
+              break;
+            }
+            case 56: {
+              int rawValue = input.readEnum();
+              poke.comm.App.ClientMessage.MessageType value = poke.comm.App.ClientMessage.MessageType.valueOf(rawValue);
+              if (value == null) {
+                unknownFields.mergeVarintField(7, rawValue);
+              } else {
+                bitField0_ |= 0x00000100;
+                messageType_ = value;
+              }
+              break;
+            }
+            case 64: {
+              bitField0_ |= 0x00000008;
+              senderClientId_ = input.readInt32();
+              break;
+            }
+            case 80: {
+              bitField0_ |= 0x00000200;
+              isClient_ = input.readBool();
+              break;
+            }
+            case 88: {
+              bitField0_ |= 0x00000400;
+              broadcastInternal_ = input.readBool();
+              break;
+            }
+            case 96: {
+              bitField0_ |= 0x00000010;
+              receiverClientId_ = input.readInt32();
+              break;
+            }
+          }
+        }
+      } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+        throw e.setUnfinishedMessage(this);
+      } catch (java.io.IOException e) {
+        throw new com.google.protobuf.InvalidProtocolBufferException(
+            e.getMessage()).setUnfinishedMessage(this);
+      } finally {
+        this.unknownFields = unknownFields.build();
+        makeExtensionsImmutable();
+      }
+    }
+    public static final com.google.protobuf.Descriptors.Descriptor
+        getDescriptor() {
+      return poke.comm.App.internal_static_ClientMessage_descriptor;
+    }
+
+    protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+        internalGetFieldAccessorTable() {
+      return poke.comm.App.internal_static_ClientMessage_fieldAccessorTable
+          .ensureFieldAccessorsInitialized(
+              poke.comm.App.ClientMessage.class, poke.comm.App.ClientMessage.Builder.class);
+    }
+
+    public static com.google.protobuf.Parser<ClientMessage> PARSER =
+        new com.google.protobuf.AbstractParser<ClientMessage>() {
+      public ClientMessage parsePartialFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        return new ClientMessage(input, extensionRegistry);
+      }
+    };
+
+    @java.lang.Override
+    public com.google.protobuf.Parser<ClientMessage> getParserForType() {
+      return PARSER;
+    }
+
+    /**
+     * Protobuf enum {@code ClientMessage.MessageType}
+     */
+    public enum MessageType
+        implements com.google.protobuf.ProtocolMessageEnum {
+      /**
+       * <code>REQUEST = 0;</code>
+       */
+      REQUEST(0, 0),
+      /**
+       * <code>SUCCESS = 1;</code>
+       */
+      SUCCESS(1, 1),
+      ;
+
+      /**
+       * <code>REQUEST = 0;</code>
+       */
+      public static final int REQUEST_VALUE = 0;
+      /**
+       * <code>SUCCESS = 1;</code>
+       */
+      public static final int SUCCESS_VALUE = 1;
+
+
+      public final int getNumber() { return value; }
+
+      public static MessageType valueOf(int value) {
+        switch (value) {
+          case 0: return REQUEST;
+          case 1: return SUCCESS;
+          default: return null;
+        }
+      }
+
+      public static com.google.protobuf.Internal.EnumLiteMap<MessageType>
+          internalGetValueMap() {
+        return internalValueMap;
+      }
+      private static com.google.protobuf.Internal.EnumLiteMap<MessageType>
+          internalValueMap =
+            new com.google.protobuf.Internal.EnumLiteMap<MessageType>() {
+              public MessageType findValueByNumber(int number) {
+                return MessageType.valueOf(number);
+              }
+            };
+
+      public final com.google.protobuf.Descriptors.EnumValueDescriptor
+          getValueDescriptor() {
+        return getDescriptor().getValues().get(index);
+      }
+      public final com.google.protobuf.Descriptors.EnumDescriptor
+          getDescriptorForType() {
+        return getDescriptor();
+      }
+      public static final com.google.protobuf.Descriptors.EnumDescriptor
+          getDescriptor() {
+        return poke.comm.App.ClientMessage.getDescriptor().getEnumTypes().get(0);
+      }
+
+      private static final MessageType[] VALUES = values();
+
+      public static MessageType valueOf(
+          com.google.protobuf.Descriptors.EnumValueDescriptor desc) {
+        if (desc.getType() != getDescriptor()) {
+          throw new java.lang.IllegalArgumentException(
+            "EnumValueDescriptor is not for this type.");
+        }
+        return VALUES[desc.getIndex()];
+      }
+
+      private final int index;
+      private final int value;
+
+      private MessageType(int index, int value) {
+        this.index = index;
+        this.value = value;
+      }
+
+      // @@protoc_insertion_point(enum_scope:ClientMessage.MessageType)
+    }
+
+    private int bitField0_;
+    // optional string msgId = 1;
+    public static final int MSGID_FIELD_NUMBER = 1;
+    private java.lang.Object msgId_;
+    /**
+     * <code>optional string msgId = 1;</code>
+     */
+    public boolean hasMsgId() {
+      return ((bitField0_ & 0x00000001) == 0x00000001);
+    }
+    /**
+     * <code>optional string msgId = 1;</code>
+     */
+    public java.lang.String getMsgId() {
+      java.lang.Object ref = msgId_;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
+      } else {
+        com.google.protobuf.ByteString bs = 
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        if (bs.isValidUtf8()) {
+          msgId_ = s;
+        }
+        return s;
+      }
+    }
+    /**
+     * <code>optional string msgId = 1;</code>
+     */
+    public com.google.protobuf.ByteString
+        getMsgIdBytes() {
+      java.lang.Object ref = msgId_;
+      if (ref instanceof java.lang.String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        msgId_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+
+    // optional string senderUserName = 2;
+    public static final int SENDERUSERNAME_FIELD_NUMBER = 2;
+    private java.lang.Object senderUserName_;
+    /**
+     * <code>optional string senderUserName = 2;</code>
+     */
+    public boolean hasSenderUserName() {
+      return ((bitField0_ & 0x00000002) == 0x00000002);
+    }
+    /**
+     * <code>optional string senderUserName = 2;</code>
+     */
+    public java.lang.String getSenderUserName() {
+      java.lang.Object ref = senderUserName_;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
+      } else {
+        com.google.protobuf.ByteString bs = 
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        if (bs.isValidUtf8()) {
+          senderUserName_ = s;
+        }
+        return s;
+      }
+    }
+    /**
+     * <code>optional string senderUserName = 2;</code>
+     */
+    public com.google.protobuf.ByteString
+        getSenderUserNameBytes() {
+      java.lang.Object ref = senderUserName_;
+      if (ref instanceof java.lang.String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        senderUserName_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+
+    // optional string receiverUserName = 3;
+    public static final int RECEIVERUSERNAME_FIELD_NUMBER = 3;
+    private java.lang.Object receiverUserName_;
+    /**
+     * <code>optional string receiverUserName = 3;</code>
+     */
+    public boolean hasReceiverUserName() {
+      return ((bitField0_ & 0x00000004) == 0x00000004);
+    }
+    /**
+     * <code>optional string receiverUserName = 3;</code>
+     */
+    public java.lang.String getReceiverUserName() {
+      java.lang.Object ref = receiverUserName_;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
+      } else {
+        com.google.protobuf.ByteString bs = 
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        if (bs.isValidUtf8()) {
+          receiverUserName_ = s;
+        }
+        return s;
+      }
+    }
+    /**
+     * <code>optional string receiverUserName = 3;</code>
+     */
+    public com.google.protobuf.ByteString
+        getReceiverUserNameBytes() {
+      java.lang.Object ref = receiverUserName_;
+      if (ref instanceof java.lang.String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        receiverUserName_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+
+    // optional int32 senderClientId = 8;
+    public static final int SENDERCLIENTID_FIELD_NUMBER = 8;
+    private int senderClientId_;
+    /**
+     * <code>optional int32 senderClientId = 8;</code>
+     */
+    public boolean hasSenderClientId() {
+      return ((bitField0_ & 0x00000008) == 0x00000008);
+    }
+    /**
+     * <code>optional int32 senderClientId = 8;</code>
+     */
+    public int getSenderClientId() {
+      return senderClientId_;
+    }
+
+    // optional int32 receiverClientId = 12;
+    public static final int RECEIVERCLIENTID_FIELD_NUMBER = 12;
+    private int receiverClientId_;
+    /**
+     * <code>optional int32 receiverClientId = 12;</code>
+     */
+    public boolean hasReceiverClientId() {
+      return ((bitField0_ & 0x00000010) == 0x00000010);
+    }
+    /**
+     * <code>optional int32 receiverClientId = 12;</code>
+     */
+    public int getReceiverClientId() {
+      return receiverClientId_;
+    }
+
+    // optional string msgText = 4;
+    public static final int MSGTEXT_FIELD_NUMBER = 4;
+    private java.lang.Object msgText_;
+    /**
+     * <code>optional string msgText = 4;</code>
+     */
+    public boolean hasMsgText() {
+      return ((bitField0_ & 0x00000020) == 0x00000020);
+    }
+    /**
+     * <code>optional string msgText = 4;</code>
+     */
+    public java.lang.String getMsgText() {
+      java.lang.Object ref = msgText_;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
+      } else {
+        com.google.protobuf.ByteString bs = 
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        if (bs.isValidUtf8()) {
+          msgText_ = s;
+        }
+        return s;
+      }
+    }
+    /**
+     * <code>optional string msgText = 4;</code>
+     */
+    public com.google.protobuf.ByteString
+        getMsgTextBytes() {
+      java.lang.Object ref = msgText_;
+      if (ref instanceof java.lang.String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        msgText_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+
+    // optional string msgImageName = 5;
+    public static final int MSGIMAGENAME_FIELD_NUMBER = 5;
+    private java.lang.Object msgImageName_;
+    /**
+     * <code>optional string msgImageName = 5;</code>
+     */
+    public boolean hasMsgImageName() {
+      return ((bitField0_ & 0x00000040) == 0x00000040);
+    }
+    /**
+     * <code>optional string msgImageName = 5;</code>
+     */
+    public java.lang.String getMsgImageName() {
+      java.lang.Object ref = msgImageName_;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
+      } else {
+        com.google.protobuf.ByteString bs = 
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        if (bs.isValidUtf8()) {
+          msgImageName_ = s;
+        }
+        return s;
+      }
+    }
+    /**
+     * <code>optional string msgImageName = 5;</code>
+     */
+    public com.google.protobuf.ByteString
+        getMsgImageNameBytes() {
+      java.lang.Object ref = msgImageName_;
+      if (ref instanceof java.lang.String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        msgImageName_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+
+    // optional bytes msgImageBits = 6;
+    public static final int MSGIMAGEBITS_FIELD_NUMBER = 6;
+    private com.google.protobuf.ByteString msgImageBits_;
+    /**
+     * <code>optional bytes msgImageBits = 6;</code>
+     */
+    public boolean hasMsgImageBits() {
+      return ((bitField0_ & 0x00000080) == 0x00000080);
+    }
+    /**
+     * <code>optional bytes msgImageBits = 6;</code>
+     */
+    public com.google.protobuf.ByteString getMsgImageBits() {
+      return msgImageBits_;
+    }
+
+    // optional .ClientMessage.MessageType messageType = 7 [default = SUCCESS];
+    public static final int MESSAGETYPE_FIELD_NUMBER = 7;
+    private poke.comm.App.ClientMessage.MessageType messageType_;
+    /**
+     * <code>optional .ClientMessage.MessageType messageType = 7 [default = SUCCESS];</code>
+     */
+    public boolean hasMessageType() {
+      return ((bitField0_ & 0x00000100) == 0x00000100);
+    }
+    /**
+     * <code>optional .ClientMessage.MessageType messageType = 7 [default = SUCCESS];</code>
+     */
+    public poke.comm.App.ClientMessage.MessageType getMessageType() {
+      return messageType_;
+    }
+
+    // optional bool isClient = 10 [default = false];
+    public static final int ISCLIENT_FIELD_NUMBER = 10;
+    private boolean isClient_;
+    /**
+     * <code>optional bool isClient = 10 [default = false];</code>
+     */
+    public boolean hasIsClient() {
+      return ((bitField0_ & 0x00000200) == 0x00000200);
+    }
+    /**
+     * <code>optional bool isClient = 10 [default = false];</code>
+     */
+    public boolean getIsClient() {
+      return isClient_;
+    }
+
+    // optional bool broadcastInternal = 11 [default = false];
+    public static final int BROADCASTINTERNAL_FIELD_NUMBER = 11;
+    private boolean broadcastInternal_;
+    /**
+     * <code>optional bool broadcastInternal = 11 [default = false];</code>
+     */
+    public boolean hasBroadcastInternal() {
+      return ((bitField0_ & 0x00000400) == 0x00000400);
+    }
+    /**
+     * <code>optional bool broadcastInternal = 11 [default = false];</code>
+     */
+    public boolean getBroadcastInternal() {
+      return broadcastInternal_;
+    }
+
+    private void initFields() {
+      msgId_ = "";
+      senderUserName_ = "";
+      receiverUserName_ = "";
+      senderClientId_ = 0;
+      receiverClientId_ = 0;
+      msgText_ = "";
+      msgImageName_ = "";
+      msgImageBits_ = com.google.protobuf.ByteString.EMPTY;
+      messageType_ = poke.comm.App.ClientMessage.MessageType.SUCCESS;
+      isClient_ = false;
+      broadcastInternal_ = false;
+    }
+    private byte memoizedIsInitialized = -1;
+    public final boolean isInitialized() {
+      byte isInitialized = memoizedIsInitialized;
+      if (isInitialized != -1) return isInitialized == 1;
+
+      memoizedIsInitialized = 1;
+      return true;
+    }
+
+    public void writeTo(com.google.protobuf.CodedOutputStream output)
+                        throws java.io.IOException {
+      getSerializedSize();
+      if (((bitField0_ & 0x00000001) == 0x00000001)) {
+        output.writeBytes(1, getMsgIdBytes());
+      }
+      if (((bitField0_ & 0x00000002) == 0x00000002)) {
+        output.writeBytes(2, getSenderUserNameBytes());
+      }
+      if (((bitField0_ & 0x00000004) == 0x00000004)) {
+        output.writeBytes(3, getReceiverUserNameBytes());
+      }
+      if (((bitField0_ & 0x00000020) == 0x00000020)) {
+        output.writeBytes(4, getMsgTextBytes());
+      }
+      if (((bitField0_ & 0x00000040) == 0x00000040)) {
+        output.writeBytes(5, getMsgImageNameBytes());
+      }
+      if (((bitField0_ & 0x00000080) == 0x00000080)) {
+        output.writeBytes(6, msgImageBits_);
+      }
+      if (((bitField0_ & 0x00000100) == 0x00000100)) {
+        output.writeEnum(7, messageType_.getNumber());
+      }
+      if (((bitField0_ & 0x00000008) == 0x00000008)) {
+        output.writeInt32(8, senderClientId_);
+      }
+      if (((bitField0_ & 0x00000200) == 0x00000200)) {
+        output.writeBool(10, isClient_);
+      }
+      if (((bitField0_ & 0x00000400) == 0x00000400)) {
+        output.writeBool(11, broadcastInternal_);
+      }
+      if (((bitField0_ & 0x00000010) == 0x00000010)) {
+        output.writeInt32(12, receiverClientId_);
+      }
+      getUnknownFields().writeTo(output);
+    }
+
+    private int memoizedSerializedSize = -1;
+    public int getSerializedSize() {
+      int size = memoizedSerializedSize;
+      if (size != -1) return size;
+
+      size = 0;
+      if (((bitField0_ & 0x00000001) == 0x00000001)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeBytesSize(1, getMsgIdBytes());
+      }
+      if (((bitField0_ & 0x00000002) == 0x00000002)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeBytesSize(2, getSenderUserNameBytes());
+      }
+      if (((bitField0_ & 0x00000004) == 0x00000004)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeBytesSize(3, getReceiverUserNameBytes());
+      }
+      if (((bitField0_ & 0x00000020) == 0x00000020)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeBytesSize(4, getMsgTextBytes());
+      }
+      if (((bitField0_ & 0x00000040) == 0x00000040)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeBytesSize(5, getMsgImageNameBytes());
+      }
+      if (((bitField0_ & 0x00000080) == 0x00000080)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeBytesSize(6, msgImageBits_);
+      }
+      if (((bitField0_ & 0x00000100) == 0x00000100)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeEnumSize(7, messageType_.getNumber());
+      }
+      if (((bitField0_ & 0x00000008) == 0x00000008)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt32Size(8, senderClientId_);
+      }
+      if (((bitField0_ & 0x00000200) == 0x00000200)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeBoolSize(10, isClient_);
+      }
+      if (((bitField0_ & 0x00000400) == 0x00000400)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeBoolSize(11, broadcastInternal_);
+      }
+      if (((bitField0_ & 0x00000010) == 0x00000010)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt32Size(12, receiverClientId_);
+      }
+      size += getUnknownFields().getSerializedSize();
+      memoizedSerializedSize = size;
+      return size;
+    }
+
+    private static final long serialVersionUID = 0L;
+    @java.lang.Override
+    protected java.lang.Object writeReplace()
+        throws java.io.ObjectStreamException {
+      return super.writeReplace();
+    }
+
+    public static poke.comm.App.ClientMessage parseFrom(
+        com.google.protobuf.ByteString data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static poke.comm.App.ClientMessage parseFrom(
+        com.google.protobuf.ByteString data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static poke.comm.App.ClientMessage parseFrom(byte[] data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static poke.comm.App.ClientMessage parseFrom(
+        byte[] data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static poke.comm.App.ClientMessage parseFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input);
+    }
+    public static poke.comm.App.ClientMessage parseFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input, extensionRegistry);
+    }
+    public static poke.comm.App.ClientMessage parseDelimitedFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return PARSER.parseDelimitedFrom(input);
+    }
+    public static poke.comm.App.ClientMessage parseDelimitedFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return PARSER.parseDelimitedFrom(input, extensionRegistry);
+    }
+    public static poke.comm.App.ClientMessage parseFrom(
+        com.google.protobuf.CodedInputStream input)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input);
+    }
+    public static poke.comm.App.ClientMessage parseFrom(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input, extensionRegistry);
+    }
+
+    public static Builder newBuilder() { return Builder.create(); }
+    public Builder newBuilderForType() { return newBuilder(); }
+    public static Builder newBuilder(poke.comm.App.ClientMessage prototype) {
+      return newBuilder().mergeFrom(prototype);
+    }
+    public Builder toBuilder() { return newBuilder(this); }
+
+    @java.lang.Override
+    protected Builder newBuilderForType(
+        com.google.protobuf.GeneratedMessage.BuilderParent parent) {
+      Builder builder = new Builder(parent);
+      return builder;
+    }
+    /**
+     * Protobuf type {@code ClientMessage}
+     */
+    public static final class Builder extends
+        com.google.protobuf.GeneratedMessage.Builder<Builder>
+       implements poke.comm.App.ClientMessageOrBuilder {
+      public static final com.google.protobuf.Descriptors.Descriptor
+          getDescriptor() {
+        return poke.comm.App.internal_static_ClientMessage_descriptor;
+      }
+
+      protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+          internalGetFieldAccessorTable() {
+        return poke.comm.App.internal_static_ClientMessage_fieldAccessorTable
+            .ensureFieldAccessorsInitialized(
+                poke.comm.App.ClientMessage.class, poke.comm.App.ClientMessage.Builder.class);
+      }
+
+      // Construct using poke.comm.App.ClientMessage.newBuilder()
+      private Builder() {
+        maybeForceBuilderInitialization();
+      }
+
+      private Builder(
+          com.google.protobuf.GeneratedMessage.BuilderParent parent) {
+        super(parent);
+        maybeForceBuilderInitialization();
+      }
+      private void maybeForceBuilderInitialization() {
+        if (com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders) {
+        }
+      }
+      private static Builder create() {
+        return new Builder();
+      }
+
+      public Builder clear() {
+        super.clear();
+        msgId_ = "";
+        bitField0_ = (bitField0_ & ~0x00000001);
+        senderUserName_ = "";
+        bitField0_ = (bitField0_ & ~0x00000002);
+        receiverUserName_ = "";
+        bitField0_ = (bitField0_ & ~0x00000004);
+        senderClientId_ = 0;
+        bitField0_ = (bitField0_ & ~0x00000008);
+        receiverClientId_ = 0;
+        bitField0_ = (bitField0_ & ~0x00000010);
+        msgText_ = "";
+        bitField0_ = (bitField0_ & ~0x00000020);
+        msgImageName_ = "";
+        bitField0_ = (bitField0_ & ~0x00000040);
+        msgImageBits_ = com.google.protobuf.ByteString.EMPTY;
+        bitField0_ = (bitField0_ & ~0x00000080);
+        messageType_ = poke.comm.App.ClientMessage.MessageType.SUCCESS;
+        bitField0_ = (bitField0_ & ~0x00000100);
+        isClient_ = false;
+        bitField0_ = (bitField0_ & ~0x00000200);
+        broadcastInternal_ = false;
+        bitField0_ = (bitField0_ & ~0x00000400);
+        return this;
+      }
+
+      public Builder clone() {
+        return create().mergeFrom(buildPartial());
+      }
+
+      public com.google.protobuf.Descriptors.Descriptor
+          getDescriptorForType() {
+        return poke.comm.App.internal_static_ClientMessage_descriptor;
+      }
+
+      public poke.comm.App.ClientMessage getDefaultInstanceForType() {
+        return poke.comm.App.ClientMessage.getDefaultInstance();
+      }
+
+      public poke.comm.App.ClientMessage build() {
+        poke.comm.App.ClientMessage result = buildPartial();
+        if (!result.isInitialized()) {
+          throw newUninitializedMessageException(result);
+        }
+        return result;
+      }
+
+      public poke.comm.App.ClientMessage buildPartial() {
+        poke.comm.App.ClientMessage result = new poke.comm.App.ClientMessage(this);
+        int from_bitField0_ = bitField0_;
+        int to_bitField0_ = 0;
+        if (((from_bitField0_ & 0x00000001) == 0x00000001)) {
+          to_bitField0_ |= 0x00000001;
+        }
+        result.msgId_ = msgId_;
+        if (((from_bitField0_ & 0x00000002) == 0x00000002)) {
+          to_bitField0_ |= 0x00000002;
+        }
+        result.senderUserName_ = senderUserName_;
+        if (((from_bitField0_ & 0x00000004) == 0x00000004)) {
+          to_bitField0_ |= 0x00000004;
+        }
+        result.receiverUserName_ = receiverUserName_;
+        if (((from_bitField0_ & 0x00000008) == 0x00000008)) {
+          to_bitField0_ |= 0x00000008;
+        }
+        result.senderClientId_ = senderClientId_;
+        if (((from_bitField0_ & 0x00000010) == 0x00000010)) {
+          to_bitField0_ |= 0x00000010;
+        }
+        result.receiverClientId_ = receiverClientId_;
+        if (((from_bitField0_ & 0x00000020) == 0x00000020)) {
+          to_bitField0_ |= 0x00000020;
+        }
+        result.msgText_ = msgText_;
+        if (((from_bitField0_ & 0x00000040) == 0x00000040)) {
+          to_bitField0_ |= 0x00000040;
+        }
+        result.msgImageName_ = msgImageName_;
+        if (((from_bitField0_ & 0x00000080) == 0x00000080)) {
+          to_bitField0_ |= 0x00000080;
+        }
+        result.msgImageBits_ = msgImageBits_;
+        if (((from_bitField0_ & 0x00000100) == 0x00000100)) {
+          to_bitField0_ |= 0x00000100;
+        }
+        result.messageType_ = messageType_;
+        if (((from_bitField0_ & 0x00000200) == 0x00000200)) {
+          to_bitField0_ |= 0x00000200;
+        }
+        result.isClient_ = isClient_;
+        if (((from_bitField0_ & 0x00000400) == 0x00000400)) {
+          to_bitField0_ |= 0x00000400;
+        }
+        result.broadcastInternal_ = broadcastInternal_;
+        result.bitField0_ = to_bitField0_;
+        onBuilt();
+        return result;
+      }
+
+      public Builder mergeFrom(com.google.protobuf.Message other) {
+        if (other instanceof poke.comm.App.ClientMessage) {
+          return mergeFrom((poke.comm.App.ClientMessage)other);
+        } else {
+          super.mergeFrom(other);
+          return this;
+        }
+      }
+
+      public Builder mergeFrom(poke.comm.App.ClientMessage other) {
+        if (other == poke.comm.App.ClientMessage.getDefaultInstance()) return this;
+        if (other.hasMsgId()) {
+          bitField0_ |= 0x00000001;
+          msgId_ = other.msgId_;
+          onChanged();
+        }
+        if (other.hasSenderUserName()) {
+          bitField0_ |= 0x00000002;
+          senderUserName_ = other.senderUserName_;
+          onChanged();
+        }
+        if (other.hasReceiverUserName()) {
+          bitField0_ |= 0x00000004;
+          receiverUserName_ = other.receiverUserName_;
+          onChanged();
+        }
+        if (other.hasSenderClientId()) {
+          setSenderClientId(other.getSenderClientId());
+        }
+        if (other.hasReceiverClientId()) {
+          setReceiverClientId(other.getReceiverClientId());
+        }
+        if (other.hasMsgText()) {
+          bitField0_ |= 0x00000020;
+          msgText_ = other.msgText_;
+          onChanged();
+        }
+        if (other.hasMsgImageName()) {
+          bitField0_ |= 0x00000040;
+          msgImageName_ = other.msgImageName_;
+          onChanged();
+        }
+        if (other.hasMsgImageBits()) {
+          setMsgImageBits(other.getMsgImageBits());
+        }
+        if (other.hasMessageType()) {
+          setMessageType(other.getMessageType());
+        }
+        if (other.hasIsClient()) {
+          setIsClient(other.getIsClient());
+        }
+        if (other.hasBroadcastInternal()) {
+          setBroadcastInternal(other.getBroadcastInternal());
+        }
+        this.mergeUnknownFields(other.getUnknownFields());
+        return this;
+      }
+
+      public final boolean isInitialized() {
+        return true;
+      }
+
+      public Builder mergeFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws java.io.IOException {
+        poke.comm.App.ClientMessage parsedMessage = null;
+        try {
+          parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
+        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+          parsedMessage = (poke.comm.App.ClientMessage) e.getUnfinishedMessage();
+          throw e;
+        } finally {
+          if (parsedMessage != null) {
+            mergeFrom(parsedMessage);
+          }
+        }
+        return this;
+      }
+      private int bitField0_;
+
+      // optional string msgId = 1;
+      private java.lang.Object msgId_ = "";
+      /**
+       * <code>optional string msgId = 1;</code>
+       */
+      public boolean hasMsgId() {
+        return ((bitField0_ & 0x00000001) == 0x00000001);
+      }
+      /**
+       * <code>optional string msgId = 1;</code>
+       */
+      public java.lang.String getMsgId() {
+        java.lang.Object ref = msgId_;
+        if (!(ref instanceof java.lang.String)) {
+          java.lang.String s = ((com.google.protobuf.ByteString) ref)
+              .toStringUtf8();
+          msgId_ = s;
+          return s;
+        } else {
+          return (java.lang.String) ref;
+        }
+      }
+      /**
+       * <code>optional string msgId = 1;</code>
+       */
+      public com.google.protobuf.ByteString
+          getMsgIdBytes() {
+        java.lang.Object ref = msgId_;
+        if (ref instanceof String) {
+          com.google.protobuf.ByteString b = 
+              com.google.protobuf.ByteString.copyFromUtf8(
+                  (java.lang.String) ref);
+          msgId_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+      /**
+       * <code>optional string msgId = 1;</code>
+       */
+      public Builder setMsgId(
+          java.lang.String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000001;
+        msgId_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional string msgId = 1;</code>
+       */
+      public Builder clearMsgId() {
+        bitField0_ = (bitField0_ & ~0x00000001);
+        msgId_ = getDefaultInstance().getMsgId();
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional string msgId = 1;</code>
+       */
+      public Builder setMsgIdBytes(
+          com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000001;
+        msgId_ = value;
+        onChanged();
+        return this;
+      }
+
+      // optional string senderUserName = 2;
+      private java.lang.Object senderUserName_ = "";
+      /**
+       * <code>optional string senderUserName = 2;</code>
+       */
+      public boolean hasSenderUserName() {
+        return ((bitField0_ & 0x00000002) == 0x00000002);
+      }
+      /**
+       * <code>optional string senderUserName = 2;</code>
+       */
+      public java.lang.String getSenderUserName() {
+        java.lang.Object ref = senderUserName_;
+        if (!(ref instanceof java.lang.String)) {
+          java.lang.String s = ((com.google.protobuf.ByteString) ref)
+              .toStringUtf8();
+          senderUserName_ = s;
+          return s;
+        } else {
+          return (java.lang.String) ref;
+        }
+      }
+      /**
+       * <code>optional string senderUserName = 2;</code>
+       */
+      public com.google.protobuf.ByteString
+          getSenderUserNameBytes() {
+        java.lang.Object ref = senderUserName_;
+        if (ref instanceof String) {
+          com.google.protobuf.ByteString b = 
+              com.google.protobuf.ByteString.copyFromUtf8(
+                  (java.lang.String) ref);
+          senderUserName_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+      /**
+       * <code>optional string senderUserName = 2;</code>
+       */
+      public Builder setSenderUserName(
+          java.lang.String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000002;
+        senderUserName_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional string senderUserName = 2;</code>
+       */
+      public Builder clearSenderUserName() {
+        bitField0_ = (bitField0_ & ~0x00000002);
+        senderUserName_ = getDefaultInstance().getSenderUserName();
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional string senderUserName = 2;</code>
+       */
+      public Builder setSenderUserNameBytes(
+          com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000002;
+        senderUserName_ = value;
+        onChanged();
+        return this;
+      }
+
+      // optional string receiverUserName = 3;
+      private java.lang.Object receiverUserName_ = "";
+      /**
+       * <code>optional string receiverUserName = 3;</code>
+       */
+      public boolean hasReceiverUserName() {
+        return ((bitField0_ & 0x00000004) == 0x00000004);
+      }
+      /**
+       * <code>optional string receiverUserName = 3;</code>
+       */
+      public java.lang.String getReceiverUserName() {
+        java.lang.Object ref = receiverUserName_;
+        if (!(ref instanceof java.lang.String)) {
+          java.lang.String s = ((com.google.protobuf.ByteString) ref)
+              .toStringUtf8();
+          receiverUserName_ = s;
+          return s;
+        } else {
+          return (java.lang.String) ref;
+        }
+      }
+      /**
+       * <code>optional string receiverUserName = 3;</code>
+       */
+      public com.google.protobuf.ByteString
+          getReceiverUserNameBytes() {
+        java.lang.Object ref = receiverUserName_;
+        if (ref instanceof String) {
+          com.google.protobuf.ByteString b = 
+              com.google.protobuf.ByteString.copyFromUtf8(
+                  (java.lang.String) ref);
+          receiverUserName_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+      /**
+       * <code>optional string receiverUserName = 3;</code>
+       */
+      public Builder setReceiverUserName(
+          java.lang.String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000004;
+        receiverUserName_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional string receiverUserName = 3;</code>
+       */
+      public Builder clearReceiverUserName() {
+        bitField0_ = (bitField0_ & ~0x00000004);
+        receiverUserName_ = getDefaultInstance().getReceiverUserName();
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional string receiverUserName = 3;</code>
+       */
+      public Builder setReceiverUserNameBytes(
+          com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000004;
+        receiverUserName_ = value;
+        onChanged();
+        return this;
+      }
+
+      // optional int32 senderClientId = 8;
+      private int senderClientId_ ;
+      /**
+       * <code>optional int32 senderClientId = 8;</code>
+       */
+      public boolean hasSenderClientId() {
+        return ((bitField0_ & 0x00000008) == 0x00000008);
+      }
+      /**
+       * <code>optional int32 senderClientId = 8;</code>
+       */
+      public int getSenderClientId() {
+        return senderClientId_;
+      }
+      /**
+       * <code>optional int32 senderClientId = 8;</code>
+       */
+      public Builder setSenderClientId(int value) {
+        bitField0_ |= 0x00000008;
+        senderClientId_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional int32 senderClientId = 8;</code>
+       */
+      public Builder clearSenderClientId() {
+        bitField0_ = (bitField0_ & ~0x00000008);
+        senderClientId_ = 0;
+        onChanged();
+        return this;
+      }
+
+      // optional int32 receiverClientId = 12;
+      private int receiverClientId_ ;
+      /**
+       * <code>optional int32 receiverClientId = 12;</code>
+       */
+      public boolean hasReceiverClientId() {
+        return ((bitField0_ & 0x00000010) == 0x00000010);
+      }
+      /**
+       * <code>optional int32 receiverClientId = 12;</code>
+       */
+      public int getReceiverClientId() {
+        return receiverClientId_;
+      }
+      /**
+       * <code>optional int32 receiverClientId = 12;</code>
+       */
+      public Builder setReceiverClientId(int value) {
+        bitField0_ |= 0x00000010;
+        receiverClientId_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional int32 receiverClientId = 12;</code>
+       */
+      public Builder clearReceiverClientId() {
+        bitField0_ = (bitField0_ & ~0x00000010);
+        receiverClientId_ = 0;
+        onChanged();
+        return this;
+      }
+
+      // optional string msgText = 4;
+      private java.lang.Object msgText_ = "";
+      /**
+       * <code>optional string msgText = 4;</code>
+       */
+      public boolean hasMsgText() {
+        return ((bitField0_ & 0x00000020) == 0x00000020);
+      }
+      /**
+       * <code>optional string msgText = 4;</code>
+       */
+      public java.lang.String getMsgText() {
+        java.lang.Object ref = msgText_;
+        if (!(ref instanceof java.lang.String)) {
+          java.lang.String s = ((com.google.protobuf.ByteString) ref)
+              .toStringUtf8();
+          msgText_ = s;
+          return s;
+        } else {
+          return (java.lang.String) ref;
+        }
+      }
+      /**
+       * <code>optional string msgText = 4;</code>
+       */
+      public com.google.protobuf.ByteString
+          getMsgTextBytes() {
+        java.lang.Object ref = msgText_;
+        if (ref instanceof String) {
+          com.google.protobuf.ByteString b = 
+              com.google.protobuf.ByteString.copyFromUtf8(
+                  (java.lang.String) ref);
+          msgText_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+      /**
+       * <code>optional string msgText = 4;</code>
+       */
+      public Builder setMsgText(
+          java.lang.String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000020;
+        msgText_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional string msgText = 4;</code>
+       */
+      public Builder clearMsgText() {
+        bitField0_ = (bitField0_ & ~0x00000020);
+        msgText_ = getDefaultInstance().getMsgText();
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional string msgText = 4;</code>
+       */
+      public Builder setMsgTextBytes(
+          com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000020;
+        msgText_ = value;
+        onChanged();
+        return this;
+      }
+
+      // optional string msgImageName = 5;
+      private java.lang.Object msgImageName_ = "";
+      /**
+       * <code>optional string msgImageName = 5;</code>
+       */
+      public boolean hasMsgImageName() {
+        return ((bitField0_ & 0x00000040) == 0x00000040);
+      }
+      /**
+       * <code>optional string msgImageName = 5;</code>
+       */
+      public java.lang.String getMsgImageName() {
+        java.lang.Object ref = msgImageName_;
+        if (!(ref instanceof java.lang.String)) {
+          java.lang.String s = ((com.google.protobuf.ByteString) ref)
+              .toStringUtf8();
+          msgImageName_ = s;
+          return s;
+        } else {
+          return (java.lang.String) ref;
+        }
+      }
+      /**
+       * <code>optional string msgImageName = 5;</code>
+       */
+      public com.google.protobuf.ByteString
+          getMsgImageNameBytes() {
+        java.lang.Object ref = msgImageName_;
+        if (ref instanceof String) {
+          com.google.protobuf.ByteString b = 
+              com.google.protobuf.ByteString.copyFromUtf8(
+                  (java.lang.String) ref);
+          msgImageName_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+      /**
+       * <code>optional string msgImageName = 5;</code>
+       */
+      public Builder setMsgImageName(
+          java.lang.String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000040;
+        msgImageName_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional string msgImageName = 5;</code>
+       */
+      public Builder clearMsgImageName() {
+        bitField0_ = (bitField0_ & ~0x00000040);
+        msgImageName_ = getDefaultInstance().getMsgImageName();
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional string msgImageName = 5;</code>
+       */
+      public Builder setMsgImageNameBytes(
+          com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000040;
+        msgImageName_ = value;
+        onChanged();
+        return this;
+      }
+
+      // optional bytes msgImageBits = 6;
+      private com.google.protobuf.ByteString msgImageBits_ = com.google.protobuf.ByteString.EMPTY;
+      /**
+       * <code>optional bytes msgImageBits = 6;</code>
+       */
+      public boolean hasMsgImageBits() {
+        return ((bitField0_ & 0x00000080) == 0x00000080);
+      }
+      /**
+       * <code>optional bytes msgImageBits = 6;</code>
+       */
+      public com.google.protobuf.ByteString getMsgImageBits() {
+        return msgImageBits_;
+      }
+      /**
+       * <code>optional bytes msgImageBits = 6;</code>
+       */
+      public Builder setMsgImageBits(com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000080;
+        msgImageBits_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional bytes msgImageBits = 6;</code>
+       */
+      public Builder clearMsgImageBits() {
+        bitField0_ = (bitField0_ & ~0x00000080);
+        msgImageBits_ = getDefaultInstance().getMsgImageBits();
+        onChanged();
+        return this;
+      }
+
+      // optional .ClientMessage.MessageType messageType = 7 [default = SUCCESS];
+      private poke.comm.App.ClientMessage.MessageType messageType_ = poke.comm.App.ClientMessage.MessageType.SUCCESS;
+      /**
+       * <code>optional .ClientMessage.MessageType messageType = 7 [default = SUCCESS];</code>
+       */
+      public boolean hasMessageType() {
+        return ((bitField0_ & 0x00000100) == 0x00000100);
+      }
+      /**
+       * <code>optional .ClientMessage.MessageType messageType = 7 [default = SUCCESS];</code>
+       */
+      public poke.comm.App.ClientMessage.MessageType getMessageType() {
+        return messageType_;
+      }
+      /**
+       * <code>optional .ClientMessage.MessageType messageType = 7 [default = SUCCESS];</code>
+       */
+      public Builder setMessageType(poke.comm.App.ClientMessage.MessageType value) {
+        if (value == null) {
+          throw new NullPointerException();
+        }
+        bitField0_ |= 0x00000100;
+        messageType_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional .ClientMessage.MessageType messageType = 7 [default = SUCCESS];</code>
+       */
+      public Builder clearMessageType() {
+        bitField0_ = (bitField0_ & ~0x00000100);
+        messageType_ = poke.comm.App.ClientMessage.MessageType.SUCCESS;
+        onChanged();
+        return this;
+      }
+
+      // optional bool isClient = 10 [default = false];
+      private boolean isClient_ ;
+      /**
+       * <code>optional bool isClient = 10 [default = false];</code>
+       */
+      public boolean hasIsClient() {
+        return ((bitField0_ & 0x00000200) == 0x00000200);
+      }
+      /**
+       * <code>optional bool isClient = 10 [default = false];</code>
+       */
+      public boolean getIsClient() {
+        return isClient_;
+      }
+      /**
+       * <code>optional bool isClient = 10 [default = false];</code>
+       */
+      public Builder setIsClient(boolean value) {
+        bitField0_ |= 0x00000200;
+        isClient_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional bool isClient = 10 [default = false];</code>
+       */
+      public Builder clearIsClient() {
+        bitField0_ = (bitField0_ & ~0x00000200);
+        isClient_ = false;
+        onChanged();
+        return this;
+      }
+
+      // optional bool broadcastInternal = 11 [default = false];
+      private boolean broadcastInternal_ ;
+      /**
+       * <code>optional bool broadcastInternal = 11 [default = false];</code>
+       */
+      public boolean hasBroadcastInternal() {
+        return ((bitField0_ & 0x00000400) == 0x00000400);
+      }
+      /**
+       * <code>optional bool broadcastInternal = 11 [default = false];</code>
+       */
+      public boolean getBroadcastInternal() {
+        return broadcastInternal_;
+      }
+      /**
+       * <code>optional bool broadcastInternal = 11 [default = false];</code>
+       */
+      public Builder setBroadcastInternal(boolean value) {
+        bitField0_ |= 0x00000400;
+        broadcastInternal_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional bool broadcastInternal = 11 [default = false];</code>
+       */
+      public Builder clearBroadcastInternal() {
+        bitField0_ = (bitField0_ & ~0x00000400);
+        broadcastInternal_ = false;
+        onChanged();
+        return this;
+      }
+
+      // @@protoc_insertion_point(builder_scope:ClientMessage)
+    }
+
+    static {
+      defaultInstance = new ClientMessage(true);
+      defaultInstance.initFields();
+    }
+
+    // @@protoc_insertion_point(class_scope:ClientMessage)
+  }
+
   public interface JoinMessageOrBuilder
       extends com.google.protobuf.MessageOrBuilder {
 
@@ -20076,11 +20076,6 @@ public final class App {
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
       internal_static_Header_fieldAccessorTable;
   private static com.google.protobuf.Descriptors.Descriptor
-    internal_static_ClientMessage_descriptor;
-  private static
-    com.google.protobuf.GeneratedMessage.FieldAccessorTable
-      internal_static_ClientMessage_fieldAccessorTable;
-  private static com.google.protobuf.Descriptors.Descriptor
     internal_static_ClusterMessage_descriptor;
   private static
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
@@ -20090,6 +20085,11 @@ public final class App {
   private static
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
       internal_static_Payload_fieldAccessorTable;
+  private static com.google.protobuf.Descriptors.Descriptor
+    internal_static_ClientMessage_descriptor;
+  private static
+    com.google.protobuf.GeneratedMessage.FieldAccessorTable
+      internal_static_ClientMessage_fieldAccessorTable;
   private static com.google.protobuf.Descriptors.Descriptor
     internal_static_JoinMessage_descriptor;
   private static
@@ -20156,24 +20156,24 @@ public final class App {
       "options\030\t \003(\0132\r.NameValueSet\"a\n\007Routing\022" +
       "\010\n\004PING\020\002\022\016\n\nNAMESPACES\020\003\022\010\n\004JOBS\020\004\022\013\n\007R" +
       "EPORTS\020\n\022\n\n\006MANAGE\020d\022\014\n\010REGISTER\020\005\022\013\n\007FO" +
-      "RWARD\020\006\"\335\002\n\rClientMessage\022\r\n\005msgId\030\001 \001(\t" +
-      "\022\026\n\016senderUserName\030\002 \001(\t\022\030\n\020receiverUser" +
-      "Name\030\003 \001(\t\022\026\n\016senderClientId\030\010 \001(\005\022\030\n\020re",
-      "ceiverClientId\030\t \001(\005\022\017\n\007msgText\030\004 \001(\t\022\024\n" +
-      "\014msgImageName\030\005 \001(\t\022\024\n\014msgImageBits\030\006 \001(" +
-      "\014\0228\n\013messageType\030\007 \001(\0162\032.ClientMessage.M" +
-      "essageType:\007SUCCESS\022\027\n\010isClient\030\n \001(\010:\005f" +
-      "alse\022 \n\021broadcastInternal\030\013 \001(\010:\005false\"\'" +
-      "\n\013MessageType\022\013\n\007REQUEST\020\000\022\013\n\007SUCCESS\020\001\"" +
-      "L\n\016ClusterMessage\022&\n\016client_message\030\001 \001(" +
-      "\0132\016.ClientMessage\022\022\n\ncluster_id\030\002 \001(\005\"\376\001" +
-      "\n\007Payload\022\023\n\004ping\030\001 \001(\0132\005.Ping\022%\n\010space_" +
-      "op\030\002 \001(\0132\023.NameSpaceOperation\022\035\n\006job_op\030",
-      "\003 \001(\0132\r.JobOperation\022\036\n\njob_status\030\r \001(\013" +
-      "2\n.JobStatus\022&\n\014space_status\030\014 \001(\0132\020.Nam" +
-      "eSpaceStatus\022&\n\016client_message\030\005 \001(\0132\016.C" +
-      "lientMessage\022(\n\017cluster_message\030\004 \001(\0132\017." +
-      "ClusterMessage\"g\n\013JoinMessage\022\024\n\014from_no" +
+      "RWARD\020\006\"L\n\016ClusterMessage\022&\n\016client_mess" +
+      "age\030\001 \001(\0132\016.ClientMessage\022\022\n\ncluster_id\030" +
+      "\002 \001(\005\"\376\001\n\007Payload\022\023\n\004ping\030\001 \001(\0132\005.Ping\022%",
+      "\n\010space_op\030\002 \001(\0132\023.NameSpaceOperation\022\035\n" +
+      "\006job_op\030\003 \001(\0132\r.JobOperation\022\036\n\njob_stat" +
+      "us\030\r \001(\0132\n.JobStatus\022&\n\014space_status\030\014 \001" +
+      "(\0132\020.NameSpaceStatus\022&\n\016client_message\030\005" +
+      " \001(\0132\016.ClientMessage\022(\n\017cluster_message\030" +
+      "\004 \001(\0132\017.ClusterMessage\"\335\002\n\rClientMessage" +
+      "\022\r\n\005msgId\030\001 \001(\t\022\026\n\016senderUserName\030\002 \001(\t\022" +
+      "\030\n\020receiverUserName\030\003 \001(\t\022\026\n\016senderClien" +
+      "tId\030\010 \001(\005\022\030\n\020receiverClientId\030\014 \001(\005\022\017\n\007m" +
+      "sgText\030\004 \001(\t\022\024\n\014msgImageName\030\005 \001(\t\022\024\n\014ms",
+      "gImageBits\030\006 \001(\014\0228\n\013messageType\030\007 \001(\0162\032." +
+      "ClientMessage.MessageType:\007SUCCESS\022\027\n\010is" +
+      "Client\030\n \001(\010:\005false\022 \n\021broadcastInternal" +
+      "\030\013 \001(\010:\005false\"\'\n\013MessageType\022\013\n\007REQUEST\020" +
+      "\000\022\013\n\007SUCCESS\020\001\"g\n\013JoinMessage\022\024\n\014from_no" +
       "de_id\030\001 \001(\005\022\022\n\nto_node_id\030\002 \001(\005\022\027\n\017from_" +
       "cluster_id\030\003 \001(\005\022\025\n\rto_cluster_id\030\004 \001(\005\"" +
       "^\n\007Request\022\027\n\006header\030\001 \002(\0132\007.Header\022\026\n\004b" +
@@ -20261,24 +20261,24 @@ public final class App {
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_Header_descriptor,
               new java.lang.String[] { "RoutingId", "Originator", "Tag", "Time", "ReplyCode", "ReplyMsg", "Path", "ToNode", "Options", });
-          internal_static_ClientMessage_descriptor =
-            getDescriptor().getMessageTypes().get(12);
-          internal_static_ClientMessage_fieldAccessorTable = new
-            com.google.protobuf.GeneratedMessage.FieldAccessorTable(
-              internal_static_ClientMessage_descriptor,
-              new java.lang.String[] { "MsgId", "SenderUserName", "ReceiverUserName", "SenderClientId", "ReceiverClientId", "MsgText", "MsgImageName", "MsgImageBits", "MessageType", "IsClient", "BroadcastInternal", });
           internal_static_ClusterMessage_descriptor =
-            getDescriptor().getMessageTypes().get(13);
+            getDescriptor().getMessageTypes().get(12);
           internal_static_ClusterMessage_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_ClusterMessage_descriptor,
               new java.lang.String[] { "ClientMessage", "ClusterId", });
           internal_static_Payload_descriptor =
-            getDescriptor().getMessageTypes().get(14);
+            getDescriptor().getMessageTypes().get(13);
           internal_static_Payload_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_Payload_descriptor,
               new java.lang.String[] { "Ping", "SpaceOp", "JobOp", "JobStatus", "SpaceStatus", "ClientMessage", "ClusterMessage", });
+          internal_static_ClientMessage_descriptor =
+            getDescriptor().getMessageTypes().get(14);
+          internal_static_ClientMessage_fieldAccessorTable = new
+            com.google.protobuf.GeneratedMessage.FieldAccessorTable(
+              internal_static_ClientMessage_descriptor,
+              new java.lang.String[] { "MsgId", "SenderUserName", "ReceiverUserName", "SenderClientId", "ReceiverClientId", "MsgText", "MsgImageName", "MsgImageBits", "MessageType", "IsClient", "BroadcastInternal", });
           internal_static_JoinMessage_descriptor =
             getDescriptor().getMessageTypes().get(15);
           internal_static_JoinMessage_fieldAccessorTable = new

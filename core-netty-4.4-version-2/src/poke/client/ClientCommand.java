@@ -205,7 +205,7 @@ public class ClientCommand {
 		        clientImage.setSenderUserName("Client1");
 		        clientImage.setReceiverUserName("Client2");
 		        clientImage.setSenderClientId(1000);
-		        clientImage.setReceiverClientId(-1);
+		        clientImage.setReceiverClientId(2000);
 		        clientImage.setMsgText("Hello Client2");
 		        clientImage.setMsgImageName(file.getName());
 		        clientImage.setMsgImageBits(ByteString.copyFrom(imageInByte));
@@ -215,7 +215,7 @@ public class ClientCommand {
 				r.setBody(p);
 				r.setHeader(h);
 				Request req = r.build();
-		
+				System.out.println("Client ma pan " + req.getBody().getClientMessage().getReceiverClientId());
 				comm.sendMessage(req);
 			}
 			catch (Exception e) {

@@ -67,6 +67,7 @@ public class PerChannelQueue implements ChannelQueue {
 		inbound = new LinkedBlockingDeque<com.google.protobuf.GeneratedMessage>();
 		outbound = new LinkedBlockingDeque<com.google.protobuf.GeneratedMessage>();
 
+		logger.info("Starting to listen to App worker");
 		iworker = new InboundAppWorker(tgroup, 1, this);
 		iworker.start();
 

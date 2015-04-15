@@ -57,9 +57,10 @@ public class ConnectionManager {
 			connections.put(nodeId, channel);
 			logger.info("Client Added in Connection Manager " + nodeId);
 		}
-		else if(state == connectionState.SERVERAPP)
+		else if(state == connectionState.SERVERAPP){
 			appconnections.put(nodeId, channel);
-			logger.info("Node Added in Connection Manager " + nodeId);
+			logger.info("Server Added in Connection Manager " + nodeId);
+		}
 	}
 
 	public static Channel getConnection(Integer nodeId, connectionState state) {
@@ -143,9 +144,13 @@ public class ConnectionManager {
 	public synchronized static void broadcastServers(Request req) {
 		if (req == null)
 			return;
-
+		System.out.println("Broadcast to servers");
+		System.out.println("Length " + appconnections.keySet().size() );
 		for (Channel ch : appconnections.values())
+		{
+			System.out.println("app connections");
 			ch.writeAndFlush(req);
+		}
 	}
 
 	public synchronized static void broadcast(Management mgmt) {

@@ -38,11 +38,8 @@ public class Jab {
 		ClientCommand cc = new ClientCommand("localhost", 5570);
 		CommListener listener = new ClientPrintListener("jab demo");
 		cc.addListener(listener);
-
-		for (int i = 0; i < 3; i++) {
-			count++;
-			cc.poke(tag, count);
-		}
+		cc.sendRegisterRequest();
+		
 	}
 
 	public static void main(String[] args) {
