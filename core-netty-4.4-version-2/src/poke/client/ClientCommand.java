@@ -204,18 +204,21 @@ public class ClientCommand {
 		        clientImage.setMsgId("1");
 		        clientImage.setSenderUserName("Client1");
 		        clientImage.setReceiverUserName("Client2");
-		        clientImage.setSenderClientId(1000);
-		        clientImage.setReceiverClientId(2000);
+		        clientImage.setSenderClientId(1);
+		        clientImage.setReceiverClientId(2);
+		        System.out.println("Client Receiver ID " + clientImage.getReceiverClientId());
 		        clientImage.setMsgText("Hello Client2");
 		        clientImage.setMsgImageName(file.getName());
 		        clientImage.setMsgImageBits(ByteString.copyFrom(imageInByte));
 		        clientImage.setMessageType(poke.comm.App.ClientMessage.MessageType.REQUEST);
 		        clientImage.setIsClient(true);
 		        clientImage.setBroadcastInternal(true);
+		        p.setClientMessage(clientImage);
 				r.setBody(p);
 				r.setHeader(h);
 				Request req = r.build();
-				System.out.println("Client ma pan " + req.getBody().getClientMessage().getReceiverClientId());
+				System.out.println("Client Receiver ID " + req.getBody().getClientMessage().getReceiverClientId());
+				System.out.println("Client Sender ID " + req.getBody().getClientMessage().getSenderClientId());
 				comm.sendMessage(req);
 			}
 			catch (Exception e) {

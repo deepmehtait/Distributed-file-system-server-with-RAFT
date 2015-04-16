@@ -65,6 +65,7 @@ public class ftpConnection {
 		    ftp.cwd("images");
 		    System.out.println("changed dir");
 		    ftp.stor(inputStream, "test.jpg");
+		    System.out.println("The file is uploaded successfully.");
 		    ftp.disconnect();
     	}
     	catch(IOException e){

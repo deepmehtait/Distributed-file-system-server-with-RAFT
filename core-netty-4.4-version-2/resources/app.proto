@@ -241,7 +241,7 @@ message ClientMessage{
   optional string senderUserName = 2;
   optional string receiverUserName = 3;
   optional int32  senderClientId = 8;
-  optional int32  receiverClientId = 12;
+  optional int32  receiverClientId = 9;
   optional string msgText = 4;
   optional string msgImageName = 5;
   optional bytes msgImageBits = 6;
