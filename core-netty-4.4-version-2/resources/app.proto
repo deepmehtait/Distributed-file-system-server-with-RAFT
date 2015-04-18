@@ -266,8 +266,8 @@ message JoinMessage {
 }
 
 message Request {
-    required Header header = 1;
-    required Payload body = 2;
+    optional Header header = 1;
+    optional Payload body = 2;
     optional JoinMessage join_message = 3;
 }
 

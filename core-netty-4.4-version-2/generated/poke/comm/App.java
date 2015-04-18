@@ -19095,31 +19095,31 @@ public final class App {
   public interface RequestOrBuilder
       extends com.google.protobuf.MessageOrBuilder {
 
-    // required .Header header = 1;
+    // optional .Header header = 1;
     /**
-     * <code>required .Header header = 1;</code>
+     * <code>optional .Header header = 1;</code>
      */
     boolean hasHeader();
     /**
-     * <code>required .Header header = 1;</code>
+     * <code>optional .Header header = 1;</code>
      */
     poke.comm.App.Header getHeader();
     /**
-     * <code>required .Header header = 1;</code>
+     * <code>optional .Header header = 1;</code>
      */
     poke.comm.App.HeaderOrBuilder getHeaderOrBuilder();
 
-    // required .Payload body = 2;
+    // optional .Payload body = 2;
     /**
-     * <code>required .Payload body = 2;</code>
+     * <code>optional .Payload body = 2;</code>
      */
     boolean hasBody();
     /**
-     * <code>required .Payload body = 2;</code>
+     * <code>optional .Payload body = 2;</code>
      */
     poke.comm.App.Payload getBody();
     /**
-     * <code>required .Payload body = 2;</code>
+     * <code>optional .Payload body = 2;</code>
      */
     poke.comm.App.PayloadOrBuilder getBodyOrBuilder();
 
@@ -19267,45 +19267,45 @@ public final class App {
     }
 
     private int bitField0_;
-    // required .Header header = 1;
+    // optional .Header header = 1;
     public static final int HEADER_FIELD_NUMBER = 1;
     private poke.comm.App.Header header_;
     /**
-     * <code>required .Header header = 1;</code>
+     * <code>optional .Header header = 1;</code>
      */
     public boolean hasHeader() {
       return ((bitField0_ & 0x00000001) == 0x00000001);
     }
     /**
-     * <code>required .Header header = 1;</code>
+     * <code>optional .Header header = 1;</code>
      */
     public poke.comm.App.Header getHeader() {
       return header_;
     }
     /**
-     * <code>required .Header header = 1;</code>
+     * <code>optional .Header header = 1;</code>
      */
     public poke.comm.App.HeaderOrBuilder getHeaderOrBuilder() {
       return header_;
     }
 
-    // required .Payload body = 2;
+    // optional .Payload body = 2;
     public static final int BODY_FIELD_NUMBER = 2;
     private poke.comm.App.Payload body_;
     /**
-     * <code>required .Payload body = 2;</code>
+     * <code>optional .Payload body = 2;</code>
      */
     public boolean hasBody() {
       return ((bitField0_ & 0x00000002) == 0x00000002);
     }
     /**
-     * <code>required .Payload body = 2;</code>
+     * <code>optional .Payload body = 2;</code>
      */
     public poke.comm.App.Payload getBody() {
       return body_;
     }
     /**
-     * <code>required .Payload body = 2;</code>
+     * <code>optional .Payload body = 2;</code>
      */
     public poke.comm.App.PayloadOrBuilder getBodyOrBuilder() {
       return body_;
@@ -19343,21 +19343,17 @@ public final class App {
       byte isInitialized = memoizedIsInitialized;
       if (isInitialized != -1) return isInitialized == 1;
 
-      if (!hasHeader()) {
-        memoizedIsInitialized = 0;
-        return false;
+      if (hasHeader()) {
+        if (!getHeader().isInitialized()) {
+          memoizedIsInitialized = 0;
+          return false;
+        }
       }
-      if (!hasBody()) {
-        memoizedIsInitialized = 0;
-        return false;
-      }
-      if (!getHeader().isInitialized()) {
-        memoizedIsInitialized = 0;
-        return false;
-      }
-      if (!getBody().isInitialized()) {
-        memoizedIsInitialized = 0;
-        return false;
+      if (hasBody()) {
+        if (!getBody().isInitialized()) {
+          memoizedIsInitialized = 0;
+          return false;
+        }
       }
       memoizedIsInitialized = 1;
       return true;
@@ -19615,21 +19611,17 @@ public final class App {
       }
 
       public final boolean isInitialized() {
-        if (!hasHeader()) {
-          
-          return false;
+        if (hasHeader()) {
+          if (!getHeader().isInitialized()) {
+            
+            return false;
+          }
         }
-        if (!hasBody()) {
-          
-          return false;
-        }
-        if (!getHeader().isInitialized()) {
-          
-          return false;
-        }
-        if (!getBody().isInitialized()) {
-          
-          return false;
+        if (hasBody()) {
+          if (!getBody().isInitialized()) {
+            
+            return false;
+          }
         }
         return true;
       }
@@ -19653,18 +19645,18 @@ public final class App {
       }
       private int bitField0_;
 
-      // required .Header header = 1;
+      // optional .Header header = 1;
       private poke.comm.App.Header header_ = poke.comm.App.Header.getDefaultInstance();
       private com.google.protobuf.SingleFieldBuilder<
           poke.comm.App.Header, poke.comm.App.Header.Builder, poke.comm.App.HeaderOrBuilder> headerBuilder_;
       /**
-       * <code>required .Header header = 1;</code>
+       * <code>optional .Header header = 1;</code>
        */
       public boolean hasHeader() {
         return ((bitField0_ & 0x00000001) == 0x00000001);
       }
       /**
-       * <code>required .Header header = 1;</code>
+       * <code>optional .Header header = 1;</code>
        */
       public poke.comm.App.Header getHeader() {
         if (headerBuilder_ == null) {
@@ -19674,7 +19666,7 @@ public final class App {
         }
       }
       /**
-       * <code>required .Header header = 1;</code>
+       * <code>optional .Header header = 1;</code>
        */
       public Builder setHeader(poke.comm.App.Header value) {
         if (headerBuilder_ == null) {
@@ -19690,7 +19682,7 @@ public final class App {
         return this;
       }
       /**
-       * <code>required .Header header = 1;</code>
+       * <code>optional .Header header = 1;</code>
        */
       public Builder setHeader(
           poke.comm.App.Header.Builder builderForValue) {
@@ -19704,7 +19696,7 @@ public final class App {
         return this;
       }
       /**
-       * <code>required .Header header = 1;</code>
+       * <code>optional .Header header = 1;</code>
        */
       public Builder mergeHeader(poke.comm.App.Header value) {
         if (headerBuilder_ == null) {
@@ -19723,7 +19715,7 @@ public final class App {
         return this;
       }
       /**
-       * <code>required .Header header = 1;</code>
+       * <code>optional .Header header = 1;</code>
        */
       public Builder clearHeader() {
         if (headerBuilder_ == null) {
@@ -19736,7 +19728,7 @@ public final class App {
         return this;
       }
       /**
-       * <code>required .Header header = 1;</code>
+       * <code>optional .Header header = 1;</code>
        */
       public poke.comm.App.Header.Builder getHeaderBuilder() {
         bitField0_ |= 0x00000001;
@@ -19744,7 +19736,7 @@ public final class App {
         return getHeaderFieldBuilder().getBuilder();
       }
       /**
-       * <code>required .Header header = 1;</code>
+       * <code>optional .Header header = 1;</code>
        */
       public poke.comm.App.HeaderOrBuilder getHeaderOrBuilder() {
         if (headerBuilder_ != null) {
@@ -19754,7 +19746,7 @@ public final class App {
         }
       }
       /**
-       * <code>required .Header header = 1;</code>
+       * <code>optional .Header header = 1;</code>
        */
       private com.google.protobuf.SingleFieldBuilder<
           poke.comm.App.Header, poke.comm.App.Header.Builder, poke.comm.App.HeaderOrBuilder> 
@@ -19770,18 +19762,18 @@ public final class App {
         return headerBuilder_;
       }
 
-      // required .Payload body = 2;
+      // optional .Payload body = 2;
       private poke.comm.App.Payload body_ = poke.comm.App.Payload.getDefaultInstance();
       private com.google.protobuf.SingleFieldBuilder<
           poke.comm.App.Payload, poke.comm.App.Payload.Builder, poke.comm.App.PayloadOrBuilder> bodyBuilder_;
       /**
-       * <code>required .Payload body = 2;</code>
+       * <code>optional .Payload body = 2;</code>
        */
       public boolean hasBody() {
         return ((bitField0_ & 0x00000002) == 0x00000002);
       }
       /**
-       * <code>required .Payload body = 2;</code>
+       * <code>optional .Payload body = 2;</code>
        */
       public poke.comm.App.Payload getBody() {
         if (bodyBuilder_ == null) {
@@ -19791,7 +19783,7 @@ public final class App {
         }
       }
       /**
-       * <code>required .Payload body = 2;</code>
+       * <code>optional .Payload body = 2;</code>
        */
       public Builder setBody(poke.comm.App.Payload value) {
         if (bodyBuilder_ == null) {
@@ -19807,7 +19799,7 @@ public final class App {
         return this;
       }
       /**
-       * <code>required .Payload body = 2;</code>
+       * <code>optional .Payload body = 2;</code>
        */
       public Builder setBody(
           poke.comm.App.Payload.Builder builderForValue) {
@@ -19821,7 +19813,7 @@ public final class App {
         return this;
       }
       /**
-       * <code>required .Payload body = 2;</code>
+       * <code>optional .Payload body = 2;</code>
        */
       public Builder mergeBody(poke.comm.App.Payload value) {
         if (bodyBuilder_ == null) {
@@ -19840,7 +19832,7 @@ public final class App {
         return this;
       }
       /**
-       * <code>required .Payload body = 2;</code>
+       * <code>optional .Payload body = 2;</code>
        */
       public Builder clearBody() {
         if (bodyBuilder_ == null) {
@@ -19853,7 +19845,7 @@ public final class App {
         return this;
       }
       /**
-       * <code>required .Payload body = 2;</code>
+       * <code>optional .Payload body = 2;</code>
        */
       public poke.comm.App.Payload.Builder getBodyBuilder() {
         bitField0_ |= 0x00000002;
@@ -19861,7 +19853,7 @@ public final class App {
         return getBodyFieldBuilder().getBuilder();
       }
       /**
-       * <code>required .Payload body = 2;</code>
+       * <code>optional .Payload body = 2;</code>
        */
       public poke.comm.App.PayloadOrBuilder getBodyOrBuilder() {
         if (bodyBuilder_ != null) {
@@ -19871,7 +19863,7 @@ public final class App {
         }
       }
       /**
-       * <code>required .Payload body = 2;</code>
+       * <code>optional .Payload body = 2;</code>
        */
       private com.google.protobuf.SingleFieldBuilder<
           poke.comm.App.Payload, poke.comm.App.Payload.Builder, poke.comm.App.PayloadOrBuilder> 
@@ -20176,8 +20168,8 @@ public final class App {
       "\000\022\013\n\007SUCCESS\020\001\"g\n\013JoinMessage\022\024\n\014from_no" +
       "de_id\030\001 \001(\005\022\022\n\nto_node_id\030\002 \001(\005\022\027\n\017from_" +
       "cluster_id\030\003 \001(\005\022\025\n\rto_cluster_id\030\004 \001(\005\"" +
-      "^\n\007Request\022\027\n\006header\030\001 \002(\0132\007.Header\022\026\n\004b" +
-      "ody\030\002 \002(\0132\010.Payload\022\"\n\014join_message\030\003 \001(" +
+      "^\n\007Request\022\027\n\006header\030\001 \001(\0132\007.Header\022\026\n\004b" +
+      "ody\030\002 \001(\0132\010.Payload\022\"\n\014join_message\030\003 \001(" +
       "\0132\014.JoinMessage*\221\001\n\nPokeStatus\022\n\n\006UKNOWN",
       "\020\001\022\013\n\007SUCCESS\020\002\022\013\n\007NOFOUND\020d\022\020\n\014NOINCOMP" +
       "LETE\020e\022\n\n\006NOAUTH\020f\022\020\n\014NOCONNECTION\020g\022\017\n\013" +

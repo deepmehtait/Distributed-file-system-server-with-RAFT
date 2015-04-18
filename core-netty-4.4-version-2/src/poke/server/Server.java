@@ -23,19 +23,18 @@ import io.netty.channel.group.ChannelGroup;
 import io.netty.channel.group.ChannelGroupFuture;
 import io.netty.channel.nio.NioEventLoopGroup;
 import io.netty.channel.socket.nio.NioServerSocketChannel;
+
 import java.io.BufferedInputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.concurrent.TimeUnit;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import poke.server.conf.ClusterConfList;
 import poke.server.conf.JsonUtil;
 import poke.server.conf.NodeDesc;
 import poke.server.conf.ServerConf;
@@ -68,7 +67,8 @@ public class Server {
 	protected static ChannelGroup allChannels;
 	protected static HashMap<Integer, ServerBootstrap> bootstrap = new HashMap<Integer, ServerBootstrap>();
 	protected ServerConf conf;
-
+	protected ClusterConfList clusterConfList;
+	
 	protected JobManager jobMgr;
 	protected NetworkManager networkMgr;
 	protected HeartbeatManager heartbeatMgr;
@@ -97,9 +97,45 @@ public class Server {
 	 * 
 	 * @param cfg
 	 */
-	public Server(File cfg) {
+	public Server(File cfg, File clusterCfg) {
 		init(cfg);
+		initCluster(clusterCfg);
 	}
+	
+	@SuppressWarnings("resource")
+	private void initCluster(File clusterCfg) {
+		// TODO Auto-generated method stub
+
+		if (!clusterCfg.exists())
+			throw new RuntimeException(clusterCfg.getAbsolutePath()
+					+ " not found");
+		BufferedInputStream br = null;
+		try {
+			byte[] raw = new byte[(int) clusterCfg.length()];
+			new BufferedInputStream(new FileInputStream(clusterCfg)).read(raw);
+			clusterConfList = JsonUtil.decode(new String(raw),
+					ClusterConfList.class);
+
+			if (!verifyClusterConf(clusterConfList))
+				throw new RuntimeException(
+						"verification of cluster configuration failed");
+
+			ResourceFactory.initializeCluster(clusterConfList);
+
+		} catch (Exception ex) {
+			ex.printStackTrace();
+		} finally {
+			if (br != null) {
+				try {
+					br.close();
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+			}
+		}
+
+	}
+
 
 	private void init(File cfg) {
 		if (!cfg.exists())
@@ -142,6 +178,16 @@ public class Server {
 
 		return rtn;
 	}
+	
+	private boolean verifyClusterConf(ClusterConfList conf) {
+		boolean rtn = true;
+		if (conf == null) {
+			logger.error("Null configuration");
+			return false;
+		} 
+		return rtn;
+	}
+	
 
 	public void release() {
 		if (HeartbeatManager.getInstance() != null)
@@ -277,7 +323,7 @@ public class Server {
 		// create manager for leader election. The number of votes (default 1)
 		// is used to break ties where there are an even number of nodes.
 		//electionMgr = ElectionManager.initManager(conf);
-		raftMgr = RaftManager.initManager(conf);
+		raftMgr = RaftManager.initManager(conf, clusterConfList);
 		// create manager for accepting jobs
 		jobMgr = JobManager.initManager(conf);
 
@@ -295,6 +341,7 @@ public class Server {
 		// manage heartbeatMgr connections
 		HeartbeatPusher conn = HeartbeatPusher.getInstance();
 		conn.start();
+
 		/***** Leader Election Start 29th March 2015*************************************************************************
 	    * This will start the monitor thread and check whether there is leader or not. If not then it will start the Election. 
 	    * This thread is used to send appendRPC to all the followers. IF they don't receive messages within a certain period then
@@ -303,6 +350,9 @@ public class Server {
 		raftMgr.startMonitor();
 		
 		logger.info("Server " + conf.getNodeId() + ", managers initialized");
+
+		//Adding code to add all clusters 
+		
 	}
 
 	/**
@@ -338,7 +388,7 @@ public class Server {
 	 */
 	
 	public static void main(String[] args) {
-		if (args.length != 1) {
+		if (args.length != 2) {
 			System.err.println("Usage: java " + Server.class.getClass().getName() + " conf-file");
 			System.exit(1);
 		}
@@ -347,9 +397,16 @@ public class Server {
 		if (!cfg.exists()) {
 			Server.logger.error("configuration file does not exist: " + cfg);
 			System.exit(2);
-		}	  
+		}
 		
-		Server svr = new Server(cfg);
+		
+		File clusterCfg = new File(args[1]);
+		if (!clusterCfg.exists()) {
+			Server.logger.error("configuration file does not exist: " + cfg);
+			System.exit(2);
+		}
+		
+		Server svr = new Server(cfg, clusterCfg);
 		svr.run();
 	}
 }

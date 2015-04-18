@@ -25,8 +25,6 @@ import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlRootElement;
 
-import org.apache.commons.collections.iterators.EntrySetMapIterator;
-
 import poke.server.storage.noop.ElectionNoOpStorage;
 import poke.server.storage.noop.TenantNoOpStorage;
 import poke.server.storage.noop.VotingNoOpStorage;

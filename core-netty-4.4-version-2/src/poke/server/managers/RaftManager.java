@@ -1,18 +1,36 @@
 package poke.server.managers;
 
+import io.netty.bootstrap.Bootstrap;
 import io.netty.channel.Channel;
+import io.netty.channel.ChannelFuture;
+import io.netty.channel.ChannelFutureListener;
+import io.netty.channel.ChannelOption;
+import io.netty.channel.EventLoopGroup;
+import io.netty.channel.nio.NioEventLoopGroup;
+import io.netty.channel.socket.nio.NioSocketChannel;
 
 import java.beans.Beans;
+import java.util.HashMap;
+import java.util.Iterator;
 import java.util.LinkedHashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.NoSuchElementException;
 import java.util.concurrent.atomic.AtomicReference;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import poke.comm.App.JoinMessage;
+import poke.comm.App.Request;
 import poke.core.Mgmt.Management;
 import poke.core.Mgmt.MgmtHeader;
 import poke.core.Mgmt.RaftMessage;
 import poke.core.Mgmt.RaftMessage.RaftAction;
+import poke.server.ServerInitializer;
+import poke.server.conf.ClusterConfList;
+import poke.server.conf.ClusterConfList.ClusterConf;
+import poke.server.conf.NodeDesc;
 import poke.server.conf.ServerConf;
 import poke.server.election.Election;
 import poke.server.election.ElectionListener;
@@ -26,6 +44,7 @@ public class RaftManager implements ElectionListener {
 	protected static AtomicReference<RaftManager> instance = new AtomicReference<RaftManager>();
 
 	private static ServerConf conf;
+	private static ClusterConfList clusterConf;
 	private static long lastKnownBeat = System.currentTimeMillis();
 	// number of times we try to get the leader when a node starts up
 	private int firstTime = 2;
@@ -36,9 +55,11 @@ public class RaftManager implements ElectionListener {
 	/** The leader */
 	Integer leaderNode;
 
-	public static RaftManager initManager(ServerConf conf) {
+	public static RaftManager initManager(ServerConf conf, ClusterConfList clusterConfList) {
 		RaftManager.conf = conf;
+		RaftManager.clusterConf = clusterConfList;
 		instance.compareAndSet(null, new RaftManager());
+		
 		return instance.get();
 	}
 	
@@ -156,6 +177,8 @@ public class RaftManager implements ElectionListener {
 		logger.info("Raft Monitor Started ");
 		if (election == null)
 			((RaftElection) electionInstance()).getMonitor().start();
+			
+			new Thread(new ClusterConnectionManager()).start();
 	}
 	
 	public Integer whoIsTheLeader() {
@@ -258,5 +281,134 @@ public class RaftManager implements ElectionListener {
 	public void setLeaderNode(Integer leaderNode) {
 		this.leaderNode = leaderNode;
 	}
+	
+	public class ClusterConnectionManager extends Thread {
+		private Map<Integer, Channel> connMap = new HashMap<Integer, Channel>();
+		private Map<Integer, ClusterConf> clusterMap;
+
+			public ClusterConnectionManager() {
+				clusterMap = clusterConf.getClusters();
+			}
+
+			public void registerConnection(int nodeId, Channel channel) {
+				connMap.put(nodeId, channel);
+			}
+
+			public ChannelFuture connect(String host, int port) {
+
+				ChannelFuture channel = null;
+				EventLoopGroup workerGroup = new NioEventLoopGroup();
+
+				try {
+					logger.info("Attempting to  connect to : "+host+" : "+port);
+					Bootstrap b = new Bootstrap();
+					b.group(workerGroup).channel(NioSocketChannel.class)
+							.handler(new ServerInitializer(false));
+
+					b.option(ChannelOption.CONNECT_TIMEOUT_MILLIS, 10000);
+					b.option(ChannelOption.TCP_NODELAY, true);
+					b.option(ChannelOption.SO_KEEPALIVE, true);
+
+					channel = b.connect(host, port).syncUninterruptibly();
+					//ClusterLostListener cll = new ClusterLostListener(this);
+					//channel.channel().closeFuture().addListener(cll);
+
+				} catch (Exception e) {
+					//e.printStackTrace();
+					//logger.info("Cound not connect!!!!!!!!!!!!!!!!!!!!!!!!!");
+					return null;
+				}
+
+				return channel;
+			}
+
+			public Request createClusterJoinMessage(int fromCluster, int fromNode,
+					int toCluster, int toNode) {
+				//logger.info("Creating join message");
+				Request.Builder req = Request.newBuilder();
+
+				JoinMessage.Builder jm = JoinMessage.newBuilder();
+				jm.setFromClusterId(fromCluster);
+				jm.setFromNodeId(fromNode);
+				jm.setToClusterId(toCluster);
+				jm.setToNodeId(toNode);
+
+				req.setJoinMessage(jm.build());
+				return req.build();
+
+			}
+
+			@Override
+			public void run() {
+				Iterator<Integer> it = clusterMap.keySet().iterator();
+				while (true) {
+					//logger.info(""+isLeader);
+					if(whoIsTheLeader()!= null){
+						
+						try {
+							int key = it.next();
+							if (!connMap.containsKey(key)) {
+								ClusterConf cc = clusterMap.get(key);
+								List<NodeDesc> nodes = cc.getClusterNodes();
+								//logger.info("For cluster "+ key +" nodes "+ nodes.size());
+								for (NodeDesc n : nodes) {
+									String host = n.getHost();
+									int port = n.getPort();
+
+									ChannelFuture channel = connect(host, port);
+									Request req = createClusterJoinMessage(35325,
+											conf.getNodeId(), key, n.getNodeId());
+									if (channel != null) {
+										channel = channel.channel().writeAndFlush(req);
+//										logger.info("Message flushed"+channel.isDone()+ " "+
+//												 channel.channel().isWritable());
+										if (channel.channel().isWritable()) {
+											registerConnection(key,
+													channel.channel());
+											logger.info("Connection to cluster " + key
+													+ " added");
+											break;
+										}
+									}
+								}
+							}
+						} catch (NoSuchElementException e) {
+							//logger.info("Restarting iterations");
+							it = clusterMap.keySet().iterator();
+							try {
+								Thread.sleep(3000);
+							} catch (InterruptedException e1) {
+								// TODO Auto-generated catch block
+								e1.printStackTrace();
+							}
+						}
+					} else {
+						try {
+							Thread.sleep(3000);
+						} catch (InterruptedException e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						}
+					}
+				}
+			}
+			
+			
+			public class ClusterLostListener implements ChannelFutureListener {
+				ClusterConnectionManager ccm;
+
+				public ClusterLostListener(ClusterConnectionManager ccm) {
+					this.ccm = ccm;
+				}
+
+				@Override
+				public void operationComplete(ChannelFuture future) throws Exception {
+					logger.info("Cluster " + future.channel()
+							+ " closed. Removing connection");
+					// TODO remove dead connection
+				}
+			}
+		}
+
 	
 }
