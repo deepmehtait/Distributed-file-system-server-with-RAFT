@@ -5,9 +5,9 @@ import java.util.LinkedHashMap;
 public class LogMessage {
 	
 	int term;
-	int logIndex;
-	int prevLogTerm;
-	int prevLogIndex;
+	int logIndex=0 ;
+	int prevLogTerm =0;
+	int prevLogIndex =0 ;
 	LinkedHashMap<Integer, String> entries;
 	
 	public int getTerm() {

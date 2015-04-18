@@ -9001,17 +9001,17 @@ public final class Mgmt {
   public interface ManagementOrBuilder
       extends com.google.protobuf.MessageOrBuilder {
 
-    // required .MgmtHeader header = 1;
+    // optional .MgmtHeader header = 1;
     /**
-     * <code>required .MgmtHeader header = 1;</code>
+     * <code>optional .MgmtHeader header = 1;</code>
      */
     boolean hasHeader();
     /**
-     * <code>required .MgmtHeader header = 1;</code>
+     * <code>optional .MgmtHeader header = 1;</code>
      */
     poke.core.Mgmt.MgmtHeader getHeader();
     /**
-     * <code>required .MgmtHeader header = 1;</code>
+     * <code>optional .MgmtHeader header = 1;</code>
      */
     poke.core.Mgmt.MgmtHeaderOrBuilder getHeaderOrBuilder();
 
@@ -9372,23 +9372,23 @@ public final class Mgmt {
     }
 
     private int bitField0_;
-    // required .MgmtHeader header = 1;
+    // optional .MgmtHeader header = 1;
     public static final int HEADER_FIELD_NUMBER = 1;
     private poke.core.Mgmt.MgmtHeader header_;
     /**
-     * <code>required .MgmtHeader header = 1;</code>
+     * <code>optional .MgmtHeader header = 1;</code>
      */
     public boolean hasHeader() {
       return ((bitField0_ & 0x00000001) == 0x00000001);
     }
     /**
-     * <code>required .MgmtHeader header = 1;</code>
+     * <code>optional .MgmtHeader header = 1;</code>
      */
     public poke.core.Mgmt.MgmtHeader getHeader() {
       return header_;
     }
     /**
-     * <code>required .MgmtHeader header = 1;</code>
+     * <code>optional .MgmtHeader header = 1;</code>
      */
     public poke.core.Mgmt.MgmtHeaderOrBuilder getHeaderOrBuilder() {
       return header_;
@@ -9623,13 +9623,11 @@ public final class Mgmt {
       byte isInitialized = memoizedIsInitialized;
       if (isInitialized != -1) return isInitialized == 1;
 
-      if (!hasHeader()) {
-        memoizedIsInitialized = 0;
-        return false;
-      }
-      if (!getHeader().isInitialized()) {
-        memoizedIsInitialized = 0;
-        return false;
+      if (hasHeader()) {
+        if (!getHeader().isInitialized()) {
+          memoizedIsInitialized = 0;
+          return false;
+        }
       }
       if (hasGraph()) {
         if (!getGraph().isInitialized()) {
@@ -10052,13 +10050,11 @@ public final class Mgmt {
       }
 
       public final boolean isInitialized() {
-        if (!hasHeader()) {
-          
-          return false;
-        }
-        if (!getHeader().isInitialized()) {
-          
-          return false;
+        if (hasHeader()) {
+          if (!getHeader().isInitialized()) {
+            
+            return false;
+          }
         }
         if (hasGraph()) {
           if (!getGraph().isInitialized()) {
@@ -10118,18 +10114,18 @@ public final class Mgmt {
       }
       private int bitField0_;
 
-      // required .MgmtHeader header = 1;
+      // optional .MgmtHeader header = 1;
       private poke.core.Mgmt.MgmtHeader header_ = poke.core.Mgmt.MgmtHeader.getDefaultInstance();
       private com.google.protobuf.SingleFieldBuilder<
           poke.core.Mgmt.MgmtHeader, poke.core.Mgmt.MgmtHeader.Builder, poke.core.Mgmt.MgmtHeaderOrBuilder> headerBuilder_;
       /**
-       * <code>required .MgmtHeader header = 1;</code>
+       * <code>optional .MgmtHeader header = 1;</code>
        */
       public boolean hasHeader() {
         return ((bitField0_ & 0x00000001) == 0x00000001);
       }
       /**
-       * <code>required .MgmtHeader header = 1;</code>
+       * <code>optional .MgmtHeader header = 1;</code>
        */
       public poke.core.Mgmt.MgmtHeader getHeader() {
         if (headerBuilder_ == null) {
@@ -10139,7 +10135,7 @@ public final class Mgmt {
         }
       }
       /**
-       * <code>required .MgmtHeader header = 1;</code>
+       * <code>optional .MgmtHeader header = 1;</code>
        */
       public Builder setHeader(poke.core.Mgmt.MgmtHeader value) {
         if (headerBuilder_ == null) {
@@ -10155,7 +10151,7 @@ public final class Mgmt {
         return this;
       }
       /**
-       * <code>required .MgmtHeader header = 1;</code>
+       * <code>optional .MgmtHeader header = 1;</code>
        */
       public Builder setHeader(
           poke.core.Mgmt.MgmtHeader.Builder builderForValue) {
@@ -10169,7 +10165,7 @@ public final class Mgmt {
         return this;
       }
       /**
-       * <code>required .MgmtHeader header = 1;</code>
+       * <code>optional .MgmtHeader header = 1;</code>
        */
       public Builder mergeHeader(poke.core.Mgmt.MgmtHeader value) {
         if (headerBuilder_ == null) {
@@ -10188,7 +10184,7 @@ public final class Mgmt {
         return this;
       }
       /**
-       * <code>required .MgmtHeader header = 1;</code>
+       * <code>optional .MgmtHeader header = 1;</code>
        */
       public Builder clearHeader() {
         if (headerBuilder_ == null) {
@@ -10201,7 +10197,7 @@ public final class Mgmt {
         return this;
       }
       /**
-       * <code>required .MgmtHeader header = 1;</code>
+       * <code>optional .MgmtHeader header = 1;</code>
        */
       public poke.core.Mgmt.MgmtHeader.Builder getHeaderBuilder() {
         bitField0_ |= 0x00000001;
@@ -10209,7 +10205,7 @@ public final class Mgmt {
         return getHeaderFieldBuilder().getBuilder();
       }
       /**
-       * <code>required .MgmtHeader header = 1;</code>
+       * <code>optional .MgmtHeader header = 1;</code>
        */
       public poke.core.Mgmt.MgmtHeaderOrBuilder getHeaderOrBuilder() {
         if (headerBuilder_ != null) {
@@ -10219,7 +10215,7 @@ public final class Mgmt {
         }
       }
       /**
-       * <code>required .MgmtHeader header = 1;</code>
+       * <code>optional .MgmtHeader header = 1;</code>
        */
       private com.google.protobuf.SingleFieldBuilder<
           poke.core.Mgmt.MgmtHeader, poke.core.Mgmt.MgmtHeader.Builder, poke.core.Mgmt.MgmtHeaderOrBuilder> 
@@ -11352,7 +11348,7 @@ public final class Mgmt {
       "RIS\020\006\022\022\n\016APPENDRESPONSE\020\007\"G\n\020RaftAppendA" +
       "ction\022\023\n\017APPENDHEARTBEAT\020\001\022\r\n\tAPPENDLOG\020" +
       "\002\022\017\n\013APPENDVALUE\020\003\"\213\002\n\nManagement\022\033\n\006hea" +
-      "der\030\001 \002(\0132\013.MgmtHeader\022\027\n\005graph\030\002 \001(\0132\010." +
+      "der\030\001 \001(\0132\013.MgmtHeader\022\027\n\005graph\030\002 \001(\0132\010." +
       "Network\022\030\n\004beat\030\003 \001(\0132\n.Heartbeat\022!\n\010ele" +
       "ction\030\004 \001(\0132\017.LeaderElection\022!\n\013raftmess" +
       "age\030\005 \001(\0132\014.RaftMessage\022#\n\014vote_declare\030" +

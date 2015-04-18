@@ -117,16 +117,20 @@ public class HeartMonitor {
 
 	public void release() {
 		logger.warn("HeartMonitor: releasing resources");
-
-		for (Integer id : handler.listeners.keySet()) {
-			MonitorListener ml = handler.listeners.get(id);
-			ml.connectionClosed();
-
-			// hold back listeners to re-apply if the connection is
-			// re-established.
-			listeners.add(ml);
+		try{
+			for (Integer id : handler.listeners.keySet()) {
+				MonitorListener ml = handler.listeners.get(id);
+				ml.connectionClosed();
+	
+				// hold back listeners to re-apply if the connection is
+				// re-established.
+				listeners.add(ml);
+			}
 		}
-
+		catch(Exception e)
+		{
+			
+		}
 		// TODO should wait a fixed time and use a listener to reset values;
 		channel = null;
 		handler = null;
@@ -320,7 +324,13 @@ public class HeartMonitor {
 
 		@Override
 		public void operationComplete(ChannelFuture future) throws Exception {
-			monitor.release();
+			try{
+				monitor.release();
+			}
+			catch(Exception e)
+			{
+				
+			}
 		}
 	}
 }

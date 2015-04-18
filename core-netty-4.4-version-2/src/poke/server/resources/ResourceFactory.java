@@ -48,6 +48,7 @@ public class ResourceFactory {
 	protected static Logger logger = LoggerFactory.getLogger("server");
 
 	private static ServerConf cfg;
+	@SuppressWarnings("unused")
 	private static ClusterConfList clusterConfList;
 	
 	private static AtomicReference<ResourceFactory> factory = new AtomicReference<ResourceFactory>();
@@ -103,7 +104,6 @@ public class ResourceFactory {
 		 * that node will upload the image to FTP server and 
 		 * send a message to leader
 		 */
-		System.out.println(header.getRoutingId().getNumber() + " The id is");
 		ResourceConf rc = cfg.findById(header.getRoutingId().getNumber());
 		if (rc == null)
 		{

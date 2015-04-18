@@ -74,7 +74,6 @@ public class RaftManager implements ElectionListener {
 			respondToWhoIsTheLeader(mgmt);
 			return;
 		}
-
 		// else respond to the message using process Function in RaftElection
 
 		Management rtn = electionInstance().process(mgmt);
@@ -282,6 +281,10 @@ public class RaftManager implements ElectionListener {
 		this.leaderNode = leaderNode;
 	}
 	
+	/***Once the leader is elected 
+	 * This thread will continuosly send join message to all the nodes in the 
+	 * Cluster conf file.
+	***/
 	public class ClusterConnectionManager extends Thread {
 		private Map<Integer, Channel> connMap = new HashMap<Integer, Channel>();
 		private Map<Integer, ClusterConf> clusterMap;
@@ -300,7 +303,7 @@ public class RaftManager implements ElectionListener {
 				EventLoopGroup workerGroup = new NioEventLoopGroup();
 
 				try {
-					logger.info("Attempting to  connect to : "+host+" : "+port);
+					//logger.info("Attempting to  connect to : "+host+" : "+port);
 					Bootstrap b = new Bootstrap();
 					b.group(workerGroup).channel(NioSocketChannel.class)
 							.handler(new ServerInitializer(false));
@@ -310,12 +313,8 @@ public class RaftManager implements ElectionListener {
 					b.option(ChannelOption.SO_KEEPALIVE, true);
 
 					channel = b.connect(host, port).syncUninterruptibly();
-					//ClusterLostListener cll = new ClusterLostListener(this);
-					//channel.channel().closeFuture().addListener(cll);
-
 				} catch (Exception e) {
 					//e.printStackTrace();
-					//logger.info("Cound not connect!!!!!!!!!!!!!!!!!!!!!!!!!");
 					return null;
 				}
 
@@ -342,9 +341,7 @@ public class RaftManager implements ElectionListener {
 			public void run() {
 				Iterator<Integer> it = clusterMap.keySet().iterator();
 				while (true) {
-					//logger.info(""+isLeader);
 					if(whoIsTheLeader()!= null){
-						
 						try {
 							int key = it.next();
 							if (!connMap.containsKey(key)) {
@@ -360,8 +357,6 @@ public class RaftManager implements ElectionListener {
 											conf.getNodeId(), key, n.getNodeId());
 									if (channel != null) {
 										channel = channel.channel().writeAndFlush(req);
-//										logger.info("Message flushed"+channel.isDone()+ " "+
-//												 channel.channel().isWritable());
 										if (channel.channel().isWritable()) {
 											registerConnection(key,
 													channel.channel());
@@ -405,7 +400,6 @@ public class RaftManager implements ElectionListener {
 				public void operationComplete(ChannelFuture future) throws Exception {
 					logger.info("Cluster " + future.channel()
 							+ " closed. Removing connection");
-					// TODO remove dead connection
 				}
 			}
 		}

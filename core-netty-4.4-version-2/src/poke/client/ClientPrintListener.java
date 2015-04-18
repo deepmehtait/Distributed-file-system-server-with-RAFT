@@ -60,14 +60,14 @@ public class ClientPrintListener implements CommListener {
 			// namespace responses
 		} else if (msg.getHeader().getRoutingId().getNumber() == Header.Routing.JOBS_VALUE) {
 			try{
-				 System.out.println("Recieved Image from Client1");
-				 File downloadFile2 = new File("/home/ankit/Downloads/CMPE280/Hello");
+				 System.out.println("Recieved Image");
+				 File downloadFile2 = new File("/home/ankit/Downloads/abc.jpg");
 		         OutputStream outputStream2 = new BufferedOutputStream(new FileOutputStream(downloadFile2));
 		         msg.getBody().getClientMessage().getMsgIdBytes().writeTo(outputStream2);	            
 			}
 			catch(Exception e)
 			{
-				System.out.println("Exception aaala");
+				e.printStackTrace();
 			}
 			
 			

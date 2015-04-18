@@ -18,7 +18,6 @@ package poke.server.conf;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
-import java.util.Set;
 import java.util.TreeMap;
 
 import javax.xml.bind.annotation.XmlAccessType;
@@ -168,12 +167,6 @@ public class ServerConf {
 	}
 
 	public ResourceConf findById(int id) {
-		Set <Integer>s = asMap().keySet();	
-		for(int i : s)
-		{
-			System.out.println(i + " The ");
-			System.out.println(asMap().get(i));
-		}
 		return asMap().get(id);
 	}
 

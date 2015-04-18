@@ -24,58 +24,35 @@ import poke.client.comm.CommListener;
 
 
 /**
- * DEMO: how to use the command class to implement a ping
+ * DEMO: how to send register and jobs to server. Run this file using startClient.sh
  * 
- * @author gash
+ * @author ankit
  * 
  */
 public class Route {
 	private String tag;
-	private int count;
 
 	public Route(String tag) {
 		this.tag = tag;
 	}
-
-/*	public void run() {
-		ClientCommand cc = new ClientCommand("192.168.0.5", 5570);
-		CommListener listener = new ClientPrintListener("Route demo");
-		cc.addListener(listener);
-		//Send Poke message to Connect to Server
-		cc.sendRegisterRequest();
-
-		//After Poke message send a file to server
-		cc.sendJobsRequest("/home/ankit/Downloads/test.jpg");
-		
-	}*/
-
 	public static void main(String[] args) {
 		try {
-				ClientCommand cc = new ClientCommand("192.168.0.5", 5570);
-				CommListener listener = new ClientPrintListener("Route demo");
+				ClientCommand cc = new ClientCommand("localhost", 5570);
+				CommListener listener = new ClientPrintListener("Client demo");
 				cc.addListener(listener);
+				System.out.println("Client sending Register Request");
 				cc.sendRegisterRequest();
-				
 				int value = 0;
 				while (true) {
-					System.out.println("1. Poke");
-					System.out.println("2. Send Image");
+					System.out.println("Press 1 to Send Image");
 					BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 					value = Integer.parseInt(br.readLine());
 					switch (value) {
 					case 1:
-						//After Poke message send a file to server
 						cc.sendJobsRequest("/home/ankit/Downloads/test.jpg");
 						break;
 					}
 				}
-//				jab.run();
-			
-			// we are running asynchronously
-			
-			//System.exit(0);
-				
-
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

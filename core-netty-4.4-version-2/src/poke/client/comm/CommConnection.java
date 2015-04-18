@@ -20,14 +20,9 @@ import io.netty.channel.Channel;
 import io.netty.channel.ChannelFuture;
 import io.netty.channel.ChannelFutureListener;
 import io.netty.channel.ChannelOption;
-import io.netty.channel.ChannelPipeline;
 import io.netty.channel.EventLoopGroup;
 import io.netty.channel.nio.NioEventLoopGroup;
 import io.netty.channel.socket.nio.NioSocketChannel;
-import io.netty.handler.codec.LengthFieldBasedFrameDecoder;
-import io.netty.handler.codec.LengthFieldPrepender;
-import io.netty.handler.codec.protobuf.ProtobufDecoder;
-import io.netty.handler.codec.protobuf.ProtobufEncoder;
 
 import java.util.concurrent.LinkedBlockingDeque;
 
@@ -115,9 +110,7 @@ public class CommConnection {
 	}
 
 	private void init() {
-		// the queue to support client-side surging
-		System.out.println("IN init of Comm Connection ");
-		
+		// the queue to support client-side surging		
 		outbound = new LinkedBlockingDeque<com.google.protobuf.GeneratedMessage>();
 
 		group = new NioEventLoopGroup();
@@ -138,7 +131,7 @@ public class CommConnection {
 			if(channel == null)
 				System.out.println("Channel is null, not able to connect to Host: "+host+"  Port: "+port);
 			else
-				System.out.println("Channel created, not null");
+				System.out.println("Channel created and it is not null");
 		
 			// want to monitor the connection to the server s.t. if we loose the
 			// connection, we can try to re-establish it.

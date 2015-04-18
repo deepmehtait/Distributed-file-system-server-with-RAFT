@@ -1,13 +1,15 @@
 package poke.server.election;
 
-import io.netty.channel.Channel;
+/******
+ * This file is used for Raft Consensus algorithm
+ * In this file leader election and log replication steps are implemented
+ * @author ankit
+ */
 
 import java.util.List;
 import java.util.Random;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
 import poke.core.Mgmt.LeaderElection;
 import poke.core.Mgmt.LeaderElection.ElectAction;
 import poke.core.Mgmt.LogEntries;
@@ -17,7 +19,6 @@ import poke.core.Mgmt.RaftMessage;
 import poke.core.Mgmt.RaftMessage.RaftAction;
 import poke.core.Mgmt.RaftMessage.RaftAppendAction;
 import poke.server.managers.ConnectionManager;
-import poke.server.managers.ConnectionManager.connectionState;
 import poke.server.managers.HeartbeatManager;
 import poke.server.managers.RaftManager;
 
@@ -33,7 +34,7 @@ public class RaftElection implements Election {
 		Follower, Candidate, Leader
 	}
 	private RState currentState;
-	LogMessage lm;
+	LogMessage lm = new LogMessage();
 	boolean appendLogs = false;
 
 	private int leaderId = -1;
@@ -47,7 +48,7 @@ public class RaftElection implements Election {
 		this.timeElection = new Random().nextInt(20000);
 		if (this.timeElection < 16000)
 			this.timeElection += 7000;
-		logger.info("Time Electio  " + timeElection);
+		logger.info("Election Timeout  " + timeElection);
 		currentState = RState.Follower;
 	}
 	
@@ -63,28 +64,17 @@ public class RaftElection implements Election {
 	public Management process(Management mgmt) {
 		if (!mgmt.hasRaftmessage())
 			return null;
-
 		RaftMessage rm = mgmt.getRaftmessage();
-
+		
 		Management rtn = null;
 
 		if (rm.getRaftAction().getNumber() == RaftAction.REQUESTVOTE_VALUE) {
-			// an election is declared!
-			//
-			// if (currentState == RState.Candidate) {
-			// // candidate ignores other vote requests
-			// } else
-			if (currentState == RState.Follower
-					|| currentState == RState.Candidate) {
-
+			if (currentState == RState.Follower || currentState == RState.Candidate) {
 				this.lastKnownBeat = System.currentTimeMillis();
-				//If term>currentTerm 
-				
 				/**
-				 * check if already voted for this term or else vote for the
-				 * candidate
+				 * check if already voted for this term and candidate's log is atleast as upto
+				 * date as receiver's log.
 				 **/
-
 				if ((this.votedFor == null
 						|| rm.getTerm() > this.votedFor.getTerm()) && 
 						(rm.getLogIndex() >= this.getLm().getLogIndex())) {
@@ -94,33 +84,22 @@ public class RaftElection implements Election {
 								+ " for term" + rm.getTerm() + " from node "
 								+ nodeId + " voted term "
 								+ this.votedFor.getTerm());
-					} else {
-						System.out.println("Node " + nodeId
-								+ " Voting for first time for "
-								+ mgmt.getHeader().getOriginator());
-					}
-
+					} 
 					this.votedFor = rm;
 					rtn = castVote();
 				}
-			} else if (currentState == RState.Leader) {
-				// TODO
-			}
-		} else if (rm.getRaftAction().getNumber() == RaftAction.VOTE_VALUE) {
-
+			} 
+		} 
+		else if (rm.getRaftAction().getNumber() == RaftAction.VOTE_VALUE) {
 			if (currentState == RState.Candidate) {
 				System.out.println("Node " + getNodeId()
 						+ " received vote from Node "
 						+ mgmt.getHeader().getOriginator() + ". Votecount "
 						+ count);
 				receiveVote(rm);
-			} else if (currentState == RState.Follower) {
-
-			} else if (currentState == RState.Leader) {
-
-			}
-
-		} else if (rm.getRaftAction().getNumber() == RaftAction.LEADER_VALUE) {
+			} 
+		} 
+		else if (rm.getRaftAction().getNumber() == RaftAction.LEADER_VALUE) {
 			if (rm.getTerm() >= this.term) {
 				this.leaderId = mgmt.getHeader().getOriginator();
 				this.term = rm.getTerm();
@@ -129,7 +108,8 @@ public class RaftElection implements Election {
 				logger.info("Node " + mgmt.getHeader().getOriginator()
 						+ " is the leader ");
 			}
-		} else if (rm.getRaftAction().getNumber() == RaftAction.APPEND_VALUE) {
+		} 
+		else if (rm.getRaftAction().getNumber() == RaftAction.APPEND_VALUE) {
 			if (currentState == RState.Candidate) {
 				if (rm.getTerm() >= term) {
 					this.lastKnownBeat = System.currentTimeMillis();
@@ -139,11 +119,9 @@ public class RaftElection implements Election {
 					logger.info("Received Append RPC from leader "
 							+ mgmt.getHeader().getOriginator());
 				}
-
 			} 
 			else if (currentState == RState.Follower) {
 				this.term = rm.getTerm();
-				// Move this line to last stmt as this resets the timer
 				this.lastKnownBeat = System.currentTimeMillis();
 				logger.info("---Test--- " + mgmt.getHeader().getOriginator()
 						+ "\n RaftAction=" + rm.getRaftAction().getNumber()
@@ -157,8 +135,6 @@ public class RaftElection implements Election {
 							+ rm.getRaftAction().getNumber()
 							+ " RaftAppendAction="
 							+ rm.getRaftAppendAction().getNumber());
-							//sendAppendResponse(mgmt);
-
 				}
 				else if(rm.getRaftAppendAction().getNumber() == RaftAppendAction.APPENDLOG_VALUE){
 					List<LogEntries> list = rm.getEntriesList();
@@ -172,27 +148,8 @@ public class RaftElection implements Election {
 					}
 					
 				}
-				
 			} 
-			
-			
-			else if (currentState == RState.Leader) {
-				// should not happen
-			}
-		} else if (rm.getRaftAction().getNumber() == RaftAction.APPENDRESPONSE_VALUE) {
-			if (currentState == RState.Leader) {
-				
-			}
-			if (rm.getTerm() > this.term) {
-				this.leaderId = mgmt.getHeader().getOriginator();
-				this.term = rm.getTerm();
-				this.lastKnownBeat = System.currentTimeMillis();
-				notify1(true, mgmt.getHeader().getOriginator());
-				logger.info("Node " + mgmt.getHeader().getOriginator()
-						+ " is the leader ");
-			}
-		}
-		
+		} 
 		return rtn;
 	}
 		
@@ -310,8 +267,6 @@ public class RaftElection implements Election {
 		currentState = RState.Candidate;
 		count = 1;
 		term++;
-		logger.info("size of nodes "
-				+ HeartbeatManager.getInstance().outgoingHB.size());
 		//If it is a single node then declare itself the winner else send REquest VOte message
 		if (HeartbeatManager.getInstance().outgoingHB.size() == 0) {
 			notify1(true, this.nodeId);
@@ -323,8 +278,6 @@ public class RaftElection implements Election {
 		}
 
 		else {
-			logger.info("size of nodes IN ELSE.!="
-					+ HeartbeatManager.getInstance().outgoingHB.size());
 			ConnectionManager.broadcastAndFlush(sendRequestVoteNotice());
 		}
 
@@ -382,101 +335,9 @@ public class RaftElection implements Election {
 		}
 	}
 	
-// Response of Normal HB to Leader
-	private Management sendAppendResponse(Management mgmt) {
-		// TODO Auto-generated method stub
-		
-		RaftMessage.Builder rm = RaftMessage.newBuilder();
-		MgmtHeader.Builder mhb = MgmtHeader.newBuilder();
-		mhb.setTime(System.currentTimeMillis());
-		mhb.setSecurityCode(-999); // TODO add security
-		mhb.setOriginator(this.nodeId);
-		mhb.setToNode(mgmt.getHeader().getOriginator());
-		// Raft Message to be added
-		rm.setTerm(term);
-		rm.setSuccess(1);
-		rm.setRaftAction(RaftAction.APPENDRESPONSE);
-		Management.Builder mb = Management.newBuilder();
-		mb.setHeader(mhb.build());
-		mb.setRaftmessage(rm.build());
-		try{
-			Channel ch = ConnectionManager.getConnection(mgmt.getHeader().getOriginator(), connectionState.SERVERMGMT);
-			if(ch!=null)
-				ch.writeAndFlush(mb.build());
-			
-		}
-		catch (Exception ex){
-			ex.printStackTrace();
-		}
-		return null;
-
-	}
-	// Response of Log Replication to Leader
-	// can be success of failure
-	private Management sendAppendResponseLog(Management mgmt)
-	{
-		RaftMessage.Builder rm = RaftMessage.newBuilder();
-		MgmtHeader.Builder mhb = MgmtHeader.newBuilder();
-		mhb.setTime(System.currentTimeMillis());
-		mhb.setSecurityCode(-999); // TODO add security
-		mhb.setOriginator(this.nodeId);
-		mhb.setToNode(mgmt.getHeader().getOriginator());
-		// Raft Message to be added
-		rm.setTerm(term);
-		rm.setSuccess(1);
-		rm.setRaftAction(RaftAction.APPENDRESPONSE);
-		Management.Builder mb = Management.newBuilder();
-		mb.setHeader(mhb.build());
-		mb.setRaftmessage(rm.build());
-
-		try{
-			Channel ch = ConnectionManager.getConnection(mgmt.getHeader().getOriginator(), connectionState.SERVERMGMT);
-			if(ch!=null)
-				ch.writeAndFlush(mb.build());
-			
-		}
-		catch (Exception ex){
-			ex.printStackTrace();
-		}
-		return null;
-
-	}
-	// Response of Vlaue to Leader
-	// can be success of failure
-	private Management sendAppendResponseValue(Management mgmt)
-	{
-		RaftMessage.Builder rm = RaftMessage.newBuilder();
-		MgmtHeader.Builder mhb = MgmtHeader.newBuilder();
-		mhb.setTime(System.currentTimeMillis());
-		mhb.setSecurityCode(-999); // TODO add security
-		mhb.setOriginator(this.nodeId);
-		mhb.setToNode(mgmt.getHeader().getOriginator());
-		// Raft Message to be added
-		rm.setTerm(term);
-		rm.setSuccess(1);
-		rm.setRaftAction(RaftAction.APPENDRESPONSE);
-		Management.Builder mb = Management.newBuilder();
-		mb.setHeader(mhb.build());
-		mb.setRaftmessage(rm.build());
-
-		try{
-			Channel ch = ConnectionManager.getConnection(mgmt.getHeader().getOriginator(), connectionState.SERVERMGMT);
-			if(ch!=null)
-				ch.writeAndFlush(mb.build());
-			
-		}
-		catch (Exception ex){
-			ex.printStackTrace();
-		}
-		return null;
-
-	}
-
 	private void notify1(boolean success, Integer leader) {
-		logger.info("In NOtify Method ");
 		if (listener != null) {
 			listener.concludeWith(success, leader);
-			logger.info("Calling concludeWith");
 		}
 	}
 
@@ -584,21 +445,4 @@ public class RaftElection implements Election {
 	public void setAppendLogs(boolean appendLogs) {
 		this.appendLogs = appendLogs;
 	}
-	
-/*	class LogEntries{
-		int log_index;
-		int log_value;
-		public int getLog_index() {
-			return log_index;
-		}
-		public void setLog_index(int log_index) {
-			this.log_index = log_index;
-		}
-		public int getLog_value() {
-			return log_value;
-		}
-		public void setLog_value(int log_value) {
-			this.log_value = log_value;
-		}
-	}*/
 }

@@ -15,7 +15,7 @@ import poke.server.managers.ConnectionManager.connectionState;
 import poke.server.resources.Resource;
 
 public class RegisterResource implements Resource {
-	protected static Logger logger = LoggerFactory.getLogger("server");
+	protected static Logger logger = LoggerFactory.getLogger("Register Resource");
 
 		
 	public RegisterResource() {
@@ -27,6 +27,7 @@ public class RegisterResource implements Resource {
 		// TODO Auto-generated method stub
 		//Add the channel and node id in connections
 		//Send Reply to Client that successfully connected
+		logger.info("Received Register Request from Client");
 		Header head = request.getHeader(); 
 		
 		int clientId = request.getBody().getClientMessage().getSenderClientId();

@@ -154,7 +154,7 @@ message RaftMessage {
 
 // internal communication payload
 message Management {
-	required MgmtHeader header = 1;
+	optional MgmtHeader header = 1;
 
 	// a node joined or left the network
 	optional Network graph = 2;

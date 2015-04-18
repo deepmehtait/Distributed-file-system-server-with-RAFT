@@ -96,11 +96,6 @@ public class InboundAppWorker extends Thread {
 							// (reply).
 							 rsc.process(req,conn);
 						}
-/*
-						if (reply != null)
-							sq.enqueueResponse(reply, null);
-						else
-							logger.info("Reply is null");*/
 					}
 				}
 			} catch (InterruptedException ie) {
