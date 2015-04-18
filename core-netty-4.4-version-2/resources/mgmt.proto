@@ -119,6 +119,12 @@ message MgmtHeader {
 	optional int32 toNode = 8;
 }
 
+
+message LogEntries {
+  optional int32 log_index = 1;
+  optional string log_data = 2;
+}
+
 message RaftMessage {
 	optional int32 term = 3;
 	optional int32 logIndex = 4;
@@ -143,7 +149,7 @@ message RaftMessage {
 		APPENDVALUE = 3;
 	}
 	optional int32 success = 10;
-
+	repeated LogEntries entries = 11;
 }
 
 // internal communication payload

@@ -191,7 +191,7 @@ public class ConnectionManager {
 		} else
 			System.out.println("No clients found");
 	}
-	public static Set getKeySetConnections(connectionState state){
+	public static Set<Integer> getKeySetConnections(connectionState state){
 		if(state == connectionState.CLIENTAPP)
 		return connections.keySet();
 		else if(state == connectionState.SERVERAPP)

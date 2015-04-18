@@ -162,7 +162,7 @@ public class ClientCommand {
 		
 		ClientMessage.Builder clBuilder  = ClientMessage.newBuilder();
 		clBuilder.setSenderUserName("client");
-		clBuilder.setSenderClientId(1000);
+		clBuilder.setSenderClientId(1);
 
 		
 		//Build Payload

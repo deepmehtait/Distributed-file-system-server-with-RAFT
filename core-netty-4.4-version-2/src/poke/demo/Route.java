@@ -37,7 +37,7 @@ public class Route {
 		this.tag = tag;
 	}
 
-	public void run() {
+/*	public void run() {
 		ClientCommand cc = new ClientCommand("192.168.0.5", 5570);
 		CommListener listener = new ClientPrintListener("Route demo");
 		cc.addListener(listener);
@@ -47,7 +47,7 @@ public class Route {
 		//After Poke message send a file to server
 		cc.sendJobsRequest("/home/ankit/Downloads/test.jpg");
 		
-	}
+	}*/
 
 	public static void main(String[] args) {
 		try {
@@ -56,14 +56,14 @@ public class Route {
 				cc.addListener(listener);
 				cc.sendRegisterRequest();
 				
-				int option = 0;
+				int value = 0;
 				while (true) {
 					System.out.println("1. Poke");
 					System.out.println("2. Send Image");
 					BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-					option = Integer.parseInt(br.readLine());
-					switch (option) {
-					case 2:
+					value = Integer.parseInt(br.readLine());
+					switch (value) {
+					case 1:
 						//After Poke message send a file to server
 						cc.sendJobsRequest("/home/ankit/Downloads/test.jpg");
 						break;
@@ -74,6 +74,7 @@ public class Route {
 			// we are running asynchronously
 			
 			//System.exit(0);
+				
 
 		} catch (Exception e) {
 			e.printStackTrace();

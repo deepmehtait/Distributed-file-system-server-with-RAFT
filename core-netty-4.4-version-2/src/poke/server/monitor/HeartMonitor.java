@@ -39,7 +39,6 @@ import poke.core.Mgmt.Management;
 import poke.core.Mgmt.MgmtHeader;
 import poke.core.Mgmt.Network;
 import poke.core.Mgmt.Network.NetworkAction;
-import poke.server.ServerHandler;
 import poke.server.ServerInitializer;
 
 /**
@@ -74,8 +73,6 @@ public class HeartMonitor {
 	private List<MonitorListener> listeners = new ArrayList<MonitorListener>();
 
 	private MonitorHandler handler;
-	private ServerHandler shandler;
-
 	/**
 	 * Create a heartbeat message processor.
 	 * 
@@ -222,7 +219,7 @@ public class HeartMonitor {
 				//logger.error("Channel to node " + toNodeId + " not writable!");
 			}
 
-			logger.info("HeartMonitor sending join message to " + toNodeId) ;
+			//logger.info("HeartMonitor sending join message to " + toNodeId) ;
 			if(blnMgmt)
 			{
 				Network.Builder n = Network.newBuilder();
@@ -250,7 +247,8 @@ public class HeartMonitor {
 			}
 			else
 			{
-				logger.info("HeartMonitor sending APP message to " + toNodeId) ;
+				//sending Join Message to create channel for APP messages
+				//logger.info("HeartMonitor sending APP message to " + toNodeId) ;
 				Header.Builder header = Header.newBuilder();
 				header.setRoutingId(Routing.REGISTER);
 				header.setOriginator(iamNode);
@@ -266,7 +264,6 @@ public class HeartMonitor {
 				// uniqueness
 				jm.setFromNodeId(iamNode);
 				jm.setToNodeId(toNodeId);
-				
 				request.setJoinMessage(jm.build());
 				ch.writeAndFlush(request.build());
 				rtn = true;

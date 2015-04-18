@@ -28,23 +28,17 @@ public class ReportsResource implements Resource {
 		ClientMessage cm = request.getBody().getClientMessage();
 		int receiverClientId = request.getBody().getClientMessage().getReceiverClientId();
 		int senderClientId = cm.getSenderClientId();
-		
-		Request r = createClientRequest(request, ftp);
+		Request r;
 		System.out.println("Receiver ID " + receiverClientId);
 		//IF receiver is -1 or is not present then all nodes will broad cast
 		//except for the node which had sent the request
-		if(receiverClientId ==-1 || receiverClientId == 0)
-		{
-			if(ConnectionManager.checkClient(connectionState.CLIENTAPP,senderClientId))
-			{
-				@SuppressWarnings("unchecked")
+		if(receiverClientId ==-1 || receiverClientId == 0){
+			r = createClientRequest(request, ftp);
+			if(ConnectionManager.checkClient(connectionState.CLIENTAPP,senderClientId)){
 				Set<Integer> keys = ConnectionManager.getKeySetConnections(connectionState.CLIENTAPP);
-				for(int i : keys)
-				{
+				for(int i : keys){
 					if(i!=senderClientId)
-					{
 						ConnectionManager.sendToClient(r, i);
-					}	
 				}
 			}
 			else
@@ -54,21 +48,19 @@ public class ReportsResource implements Resource {
 		//and send it to him
 		else
 		{
-			System.out.println("In Else of Repports Resource");
+			r = createClientRequest(request, ftp);
 			if(ConnectionManager.checkClient(connectionState.CLIENTAPP,receiverClientId))
 			{
-				System.out.println("send to client");
+				System.out.println("send to specific client");
 				ConnectionManager.sendToClient(r, receiverClientId);
 			}
 		}	
 	}
 	
-	public Request createClientRequest(Request request, ftpConnection ftp)
-	{
+	public Request createClientRequest(Request request, ftpConnection ftp){
 		try{
 			ClientMessage.Builder cBuilder  = ClientMessage.newBuilder();
 			ClientMessage reqClientMsg=request.getBody().getClientMessage();
-			
 			
 			cBuilder.setMsgId(reqClientMsg.getMsgId());
 			cBuilder.setSenderUserName(reqClientMsg.getSenderUserName());
@@ -83,7 +75,6 @@ public class ReportsResource implements Resource {
 			cBuilder.setIsClient(true);
 			cBuilder.setBroadcastInternal(true);
 			
-			
 			Header.Builder h = Header.newBuilder();
 			Header reqHeader = request.getHeader();
 			//means each node receiving this message has to report this message to their respective client
@@ -97,7 +88,6 @@ public class ReportsResource implements Resource {
 			Payload.Builder payload = Payload.newBuilder();
 			payload.setClientMessage(cBuilder);
 				
-			
 			//add body to request
 			Request.Builder req = Request.newBuilder();
 			req.setBody(payload);
@@ -105,13 +95,10 @@ public class ReportsResource implements Resource {
 			Request r = req.build();
 			
 			return r;
-
 		}
-		catch(Exception e)
-		{
+		catch(Exception e){
 			e.printStackTrace();
 			return null;
 		}
-				
 	}
 }

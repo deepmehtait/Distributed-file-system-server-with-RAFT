@@ -6885,6 +6885,558 @@ public final class Mgmt {
     // @@protoc_insertion_point(class_scope:MgmtHeader)
   }
 
+  public interface LogEntriesOrBuilder
+      extends com.google.protobuf.MessageOrBuilder {
+
+    // optional int32 log_index = 1;
+    /**
+     * <code>optional int32 log_index = 1;</code>
+     */
+    boolean hasLogIndex();
+    /**
+     * <code>optional int32 log_index = 1;</code>
+     */
+    int getLogIndex();
+
+    // optional string log_data = 2;
+    /**
+     * <code>optional string log_data = 2;</code>
+     */
+    boolean hasLogData();
+    /**
+     * <code>optional string log_data = 2;</code>
+     */
+    java.lang.String getLogData();
+    /**
+     * <code>optional string log_data = 2;</code>
+     */
+    com.google.protobuf.ByteString
+        getLogDataBytes();
+  }
+  /**
+   * Protobuf type {@code LogEntries}
+   */
+  public static final class LogEntries extends
+      com.google.protobuf.GeneratedMessage
+      implements LogEntriesOrBuilder {
+    // Use LogEntries.newBuilder() to construct.
+    private LogEntries(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
+      super(builder);
+      this.unknownFields = builder.getUnknownFields();
+    }
+    private LogEntries(boolean noInit) { this.unknownFields = com.google.protobuf.UnknownFieldSet.getDefaultInstance(); }
+
+    private static final LogEntries defaultInstance;
+    public static LogEntries getDefaultInstance() {
+      return defaultInstance;
+    }
+
+    public LogEntries getDefaultInstanceForType() {
+      return defaultInstance;
+    }
+
+    private final com.google.protobuf.UnknownFieldSet unknownFields;
+    @java.lang.Override
+    public final com.google.protobuf.UnknownFieldSet
+        getUnknownFields() {
+      return this.unknownFields;
+    }
+    private LogEntries(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      initFields();
+      int mutable_bitField0_ = 0;
+      com.google.protobuf.UnknownFieldSet.Builder unknownFields =
+          com.google.protobuf.UnknownFieldSet.newBuilder();
+      try {
+        boolean done = false;
+        while (!done) {
+          int tag = input.readTag();
+          switch (tag) {
+            case 0:
+              done = true;
+              break;
+            default: {
+              if (!parseUnknownField(input, unknownFields,
+                                     extensionRegistry, tag)) {
+                done = true;
+              }
+              break;
+            }
+            case 8: {
+              bitField0_ |= 0x00000001;
+              logIndex_ = input.readInt32();
+              break;
+            }
+            case 18: {
+              bitField0_ |= 0x00000002;
+              logData_ = input.readBytes();
+              break;
+            }
+          }
+        }
+      } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+        throw e.setUnfinishedMessage(this);
+      } catch (java.io.IOException e) {
+        throw new com.google.protobuf.InvalidProtocolBufferException(
+            e.getMessage()).setUnfinishedMessage(this);
+      } finally {
+        this.unknownFields = unknownFields.build();
+        makeExtensionsImmutable();
+      }
+    }
+    public static final com.google.protobuf.Descriptors.Descriptor
+        getDescriptor() {
+      return poke.core.Mgmt.internal_static_LogEntries_descriptor;
+    }
+
+    protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+        internalGetFieldAccessorTable() {
+      return poke.core.Mgmt.internal_static_LogEntries_fieldAccessorTable
+          .ensureFieldAccessorsInitialized(
+              poke.core.Mgmt.LogEntries.class, poke.core.Mgmt.LogEntries.Builder.class);
+    }
+
+    public static com.google.protobuf.Parser<LogEntries> PARSER =
+        new com.google.protobuf.AbstractParser<LogEntries>() {
+      public LogEntries parsePartialFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        return new LogEntries(input, extensionRegistry);
+      }
+    };
+
+    @java.lang.Override
+    public com.google.protobuf.Parser<LogEntries> getParserForType() {
+      return PARSER;
+    }
+
+    private int bitField0_;
+    // optional int32 log_index = 1;
+    public static final int LOG_INDEX_FIELD_NUMBER = 1;
+    private int logIndex_;
+    /**
+     * <code>optional int32 log_index = 1;</code>
+     */
+    public boolean hasLogIndex() {
+      return ((bitField0_ & 0x00000001) == 0x00000001);
+    }
+    /**
+     * <code>optional int32 log_index = 1;</code>
+     */
+    public int getLogIndex() {
+      return logIndex_;
+    }
+
+    // optional string log_data = 2;
+    public static final int LOG_DATA_FIELD_NUMBER = 2;
+    private java.lang.Object logData_;
+    /**
+     * <code>optional string log_data = 2;</code>
+     */
+    public boolean hasLogData() {
+      return ((bitField0_ & 0x00000002) == 0x00000002);
+    }
+    /**
+     * <code>optional string log_data = 2;</code>
+     */
+    public java.lang.String getLogData() {
+      java.lang.Object ref = logData_;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
+      } else {
+        com.google.protobuf.ByteString bs = 
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        if (bs.isValidUtf8()) {
+          logData_ = s;
+        }
+        return s;
+      }
+    }
+    /**
+     * <code>optional string log_data = 2;</code>
+     */
+    public com.google.protobuf.ByteString
+        getLogDataBytes() {
+      java.lang.Object ref = logData_;
+      if (ref instanceof java.lang.String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        logData_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+
+    private void initFields() {
+      logIndex_ = 0;
+      logData_ = "";
+    }
+    private byte memoizedIsInitialized = -1;
+    public final boolean isInitialized() {
+      byte isInitialized = memoizedIsInitialized;
+      if (isInitialized != -1) return isInitialized == 1;
+
+      memoizedIsInitialized = 1;
+      return true;
+    }
+
+    public void writeTo(com.google.protobuf.CodedOutputStream output)
+                        throws java.io.IOException {
+      getSerializedSize();
+      if (((bitField0_ & 0x00000001) == 0x00000001)) {
+        output.writeInt32(1, logIndex_);
+      }
+      if (((bitField0_ & 0x00000002) == 0x00000002)) {
+        output.writeBytes(2, getLogDataBytes());
+      }
+      getUnknownFields().writeTo(output);
+    }
+
+    private int memoizedSerializedSize = -1;
+    public int getSerializedSize() {
+      int size = memoizedSerializedSize;
+      if (size != -1) return size;
+
+      size = 0;
+      if (((bitField0_ & 0x00000001) == 0x00000001)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt32Size(1, logIndex_);
+      }
+      if (((bitField0_ & 0x00000002) == 0x00000002)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeBytesSize(2, getLogDataBytes());
+      }
+      size += getUnknownFields().getSerializedSize();
+      memoizedSerializedSize = size;
+      return size;
+    }
+
+    private static final long serialVersionUID = 0L;
+    @java.lang.Override
+    protected java.lang.Object writeReplace()
+        throws java.io.ObjectStreamException {
+      return super.writeReplace();
+    }
+
+    public static poke.core.Mgmt.LogEntries parseFrom(
+        com.google.protobuf.ByteString data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static poke.core.Mgmt.LogEntries parseFrom(
+        com.google.protobuf.ByteString data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static poke.core.Mgmt.LogEntries parseFrom(byte[] data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static poke.core.Mgmt.LogEntries parseFrom(
+        byte[] data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static poke.core.Mgmt.LogEntries parseFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input);
+    }
+    public static poke.core.Mgmt.LogEntries parseFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input, extensionRegistry);
+    }
+    public static poke.core.Mgmt.LogEntries parseDelimitedFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return PARSER.parseDelimitedFrom(input);
+    }
+    public static poke.core.Mgmt.LogEntries parseDelimitedFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return PARSER.parseDelimitedFrom(input, extensionRegistry);
+    }
+    public static poke.core.Mgmt.LogEntries parseFrom(
+        com.google.protobuf.CodedInputStream input)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input);
+    }
+    public static poke.core.Mgmt.LogEntries parseFrom(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input, extensionRegistry);
+    }
+
+    public static Builder newBuilder() { return Builder.create(); }
+    public Builder newBuilderForType() { return newBuilder(); }
+    public static Builder newBuilder(poke.core.Mgmt.LogEntries prototype) {
+      return newBuilder().mergeFrom(prototype);
+    }
+    public Builder toBuilder() { return newBuilder(this); }
+
+    @java.lang.Override
+    protected Builder newBuilderForType(
+        com.google.protobuf.GeneratedMessage.BuilderParent parent) {
+      Builder builder = new Builder(parent);
+      return builder;
+    }
+    /**
+     * Protobuf type {@code LogEntries}
+     */
+    public static final class Builder extends
+        com.google.protobuf.GeneratedMessage.Builder<Builder>
+       implements poke.core.Mgmt.LogEntriesOrBuilder {
+      public static final com.google.protobuf.Descriptors.Descriptor
+          getDescriptor() {
+        return poke.core.Mgmt.internal_static_LogEntries_descriptor;
+      }
+
+      protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+          internalGetFieldAccessorTable() {
+        return poke.core.Mgmt.internal_static_LogEntries_fieldAccessorTable
+            .ensureFieldAccessorsInitialized(
+                poke.core.Mgmt.LogEntries.class, poke.core.Mgmt.LogEntries.Builder.class);
+      }
+
+      // Construct using poke.core.Mgmt.LogEntries.newBuilder()
+      private Builder() {
+        maybeForceBuilderInitialization();
+      }
+
+      private Builder(
+          com.google.protobuf.GeneratedMessage.BuilderParent parent) {
+        super(parent);
+        maybeForceBuilderInitialization();
+      }
+      private void maybeForceBuilderInitialization() {
+        if (com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders) {
+        }
+      }
+      private static Builder create() {
+        return new Builder();
+      }
+
+      public Builder clear() {
+        super.clear();
+        logIndex_ = 0;
+        bitField0_ = (bitField0_ & ~0x00000001);
+        logData_ = "";
+        bitField0_ = (bitField0_ & ~0x00000002);
+        return this;
+      }
+
+      public Builder clone() {
+        return create().mergeFrom(buildPartial());
+      }
+
+      public com.google.protobuf.Descriptors.Descriptor
+          getDescriptorForType() {
+        return poke.core.Mgmt.internal_static_LogEntries_descriptor;
+      }
+
+      public poke.core.Mgmt.LogEntries getDefaultInstanceForType() {
+        return poke.core.Mgmt.LogEntries.getDefaultInstance();
+      }
+
+      public poke.core.Mgmt.LogEntries build() {
+        poke.core.Mgmt.LogEntries result = buildPartial();
+        if (!result.isInitialized()) {
+          throw newUninitializedMessageException(result);
+        }
+        return result;
+      }
+
+      public poke.core.Mgmt.LogEntries buildPartial() {
+        poke.core.Mgmt.LogEntries result = new poke.core.Mgmt.LogEntries(this);
+        int from_bitField0_ = bitField0_;
+        int to_bitField0_ = 0;
+        if (((from_bitField0_ & 0x00000001) == 0x00000001)) {
+          to_bitField0_ |= 0x00000001;
+        }
+        result.logIndex_ = logIndex_;
+        if (((from_bitField0_ & 0x00000002) == 0x00000002)) {
+          to_bitField0_ |= 0x00000002;
+        }
+        result.logData_ = logData_;
+        result.bitField0_ = to_bitField0_;
+        onBuilt();
+        return result;
+      }
+
+      public Builder mergeFrom(com.google.protobuf.Message other) {
+        if (other instanceof poke.core.Mgmt.LogEntries) {
+          return mergeFrom((poke.core.Mgmt.LogEntries)other);
+        } else {
+          super.mergeFrom(other);
+          return this;
+        }
+      }
+
+      public Builder mergeFrom(poke.core.Mgmt.LogEntries other) {
+        if (other == poke.core.Mgmt.LogEntries.getDefaultInstance()) return this;
+        if (other.hasLogIndex()) {
+          setLogIndex(other.getLogIndex());
+        }
+        if (other.hasLogData()) {
+          bitField0_ |= 0x00000002;
+          logData_ = other.logData_;
+          onChanged();
+        }
+        this.mergeUnknownFields(other.getUnknownFields());
+        return this;
+      }
+
+      public final boolean isInitialized() {
+        return true;
+      }
+
+      public Builder mergeFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws java.io.IOException {
+        poke.core.Mgmt.LogEntries parsedMessage = null;
+        try {
+          parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
+        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+          parsedMessage = (poke.core.Mgmt.LogEntries) e.getUnfinishedMessage();
+          throw e;
+        } finally {
+          if (parsedMessage != null) {
+            mergeFrom(parsedMessage);
+          }
+        }
+        return this;
+      }
+      private int bitField0_;
+
+      // optional int32 log_index = 1;
+      private int logIndex_ ;
+      /**
+       * <code>optional int32 log_index = 1;</code>
+       */
+      public boolean hasLogIndex() {
+        return ((bitField0_ & 0x00000001) == 0x00000001);
+      }
+      /**
+       * <code>optional int32 log_index = 1;</code>
+       */
+      public int getLogIndex() {
+        return logIndex_;
+      }
+      /**
+       * <code>optional int32 log_index = 1;</code>
+       */
+      public Builder setLogIndex(int value) {
+        bitField0_ |= 0x00000001;
+        logIndex_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional int32 log_index = 1;</code>
+       */
+      public Builder clearLogIndex() {
+        bitField0_ = (bitField0_ & ~0x00000001);
+        logIndex_ = 0;
+        onChanged();
+        return this;
+      }
+
+      // optional string log_data = 2;
+      private java.lang.Object logData_ = "";
+      /**
+       * <code>optional string log_data = 2;</code>
+       */
+      public boolean hasLogData() {
+        return ((bitField0_ & 0x00000002) == 0x00000002);
+      }
+      /**
+       * <code>optional string log_data = 2;</code>
+       */
+      public java.lang.String getLogData() {
+        java.lang.Object ref = logData_;
+        if (!(ref instanceof java.lang.String)) {
+          java.lang.String s = ((com.google.protobuf.ByteString) ref)
+              .toStringUtf8();
+          logData_ = s;
+          return s;
+        } else {
+          return (java.lang.String) ref;
+        }
+      }
+      /**
+       * <code>optional string log_data = 2;</code>
+       */
+      public com.google.protobuf.ByteString
+          getLogDataBytes() {
+        java.lang.Object ref = logData_;
+        if (ref instanceof String) {
+          com.google.protobuf.ByteString b = 
+              com.google.protobuf.ByteString.copyFromUtf8(
+                  (java.lang.String) ref);
+          logData_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+      /**
+       * <code>optional string log_data = 2;</code>
+       */
+      public Builder setLogData(
+          java.lang.String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000002;
+        logData_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional string log_data = 2;</code>
+       */
+      public Builder clearLogData() {
+        bitField0_ = (bitField0_ & ~0x00000002);
+        logData_ = getDefaultInstance().getLogData();
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional string log_data = 2;</code>
+       */
+      public Builder setLogDataBytes(
+          com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000002;
+        logData_ = value;
+        onChanged();
+        return this;
+      }
+
+      // @@protoc_insertion_point(builder_scope:LogEntries)
+    }
+
+    static {
+      defaultInstance = new LogEntries(true);
+      defaultInstance.initFields();
+    }
+
+    // @@protoc_insertion_point(class_scope:LogEntries)
+  }
+
   public interface RaftMessageOrBuilder
       extends com.google.protobuf.MessageOrBuilder {
 
@@ -6967,6 +7519,31 @@ public final class Mgmt {
      * <code>optional int32 success = 10;</code>
      */
     int getSuccess();
+
+    // repeated .LogEntries entries = 11;
+    /**
+     * <code>repeated .LogEntries entries = 11;</code>
+     */
+    java.util.List<poke.core.Mgmt.LogEntries> 
+        getEntriesList();
+    /**
+     * <code>repeated .LogEntries entries = 11;</code>
+     */
+    poke.core.Mgmt.LogEntries getEntries(int index);
+    /**
+     * <code>repeated .LogEntries entries = 11;</code>
+     */
+    int getEntriesCount();
+    /**
+     * <code>repeated .LogEntries entries = 11;</code>
+     */
+    java.util.List<? extends poke.core.Mgmt.LogEntriesOrBuilder> 
+        getEntriesOrBuilderList();
+    /**
+     * <code>repeated .LogEntries entries = 11;</code>
+     */
+    poke.core.Mgmt.LogEntriesOrBuilder getEntriesOrBuilder(
+        int index);
   }
   /**
    * Protobuf type {@code RaftMessage}
@@ -7071,6 +7648,14 @@ public final class Mgmt {
               success_ = input.readInt32();
               break;
             }
+            case 90: {
+              if (!((mutable_bitField0_ & 0x00000100) == 0x00000100)) {
+                entries_ = new java.util.ArrayList<poke.core.Mgmt.LogEntries>();
+                mutable_bitField0_ |= 0x00000100;
+              }
+              entries_.add(input.readMessage(poke.core.Mgmt.LogEntries.PARSER, extensionRegistry));
+              break;
+            }
           }
         }
       } catch (com.google.protobuf.InvalidProtocolBufferException e) {
@@ -7079,6 +7664,9 @@ public final class Mgmt {
         throw new com.google.protobuf.InvalidProtocolBufferException(
             e.getMessage()).setUnfinishedMessage(this);
       } finally {
+        if (((mutable_bitField0_ & 0x00000100) == 0x00000100)) {
+          entries_ = java.util.Collections.unmodifiableList(entries_);
+        }
         this.unknownFields = unknownFields.build();
         makeExtensionsImmutable();
       }
@@ -7457,6 +8045,42 @@ public final class Mgmt {
       return success_;
     }
 
+    // repeated .LogEntries entries = 11;
+    public static final int ENTRIES_FIELD_NUMBER = 11;
+    private java.util.List<poke.core.Mgmt.LogEntries> entries_;
+    /**
+     * <code>repeated .LogEntries entries = 11;</code>
+     */
+    public java.util.List<poke.core.Mgmt.LogEntries> getEntriesList() {
+      return entries_;
+    }
+    /**
+     * <code>repeated .LogEntries entries = 11;</code>
+     */
+    public java.util.List<? extends poke.core.Mgmt.LogEntriesOrBuilder> 
+        getEntriesOrBuilderList() {
+      return entries_;
+    }
+    /**
+     * <code>repeated .LogEntries entries = 11;</code>
+     */
+    public int getEntriesCount() {
+      return entries_.size();
+    }
+    /**
+     * <code>repeated .LogEntries entries = 11;</code>
+     */
+    public poke.core.Mgmt.LogEntries getEntries(int index) {
+      return entries_.get(index);
+    }
+    /**
+     * <code>repeated .LogEntries entries = 11;</code>
+     */
+    public poke.core.Mgmt.LogEntriesOrBuilder getEntriesOrBuilder(
+        int index) {
+      return entries_.get(index);
+    }
+
     private void initFields() {
       term_ = 0;
       logIndex_ = 0;
@@ -7466,6 +8090,7 @@ public final class Mgmt {
       raftAction_ = poke.core.Mgmt.RaftMessage.RaftAction.APPEND;
       raftAppendAction_ = poke.core.Mgmt.RaftMessage.RaftAppendAction.APPENDHEARTBEAT;
       success_ = 0;
+      entries_ = java.util.Collections.emptyList();
     }
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
@@ -7502,6 +8127,9 @@ public final class Mgmt {
       }
       if (((bitField0_ & 0x00000080) == 0x00000080)) {
         output.writeInt32(10, success_);
+      }
+      for (int i = 0; i < entries_.size(); i++) {
+        output.writeMessage(11, entries_.get(i));
       }
       getUnknownFields().writeTo(output);
     }
@@ -7543,6 +8171,10 @@ public final class Mgmt {
       if (((bitField0_ & 0x00000080) == 0x00000080)) {
         size += com.google.protobuf.CodedOutputStream
           .computeInt32Size(10, success_);
+      }
+      for (int i = 0; i < entries_.size(); i++) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeMessageSize(11, entries_.get(i));
       }
       size += getUnknownFields().getSerializedSize();
       memoizedSerializedSize = size;
@@ -7652,6 +8284,7 @@ public final class Mgmt {
       }
       private void maybeForceBuilderInitialization() {
         if (com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders) {
+          getEntriesFieldBuilder();
         }
       }
       private static Builder create() {
@@ -7676,6 +8309,12 @@ public final class Mgmt {
         bitField0_ = (bitField0_ & ~0x00000040);
         success_ = 0;
         bitField0_ = (bitField0_ & ~0x00000080);
+        if (entriesBuilder_ == null) {
+          entries_ = java.util.Collections.emptyList();
+          bitField0_ = (bitField0_ & ~0x00000100);
+        } else {
+          entriesBuilder_.clear();
+        }
         return this;
       }
 
@@ -7736,6 +8375,15 @@ public final class Mgmt {
           to_bitField0_ |= 0x00000080;
         }
         result.success_ = success_;
+        if (entriesBuilder_ == null) {
+          if (((bitField0_ & 0x00000100) == 0x00000100)) {
+            entries_ = java.util.Collections.unmodifiableList(entries_);
+            bitField0_ = (bitField0_ & ~0x00000100);
+          }
+          result.entries_ = entries_;
+        } else {
+          result.entries_ = entriesBuilder_.build();
+        }
         result.bitField0_ = to_bitField0_;
         onBuilt();
         return result;
@@ -7775,6 +8423,32 @@ public final class Mgmt {
         }
         if (other.hasSuccess()) {
           setSuccess(other.getSuccess());
+        }
+        if (entriesBuilder_ == null) {
+          if (!other.entries_.isEmpty()) {
+            if (entries_.isEmpty()) {
+              entries_ = other.entries_;
+              bitField0_ = (bitField0_ & ~0x00000100);
+            } else {
+              ensureEntriesIsMutable();
+              entries_.addAll(other.entries_);
+            }
+            onChanged();
+          }
+        } else {
+          if (!other.entries_.isEmpty()) {
+            if (entriesBuilder_.isEmpty()) {
+              entriesBuilder_.dispose();
+              entriesBuilder_ = null;
+              entries_ = other.entries_;
+              bitField0_ = (bitField0_ & ~0x00000100);
+              entriesBuilder_ = 
+                com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders ?
+                   getEntriesFieldBuilder() : null;
+            } else {
+              entriesBuilder_.addAllMessages(other.entries_);
+            }
+          }
         }
         this.mergeUnknownFields(other.getUnknownFields());
         return this;
@@ -8071,6 +8745,246 @@ public final class Mgmt {
         success_ = 0;
         onChanged();
         return this;
+      }
+
+      // repeated .LogEntries entries = 11;
+      private java.util.List<poke.core.Mgmt.LogEntries> entries_ =
+        java.util.Collections.emptyList();
+      private void ensureEntriesIsMutable() {
+        if (!((bitField0_ & 0x00000100) == 0x00000100)) {
+          entries_ = new java.util.ArrayList<poke.core.Mgmt.LogEntries>(entries_);
+          bitField0_ |= 0x00000100;
+         }
+      }
+
+      private com.google.protobuf.RepeatedFieldBuilder<
+          poke.core.Mgmt.LogEntries, poke.core.Mgmt.LogEntries.Builder, poke.core.Mgmt.LogEntriesOrBuilder> entriesBuilder_;
+
+      /**
+       * <code>repeated .LogEntries entries = 11;</code>
+       */
+      public java.util.List<poke.core.Mgmt.LogEntries> getEntriesList() {
+        if (entriesBuilder_ == null) {
+          return java.util.Collections.unmodifiableList(entries_);
+        } else {
+          return entriesBuilder_.getMessageList();
+        }
+      }
+      /**
+       * <code>repeated .LogEntries entries = 11;</code>
+       */
+      public int getEntriesCount() {
+        if (entriesBuilder_ == null) {
+          return entries_.size();
+        } else {
+          return entriesBuilder_.getCount();
+        }
+      }
+      /**
+       * <code>repeated .LogEntries entries = 11;</code>
+       */
+      public poke.core.Mgmt.LogEntries getEntries(int index) {
+        if (entriesBuilder_ == null) {
+          return entries_.get(index);
+        } else {
+          return entriesBuilder_.getMessage(index);
+        }
+      }
+      /**
+       * <code>repeated .LogEntries entries = 11;</code>
+       */
+      public Builder setEntries(
+          int index, poke.core.Mgmt.LogEntries value) {
+        if (entriesBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          ensureEntriesIsMutable();
+          entries_.set(index, value);
+          onChanged();
+        } else {
+          entriesBuilder_.setMessage(index, value);
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .LogEntries entries = 11;</code>
+       */
+      public Builder setEntries(
+          int index, poke.core.Mgmt.LogEntries.Builder builderForValue) {
+        if (entriesBuilder_ == null) {
+          ensureEntriesIsMutable();
+          entries_.set(index, builderForValue.build());
+          onChanged();
+        } else {
+          entriesBuilder_.setMessage(index, builderForValue.build());
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .LogEntries entries = 11;</code>
+       */
+      public Builder addEntries(poke.core.Mgmt.LogEntries value) {
+        if (entriesBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          ensureEntriesIsMutable();
+          entries_.add(value);
+          onChanged();
+        } else {
+          entriesBuilder_.addMessage(value);
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .LogEntries entries = 11;</code>
+       */
+      public Builder addEntries(
+          int index, poke.core.Mgmt.LogEntries value) {
+        if (entriesBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          ensureEntriesIsMutable();
+          entries_.add(index, value);
+          onChanged();
+        } else {
+          entriesBuilder_.addMessage(index, value);
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .LogEntries entries = 11;</code>
+       */
+      public Builder addEntries(
+          poke.core.Mgmt.LogEntries.Builder builderForValue) {
+        if (entriesBuilder_ == null) {
+          ensureEntriesIsMutable();
+          entries_.add(builderForValue.build());
+          onChanged();
+        } else {
+          entriesBuilder_.addMessage(builderForValue.build());
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .LogEntries entries = 11;</code>
+       */
+      public Builder addEntries(
+          int index, poke.core.Mgmt.LogEntries.Builder builderForValue) {
+        if (entriesBuilder_ == null) {
+          ensureEntriesIsMutable();
+          entries_.add(index, builderForValue.build());
+          onChanged();
+        } else {
+          entriesBuilder_.addMessage(index, builderForValue.build());
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .LogEntries entries = 11;</code>
+       */
+      public Builder addAllEntries(
+          java.lang.Iterable<? extends poke.core.Mgmt.LogEntries> values) {
+        if (entriesBuilder_ == null) {
+          ensureEntriesIsMutable();
+          super.addAll(values, entries_);
+          onChanged();
+        } else {
+          entriesBuilder_.addAllMessages(values);
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .LogEntries entries = 11;</code>
+       */
+      public Builder clearEntries() {
+        if (entriesBuilder_ == null) {
+          entries_ = java.util.Collections.emptyList();
+          bitField0_ = (bitField0_ & ~0x00000100);
+          onChanged();
+        } else {
+          entriesBuilder_.clear();
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .LogEntries entries = 11;</code>
+       */
+      public Builder removeEntries(int index) {
+        if (entriesBuilder_ == null) {
+          ensureEntriesIsMutable();
+          entries_.remove(index);
+          onChanged();
+        } else {
+          entriesBuilder_.remove(index);
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .LogEntries entries = 11;</code>
+       */
+      public poke.core.Mgmt.LogEntries.Builder getEntriesBuilder(
+          int index) {
+        return getEntriesFieldBuilder().getBuilder(index);
+      }
+      /**
+       * <code>repeated .LogEntries entries = 11;</code>
+       */
+      public poke.core.Mgmt.LogEntriesOrBuilder getEntriesOrBuilder(
+          int index) {
+        if (entriesBuilder_ == null) {
+          return entries_.get(index);  } else {
+          return entriesBuilder_.getMessageOrBuilder(index);
+        }
+      }
+      /**
+       * <code>repeated .LogEntries entries = 11;</code>
+       */
+      public java.util.List<? extends poke.core.Mgmt.LogEntriesOrBuilder> 
+           getEntriesOrBuilderList() {
+        if (entriesBuilder_ != null) {
+          return entriesBuilder_.getMessageOrBuilderList();
+        } else {
+          return java.util.Collections.unmodifiableList(entries_);
+        }
+      }
+      /**
+       * <code>repeated .LogEntries entries = 11;</code>
+       */
+      public poke.core.Mgmt.LogEntries.Builder addEntriesBuilder() {
+        return getEntriesFieldBuilder().addBuilder(
+            poke.core.Mgmt.LogEntries.getDefaultInstance());
+      }
+      /**
+       * <code>repeated .LogEntries entries = 11;</code>
+       */
+      public poke.core.Mgmt.LogEntries.Builder addEntriesBuilder(
+          int index) {
+        return getEntriesFieldBuilder().addBuilder(
+            index, poke.core.Mgmt.LogEntries.getDefaultInstance());
+      }
+      /**
+       * <code>repeated .LogEntries entries = 11;</code>
+       */
+      public java.util.List<poke.core.Mgmt.LogEntries.Builder> 
+           getEntriesBuilderList() {
+        return getEntriesFieldBuilder().getBuilderList();
+      }
+      private com.google.protobuf.RepeatedFieldBuilder<
+          poke.core.Mgmt.LogEntries, poke.core.Mgmt.LogEntries.Builder, poke.core.Mgmt.LogEntriesOrBuilder> 
+          getEntriesFieldBuilder() {
+        if (entriesBuilder_ == null) {
+          entriesBuilder_ = new com.google.protobuf.RepeatedFieldBuilder<
+              poke.core.Mgmt.LogEntries, poke.core.Mgmt.LogEntries.Builder, poke.core.Mgmt.LogEntriesOrBuilder>(
+                  entries_,
+                  ((bitField0_ & 0x00000100) == 0x00000100),
+                  getParentForChildren(),
+                  isClean());
+          entries_ = null;
+        }
+        return entriesBuilder_;
       }
 
       // @@protoc_insertion_point(builder_scope:RaftMessage)
@@ -10372,6 +11286,11 @@ public final class Mgmt {
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
       internal_static_MgmtHeader_fieldAccessorTable;
   private static com.google.protobuf.Descriptors.Descriptor
+    internal_static_LogEntries_descriptor;
+  private static
+    com.google.protobuf.GeneratedMessage.FieldAccessorTable
+      internal_static_LogEntries_fieldAccessorTable;
+  private static com.google.protobuf.Descriptors.Descriptor
     internal_static_RaftMessage_descriptor;
   private static
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
@@ -10420,24 +11339,26 @@ public final class Mgmt {
       "\003 \002(\003\"p\n\nMgmtHeader\022\022\n\noriginator\030\002 \002(\005\022" +
       "\024\n\014securityCode\030\003 \002(\005\022\014\n\004time\030\004 \002(\003\022\032\n\004p" +
       "ath\030\007 \003(\0132\014.VectorClock\022\016\n\006toNode\030\010 \001(\005\"",
-      "\237\003\n\013RaftMessage\022\014\n\004term\030\003 \001(\005\022\020\n\010logInde" +
-      "x\030\004 \001(\005\022\020\n\010prevTerm\030\005 \001(\005\022\024\n\014prevlogInde" +
-      "x\030\006 \001(\005\022\016\n\006leader\030\010 \001(\005\022+\n\nraftAction\030\007 " +
-      "\001(\0162\027.RaftMessage.RaftAction\0227\n\020raftAppe" +
-      "ndAction\030\t \001(\0162\035.RaftMessage.RaftAppendA" +
-      "ction\022\017\n\007success\030\n \001(\005\"x\n\nRaftAction\022\n\n\006" +
-      "APPEND\020\001\022\017\n\013REQUESTVOTE\020\002\022\n\n\006LEADER\020\003\022\010\n" +
-      "\004VOTE\020\004\022\022\n\016WHOISTHELEADER\020\005\022\017\n\013THELEADER" +
-      "IS\020\006\022\022\n\016APPENDRESPONSE\020\007\"G\n\020RaftAppendAc" +
-      "tion\022\023\n\017APPENDHEARTBEAT\020\001\022\r\n\tAPPENDLOG\020\002",
-      "\022\017\n\013APPENDVALUE\020\003\"\213\002\n\nManagement\022\033\n\006head" +
-      "er\030\001 \002(\0132\013.MgmtHeader\022\027\n\005graph\030\002 \001(\0132\010.N" +
-      "etwork\022\030\n\004beat\030\003 \001(\0132\n.Heartbeat\022!\n\010elec" +
-      "tion\030\004 \001(\0132\017.LeaderElection\022!\n\013raftmessa" +
-      "ge\030\005 \001(\0132\014.RaftMessage\022#\n\014vote_declare\030\007" +
-      " \001(\0132\r.VotingBallot\022\036\n\tvote_cast\030\010 \001(\0132\013" +
-      ".VotingCast\022\"\n\013vote_status\030\t \001(\0132\r.Votin" +
-      "gStatusB\r\n\tpoke.coreH\001"
+      "1\n\nLogEntries\022\021\n\tlog_index\030\001 \001(\005\022\020\n\010log_" +
+      "data\030\002 \001(\t\"\275\003\n\013RaftMessage\022\014\n\004term\030\003 \001(\005" +
+      "\022\020\n\010logIndex\030\004 \001(\005\022\020\n\010prevTerm\030\005 \001(\005\022\024\n\014" +
+      "prevlogIndex\030\006 \001(\005\022\016\n\006leader\030\010 \001(\005\022+\n\nra" +
+      "ftAction\030\007 \001(\0162\027.RaftMessage.RaftAction\022" +
+      "7\n\020raftAppendAction\030\t \001(\0162\035.RaftMessage." +
+      "RaftAppendAction\022\017\n\007success\030\n \001(\005\022\034\n\007ent" +
+      "ries\030\013 \003(\0132\013.LogEntries\"x\n\nRaftAction\022\n\n" +
+      "\006APPEND\020\001\022\017\n\013REQUESTVOTE\020\002\022\n\n\006LEADER\020\003\022\010" +
+      "\n\004VOTE\020\004\022\022\n\016WHOISTHELEADER\020\005\022\017\n\013THELEADE",
+      "RIS\020\006\022\022\n\016APPENDRESPONSE\020\007\"G\n\020RaftAppendA" +
+      "ction\022\023\n\017APPENDHEARTBEAT\020\001\022\r\n\tAPPENDLOG\020" +
+      "\002\022\017\n\013APPENDVALUE\020\003\"\213\002\n\nManagement\022\033\n\006hea" +
+      "der\030\001 \002(\0132\013.MgmtHeader\022\027\n\005graph\030\002 \001(\0132\010." +
+      "Network\022\030\n\004beat\030\003 \001(\0132\n.Heartbeat\022!\n\010ele" +
+      "ction\030\004 \001(\0132\017.LeaderElection\022!\n\013raftmess" +
+      "age\030\005 \001(\0132\014.RaftMessage\022#\n\014vote_declare\030" +
+      "\007 \001(\0132\r.VotingBallot\022\036\n\tvote_cast\030\010 \001(\0132" +
+      "\013.VotingCast\022\"\n\013vote_status\030\t \001(\0132\r.Voti" +
+      "ngStatusB\r\n\tpoke.coreH\001"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
       new com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner() {
@@ -10492,14 +11413,20 @@ public final class Mgmt {
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_MgmtHeader_descriptor,
               new java.lang.String[] { "Originator", "SecurityCode", "Time", "Path", "ToNode", });
-          internal_static_RaftMessage_descriptor =
+          internal_static_LogEntries_descriptor =
             getDescriptor().getMessageTypes().get(8);
+          internal_static_LogEntries_fieldAccessorTable = new
+            com.google.protobuf.GeneratedMessage.FieldAccessorTable(
+              internal_static_LogEntries_descriptor,
+              new java.lang.String[] { "LogIndex", "LogData", });
+          internal_static_RaftMessage_descriptor =
+            getDescriptor().getMessageTypes().get(9);
           internal_static_RaftMessage_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_RaftMessage_descriptor,
-              new java.lang.String[] { "Term", "LogIndex", "PrevTerm", "PrevlogIndex", "Leader", "RaftAction", "RaftAppendAction", "Success", });
+              new java.lang.String[] { "Term", "LogIndex", "PrevTerm", "PrevlogIndex", "Leader", "RaftAction", "RaftAppendAction", "Success", "Entries", });
           internal_static_Management_descriptor =
-            getDescriptor().getMessageTypes().get(9);
+            getDescriptor().getMessageTypes().get(10);
           internal_static_Management_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_Management_descriptor,

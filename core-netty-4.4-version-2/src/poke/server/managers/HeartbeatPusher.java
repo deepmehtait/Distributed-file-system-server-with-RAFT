@@ -86,7 +86,7 @@ public class HeartbeatPusher extends Thread {
 
 		while (forever) {
 			try {
-				Thread.sleep(2000);
+				Thread.sleep(sConnectRate);
 				
 				// try to establish connections to our nearest nodes
 				
@@ -95,7 +95,7 @@ public class HeartbeatPusher extends Thread {
 							try {
 								if (logger.isDebugEnabled())
 									logger.debug("attempting to connect to node: " + hb.getNodeInfo());
-								hb.startHeartbeat();
+									hb.startHeartbeat();
 							} catch (Exception ie) {
 								// do nothing
 							}
