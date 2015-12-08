@@ -82,3 +82,7 @@ A cluster is a connection of nodes in the network. The cluster components are co
 - **Inter-Cluster Communication:** The clusters connect with each other only after the Leader is elected in all the clusters.
 Then the Nodes in the cluster sends a JOIN Request to nodes of the other cluster, then it establishes a connection. The channel information and nodeId are stored in a hashMap. This information is used to communicate in future. 
 The client Request contains the information whether the message is for intra-cluster or inter-cluster. If the message is for intra-cluster, then it flows through the cluster as explained above. If the message is for inter-cluster, then the request is sent to all nodes in the other clusters. When request is received by the node in our cluster, it first uploads the image to the FTP server, then the flow continues as explained above (as explained in the high level flow of solution). 
+
+
+#### ARCHITECTURE
+![alt tag](https://cloud.githubusercontent.com/assets/8681531/11649793/9cfbec5a-9d37-11e5-84de-ced6acaa3791.png)
